@@ -76,6 +76,7 @@ async def test_connectivity():
     print("🧪 تست اتصال به منابع...")
     
     try:
+        import aiohttp
         from config_collector import V2RayCollector
         
         collector = V2RayCollector()
