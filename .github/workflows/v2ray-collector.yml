@@ -29,6 +29,8 @@ jobs:
     - name: Create directories
       run: |
         mkdir -p subscriptions logs
+        echo "📁 Directories created"
+        ls -la
         
     - name: Run V2Ray Config Collector
       run: |
@@ -77,6 +79,24 @@ jobs:
         
         asyncio.run(main())
         "
+        
+    - name: Verify subscription files
+      run: |
+        echo "🔍 Checking subscription files..."
+        if [ -d "subscriptions" ]; then
+          echo "✅ subscriptions directory exists"
+          ls -la subscriptions/
+          if [ -f "subscriptions/all_subscription.txt" ]; then
+            echo "✅ all_subscription.txt exists"
+          else
+            echo "❌ all_subscription.txt missing"
+            echo "# Placeholder" > subscriptions/all_subscription.txt
+          fi
+        else
+          echo "❌ subscriptions directory missing"
+          mkdir -p subscriptions
+          echo "# Placeholder" > subscriptions/all_subscription.txt
+        fi
         
     - name: Create index page
       run: |
@@ -180,6 +200,7 @@ jobs:
       with:
         name: v2ray-subscriptions
         path: subscriptions/
+        if-no-files-found: error
         
     - name: Commit and push changes
       run: |

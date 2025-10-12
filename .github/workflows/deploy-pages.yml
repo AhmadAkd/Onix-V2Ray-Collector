@@ -1,9 +1,10 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["V2Ray Config Collector & Tester"]
+    types:
+      - completed
 
 permissions:
   contents: read
@@ -16,6 +17,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -25,6 +27,16 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v4
+      - name: Check subscriptions directory
+        run: |
+          if [ -d "subscriptions" ]; then
+            echo "✅ subscriptions directory exists"
+            ls -la subscriptions/
+          else
+            echo "❌ subscriptions directory not found"
+            mkdir -p subscriptions
+            echo "# Placeholder" > subscriptions/README.md
+          fi
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
