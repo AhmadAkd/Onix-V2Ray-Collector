@@ -38,7 +38,7 @@ jobs:
             echo "# Placeholder" > subscriptions/README.md
           fi
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: subscriptions/
       - name: Deploy to GitHub Pages
