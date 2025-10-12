@@ -57,33 +57,47 @@ python web_server.py
 python web_server.py --host 0.0.0.0 --port 8080
 ```
 
+### 4. شروع سریع
+
+```bash
+python start.py
+```
+
 ## 📁 ساختار پروژه
 
 ```
-V2Ray-Checker/
+V2Ray_Collector/
 ├── config_collector.py      # هسته اصلی جمع‌آوری و تست
 ├── automation.py            # سیستم اتوماسیون
 ├── web_server.py           # سرور وب
-├── requirements.txt        # وابستگی‌ها
-├── README.md              # راهنمای استفاده
-└── subscriptions/         # فایل‌های اشتراک تولید شده
+├── config.py              # تنظیمات سیستم
+├── start.py               # اسکریپت شروع سریع
+├── run_tests.py           # اجرای تست‌ها
+├── deploy.sh              # اسکریپت استقرار
+├── requirements.txt       # وابستگی‌ها
+├── README.md             # راهنمای فارسی
+├── README_EN.md          # راهنمای انگلیسی
+├── LICENSE               # مجوز MIT
+├── Dockerfile            # کانتینر Docker
+├── docker-compose.yml    # تنظیمات Docker
+└── subscriptions/        # فایل‌های اشتراک تولید شده
     ├── vmess_subscription.txt
     ├── vless_subscription.txt
     ├── trojan_subscription.txt
     ├── ss_subscription.txt
     ├── ssr_subscription.txt
     ├── all_subscription.txt
-    └── report_*.json       # گزارش‌های عملکرد
+    └── report_*.json     # گزارش‌های عملکرد
 ```
 
 ## 🔧 تنظیمات
 
 ### منابع کانفیگ‌ها
 
-می‌توانید منابع کانفیگ‌ها را در فایل `config_collector.py` تغییر دهید:
+می‌توانید منابع کانفیگ‌ها را در فایل `config.py` تغییر دهید:
 
 ```python
-self.config_sources = [
+CONFIG_SOURCES = [
     "https://github.com/Epodonios/v2ray-configs/raw/main/All_Configs_Sub.txt",
     "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge.txt",
     # اضافه کردن منابع جدید...
@@ -94,10 +108,10 @@ self.config_sources = [
 
 ```python
 # تعداد همزمان تست‌ها
-max_concurrent = 50
+max_concurrent_tests = 50
 
 # زمان انتظار تست
-timeout = 10
+test_timeout = 10
 ```
 
 ## 📊 گزارش‌گیری
@@ -146,9 +160,11 @@ timeout = 10
 ### تغییر زمان‌بندی
 
 ```python
-# در فایل automation.py
-schedule.every(15).minutes.do(self.run_scheduled_job)  # هر 15 دقیقه
-schedule.every().day.at("01:00").do(self.cleanup_old_files)  # ساعت 1 صبح
+# در فایل config.py
+AUTOMATION_CONFIG = {
+    'collection_interval_minutes': 15,  # هر 15 دقیقه
+    'cleanup_hour': 1,  # ساعت 1 صبح
+}
 ```
 
 ## 🛠️ تنظیمات پیشرفته
@@ -163,23 +179,25 @@ nohup python automation.py --mode auto > automation.log 2>&1 &
 ps aux | grep automation.py
 ```
 
+### اجرای با Docker
+
+```bash
+# ساخت و اجرای کانتینر
+docker-compose up -d
+
+# مشاهده لاگ‌ها
+docker-compose logs -f
+```
+
 ### اجرای با systemd (Linux)
 
-```ini
-# /etc/systemd/system/v2ray-collector.service
-[Unit]
-Description=V2Ray Config Collector
-After=network.target
+```bash
+# ایجاد سرویس
+sudo ./deploy.sh --service
 
-[Service]
-Type=simple
-User=your-username
-WorkingDirectory=/path/to/project
-ExecStart=/usr/bin/python3 automation.py --mode auto
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
+# فعال‌سازی سرویس
+sudo systemctl enable v2ray-collector
+sudo systemctl start v2ray-collector
 ```
 
 ## 📱 استفاده از لینک‌های اشتراک
@@ -204,6 +222,19 @@ WantedBy=multi-user.target
 2. روی "Subscribe" کلیک کنید
 3. "Subscribe Settings" را انتخاب کنید
 4. لینک را اضافه کنید
+
+## 🧪 تست سیستم
+
+```bash
+# اجرای تمام تست‌ها
+python run_tests.py
+
+# تست یکباره
+python automation.py --mode once
+
+# تست سرور وب
+python web_server.py --debug
+```
 
 ## 🔍 عیب‌یابی
 
@@ -234,6 +265,18 @@ WantedBy=multi-user.target
 
 - `v2ray_collector.log` - لاگ اصلی جمع‌آوری
 - `automation.log` - لاگ اتوماسیون
+- `test_report.json` - گزارش تست‌ها
+
+## 🌟 ویژگی‌های کلیدی
+
+1. **کیفیت بالاتر**: فقط کانفیگ‌های تست شده و سالم
+2. **دسته‌بندی بهتر**: تفکیک بر اساس پروتکل
+3. **رابط کاربری**: وب‌سایت فارسی و انگلیسی
+4. **اتوماسیون**: به‌روزرسانی خودکار
+5. **گزارش‌گیری**: آمار دقیق عملکرد
+6. **API**: دسترسی برنامه‌نویسی
+7. **قابلیت تنظیم**: تمام پارامترها قابل تغییر
+8. **Docker**: پشتیبانی کامل از کانتینری‌سازی
 
 ## 🤝 مشارکت
 
@@ -253,8 +296,12 @@ WantedBy=multi-user.target
 برای پشتیبانی و گزارش مشکل:
 
 - GitHub Issues
-- Email: <your-email@example.com>
+- Email: your-email@example.com
 
 ---
 
 **نکته مهم**: این سیستم فقط کانفیگ‌های رایگان را جمع‌آوری می‌کند و هیچ کانفیگ پولی یا خصوصی در آن ذخیره نمی‌شود.
+
+---
+
+Made with ❤️ for the V2Ray community
