@@ -1,29 +1,29 @@
 {
-  "timestamp": "2025-10-13 07:33:48",
+  "timestamp": "2025-10-13 07:40:11",
   "total_configs_tested": 2697,
-  "working_configs": 1154,
-  "failed_configs": 1543,
-  "success_rate": "42.8%",
+  "working_configs": 1156,
+  "failed_configs": 1541,
+  "success_rate": "42.9%",
   "protocols": {
     "vless": {
-      "count": 788,
-      "avg_latency": "148.1ms"
-    },
-    "trojan": {
-      "count": 61,
-      "avg_latency": "188.9ms"
+      "count": 789,
+      "avg_latency": "89.4ms"
     },
     "vmess": {
-      "count": 294,
-      "avg_latency": "145.1ms"
+      "count": 296,
+      "avg_latency": "139.0ms"
+    },
+    "trojan": {
+      "count": 57,
+      "avg_latency": "202.0ms"
+    },
+    "ssr": {
+      "count": 11,
+      "avg_latency": "224.6ms"
     },
     "ss": {
       "count": 3,
-      "avg_latency": "173.7ms"
-    },
-    "ssr": {
-      "count": 8,
-      "avg_latency": "126.0ms"
+      "avg_latency": "228.0ms"
     }
   }
 }
