@@ -46,40 +46,42 @@ class V2RayConfig:
     is_working: bool = False
     country: str = "unknown"
 
+
 class UltraFastConnectionPool:
     """Connection Pool برای تست فوق سریع"""
-    
+
     def __init__(self, max_workers: int = 100):
         self.max_workers = max_workers
-        self.executor = concurrent.futures.ThreadPoolExecutor(max_workers=max_workers)
+        self.executor = concurrent.futures.ThreadPoolExecutor(
+            max_workers=max_workers)
         self.connection_cache = {}
         self.test_results = {}
-        
+
     def test_connection_sync(self, address: str, port: int, timeout: float = 2.0) -> Tuple[bool, float]:
         """تست همزمان اتصال"""
         try:
             start_time = time.time()
-            
+
             # استفاده از socket برای تست سریع‌تر
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(timeout)
-            
+
             result = sock.connect_ex((address, port))
             sock.close()
-            
+
             latency = (time.time() - start_time) * 1000
-            
+
             if result == 0:
                 return True, latency
             return False, 0.0
-            
+
         except Exception:
             return False, 0.0
-    
+
     async def test_multiple_connections(self, configs: List[V2RayConfig]) -> List[Tuple[V2RayConfig, bool, float]]:
         """تست چندگانه اتصالات"""
         loop = asyncio.get_event_loop()
-        
+
         # ایجاد tasks برای تست موازی
         tasks = []
         for config in configs:
@@ -91,7 +93,7 @@ class UltraFastConnectionPool:
                 2.0  # timeout کوتاه
             )
             tasks.append((config, task))
-        
+
         # اجرای موازی
         results = []
         for config, task in tasks:
@@ -100,9 +102,9 @@ class UltraFastConnectionPool:
                 results.append((config, is_working, latency))
             except Exception:
                 results.append((config, False, 0.0))
-        
+
         return results
-    
+
     def close(self):
         """بستن executor"""
         self.executor.shutdown(wait=True)
@@ -111,49 +113,51 @@ class UltraFastConnectionPool:
 
 class SmartConfigFilter:
     """فیلتر هوشمند برای حذف کانفیگ‌های نامناسب قبل از تست"""
-    
+
     def __init__(self):
         self.blacklisted_ips = set()
-        self.blacklisted_ports = {22, 23, 25, 53, 80, 110, 143, 993, 995, 3389, 5432, 6379, 27017}
+        self.blacklisted_ports = {22, 23, 25, 53, 80,
+                                  110, 143, 993, 995, 3389, 5432, 6379, 27017}
         self.valid_ports = set(range(1024, 65536))  # پورت‌های کاربری
-        
+
     def is_valid_config(self, config: V2RayConfig) -> bool:
         """بررسی اعتبار کانفیگ"""
         # بررسی IP
         if config.address in self.blacklisted_ips:
             return False
-            
+
         # بررسی پورت
         if config.port in self.blacklisted_ports:
             return False
-            
+
         # بررسی محدوده پورت
         if config.port not in self.valid_ports:
             return False
-            
+
         # بررسی آدرس IP خصوصی (معمولاً غیرقابل دسترس)
         if config.address.startswith(('127.', '192.168.', '10.', '172.')):
             return False
-            
+
         # بررسی UUID خالی
         if not config.uuid or len(config.uuid) < 10:
             return False
-            
+
         return True
-    
+
     def filter_configs(self, configs: List[V2RayConfig]) -> List[V2RayConfig]:
         """فیلتر کردن کانفیگ‌ها"""
         valid_configs = []
         filtered_count = 0
-        
+
         for config in configs:
             if self.is_valid_config(config):
                 valid_configs.append(config)
             else:
                 filtered_count += 1
-                
+
         logger.info(f"🔍 فیلتر هوشمند: {filtered_count} کانفیگ نامناسب حذف شد")
         return valid_configs
+
 
 class V2RayCollector:
     """کلاس اصلی برای جمع‌آوری و تست کانفیگ‌های V2Ray"""
@@ -162,152 +166,55 @@ class V2RayCollector:
         self.configs: List[V2RayConfig] = []
         self.working_configs: List[V2RayConfig] = []
         self.failed_configs: List[V2RayConfig] = []
-        
+
         # اضافه کردن سیستم‌های جدید
         self.connection_pool = UltraFastConnectionPool(max_workers=200)
         self.smart_filter = SmartConfigFilter()
-        
+
         # اضافه کردن Cache Manager
         try:
             from cache_manager import CacheManager
             self.cache = CacheManager(cache_dir="cache", max_size=2000)
             logger.info("Cache Manager initialized successfully")
         except ImportError:
-            logger.warning("Cache Manager not available, running without cache")
+            logger.warning(
+                "Cache Manager not available, running without cache")
             self.cache = None
-        
+
         # اضافه کردن Advanced Analytics
         try:
             from analytics import AdvancedAnalytics
             self.analytics = AdvancedAnalytics()
             logger.info("Advanced Analytics initialized successfully")
         except ImportError:
-            logger.warning("Advanced Analytics not available, running without analytics")
+            logger.warning(
+                "Advanced Analytics not available, running without analytics")
             self.analytics = None
 
-        # منابع کانفیگ‌های رایگان
+        # منابع کانفیگ‌های رایگان - منابع فعال و معتبر (بدون تکراری)
         self.config_sources = [
-            # منابع اصلی و معتبر
+            # منابع اصلی و معتبر (تست شده)
             "https://github.com/Epodonios/v2ray-configs/raw/main/All_Configs_Sub.txt",
             "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge.txt",
             "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
             "https://raw.githubusercontent.com/aiboboxx/v2rayfree/main/v2",
+            "https://raw.githubusercontent.com/roosterkid/openproxylist/main/V2RAY_BASE64.txt",
             "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/All_Configs_base64_Sub.txt",
+
+            # منابع SingBox (تست شده)
             "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/ss.json",
             "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/mix.json",
-            
-            # منابع VMess اضافی
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess2",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess3",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess4",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess5",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess6",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess7",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess8",
-            
-            # منابع اضافی VMess
-            "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/sub/sub_merge.txt",
-            "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge.txt",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess9",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess10",
-            
-            # منابع VLESS
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vless",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vless2",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vless3",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vless4",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vless5",
-            
-            # منابع Trojan
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/trojan",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/trojan2",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/trojan3",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/trojan4",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/trojan5",
-            
-            # منابع Shadowsocks
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss2",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss3",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss4",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss5",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss6",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss7",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss8",
-            
-            # منابع ترکیبی
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/mixed",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/mixed2",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/mixed3",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/mixed4",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/mixed5",
-            
-            # منابع اضافی
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/other",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/other2",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/other3",
-            
-            # منابع جایگزین
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/backup",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/backup2",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/backup3",
-            
-            # منابع جدید
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/new",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/new2",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/new3",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/new4",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/new5",
-            
-            # منابع تکمیلی
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra2",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra3",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra4",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra5",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra6",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra7",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra8",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra9",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra10",
-            
-            # منابع معتبر اضافی
             "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/vmess.json",
             "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/vless.json",
             "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/trojan.json",
-            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/ssr.json",
             "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/hy2.json",
-            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/hysteria.json",
-            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/ss.json",
-            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/mix.json",
-            
-            # منابع جایگزین معتبر
-            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/ss-sub.txt",
-            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray.txt",
-            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray2.txt",
-            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray3.txt",
-            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray4.txt",
-            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray5.txt",
-            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray6.txt",
-            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray7.txt",
-            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray8.txt",
-            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray9.txt",
-            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray10.txt",
-            
-            # منابع متنوع
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/all",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/all2",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/all3",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/all4",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/all5",
-            
-            # منابع پشتیبان
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/backup4",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/backup5",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/backup6",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/backup7",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/backup8"
+
+            # منابع Leon406 SubCrawler (تست شده)
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vless",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss",
+
+            # منابع Shadowsocks (تست شده)
+            "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/sub/sub_merge.txt",
         ]
 
         # الگوهای regex برای تشخیص پروتکل‌ها
@@ -331,9 +238,10 @@ class V2RayCollector:
         if self.cache:
             cached_configs = self.cache.get(source_url)
             if cached_configs is not None:
-                logger.info(f"Cache hit for {source_url} - {len(cached_configs)} configs")
+                logger.info(
+                    f"Cache hit for {source_url} - {len(cached_configs)} configs")
                 return cached_configs
-        
+
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.get(source_url, timeout=30) as response:
@@ -352,11 +260,12 @@ class V2RayCollector:
                                     config.raw_config for config in singbox_configs]
                                 logger.info(
                                     f"دریافت {len(configs)} کانفیگ از SingBox JSON: {source_url}")
-                                
+
                                 # ذخیره در کش
                                 if self.cache:
-                                    self.cache.set(source_url, configs, ttl=1800)  # 30 دقیقه
-                                
+                                    self.cache.set(
+                                        source_url, configs, ttl=1800)  # 30 دقیقه
+
                                 return configs
                             except json.JSONDecodeError:
                                 logger.warning(
@@ -367,13 +276,15 @@ class V2RayCollector:
                         for line in content.strip().split('\n'):
                             if line.strip() and not line.startswith('#'):
                                 configs.append(line.strip())
-                        
-                        logger.info(f"دریافت {len(configs)} کانفیگ از {source_url}")
-                        
+
+                        logger.info(
+                            f"دریافت {len(configs)} کانفیگ از {source_url}")
+
                         # ذخیره در کش
                         if self.cache:
-                            self.cache.set(source_url, configs, ttl=1800)  # 30 دقیقه
-                        
+                            self.cache.set(source_url, configs,
+                                           ttl=1800)  # 30 دقیقه
+
                         return configs
         except Exception as e:
             logger.error(f"خطا در دریافت از {source_url}: {e}")
@@ -558,7 +469,7 @@ class V2RayCollector:
         """تست اتصال کانفیگ با روش‌های پیشرفته"""
         try:
             start_time = time.time()
-            
+
             # تست‌های مختلف برای پروتکل‌های مختلف
             if config.protocol == "vmess":
                 return await self._test_vmess_connection(config, start_time)
@@ -572,25 +483,26 @@ class V2RayCollector:
                 return await self._test_generic_connection(config, start_time)
 
         except Exception as e:
-            logger.debug(f"خطا در تست {config.protocol} {config.address}:{config.port} - {e}")
+            logger.debug(
+                f"خطا در تست {config.protocol} {config.address}:{config.port} - {e}")
             return False, 0.0
 
     async def _test_vmess_connection(self, config: V2RayConfig, start_time: float) -> Tuple[bool, float]:
         """تست اتصال VMess"""
         try:
             import socket
-            
+
             # تست اتصال TCP
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(10)
             result = sock.connect_ex((config.address, config.port))
             sock.close()
-            
+
             if result == 0:
                 latency = (time.time() - start_time) * 1000
                 return True, latency
             return False, 0.0
-            
+
         except Exception:
             return False, 0.0
 
@@ -598,18 +510,18 @@ class V2RayCollector:
         """تست اتصال VLESS"""
         try:
             import socket
-            
+
             # تست اتصال TCP
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(10)
             result = sock.connect_ex((config.address, config.port))
             sock.close()
-            
+
             if result == 0:
                 latency = (time.time() - start_time) * 1000
                 return True, latency
             return False, 0.0
-            
+
         except Exception:
             return False, 0.0
 
@@ -618,29 +530,30 @@ class V2RayCollector:
         try:
             import socket
             import ssl
-            
+
             # تست اتصال TCP + TLS
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(10)
-            
+
             try:
                 sock.connect((config.address, config.port))
-                
+
                 # تست TLS
                 context = ssl.create_default_context()
                 context.check_hostname = False
                 context.verify_mode = ssl.CERT_NONE
-                
-                tls_sock = context.wrap_socket(sock, server_hostname=config.address)
+
+                tls_sock = context.wrap_socket(
+                    sock, server_hostname=config.address)
                 tls_sock.close()
-                
+
                 latency = (time.time() - start_time) * 1000
                 return True, latency
-                
+
             except:
                 sock.close()
                 return False, 0.0
-                
+
         except Exception:
             return False, 0.0
 
@@ -648,18 +561,18 @@ class V2RayCollector:
         """تست اتصال Shadowsocks"""
         try:
             import socket
-            
+
             # تست اتصال TCP
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(10)
             result = sock.connect_ex((config.address, config.port))
             sock.close()
-            
+
             if result == 0:
                 latency = (time.time() - start_time) * 1000
                 return True, latency
             return False, 0.0
-            
+
         except Exception:
             return False, 0.0
 
@@ -667,18 +580,18 @@ class V2RayCollector:
         """تست اتصال عمومی"""
         try:
             import socket
-            
+
             # تست اتصال TCP ساده
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(10)
             result = sock.connect_ex((config.address, config.port))
             sock.close()
-            
+
             if result == 0:
                 latency = (time.time() - start_time) * 1000
                 return True, latency
             return False, 0.0
-            
+
         except Exception:
             return False, 0.0
 
@@ -686,7 +599,7 @@ class V2RayCollector:
         """تست سریع اتصال کانفیگ با timeout کوتاه‌تر"""
         try:
             start_time = time.time()
-            
+
             # تست سریع با timeout کوتاه‌تر
             if config.protocol == "vmess":
                 return await self._test_vmess_connection_fast(config, start_time)
@@ -700,24 +613,25 @@ class V2RayCollector:
                 return await self._test_generic_connection_fast(config, start_time)
 
         except Exception as e:
-            logger.debug(f"خطا در تست سریع {config.protocol} {config.address}:{config.port} - {e}")
+            logger.debug(
+                f"خطا در تست سریع {config.protocol} {config.address}:{config.port} - {e}")
             return False, 0.0
 
     async def _test_vmess_connection_fast(self, config: V2RayConfig, start_time: float) -> Tuple[bool, float]:
         """تست سریع اتصال VMess"""
         try:
             import socket
-            
+
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(5)  # timeout کوتاه‌تر
             result = sock.connect_ex((config.address, config.port))
             sock.close()
-            
+
             if result == 0:
                 latency = (time.time() - start_time) * 1000
                 return True, latency
             return False, 0.0
-            
+
         except Exception:
             return False, 0.0
 
@@ -725,17 +639,17 @@ class V2RayCollector:
         """تست سریع اتصال VLESS"""
         try:
             import socket
-            
+
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(5)
             result = sock.connect_ex((config.address, config.port))
             sock.close()
-            
+
             if result == 0:
                 latency = (time.time() - start_time) * 1000
                 return True, latency
             return False, 0.0
-            
+
         except Exception:
             return False, 0.0
 
@@ -743,17 +657,17 @@ class V2RayCollector:
         """تست سریع اتصال Trojan"""
         try:
             import socket
-            
+
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(5)
             result = sock.connect_ex((config.address, config.port))
             sock.close()
-            
+
             if result == 0:
                 latency = (time.time() - start_time) * 1000
                 return True, latency
             return False, 0.0
-                
+
         except Exception:
             return False, 0.0
 
@@ -761,17 +675,17 @@ class V2RayCollector:
         """تست سریع اتصال Shadowsocks"""
         try:
             import socket
-            
+
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(5)
             result = sock.connect_ex((config.address, config.port))
             sock.close()
-            
+
             if result == 0:
                 latency = (time.time() - start_time) * 1000
                 return True, latency
             return False, 0.0
-            
+
         except Exception:
             return False, 0.0
 
@@ -779,17 +693,17 @@ class V2RayCollector:
         """تست سریع اتصال عمومی"""
         try:
             import socket
-            
+
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(5)
             result = sock.connect_ex((config.address, config.port))
             sock.close()
-            
+
             if result == 0:
                 latency = (time.time() - start_time) * 1000
                 return True, latency
             return False, 0.0
-            
+
         except Exception:
             return False, 0.0
 
@@ -978,23 +892,23 @@ class V2RayCollector:
                 main_part = config_str.split('://', 1)[1]
             else:
                 return None
-            
+
             # تجزیه پارامترها
             parts = main_part.split('?')
             server_info = parts[0]
-            
+
             # استخراج آدرس و پورت
             if '@' in server_info:
                 server_part = server_info.split('@')[1]
             else:
                 server_part = server_info
-            
+
             if ':' in server_part:
                 address, port = server_part.rsplit(':', 1)
                 port = int(port)
             else:
                 return None
-            
+
             # استخراج UUID از query params
             uuid = "hysteria-uuid"
             if len(parts) > 1:
@@ -1005,7 +919,7 @@ class V2RayCollector:
                         if key == 'auth' or key == 'password':
                             uuid = value
                             break
-            
+
             return V2RayConfig(
                 protocol="hysteria",
                 address=address,
@@ -1025,23 +939,23 @@ class V2RayCollector:
                 main_part = config_str.split('://', 1)[1]
             else:
                 return None
-            
+
             # تجزیه پارامترها
             parts = main_part.split('?')
             server_info = parts[0]
-            
+
             # استخراج آدرس و پورت
             if '@' in server_info:
                 server_part = server_info.split('@')[1]
             else:
                 server_part = server_info
-            
+
             if ':' in server_part:
                 address, port = server_part.rsplit(':', 1)
                 port = int(port)
             else:
                 return None
-            
+
             # استخراج Public Key
             public_key = "wireguard-key"
             if len(parts) > 1:
@@ -1052,7 +966,7 @@ class V2RayCollector:
                         if key == 'publickey':
                             public_key = value
                             break
-            
+
             return V2RayConfig(
                 protocol="wireguard",
                 address=address,
@@ -1072,23 +986,23 @@ class V2RayCollector:
                 main_part = config_str.split('://', 1)[1]
             else:
                 return None
-            
+
             # تجزیه پارامترها
             parts = main_part.split('?')
             server_info = parts[0]
-            
+
             # استخراج آدرس و پورت
             if '@' in server_info:
                 server_part = server_info.split('@')[1]
             else:
                 server_part = server_info
-            
+
             if ':' in server_part:
                 address, port = server_part.rsplit(':', 1)
                 port = int(port)
             else:
                 return None
-            
+
             # استخراج UUID
             uuid = "tuic-uuid"
             if len(parts) > 1:
@@ -1099,7 +1013,7 @@ class V2RayCollector:
                         if key == 'uuid':
                             uuid = value
                             break
-            
+
             return V2RayConfig(
                 protocol="tuic",
                 address=address,
@@ -1119,28 +1033,28 @@ class V2RayCollector:
                 main_part = config_str.split('://', 1)[1]
             else:
                 return None
-            
+
             # تجزیه پارامترها
             parts = main_part.split('?')
             server_info = parts[0]
-            
+
             # استخراج آدرس و پورت
             if '@' in server_info:
                 server_part = server_info.split('@')[1]
             else:
                 server_part = server_info
-            
+
             if ':' in server_part:
                 address, port = server_part.rsplit(':', 1)
                 port = int(port)
             else:
                 return None
-            
+
             # استخراج username
             username = "naive-user"
             if '@' in server_info:
                 username = server_info.split('@')[0]
-            
+
             return V2RayConfig(
                 protocol="naive",
                 address=address,
@@ -1155,18 +1069,18 @@ class V2RayCollector:
     def remove_duplicate_configs_advanced(self, configs: List[str]) -> List[str]:
         """حذف تکراری‌های پیشرفته بر اساس محتوا"""
         logger.info("🔍 شروع حذف تکراری‌های پیشرفته...")
-        
+
         unique_configs = []
         seen_hashes = set()
         duplicate_count = 0
-        
+
         for config_str in configs:
             if not config_str or len(config_str.strip()) == 0:
                 continue
-                
+
             # ایجاد hash از محتوای کانفیگ
             config_hash = hashlib.md5(config_str.encode('utf-8')).hexdigest()
-            
+
             if config_hash not in seen_hashes:
                 # بررسی تکراری بر اساس آدرس و پورت
                 config = self.parse_config(config_str)
@@ -1183,7 +1097,7 @@ class V2RayCollector:
                     seen_hashes.add(config_hash)
             else:
                 duplicate_count += 1
-        
+
         logger.info(f"🔄 حذف {duplicate_count} کانفیگ تکراری")
         return unique_configs
 
@@ -1194,21 +1108,23 @@ class V2RayCollector:
 
         # مرحله 1: حذف تکراری‌های پیشرفته
         unique_configs = self.remove_duplicate_configs_advanced(configs)
-        logger.info(f"🔄 حذف تکراری‌ها: {len(configs)} → {len(unique_configs)} کانفیگ")
+        logger.info(
+            f"🔄 حذف تکراری‌ها: {len(configs)} → {len(unique_configs)} کانفیگ")
 
         # مرحله 2: تبدیل به V2RayConfig و فیلتر هوشمند
         parsed_configs = []
         parse_start = time.time()
-        
+
         for config_str in unique_configs:
             config = self.parse_config(config_str)
             if config:
                 parsed_configs.append(config)
-        
+
         # فیلتر هوشمند
         valid_configs = self.smart_filter.filter_configs(parsed_configs)
         parse_time = time.time() - parse_start
-        logger.info(f"🔍 فیلتر هوشمند: {len(parsed_configs)} → {len(valid_configs)} کانفیگ معتبر ({parse_time:.1f}s)")
+        logger.info(
+            f"🔍 فیلتر هوشمند: {len(parsed_configs)} → {len(valid_configs)} کانفیگ معتبر ({parse_time:.1f}s)")
 
         if not valid_configs:
             logger.warning("❌ هیچ کانفیگ معتبری یافت نشد")
@@ -1216,49 +1132,58 @@ class V2RayCollector:
 
         # مرحله 3: تست فوق سریع با Connection Pool
         test_start = time.time()
-        logger.info(f"⚡ شروع تست فوق سریع با {self.connection_pool.max_workers} worker")
+        logger.info(
+            f"⚡ شروع تست فوق سریع با {self.connection_pool.max_workers} worker")
 
         # تقسیم به batch های بزرگ برای تست موازی
         batch_size = 500  # batch بزرگ‌تر
-        batches = [valid_configs[i:i + batch_size] for i in range(0, len(valid_configs), batch_size)]
-        
+        batches = [valid_configs[i:i + batch_size]
+                   for i in range(0, len(valid_configs), batch_size)]
+
         total_tested = 0
         for batch_idx, batch in enumerate(batches):
-            logger.info(f"🧪 تست batch {batch_idx + 1}/{len(batches)} ({len(batch)} کانفیگ)")
-            
+            logger.info(
+                f"🧪 تست batch {batch_idx + 1}/{len(batches)} ({len(batch)} کانفیگ)")
+
             # تست موازی با Connection Pool
             results = await self.connection_pool.test_multiple_connections(batch)
-            
+
             # پردازش نتایج
             for config, is_working, latency in results:
                 config.is_working = is_working
                 config.latency = latency
-                
+
                 if is_working:
                     self.working_configs.append(config)
-                    logger.debug(f"✅ {config.protocol.upper()} {config.address}:{config.port} - {latency:.0f}ms")
+                    logger.debug(
+                        f"✅ {config.protocol.upper()} {config.address}:{config.port} - {latency:.0f}ms")
                 else:
                     self.failed_configs.append(config)
-            
+
             total_tested += len(batch)
-            
+
             # گزارش پیشرفت
             if batch_idx % 5 == 0 or batch_idx == len(batches) - 1:
-                success_rate = (len(self.working_configs) / total_tested * 100) if total_tested > 0 else 0
-                logger.info(f"📊 پیشرفت: {total_tested}/{len(valid_configs)} - موفقیت: {success_rate:.1f}%")
+                success_rate = (len(self.working_configs) /
+                                total_tested * 100) if total_tested > 0 else 0
+                logger.info(
+                    f"📊 پیشرفت: {total_tested}/{len(valid_configs)} - موفقیت: {success_rate:.1f}%")
 
         test_time = time.time() - test_start
         total_time = time.time() - start_time
-        
+
         # گزارش نهایی
-        success_rate = (len(self.working_configs) / len(valid_configs) * 100) if valid_configs else 0
-        configs_per_second = len(valid_configs) / test_time if test_time > 0 else 0
-        
+        success_rate = (len(self.working_configs) /
+                        len(valid_configs) * 100) if valid_configs else 0
+        configs_per_second = len(valid_configs) / \
+            test_time if test_time > 0 else 0
+
         logger.info(f"🎉 تست فوق سریع کامل شد:")
         logger.info(f"   ⏱️ زمان کل: {total_time:.1f}s")
         logger.info(f"   🧪 زمان تست: {test_time:.1f}s")
         logger.info(f"   ⚡ سرعت: {configs_per_second:.1f} کانفیگ/ثانیه")
-        logger.info(f"   ✅ موفق: {len(self.working_configs)} ({success_rate:.1f}%)")
+        logger.info(
+            f"   ✅ موفق: {len(self.working_configs)} ({success_rate:.1f}%)")
         logger.info(f"   ❌ ناموفق: {len(self.failed_configs)}")
 
     def cleanup_resources(self):
@@ -1421,11 +1346,12 @@ class V2RayCollector:
 
         logger.info(
             f"✅ سیکل کامل شد - {len(self.working_configs)} کانفیگ سالم ذخیره شد")
-        
+
         # تولید گزارش تحلیلی پیشرفته
         if self.analytics:
             try:
-                analytics_report = self.analytics.generate_report(self.working_configs, self.failed_configs)
+                analytics_report = self.analytics.generate_report(
+                    self.working_configs, self.failed_configs)
                 self.save_analytics_report(analytics_report)
                 logger.info("Advanced analytics report generated successfully")
             except Exception as e:
@@ -1465,18 +1391,19 @@ class V2RayCollector:
                 report['protocols'][protocol]['avg_latency'] = f"{avg_latency:.1f}ms"
 
         return report
-    
+
     def save_analytics_report(self, analytics_report: Dict) -> None:
         """ذخیره گزارش تحلیلی"""
         try:
             import os
             os.makedirs('subscriptions', exist_ok=True)
-            
+
             with open('subscriptions/analytics_report.json', 'w', encoding='utf-8') as f:
                 json.dump(analytics_report, f, ensure_ascii=False, indent=2)
-            
-            logger.info("Analytics report saved to subscriptions/analytics_report.json")
-            
+
+            logger.info(
+                "Analytics report saved to subscriptions/analytics_report.json")
+
         except Exception as e:
             logger.error(f"Error saving analytics report: {e}")
 
