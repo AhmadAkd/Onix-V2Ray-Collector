@@ -18,6 +18,16 @@
 ### 🌐 صفحه اصلی
 [**مشاهده تمام لینک‌ها**](https://ahmadakd.github.io/V2Ray_Collector/subscriptions/)
 
+### 📊 Dashboard مدیریتی
+[**Dashboard پیشرفته**](https://ahmadakd.github.io/V2Ray_Collector/subscriptions/dashboard.html)
+
+### 🚀 API عمومی
+```
+GET /api/stats - آمار کلی
+GET /api/configs - همه کانفیگ‌ها
+GET /api/subscription/{protocol} - لینک اشتراک
+```
+
 ### همه کانفیگ‌ها
 ```
 https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/all_subscription.txt

@@ -1,17 +1,17 @@
 {
-  "timestamp": "2025-10-12T12:30:34.291145",
+  "timestamp": "2025-10-13T09:03:05.291509",
   "total_tests": 8,
-  "passed_tests": 8,
-  "failed_tests": 0,
-  "success_rate": "100.0%",
+  "passed_tests": 2,
+  "failed_tests": 6,
+  "success_rate": "25.0%",
   "test_results": {
     "imports": true,
-    "file_structure": true,
+    "file_structure": false,
     "config_file": true,
-    "config_collector": true,
-    "config_parsing": true,
-    "connectivity": true,
-    "automation": true,
-    "web_server": true
+    "config_collector": false,
+    "config_parsing": false,
+    "connectivity": false,
+    "automation": false,
+    "web_server": false
   }
 }

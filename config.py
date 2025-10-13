@@ -29,6 +29,10 @@ CONFIG_SOURCES = [
     "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge.txt",
     "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
     "https://raw.githubusercontent.com/aiboboxx/v2rayfree/main/v2",
+    "https://raw.githubusercontent.com/roosterkid/openproxylist/main/V2RAY_BASE64.txt",
+    "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/All_Configs_base64_Sub.txt",
+    "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/ss.json",
+    "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/mix.json",
 
     # منابع اضافی (اختیاری)
     # "https://raw.githubusercontent.com/your-source/configs.txt",
@@ -56,9 +60,19 @@ WEB_SERVER_CONFIG = {
 CATEGORIZATION_CONFIG = {
     'sort_by_latency': True,  # مرتب‌سازی بر اساس تأخیر
     'group_by_protocol': True,  # دسته‌بندی بر اساس پروتکل
-    # دسته‌بندی بر اساس کشور (نیاز به IP geolocation)
-    'group_by_country': False,
+    'group_by_country': True,  # دسته‌بندی بر اساس کشور
     'max_configs_per_protocol': 1000,  # حداکثر کانفیگ در هر پروتکل
+    'max_configs_per_country': 500,  # حداکثر کانفیگ در هر کشور
+}
+
+# تنظیمات فیلتر جغرافیایی
+GEO_FILTER_CONFIG = {
+    'enabled': True,  # فعال‌سازی فیلتر جغرافیایی
+    'priority_countries': ['US', 'DE', 'NL', 'CA', 'UK'],  # کشورهای اولویت‌دار
+    'blocked_countries': ['CN', 'RU'],  # کشورهای مسدود
+    'prefer_nearby': True,  # اولویت کشورهای نزدیک به ایران
+    'nearby_countries': ['TR', 'AM', 'AZ', 'GE'],  # کشورهای نزدیک
+    'min_country_diversity': 3,  # حداقل تنوع کشوری
 }
 
 # تنظیمات لاگ‌گیری

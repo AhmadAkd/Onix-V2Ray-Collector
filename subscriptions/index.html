@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V2Ray Collector - لینک‌های اشتراک</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .hero-section {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .hero-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        .stats-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        .stats-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .stats-label {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+        .protocol-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .protocol-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+        .protocol-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+        .protocol-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .protocol-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .protocol-description {
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        .btn-download {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        .btn-download:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+        .btn-copy {
+            background: #28a745;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        .btn-copy:hover {
+            background: #218838;
+            transform: scale(1.05);
+        }
+        .guide-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .guide-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        .guide-step:hover {
+            background: #e9ecef;
+            transform: translateX(10px);
+        }
+        .guide-number {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-left: 20px;
+            flex-shrink: 0;
+        }
+        .guide-text {
+            flex: 1;
+        }
+        .footer {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+        }
+        .footer a:hover {
+            color: #ffd700;
+            text-decoration: underline;
+        }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 15px 25px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            animation: slideIn 0.3s ease;
+        }
+        .notification.success {
+            background: #28a745;
+        }
+        .notification.error {
+            background: #dc3545;
+        }
+        .notification.info {
+            background: #17a2b8;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">
+                <i class="fas fa-rocket"></i> V2Ray Collector
+            </h1>
+            <p class="hero-subtitle">کانفیگ‌های رایگان و سالم V2Ray با کیفیت بالا</p>
+            
+            <!-- Stats Cards -->
+            <div class="row justify-content-center">
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stats-number" id="healthyCount">
+                            <div class="loading"></div>
+                        </div>
+                        <div class="stats-label">کانفیگ‌های سالم</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stats-number" id="failedCount">
+                            <div class="loading"></div>
+                        </div>
+                        <div class="stats-label">کانفیگ‌های ناسالم</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stats-number" id="successRate">
+                            <div class="loading"></div>
+                        </div>
+                        <div class="stats-label">نرخ موفقیت</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <div class="stats-number" id="lastUpdate">
+                            <div class="loading"></div>
+                        </div>
+                        <div class="stats-label">آخرین بروزرسانی</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="container">
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h4>امنیت بالا</h4>
+                <p>تست مداوم و فیلتر کانفیگ‌های ناسالم</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <h4>بروزرسانی خودکار</h4>
+                <p>هر 30 دقیقه کانفیگ‌های جدید جمع‌آوری می‌شود</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h4>تنوع جغرافیایی</h4>
+                <p>کانفیگ‌هایی از کشورهای مختلف جهان</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h4>عملکرد سریع</h4>
+                <p>تست همزمان و بهینه‌سازی شده</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Subscription Links Section -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center mb-5" style="color: white; font-weight: bold;">
+                    <i class="fas fa-download"></i> لینک‌های اشتراک
+                </h2>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- VMess -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="protocol-card">
+                    <div class="protocol-icon">🔵</div>
+                    <h3 class="protocol-title">VMess</h3>
+                    <p class="protocol-description">
+                        پروتکل VMess با قابلیت‌های پیشرفته، امنیت بالا و پشتیبانی از ویژگی‌های مدرن
+                    </p>
+                    <div class="text-center">
+                        <a href="vmess_subscription.txt" class="btn-download" download>
+                            <i class="fas fa-download"></i> دانلود VMess
+                        </a>
+                        <button class="btn-copy" onclick="copyToClipboard('https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/vmess_subscription.txt')">
+                            <i class="fas fa-copy"></i> کپی لینک
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VLESS -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="protocol-card">
+                    <div class="protocol-icon">🟣</div>
+                    <h3 class="protocol-title">VLESS</h3>
+                    <p class="protocol-description">
+                        پروتکل VLESS سبک و سریع با عملکرد بهینه و مصرف منابع کم
+                    </p>
+                    <div class="text-center">
+                        <a href="vless_subscription.txt" class="btn-download" download>
+                            <i class="fas fa-download"></i> دانلود VLESS
+                        </a>
+                        <button class="btn-copy" onclick="copyToClipboard('https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/vless_subscription.txt')">
+                            <i class="fas fa-copy"></i> کپی لینک
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trojan -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="protocol-card">
+                    <div class="protocol-icon">🟠</div>
+                    <h3 class="protocol-title">Trojan</h3>
+                    <p class="protocol-description">
+                        پروتکل Trojan با شبیه‌سازی ترافیک HTTPS و عبور از فیلترینگ
+                    </p>
+                    <div class="text-center">
+                        <a href="trojan_subscription.txt" class="btn-download" download>
+                            <i class="fas fa-download"></i> دانلود Trojan
+                        </a>
+                        <button class="btn-copy" onclick="copyToClipboard('https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/trojan_subscription.txt')">
+                            <i class="fas fa-copy"></i> کپی لینک
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shadowsocks -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="protocol-card">
+                    <div class="protocol-icon">🟡</div>
+                    <h3 class="protocol-title">Shadowsocks</h3>
+                    <p class="protocol-description">
+                        پروتکل Shadowsocks کلاسیک و قابل اعتماد با سادگی استفاده
+                    </p>
+                    <div class="text-center">
+                        <a href="ss_subscription.txt" class="btn-download" download>
+                            <i class="fas fa-download"></i> دانلود SS
+                        </a>
+                        <button class="btn-copy" onclick="copyToClipboard('https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/ss_subscription.txt')">
+                            <i class="fas fa-copy"></i> کپی لینک
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ShadowsocksR -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="protocol-card">
+                    <div class="protocol-icon">🟤</div>
+                    <h3 class="protocol-title">ShadowsocksR</h3>
+                    <p class="protocol-description">
+                        پروتکل ShadowsocksR با ویژگی‌های اضافی و پشتیبانی از obfs
+                    </p>
+                    <div class="text-center">
+                        <a href="ssr_subscription.txt" class="btn-download" download>
+                            <i class="fas fa-download"></i> دانلود SSR
+                        </a>
+                        <button class="btn-copy" onclick="copyToClipboard('https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/ssr_subscription.txt')">
+                            <i class="fas fa-copy"></i> کپی لینک
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- All Protocols -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="protocol-card">
+                    <div class="protocol-icon">🌈</div>
+                    <h3 class="protocol-title">همه پروتکل‌ها</h3>
+                    <p class="protocol-description">
+                        ترکیبی از تمام پروتکل‌های موجود برای حداکثر تنوع و انتخاب
+                    </p>
+                    <div class="text-center">
+                        <a href="all_subscription.txt" class="btn-download" download>
+                            <i class="fas fa-download"></i> دانلود همه
+                        </a>
+                        <button class="btn-copy" onclick="copyToClipboard('https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/all_subscription.txt')">
+                            <i class="fas fa-copy"></i> کپی لینک
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Guide Section -->
+    <div class="container">
+        <div class="guide-section">
+            <h2 class="text-center mb-5">
+                <i class="fas fa-book"></i> راهنمای استفاده
+            </h2>
+            
+            <div class="guide-step">
+                <div class="guide-number">1</div>
+                <div class="guide-text">
+                    <h5><i class="fas fa-download"></i> دانلود یا کپی</h5>
+                    <p>روی دکمه "دانلود" کلیک کنید یا لینک اشتراک را کپی کنید</p>
+                </div>
+            </div>
+            
+            <div class="guide-step">
+                <div class="guide-number">2</div>
+                <div class="guide-text">
+                    <h5><i class="fas fa-plus"></i> اضافه کردن</h5>
+                    <p>فایل یا لینک اشتراک را در اپلیکیشن V2Ray خود اضافه کنید</p>
+                </div>
+            </div>
+            
+            <div class="guide-step">
+                <div class="guide-number">3</div>
+                <div class="guide-text">
+                    <h5><i class="fas fa-server"></i> انتخاب سرور</h5>
+                    <p>یکی از سرورهای موجود را انتخاب کرده و اتصال برقرار کنید</p>
+                </div>
+            </div>
+            
+            <div class="guide-step">
+                <div class="guide-number">4</div>
+                <div class="guide-text">
+                    <h5><i class="fas fa-check"></i> اتصال موفق</h5>
+                    <p>از اتصال ایمن و سریع خود لذت ببرید!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h4 style="margin-bottom: 20px;">
+                        <i class="fas fa-heart"></i> V2Ray Collector
+                    </h4>
+                    <p style="margin-bottom: 20px; opacity: 0.9;">
+                        جمع‌آوری و تست خودکار کانفیگ‌های رایگان V2Ray با کیفیت بالا
+                    </p>
+                    <div style="margin-bottom: 20px;">
+                        <a href="https://github.com/AhmadAkd/V2Ray_Collector" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="dashboard.html" target="_blank">
+                            <i class="fas fa-chart-line"></i> Dashboard
+                        </a>
+                        <a href="https://github.com/AhmadAkd/V2Ray_Collector/blob/main/README.md" target="_blank">
+                            <i class="fas fa-book"></i> مستندات
+                        </a>
+                    </div>
+                    <p style="opacity: 0.7; font-size: 0.9em;">
+                        آخرین بروزرسانی: <span id="footerUpdate">-</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // کپی کردن لینک به کلیپ‌بورد
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                showNotification('✅ لینک با موفقیت کپی شد!', 'success');
+            }, function(err) {
+                // روش جایگزین برای مرورگرهای قدیمی
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showNotification('✅ لینک با موفقیت کپی شد!', 'success');
+            });
+        }
+        
+        // نمایش اعلان
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'times' : 'info'}-circle"></i>
+                ${message}
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 4000);
+        }
+        
+        // بارگذاری آمار
+        async function loadStats() {
+            try {
+                const response = await fetch('latest_report.json');
+                const data = await response.json();
+                
+                const healthyCount = data.working_configs ? data.working_configs.length : 0;
+                const failedCount = data.failed_configs ? data.failed_configs.length : 0;
+                const totalCount = healthyCount + failedCount;
+                const successRate = totalCount > 0 ? Math.round((healthyCount / totalCount) * 100) : 0;
+                
+                document.getElementById('healthyCount').innerHTML = healthyCount.toLocaleString();
+                document.getElementById('failedCount').innerHTML = failedCount.toLocaleString();
+                document.getElementById('successRate').innerHTML = successRate + '%';
+                
+                if (data.timestamp) {
+                    const lastUpdate = new Date(data.timestamp);
+                    const timeAgo = getTimeAgo(lastUpdate);
+                    document.getElementById('lastUpdate').innerHTML = timeAgo;
+                    document.getElementById('footerUpdate').textContent = lastUpdate.toLocaleString('fa-IR');
+                }
+            } catch (error) {
+                console.error('خطا در بارگذاری آمار:', error);
+                showNotification('⚠️ خطا در بارگذاری آمار', 'error');
+                
+                // نمایش مقادیر پیش‌فرض
+                document.getElementById('healthyCount').innerHTML = '-';
+                document.getElementById('failedCount').innerHTML = '-';
+                document.getElementById('successRate').innerHTML = '-%';
+                document.getElementById('lastUpdate').innerHTML = '-';
+            }
+        }
+        
+        // محاسبه زمان گذشته
+        function getTimeAgo(date) {
+            const now = new Date();
+            const diff = now - date;
+            const minutes = Math.floor(diff / 60000);
+            const hours = Math.floor(diff / 3600000);
+            const days = Math.floor(diff / 86400000);
+            
+            if (minutes < 1) return 'همین الان';
+            if (minutes < 60) return `${minutes} دقیقه پیش`;
+            if (hours < 24) return `${hours} ساعت پیش`;
+            return `${days} روز پیش`;
+        }
+        
+        // بارگذاری آمار هنگام لود صفحه
+        document.addEventListener('DOMContentLoaded', loadStats);
+        
+        // Auto-refresh stats every 5 minutes
+        setInterval(loadStats, 5 * 60 * 1000);
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

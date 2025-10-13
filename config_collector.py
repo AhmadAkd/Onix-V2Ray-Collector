@@ -59,7 +59,11 @@ class V2RayCollector:
             "https://github.com/Epodonios/v2ray-configs/raw/main/All_Configs_Sub.txt",
             "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge.txt",
             "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
-            "https://raw.githubusercontent.com/aiboboxx/v2rayfree/main/v2"
+            "https://raw.githubusercontent.com/aiboboxx/v2rayfree/main/v2",
+            "https://raw.githubusercontent.com/roosterkid/openproxylist/main/V2RAY_BASE64.txt",
+            "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/All_Configs_base64_Sub.txt",
+            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/ss.json",
+            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/mix.json"
         ]
 
         # الگوهای regex برای تشخیص پروتکل‌ها
@@ -78,20 +82,24 @@ class V2RayCollector:
                 async with session.get(source_url, timeout=30) as response:
                     if response.status == 200:
                         content = await response.text()
-                        
+
                         # بررسی فرمت JSON (SingBox)
                         if source_url.endswith('.json') or content.strip().startswith('{'):
                             try:
                                 import json
                                 json_data = json.loads(content)
-                                singbox_configs = self.parse_singbox_config(json_data)
+                                singbox_configs = self.parse_singbox_config(
+                                    json_data)
                                 # تبدیل به فرمت استاندارد
-                                configs = [config.raw_config for config in singbox_configs]
-                                logger.info(f"دریافت {len(configs)} کانفیگ از SingBox JSON: {source_url}")
+                                configs = [
+                                    config.raw_config for config in singbox_configs]
+                                logger.info(
+                                    f"دریافت {len(configs)} کانفیگ از SingBox JSON: {source_url}")
                                 return configs
                             except json.JSONDecodeError:
-                                logger.warning(f"فرمت JSON نامعتبر در {source_url}")
-                        
+                                logger.warning(
+                                    f"فرمت JSON نامعتبر در {source_url}")
+
                         # تجزیه کانفیگ‌ها از متن معمولی
                         configs = []
                         for line in content.strip().split('\n'):
@@ -256,10 +264,10 @@ class V2RayCollector:
     def parse_singbox_config(self, json_data: dict) -> List[V2RayConfig]:
         """تجزیه کانفیگ SingBox JSON"""
         configs = []
-        
+
         try:
             outbounds = json_data.get('outbounds', [])
-            
+
             for outbound in outbounds:
                 if isinstance(outbound, dict) and 'outbounds' in outbound:
                     # این یک selector است که خودش outbounds دارد
@@ -272,10 +280,10 @@ class V2RayCollector:
                     config = self.parse_singbox_outbound(outbound)
                     if config:
                         configs.append(config)
-            
+
             logger.info(f"تجزیه شد {len(configs)} کانفیگ از فرمت SingBox")
             return configs
-            
+
         except Exception as e:
             logger.error(f"خطا در تجزیه SingBox: {e}")
             return []
@@ -285,7 +293,7 @@ class V2RayCollector:
         try:
             outbound_type = outbound.get('type', '')
             tag = outbound.get('tag', '')
-            
+
             if outbound_type == 'vmess':
                 return V2RayConfig(
                     protocol="vmess",
@@ -298,7 +306,7 @@ class V2RayCollector:
                     raw_config=f"vmess://{self.encode_vmess_config(outbound)}",
                     country=self.extract_country_from_tag(tag)
                 )
-            
+
             elif outbound_type == 'vless':
                 return V2RayConfig(
                     protocol="vless",
@@ -310,7 +318,7 @@ class V2RayCollector:
                     raw_config=f"vless://{self.encode_vless_config(outbound)}",
                     country=self.extract_country_from_tag(tag)
                 )
-            
+
             elif outbound_type == 'trojan':
                 return V2RayConfig(
                     protocol="trojan",
@@ -321,7 +329,7 @@ class V2RayCollector:
                     raw_config=f"trojan://{self.encode_trojan_config(outbound)}",
                     country=self.extract_country_from_tag(tag)
                 )
-            
+
             elif outbound_type == 'shadowsocks':
                 return V2RayConfig(
                     protocol="ss",
@@ -331,10 +339,10 @@ class V2RayCollector:
                     raw_config=f"ss://{self.encode_ss_config(outbound)}",
                     country=self.extract_country_from_tag(tag)
                 )
-            
+
         except Exception as e:
             logger.debug(f"خطا در تجزیه outbound: {e}")
-        
+
         return None
 
     def extract_country_from_tag(self, tag: str) -> str:
@@ -345,11 +353,11 @@ class V2RayCollector:
             '🇷🇺': 'RU', '🇪🇸': 'ES', '🇳🇴': 'NO', '🇱🇹': 'LT',
             '🇭🇰': 'HK', '🇨🇳': 'CN', '🚩': 'CF'
         }
-        
+
         for flag, country in country_flags.items():
             if flag in tag:
                 return country
-        
+
         return 'unknown'
 
     def encode_vmess_config(self, outbound: dict) -> str:
@@ -367,7 +375,7 @@ class V2RayCollector:
             "path": "",
             "tls": "tls" if outbound.get('transport', {}).get('tls') else ""
         }
-        
+
         import json
         return base64.b64encode(json.dumps(vmess_config).encode()).decode()
 
@@ -376,14 +384,14 @@ class V2RayCollector:
         uuid = outbound.get('uuid', '')
         server = outbound.get('server', '')
         port = outbound.get('server_port', 0)
-        
+
         params = []
         if outbound.get('transport', {}).get('tls'):
             params.append('security=tls')
-        
+
         params_str = '&'.join(params) if params else ''
         fragment = f"#{outbound.get('tag', '')}"
-        
+
         return f"{uuid}@{server}:{port}?{params_str}{fragment}"
 
     def encode_trojan_config(self, outbound: dict) -> str:
@@ -392,7 +400,7 @@ class V2RayCollector:
         server = outbound.get('server', '')
         port = outbound.get('server_port', 0)
         fragment = f"#{outbound.get('tag', '')}"
-        
+
         return f"{password}@{server}:{port}{fragment}"
 
     def encode_ss_config(self, outbound: dict) -> str:
@@ -401,14 +409,14 @@ class V2RayCollector:
         password = outbound.get('password', '')
         server = outbound.get('server', '')
         port = outbound.get('server_port', 0)
-        
+
         encoded = base64.b64encode(f"{method}:{password}".encode()).decode()
         return f"{encoded}@{server}:{port}"
 
     def parse_config(self, config_str: str) -> Optional[V2RayConfig]:
         """تجزیه کانفیگ بر اساس نوع پروتکل"""
         config_str = config_str.strip()
-        
+
         if config_str.startswith('vmess://'):
             return self.parse_vmess_config(config_str)
         elif config_str.startswith('vless://'):
@@ -417,13 +425,21 @@ class V2RayCollector:
             return self.parse_trojan_config(config_str)
         elif config_str.startswith('ss://'):
             return self.parse_ss_config(config_str)
-        
+
         return None
 
-    async def test_all_configs(self, configs: List[str], max_concurrent: int = 50):
-        """تست تمام کانفیگ‌ها"""
-        logger.info(f"شروع تست {len(configs)} کانفیگ...")
-
+    async def test_all_configs(self, configs: List[str], max_concurrent: int = 100):
+        """تست تمام کانفیگ‌ها با بهینه‌سازی"""
+        logger.info(f"شروع تست {len(configs)} کانفیگ با {max_concurrent} همزمان...")
+        
+        # فیلتر کانفیگ‌های تکراری
+        unique_configs = list(set(configs))
+        logger.info(f"حذف {len(configs) - len(unique_configs)} کانفیگ تکراری")
+        
+        # فیلتر جغرافیایی
+        if hasattr(self, 'geo_filter_enabled') and self.geo_filter_enabled:
+            unique_configs = self.apply_geo_filter(unique_configs)
+        
         semaphore = asyncio.Semaphore(max_concurrent)
 
         async def test_single_config(config_str: str):
@@ -436,7 +452,7 @@ class V2RayCollector:
 
                     if is_working:
                         self.working_configs.append(config)
-                        logger.info(
+                        logger.debug(
                             f"✅ {config.protocol.upper()} {config.address}:{config.port} - {latency:.0f}ms")
                     else:
                         self.failed_configs.append(config)
@@ -446,15 +462,63 @@ class V2RayCollector:
                     logger.debug(
                         f"❌ خطا در تجزیه کانفیگ: {config_str[:50]}...")
 
-        # اجرای موازی تست‌ها
-        tasks = [test_single_config(config) for config in configs]
-        await asyncio.gather(*tasks, return_exceptions=True)
+        # تقسیم به batch های کوچک‌تر برای مدیریت بهتر
+        batch_size = max_concurrent * 2
+        batches = [unique_configs[i:i + batch_size] for i in range(0, len(unique_configs), batch_size)]
+        
+        total_working = len(self.working_configs)
+        total_failed = len(self.failed_configs)
+        
+        for batch_idx, batch in enumerate(batches):
+            logger.info(f"تست batch {batch_idx + 1}/{len(batches)} ({len(batch)} کانفیگ)")
+            
+            # اجرای موازی تست‌ها
+            tasks = [test_single_config(config) for config in batch]
+            await asyncio.gather(*tasks, return_exceptions=True)
+            
+            # استراحت کوتاه بین batch ها
+            if batch_idx < len(batches) - 1:
+                await asyncio.sleep(0.5)
 
         logger.info(
             f"تست کامل شد: {len(self.working_configs)} کانفیگ سالم، {len(self.failed_configs)} کانفیگ ناسالم")
 
+    def apply_geo_filter(self, configs: List[str]) -> List[str]:
+        """اعمال فیلتر جغرافیایی"""
+        from config import GEO_FILTER_CONFIG
+        
+        if not GEO_FILTER_CONFIG['enabled']:
+            return configs
+        
+        filtered_configs = []
+        country_counts = {}
+        
+        for config_str in configs:
+            config = self.parse_config(config_str)
+            if not config:
+                continue
+                
+            country = config.country or 'unknown'
+            
+            # بررسی کشورهای مسدود
+            if country in GEO_FILTER_CONFIG['blocked_countries']:
+                continue
+            
+            # محدودیت تعداد کانفیگ در هر کشور
+            max_per_country = GEO_FILTER_CONFIG.get('max_configs_per_country', 500)
+            if country_counts.get(country, 0) >= max_per_country:
+                continue
+            
+            filtered_configs.append(config_str)
+            country_counts[country] = country_counts.get(country, 0) + 1
+        
+        logger.info(f"فیلتر جغرافیایی: {len(configs)} -> {len(filtered_configs)} کانفیگ")
+        return filtered_configs
+
     def categorize_configs(self):
-        """دسته‌بندی کانفیگ‌ها"""
+        """دسته‌بندی کانفیگ‌ها با فیلتر جغرافیایی"""
+        from config import CATEGORIZATION_CONFIG, GEO_FILTER_CONFIG
+        
         categories = {
             'vmess': [],
             'vless': [],
@@ -462,11 +526,38 @@ class V2RayCollector:
             'ss': [],
             'ssr': []
         }
-
+        
+        # دسته‌بندی بر اساس پروتکل
         for config in self.working_configs:
             if config.protocol in categories:
                 categories[config.protocol].append(config)
-
+        
+        # اعمال محدودیت‌ها
+        max_per_protocol = CATEGORIZATION_CONFIG.get('max_configs_per_protocol', 1000)
+        max_per_country = CATEGORIZATION_CONFIG.get('max_configs_per_country', 500)
+        
+        for protocol, configs in categories.items():
+            # مرتب‌سازی بر اساس تأخیر
+            if CATEGORIZATION_CONFIG.get('sort_by_latency', True):
+                configs.sort(key=lambda x: x.latency or float('inf'))
+            
+            # محدودیت تعداد
+            if len(configs) > max_per_protocol:
+                categories[protocol] = configs[:max_per_protocol]
+                logger.info(f"محدود کردن {protocol}: {len(configs)} -> {max_per_protocol}")
+        
+        # دسته‌بندی بر اساس کشور
+        if CATEGORIZATION_CONFIG.get('group_by_country', True):
+            country_categories = {}
+            for protocol, configs in categories.items():
+                for config in configs:
+                    country = config.country or 'unknown'
+                    if country not in country_categories:
+                        country_categories[country] = []
+                    country_categories[country].append(config)
+            
+            logger.info(f"دسته‌بندی کشورها: {list(country_categories.keys())}")
+        
         return categories
 
     def generate_subscription_links(self, categories: Dict[str, List[V2RayConfig]]):
