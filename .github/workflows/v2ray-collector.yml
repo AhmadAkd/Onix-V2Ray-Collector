@@ -60,8 +60,8 @@ jobs:
             raw_configs = await collector.collect_all_configs()
             print(f'📥 {len(raw_configs)} کانفیگ جمع‌آوری شد')
             
-            # تست کانفیگ‌ها
-            await collector.test_all_configs(raw_configs)
+            # تست کانفیگ‌ها با بهینه‌سازی سرعت
+            await collector.test_all_configs(raw_configs, max_concurrent=25)
             print(f'✅ {len(collector.working_configs)} کانفیگ سالم، {len(collector.failed_configs)} ناسالم')
             
             # دسته‌بندی

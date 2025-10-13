@@ -12,6 +12,7 @@ import base64
 import re
 import time
 import logging
+import hashlib
 from typing import List, Dict, Optional, Tuple
 from dataclasses import dataclass
 from urllib.parse import urlparse
@@ -449,6 +450,117 @@ class V2RayCollector:
         except Exception:
             return False, 0.0
 
+    async def test_config_connectivity_fast(self, config: V2RayConfig) -> Tuple[bool, float]:
+        """تست سریع اتصال کانفیگ با timeout کوتاه‌تر"""
+        try:
+            start_time = time.time()
+            
+            # تست سریع با timeout کوتاه‌تر
+            if config.protocol == "vmess":
+                return await self._test_vmess_connection_fast(config, start_time)
+            elif config.protocol == "vless":
+                return await self._test_vless_connection_fast(config, start_time)
+            elif config.protocol == "trojan":
+                return await self._test_trojan_connection_fast(config, start_time)
+            elif config.protocol in ["ss", "ssr"]:
+                return await self._test_ss_connection_fast(config, start_time)
+            else:
+                return await self._test_generic_connection_fast(config, start_time)
+
+        except Exception as e:
+            logger.debug(f"خطا در تست سریع {config.protocol} {config.address}:{config.port} - {e}")
+            return False, 0.0
+
+    async def _test_vmess_connection_fast(self, config: V2RayConfig, start_time: float) -> Tuple[bool, float]:
+        """تست سریع اتصال VMess"""
+        try:
+            import socket
+            
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(5)  # timeout کوتاه‌تر
+            result = sock.connect_ex((config.address, config.port))
+            sock.close()
+            
+            if result == 0:
+                latency = (time.time() - start_time) * 1000
+                return True, latency
+            return False, 0.0
+            
+        except Exception:
+            return False, 0.0
+
+    async def _test_vless_connection_fast(self, config: V2RayConfig, start_time: float) -> Tuple[bool, float]:
+        """تست سریع اتصال VLESS"""
+        try:
+            import socket
+            
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(5)
+            result = sock.connect_ex((config.address, config.port))
+            sock.close()
+            
+            if result == 0:
+                latency = (time.time() - start_time) * 1000
+                return True, latency
+            return False, 0.0
+            
+        except Exception:
+            return False, 0.0
+
+    async def _test_trojan_connection_fast(self, config: V2RayConfig, start_time: float) -> Tuple[bool, float]:
+        """تست سریع اتصال Trojan"""
+        try:
+            import socket
+            
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(5)
+            result = sock.connect_ex((config.address, config.port))
+            sock.close()
+            
+            if result == 0:
+                latency = (time.time() - start_time) * 1000
+                return True, latency
+            return False, 0.0
+                
+        except Exception:
+            return False, 0.0
+
+    async def _test_ss_connection_fast(self, config: V2RayConfig, start_time: float) -> Tuple[bool, float]:
+        """تست سریع اتصال Shadowsocks"""
+        try:
+            import socket
+            
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(5)
+            result = sock.connect_ex((config.address, config.port))
+            sock.close()
+            
+            if result == 0:
+                latency = (time.time() - start_time) * 1000
+                return True, latency
+            return False, 0.0
+            
+        except Exception:
+            return False, 0.0
+
+    async def _test_generic_connection_fast(self, config: V2RayConfig, start_time: float) -> Tuple[bool, float]:
+        """تست سریع اتصال عمومی"""
+        try:
+            import socket
+            
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(5)
+            result = sock.connect_ex((config.address, config.port))
+            sock.close()
+            
+            if result == 0:
+                latency = (time.time() - start_time) * 1000
+                return True, latency
+            return False, 0.0
+            
+        except Exception:
+            return False, 0.0
+
     def parse_singbox_config(self, json_data: dict) -> List[V2RayConfig]:
         """تجزیه کانفیگ SingBox JSON"""
         configs = []
@@ -618,40 +730,76 @@ class V2RayCollector:
 
         return None
 
-    async def test_all_configs(self, configs: List[str], max_concurrent: int = 100):
-        """تست تمام کانفیگ‌ها با بهینه‌سازی"""
-        logger.info(
-            f"شروع تست {len(configs)} کانفیگ با {max_concurrent} همزمان...")
+    def remove_duplicate_configs_advanced(self, configs: List[str]) -> List[str]:
+        """حذف تکراری‌های پیشرفته بر اساس محتوا"""
+        logger.info("🔍 شروع حذف تکراری‌های پیشرفته...")
+        
+        unique_configs = []
+        seen_hashes = set()
+        duplicate_count = 0
+        
+        for config_str in configs:
+            if not config_str or len(config_str.strip()) == 0:
+                continue
+                
+            # ایجاد hash از محتوای کانفیگ
+            config_hash = hashlib.md5(config_str.encode('utf-8')).hexdigest()
+            
+            if config_hash not in seen_hashes:
+                # بررسی تکراری بر اساس آدرس و پورت
+                config = self.parse_config(config_str)
+                if config:
+                    server_key = f"{config.address}:{config.port}:{config.protocol}"
+                    if server_key not in seen_hashes:
+                        unique_configs.append(config_str)
+                        seen_hashes.add(config_hash)
+                        seen_hashes.add(server_key)
+                    else:
+                        duplicate_count += 1
+                else:
+                    unique_configs.append(config_str)
+                    seen_hashes.add(config_hash)
+            else:
+                duplicate_count += 1
+        
+        logger.info(f"🔄 حذف {duplicate_count} کانفیگ تکراری")
+        return unique_configs
 
-        # فیلتر کانفیگ‌های تکراری
-        unique_configs = list(set(configs))
-        logger.info(f"حذف {len(configs) - len(unique_configs)} کانفیگ تکراری")
+    async def test_all_configs(self, configs: List[str], max_concurrent: int = 20):
+        """تست تمام کانفیگ‌ها با بهینه‌سازی پیشرفته"""
+        logger.info(f"🧪 شروع تست {len(configs)} کانفیگ...")
+
+        # حذف تکراری‌های پیشرفته
+        unique_configs = self.remove_duplicate_configs_advanced(configs)
+        logger.info(f"🔄 حذف تکراری‌ها: {len(configs)} → {len(unique_configs)} کانفیگ منحصر به فرد")
+
+        # بهینه‌سازی تعداد همزمان بر اساس تعداد کانفیگ
+        optimal_concurrent = min(max_concurrent, max(5, len(unique_configs) // 10))
+        logger.info(f"⚡ تست موازی با {optimal_concurrent} thread")
 
         # فیلتر جغرافیایی
         if hasattr(self, 'geo_filter_enabled') and self.geo_filter_enabled:
             unique_configs = self.apply_geo_filter(unique_configs)
 
-        semaphore = asyncio.Semaphore(max_concurrent)
+        semaphore = asyncio.Semaphore(optimal_concurrent)
 
-        async def test_single_config(config_str: str):
+        async def test_single_config_fast(config_str: str):
             async with semaphore:
-                config = self.parse_config(config_str)
-                if config:
-                    is_working, latency = await self.test_config_connectivity(config)
-                    config.is_working = is_working
-                    config.latency = latency
+                try:
+                    config = self.parse_config(config_str)
+                    if config:
+                        # تست سریع‌تر با timeout کوتاه‌تر
+                        is_working, latency = await self.test_config_connectivity_fast(config)
+                        config.is_working = is_working
+                        config.latency = latency
 
-                    if is_working:
-                        self.working_configs.append(config)
-                        logger.debug(
-                            f"✅ {config.protocol.upper()} {config.address}:{config.port} - {latency:.0f}ms")
-                    else:
-                        self.failed_configs.append(config)
-                        logger.debug(
-                            f"❌ {config.protocol.upper()} {config.address}:{config.port} - فیل شد")
-                else:
-                    logger.debug(
-                        f"❌ خطا در تجزیه کانفیگ: {config_str[:50]}...")
+                        if is_working:
+                            self.working_configs.append(config)
+                            logger.debug(f"✅ {config.protocol.upper()} {config.address}:{config.port} - {latency:.0f}ms")
+                        else:
+                            self.failed_configs.append(config)
+                except Exception as e:
+                    logger.debug(f"❌ خطا در تست کانفیگ: {e}")
 
         # تقسیم به batch های کوچک‌تر برای مدیریت بهتر
         batch_size = max_concurrent * 2
