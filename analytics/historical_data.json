@@ -1,0 +1,27 @@
+[
+  {
+    "timestamp": "2025-10-13T09:51:28.656149",
+    "total_configs": 5,
+    "working_configs": 3,
+    "failed_configs": 2,
+    "success_rate": 60.0,
+    "avg_latency": 216.66666666666666,
+    "median_latency": 200,
+    "protocol_distribution": {
+      "vmess": 2,
+      "vless": 2,
+      "trojan": 1
+    },
+    "country_distribution": {
+      "US": 2,
+      "DE": 1
+    },
+    "latency_distribution": {
+      "0-100ms": 0,
+      "100-300ms": 3,
+      "300-500ms": 0,
+      "500-1000ms": 0,
+      "1000ms+": 0
+    }
+  }
+]

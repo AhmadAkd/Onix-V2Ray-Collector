@@ -61,6 +61,15 @@ class V2RayCollector:
         except ImportError:
             logger.warning("Cache Manager not available, running without cache")
             self.cache = None
+        
+        # اضافه کردن Advanced Analytics
+        try:
+            from analytics import AdvancedAnalytics
+            self.analytics = AdvancedAnalytics()
+            logger.info("Advanced Analytics initialized successfully")
+        except ImportError:
+            logger.warning("Advanced Analytics not available, running without analytics")
+            self.analytics = None
 
         # منابع کانفیگ‌های رایگان
         self.config_sources = [
@@ -817,6 +826,15 @@ class V2RayCollector:
 
         logger.info(
             f"✅ سیکل کامل شد - {len(self.working_configs)} کانفیگ سالم ذخیره شد")
+        
+        # تولید گزارش تحلیلی پیشرفته
+        if self.analytics:
+            try:
+                analytics_report = self.analytics.generate_report(self.working_configs, self.failed_configs)
+                self.save_analytics_report(analytics_report)
+                logger.info("Advanced analytics report generated successfully")
+            except Exception as e:
+                logger.error(f"Error generating analytics report: {e}")
 
         return subscription_files
 
@@ -852,6 +870,20 @@ class V2RayCollector:
                 report['protocols'][protocol]['avg_latency'] = f"{avg_latency:.1f}ms"
 
         return report
+    
+    def save_analytics_report(self, analytics_report: Dict) -> None:
+        """ذخیره گزارش تحلیلی"""
+        try:
+            import os
+            os.makedirs('subscriptions', exist_ok=True)
+            
+            with open('subscriptions/analytics_report.json', 'w', encoding='utf-8') as f:
+                json.dump(analytics_report, f, ensure_ascii=False, indent=2)
+            
+            logger.info("Analytics report saved to subscriptions/analytics_report.json")
+            
+        except Exception as e:
+            logger.error(f"Error saving analytics report: {e}")
 
 
 async def main():
