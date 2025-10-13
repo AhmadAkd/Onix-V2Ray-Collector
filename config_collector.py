@@ -191,14 +191,29 @@ class V2RayCollector:
                 "Advanced Analytics not available, running without analytics")
             self.analytics = None
 
-        # منابع کانفیگ‌های رایگان - منابع فعال و معتبر (بدون تکراری)
+        # منابع کانفیگ‌های رایگان - منابع فعال و معتبر (بهینه‌سازی شده)
         self.config_sources = [
-            # منابع اصلی و معتبر (تست شده)
-            "https://github.com/Epodonios/v2ray-configs/raw/main/All_Configs_Sub.txt",
+            # منابع اصلی Epodonios (تست شده)
+            "https://github.com/Epodonios/v2ray-configs/raw/main/All_Configs_base64_Sub.txt",
+            
+            # منابع تقسیم شده بر اساس پروتکل (Epodonios)
+            "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/vless.txt",
+            "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/vmess.txt",
+            "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/ss.txt",
+            "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/ssr.txt",
+            "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/trojan.txt",
+            
+            # منابع تقسیم شده (Epodonios - 250 کانفیگ در هر فایل)
+            "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub1.txt",
+            "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub2.txt",
+            "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub3.txt",
+            "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub4.txt",
+            "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub5.txt",
+            
+            # منابع معتبر دیگر (تست شده)
             "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge.txt",
             "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
             "https://raw.githubusercontent.com/aiboboxx/v2rayfree/main/v2",
-            "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/All_Configs_base64_Sub.txt",
             
             # منابع SingBox (تست شده)
             "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/ss.json",
