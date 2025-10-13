@@ -216,4 +216,5 @@ jobs:
         git config --local user.name "GitHub Action"
         git add subscriptions/
         git commit -m "Auto-update V2Ray configs $(date '+%Y-%m-%d %H:%M:%S')" || exit 0
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
         git push origin main
