@@ -78,7 +78,21 @@ class V2RayCollector:
                 async with session.get(source_url, timeout=30) as response:
                     if response.status == 200:
                         content = await response.text()
-                        # تجزیه کانفیگ‌ها از متن
+                        
+                        # بررسی فرمت JSON (SingBox)
+                        if source_url.endswith('.json') or content.strip().startswith('{'):
+                            try:
+                                import json
+                                json_data = json.loads(content)
+                                singbox_configs = self.parse_singbox_config(json_data)
+                                # تبدیل به فرمت استاندارد
+                                configs = [config.raw_config for config in singbox_configs]
+                                logger.info(f"دریافت {len(configs)} کانفیگ از SingBox JSON: {source_url}")
+                                return configs
+                            except json.JSONDecodeError:
+                                logger.warning(f"فرمت JSON نامعتبر در {source_url}")
+                        
+                        # تجزیه کانفیگ‌ها از متن معمولی
                         configs = []
                         for line in content.strip().split('\n'):
                             if line.strip() and not line.startswith('#'):
@@ -239,10 +253,162 @@ class V2RayCollector:
             logger.debug(f"خطا در تست {config.address}:{config.port} - {e}")
             return False, 0.0
 
+    def parse_singbox_config(self, json_data: dict) -> List[V2RayConfig]:
+        """تجزیه کانفیگ SingBox JSON"""
+        configs = []
+        
+        try:
+            outbounds = json_data.get('outbounds', [])
+            
+            for outbound in outbounds:
+                if isinstance(outbound, dict) and 'outbounds' in outbound:
+                    # این یک selector است که خودش outbounds دارد
+                    for sub_outbound in outbound['outbounds']:
+                        config = self.parse_singbox_outbound(sub_outbound)
+                        if config:
+                            configs.append(config)
+                else:
+                    # این یک outbound مستقیم است
+                    config = self.parse_singbox_outbound(outbound)
+                    if config:
+                        configs.append(config)
+            
+            logger.info(f"تجزیه شد {len(configs)} کانفیگ از فرمت SingBox")
+            return configs
+            
+        except Exception as e:
+            logger.error(f"خطا در تجزیه SingBox: {e}")
+            return []
+
+    def parse_singbox_outbound(self, outbound: dict) -> Optional[V2RayConfig]:
+        """تجزیه یک outbound SingBox"""
+        try:
+            outbound_type = outbound.get('type', '')
+            tag = outbound.get('tag', '')
+            
+            if outbound_type == 'vmess':
+                return V2RayConfig(
+                    protocol="vmess",
+                    address=outbound.get('server', ''),
+                    port=int(outbound.get('server_port', 0)),
+                    uuid=outbound.get('uuid', ''),
+                    alter_id=int(outbound.get('alter_id', 0)),
+                    network=outbound.get('transport', {}).get('type', 'tcp'),
+                    tls=outbound.get('transport', {}).get('tls', False),
+                    raw_config=f"vmess://{self.encode_vmess_config(outbound)}",
+                    country=self.extract_country_from_tag(tag)
+                )
+            
+            elif outbound_type == 'vless':
+                return V2RayConfig(
+                    protocol="vless",
+                    address=outbound.get('server', ''),
+                    port=int(outbound.get('server_port', 0)),
+                    uuid=outbound.get('uuid', ''),
+                    network=outbound.get('transport', {}).get('type', 'tcp'),
+                    tls=outbound.get('transport', {}).get('tls', False),
+                    raw_config=f"vless://{self.encode_vless_config(outbound)}",
+                    country=self.extract_country_from_tag(tag)
+                )
+            
+            elif outbound_type == 'trojan':
+                return V2RayConfig(
+                    protocol="trojan",
+                    address=outbound.get('server', ''),
+                    port=int(outbound.get('server_port', 0)),
+                    uuid=outbound.get('password', ''),
+                    tls=True,
+                    raw_config=f"trojan://{self.encode_trojan_config(outbound)}",
+                    country=self.extract_country_from_tag(tag)
+                )
+            
+            elif outbound_type == 'shadowsocks':
+                return V2RayConfig(
+                    protocol="ss",
+                    address=outbound.get('server', ''),
+                    port=int(outbound.get('server_port', 0)),
+                    uuid=f"{outbound.get('method', '')}:{outbound.get('password', '')}",
+                    raw_config=f"ss://{self.encode_ss_config(outbound)}",
+                    country=self.extract_country_from_tag(tag)
+                )
+            
+        except Exception as e:
+            logger.debug(f"خطا در تجزیه outbound: {e}")
+        
+        return None
+
+    def extract_country_from_tag(self, tag: str) -> str:
+        """استخراج کشور از تگ"""
+        country_flags = {
+            '🇺🇸': 'US', '🇩🇪': 'DE', '🇮🇷': 'IR', '🇨🇦': 'CA',
+            '🇳🇱': 'NL', '🇹🇷': 'TR', '🇸🇪': 'SE', '🇮🇳': 'IN',
+            '🇷🇺': 'RU', '🇪🇸': 'ES', '🇳🇴': 'NO', '🇱🇹': 'LT',
+            '🇭🇰': 'HK', '🇨🇳': 'CN', '🚩': 'CF'
+        }
+        
+        for flag, country in country_flags.items():
+            if flag in tag:
+                return country
+        
+        return 'unknown'
+
+    def encode_vmess_config(self, outbound: dict) -> str:
+        """کدگذاری کانفیگ VMess به base64"""
+        vmess_config = {
+            "v": "2",
+            "ps": outbound.get('tag', ''),
+            "add": outbound.get('server', ''),
+            "port": str(outbound.get('server_port', 0)),
+            "id": outbound.get('uuid', ''),
+            "aid": str(outbound.get('alter_id', 0)),
+            "net": outbound.get('transport', {}).get('type', 'tcp'),
+            "type": "none",
+            "host": "",
+            "path": "",
+            "tls": "tls" if outbound.get('transport', {}).get('tls') else ""
+        }
+        
+        import json
+        return base64.b64encode(json.dumps(vmess_config).encode()).decode()
+
+    def encode_vless_config(self, outbound: dict) -> str:
+        """کدگذاری کانفیگ VLESS"""
+        uuid = outbound.get('uuid', '')
+        server = outbound.get('server', '')
+        port = outbound.get('server_port', 0)
+        
+        params = []
+        if outbound.get('transport', {}).get('tls'):
+            params.append('security=tls')
+        
+        params_str = '&'.join(params) if params else ''
+        fragment = f"#{outbound.get('tag', '')}"
+        
+        return f"{uuid}@{server}:{port}?{params_str}{fragment}"
+
+    def encode_trojan_config(self, outbound: dict) -> str:
+        """کدگذاری کانفیگ Trojan"""
+        password = outbound.get('password', '')
+        server = outbound.get('server', '')
+        port = outbound.get('server_port', 0)
+        fragment = f"#{outbound.get('tag', '')}"
+        
+        return f"{password}@{server}:{port}{fragment}"
+
+    def encode_ss_config(self, outbound: dict) -> str:
+        """کدگذاری کانفیگ Shadowsocks"""
+        method = outbound.get('method', '')
+        password = outbound.get('password', '')
+        server = outbound.get('server', '')
+        port = outbound.get('server_port', 0)
+        
+        encoded = base64.b64encode(f"{method}:{password}".encode()).decode()
+        return f"{encoded}@{server}:{port}"
+
     def parse_config(self, config_str: str) -> Optional[V2RayConfig]:
         """تجزیه کانفیگ بر اساس نوع پروتکل"""
         config_str = config_str.strip()
-
+        
         if config_str.startswith('vmess://'):
             return self.parse_vmess_config(config_str)
         elif config_str.startswith('vless://'):
@@ -251,7 +417,7 @@ class V2RayCollector:
             return self.parse_trojan_config(config_str)
         elif config_str.startswith('ss://'):
             return self.parse_ss_config(config_str)
-
+        
         return None
 
     async def test_all_configs(self, configs: List[str], max_concurrent: int = 50):
