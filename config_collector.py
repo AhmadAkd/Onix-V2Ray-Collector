@@ -814,7 +814,7 @@ class V2RayCollector:
                 f"تست batch {batch_idx + 1}/{len(batches)} ({len(batch)} کانفیگ)")
 
             # اجرای موازی تست‌ها
-            tasks = [test_single_config(config) for config in batch]
+            tasks = [test_single_config_fast(config) for config in batch]
             await asyncio.gather(*tasks, return_exceptions=True)
 
             # استراحت کوتاه بین batch ها
