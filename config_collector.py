@@ -234,6 +234,59 @@ class V2RayCollector:
             logger.debug(f"خطا در تجزیه SS: {e}")
         return None
 
+    def parse_ssr_config(self, config_str: str) -> Optional[V2RayConfig]:
+        """تجزیه کانفیگ ShadowsocksR"""
+        try:
+            # حذف پیشوند ssr://
+            encoded_part = config_str[6:]
+            
+            # اضافه کردن padding اگر لازم باشد
+            missing_padding = len(encoded_part) % 4
+            if missing_padding:
+                encoded_part += '=' * (4 - missing_padding)
+            
+            # decode base64
+            decoded = base64.b64decode(encoded_part).decode('utf-8')
+            
+            # تجزیه پارامترها - SSR format: server:port:protocol:method:obfs:password/base64
+            parts = decoded.split('/')
+            if len(parts) < 1:
+                return None
+            
+            # تجزیه بخش اول (server info)
+            server_info_parts = parts[0].split(':')
+            if len(server_info_parts) < 6:
+                return None
+            
+            server = server_info_parts[0]
+            port = int(server_info_parts[1])
+            protocol = server_info_parts[2]
+            method = server_info_parts[3]
+            obfs = server_info_parts[4]
+            password_encoded = server_info_parts[5]
+            
+            # decode password
+            try:
+                password_missing_padding = len(password_encoded) % 4
+                if password_missing_padding:
+                    password_encoded += '=' * (4 - password_missing_padding)
+                password = base64.b64decode(password_encoded).decode('utf-8')
+            except:
+                password = password_encoded
+            
+            return V2RayConfig(
+                protocol="ssr",
+                address=server,
+                port=port,
+                uuid=f"{method}:{password}",
+                raw_config=config_str,
+                country="unknown"
+            )
+            
+        except Exception as e:
+            logger.debug(f"خطا در تجزیه SSR: {e}")
+            return None
+
     async def test_config_connectivity(self, config: V2RayConfig) -> Tuple[bool, float]:
         """تست اتصال کانفیگ"""
         try:
@@ -416,7 +469,7 @@ class V2RayCollector:
     def parse_config(self, config_str: str) -> Optional[V2RayConfig]:
         """تجزیه کانفیگ بر اساس نوع پروتکل"""
         config_str = config_str.strip()
-
+        
         if config_str.startswith('vmess://'):
             return self.parse_vmess_config(config_str)
         elif config_str.startswith('vless://'):
@@ -425,7 +478,9 @@ class V2RayCollector:
             return self.parse_trojan_config(config_str)
         elif config_str.startswith('ss://'):
             return self.parse_ss_config(config_str)
-
+        elif config_str.startswith('ssr://'):
+            return self.parse_ssr_config(config_str)
+        
         return None
 
     async def test_all_configs(self, configs: List[str], max_concurrent: int = 100):
