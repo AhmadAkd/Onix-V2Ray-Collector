@@ -40,9 +40,49 @@ jobs:
         echo "📁 Directories created"
         ls -la
         
-    - name: Run V2Ray Config Collector
+    - name: Run V2Ray Config Collector (Test)
       run: |
-        python config_collector.py
+        echo "🧪 Testing config collector..."
+        python -c "
+        from config_collector import V2RayCollector
+        import asyncio
+        
+        async def test():
+            collector = V2RayCollector()
+            print(f'📊 Sources count: {len(collector.config_sources)}')
+            
+            # Test a few sources
+            test_sources = collector.config_sources[:5]
+            for source in test_sources:
+                try:
+                    configs = await collector.fetch_configs_from_source(source)
+                    print(f'✅ {source}: {len(configs)} configs')
+                except Exception as e:
+                    print(f'❌ {source}: Error - {e}')
+        
+        asyncio.run(test())
+        "
+        
+    - name: Check for problematic sources
+      run: |
+        echo "🔍 Checking for problematic sources..."
+        python -c "
+        from config_collector import V2RayCollector
+        collector = V2RayCollector()
+        
+        problematic_sources = []
+        for source in collector.config_sources:
+            if 'roosterkid/openproxylist' in source:
+                problematic_sources.append(source)
+        
+        if problematic_sources:
+            print('❌ Problematic sources found:')
+            for source in problematic_sources:
+                print(f'   - {source}')
+            exit(1)
+        else:
+            print('✅ No problematic sources found')
+        "
         
     - name: Generate subscription files
       run: |
