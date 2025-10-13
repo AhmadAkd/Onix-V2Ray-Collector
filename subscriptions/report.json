@@ -1,0 +1,29 @@
+{
+  "timestamp": "2025-10-13 07:32:46",
+  "total_configs_tested": 2697,
+  "working_configs": 1156,
+  "failed_configs": 1541,
+  "success_rate": "42.9%",
+  "protocols": {
+    "vmess": {
+      "count": 298,
+      "avg_latency": "138.1ms"
+    },
+    "vless": {
+      "count": 787,
+      "avg_latency": "175.8ms"
+    },
+    "trojan": {
+      "count": 61,
+      "avg_latency": "238.5ms"
+    },
+    "ss": {
+      "count": 3,
+      "avg_latency": "522.6ms"
+    },
+    "ssr": {
+      "count": 7,
+      "avg_latency": "195.0ms"
+    }
+  }
+}

@@ -1,8 +1,29 @@
 {
-  "timestamp": "در حال پردازش...",
-  "total_configs_tested": 0,
-  "working_configs": 0,
-  "failed_configs": 0,
-  "success_rate": "0%",
-  "protocols": {}
+  "timestamp": "2025-10-13 07:33:48",
+  "total_configs_tested": 2697,
+  "working_configs": 1154,
+  "failed_configs": 1543,
+  "success_rate": "42.8%",
+  "protocols": {
+    "vless": {
+      "count": 788,
+      "avg_latency": "148.1ms"
+    },
+    "trojan": {
+      "count": 61,
+      "avg_latency": "188.9ms"
+    },
+    "vmess": {
+      "count": 294,
+      "avg_latency": "145.1ms"
+    },
+    "ss": {
+      "count": 3,
+      "avg_latency": "173.7ms"
+    },
+    "ssr": {
+      "count": 8,
+      "avg_latency": "126.0ms"
+    }
+  }
 }
