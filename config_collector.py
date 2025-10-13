@@ -198,9 +198,8 @@ class V2RayCollector:
             "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge.txt",
             "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
             "https://raw.githubusercontent.com/aiboboxx/v2rayfree/main/v2",
-            "https://raw.githubusercontent.com/roosterkid/openproxylist/main/V2RAY_BASE64.txt",
             "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/All_Configs_base64_Sub.txt",
-
+            
             # منابع SingBox (تست شده)
             "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/ss.json",
             "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/mix.json",
@@ -208,11 +207,11 @@ class V2RayCollector:
             "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/vless.json",
             "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/trojan.json",
             "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/hy2.json",
-
+            
             # منابع Leon406 SubCrawler (تست شده)
             "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vless",
             "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss",
-
+            
             # منابع Shadowsocks (تست شده)
             "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/sub/sub_merge.txt",
         ]
