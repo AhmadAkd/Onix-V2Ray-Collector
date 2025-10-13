@@ -13,7 +13,9 @@ import re
 import time
 import logging
 import hashlib
-from typing import List, Dict, Optional, Tuple
+import socket
+import concurrent.futures
+from typing import List, Dict, Optional, Tuple, Set
 from dataclasses import dataclass
 from urllib.parse import urlparse
 
@@ -43,8 +45,115 @@ class V2RayConfig:
     latency: float = 0.0
     is_working: bool = False
     country: str = "unknown"
+
+class UltraFastConnectionPool:
+    """Connection Pool برای تست فوق سریع"""
+    
+    def __init__(self, max_workers: int = 100):
+        self.max_workers = max_workers
+        self.executor = concurrent.futures.ThreadPoolExecutor(max_workers=max_workers)
+        self.connection_cache = {}
+        self.test_results = {}
+        
+    def test_connection_sync(self, address: str, port: int, timeout: float = 2.0) -> Tuple[bool, float]:
+        """تست همزمان اتصال"""
+        try:
+            start_time = time.time()
+            
+            # استفاده از socket برای تست سریع‌تر
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(timeout)
+            
+            result = sock.connect_ex((address, port))
+            sock.close()
+            
+            latency = (time.time() - start_time) * 1000
+            
+            if result == 0:
+                return True, latency
+            return False, 0.0
+            
+        except Exception:
+            return False, 0.0
+    
+    async def test_multiple_connections(self, configs: List[V2RayConfig]) -> List[Tuple[V2RayConfig, bool, float]]:
+        """تست چندگانه اتصالات"""
+        loop = asyncio.get_event_loop()
+        
+        # ایجاد tasks برای تست موازی
+        tasks = []
+        for config in configs:
+            task = loop.run_in_executor(
+                self.executor,
+                self.test_connection_sync,
+                config.address,
+                config.port,
+                2.0  # timeout کوتاه
+            )
+            tasks.append((config, task))
+        
+        # اجرای موازی
+        results = []
+        for config, task in tasks:
+            try:
+                is_working, latency = await task
+                results.append((config, is_working, latency))
+            except Exception:
+                results.append((config, False, 0.0))
+        
+        return results
+    
+    def close(self):
+        """بستن executor"""
+        self.executor.shutdown(wait=True)
     speed_test_result: float = 0.0
 
+
+class SmartConfigFilter:
+    """فیلتر هوشمند برای حذف کانفیگ‌های نامناسب قبل از تست"""
+    
+    def __init__(self):
+        self.blacklisted_ips = set()
+        self.blacklisted_ports = {22, 23, 25, 53, 80, 110, 143, 993, 995, 3389, 5432, 6379, 27017}
+        self.valid_ports = set(range(1024, 65536))  # پورت‌های کاربری
+        
+    def is_valid_config(self, config: V2RayConfig) -> bool:
+        """بررسی اعتبار کانفیگ"""
+        # بررسی IP
+        if config.address in self.blacklisted_ips:
+            return False
+            
+        # بررسی پورت
+        if config.port in self.blacklisted_ports:
+            return False
+            
+        # بررسی محدوده پورت
+        if config.port not in self.valid_ports:
+            return False
+            
+        # بررسی آدرس IP خصوصی (معمولاً غیرقابل دسترس)
+        if config.address.startswith(('127.', '192.168.', '10.', '172.')):
+            return False
+            
+        # بررسی UUID خالی
+        if not config.uuid or len(config.uuid) < 10:
+            return False
+            
+        return True
+    
+    def filter_configs(self, configs: List[V2RayConfig]) -> List[V2RayConfig]:
+        """فیلتر کردن کانفیگ‌ها"""
+        valid_configs = []
+        filtered_count = 0
+        
+        for config in configs:
+            if self.is_valid_config(config):
+                valid_configs.append(config)
+            else:
+                filtered_count += 1
+                
+        logger.info(f"🔍 فیلتر هوشمند: {filtered_count} کانفیگ نامناسب حذف شد")
+        return valid_configs
 
 class V2RayCollector:
     """کلاس اصلی برای جمع‌آوری و تست کانفیگ‌های V2Ray"""
@@ -53,6 +162,10 @@ class V2RayCollector:
         self.configs: List[V2RayConfig] = []
         self.working_configs: List[V2RayConfig] = []
         self.failed_configs: List[V2RayConfig] = []
+        
+        # اضافه کردن سیستم‌های جدید
+        self.connection_pool = UltraFastConnectionPool(max_workers=200)
+        self.smart_filter = SmartConfigFilter()
         
         # اضافه کردن Cache Manager
         try:
@@ -765,64 +878,89 @@ class V2RayCollector:
         logger.info(f"🔄 حذف {duplicate_count} کانفیگ تکراری")
         return unique_configs
 
-    async def test_all_configs(self, configs: List[str], max_concurrent: int = 20):
-        """تست تمام کانفیگ‌ها با بهینه‌سازی پیشرفته"""
-        logger.info(f"🧪 شروع تست {len(configs)} کانفیگ...")
+    async def test_all_configs_ultra_fast(self, configs: List[str], max_concurrent: int = 50):
+        """تست فوق سریع کانفیگ‌ها با بهینه‌سازی پیشرفته"""
+        start_time = time.time()
+        logger.info(f"🚀 شروع تست فوق سریع {len(configs)} کانفیگ...")
 
-        # حذف تکراری‌های پیشرفته
+        # مرحله 1: حذف تکراری‌های پیشرفته
         unique_configs = self.remove_duplicate_configs_advanced(configs)
-        logger.info(f"🔄 حذف تکراری‌ها: {len(configs)} → {len(unique_configs)} کانفیگ منحصر به فرد")
+        logger.info(f"🔄 حذف تکراری‌ها: {len(configs)} → {len(unique_configs)} کانفیگ")
 
-        # بهینه‌سازی تعداد همزمان بر اساس تعداد کانفیگ
-        optimal_concurrent = min(max_concurrent, max(5, len(unique_configs) // 10))
-        logger.info(f"⚡ تست موازی با {optimal_concurrent} thread")
+        # مرحله 2: تبدیل به V2RayConfig و فیلتر هوشمند
+        parsed_configs = []
+        parse_start = time.time()
+        
+        for config_str in unique_configs:
+            config = self.parse_config(config_str)
+            if config:
+                parsed_configs.append(config)
+        
+        # فیلتر هوشمند
+        valid_configs = self.smart_filter.filter_configs(parsed_configs)
+        parse_time = time.time() - parse_start
+        logger.info(f"🔍 فیلتر هوشمند: {len(parsed_configs)} → {len(valid_configs)} کانفیگ معتبر ({parse_time:.1f}s)")
 
-        # فیلتر جغرافیایی
-        if hasattr(self, 'geo_filter_enabled') and self.geo_filter_enabled:
-            unique_configs = self.apply_geo_filter(unique_configs)
+        if not valid_configs:
+            logger.warning("❌ هیچ کانفیگ معتبری یافت نشد")
+            return
 
-        semaphore = asyncio.Semaphore(optimal_concurrent)
+        # مرحله 3: تست فوق سریع با Connection Pool
+        test_start = time.time()
+        logger.info(f"⚡ شروع تست فوق سریع با {self.connection_pool.max_workers} worker")
 
-        async def test_single_config_fast(config_str: str):
-            async with semaphore:
-                try:
-                    config = self.parse_config(config_str)
-                    if config:
-                        # تست سریع‌تر با timeout کوتاه‌تر
-                        is_working, latency = await self.test_config_connectivity_fast(config)
-                        config.is_working = is_working
-                        config.latency = latency
-
-                        if is_working:
-                            self.working_configs.append(config)
-                            logger.debug(f"✅ {config.protocol.upper()} {config.address}:{config.port} - {latency:.0f}ms")
-                        else:
-                            self.failed_configs.append(config)
-                except Exception as e:
-                    logger.debug(f"❌ خطا در تست کانفیگ: {e}")
-
-        # تقسیم به batch های کوچک‌تر برای مدیریت بهتر
-        batch_size = max_concurrent * 2
-        batches = [unique_configs[i:i + batch_size]
-                   for i in range(0, len(unique_configs), batch_size)]
-
-        total_working = len(self.working_configs)
-        total_failed = len(self.failed_configs)
-
+        # تقسیم به batch های بزرگ برای تست موازی
+        batch_size = 500  # batch بزرگ‌تر
+        batches = [valid_configs[i:i + batch_size] for i in range(0, len(valid_configs), batch_size)]
+        
+        total_tested = 0
         for batch_idx, batch in enumerate(batches):
-            logger.info(
-                f"تست batch {batch_idx + 1}/{len(batches)} ({len(batch)} کانفیگ)")
+            logger.info(f"🧪 تست batch {batch_idx + 1}/{len(batches)} ({len(batch)} کانفیگ)")
+            
+            # تست موازی با Connection Pool
+            results = await self.connection_pool.test_multiple_connections(batch)
+            
+            # پردازش نتایج
+            for config, is_working, latency in results:
+                config.is_working = is_working
+                config.latency = latency
+                
+                if is_working:
+                    self.working_configs.append(config)
+                    logger.debug(f"✅ {config.protocol.upper()} {config.address}:{config.port} - {latency:.0f}ms")
+                else:
+                    self.failed_configs.append(config)
+            
+            total_tested += len(batch)
+            
+            # گزارش پیشرفت
+            if batch_idx % 5 == 0 or batch_idx == len(batches) - 1:
+                success_rate = (len(self.working_configs) / total_tested * 100) if total_tested > 0 else 0
+                logger.info(f"📊 پیشرفت: {total_tested}/{len(valid_configs)} - موفقیت: {success_rate:.1f}%")
 
-            # اجرای موازی تست‌ها
-            tasks = [test_single_config_fast(config) for config in batch]
-            await asyncio.gather(*tasks, return_exceptions=True)
+        test_time = time.time() - test_start
+        total_time = time.time() - start_time
+        
+        # گزارش نهایی
+        success_rate = (len(self.working_configs) / len(valid_configs) * 100) if valid_configs else 0
+        configs_per_second = len(valid_configs) / test_time if test_time > 0 else 0
+        
+        logger.info(f"🎉 تست فوق سریع کامل شد:")
+        logger.info(f"   ⏱️ زمان کل: {total_time:.1f}s")
+        logger.info(f"   🧪 زمان تست: {test_time:.1f}s")
+        logger.info(f"   ⚡ سرعت: {configs_per_second:.1f} کانفیگ/ثانیه")
+        logger.info(f"   ✅ موفق: {len(self.working_configs)} ({success_rate:.1f}%)")
+        logger.info(f"   ❌ ناموفق: {len(self.failed_configs)}")
 
-            # استراحت کوتاه بین batch ها
-            if batch_idx < len(batches) - 1:
-                await asyncio.sleep(0.5)
+    def cleanup_resources(self):
+        """پاکسازی منابع"""
+        if hasattr(self, 'connection_pool'):
+            self.connection_pool.close()
+        logger.info("🧹 منابع پاکسازی شدند")
 
-        logger.info(
-            f"تست کامل شد: {len(self.working_configs)} کانفیگ سالم، {len(self.failed_configs)} کانفیگ ناسالم")
+    async def test_all_configs(self, configs: List[str], max_concurrent: int = 50):
+        """Wrapper برای تست فوق سریع"""
+        await self.test_all_configs_ultra_fast(configs, max_concurrent)
 
     def apply_geo_filter(self, configs: List[str]) -> List[str]:
         """اعمال فیلتر جغرافیایی"""
