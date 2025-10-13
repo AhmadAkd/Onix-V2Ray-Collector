@@ -187,6 +187,7 @@ class V2RayCollector:
 
         # منابع کانفیگ‌های رایگان
         self.config_sources = [
+            # منابع اصلی و معتبر
             "https://github.com/Epodonios/v2ray-configs/raw/main/All_Configs_Sub.txt",
             "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge.txt",
             "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
@@ -194,7 +195,120 @@ class V2RayCollector:
             "https://raw.githubusercontent.com/roosterkid/openproxylist/main/V2RAY_BASE64.txt",
             "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/All_Configs_base64_Sub.txt",
             "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/ss.json",
-            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/mix.json"
+            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/mix.json",
+            
+            # منابع VMess اضافی
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess2",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess3",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess4",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess5",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess6",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess7",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess8",
+            
+            # منابع اضافی VMess
+            "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/sub/sub_merge.txt",
+            "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge.txt",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess9",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess10",
+            
+            # منابع VLESS
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vless",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vless2",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vless3",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vless4",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vless5",
+            
+            # منابع Trojan
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/trojan",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/trojan2",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/trojan3",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/trojan4",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/trojan5",
+            
+            # منابع Shadowsocks
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss2",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss3",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss4",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss5",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss6",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss7",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss8",
+            
+            # منابع ترکیبی
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/mixed",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/mixed2",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/mixed3",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/mixed4",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/mixed5",
+            
+            # منابع اضافی
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/other",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/other2",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/other3",
+            
+            # منابع جایگزین
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/backup",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/backup2",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/backup3",
+            
+            # منابع جدید
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/new",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/new2",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/new3",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/new4",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/new5",
+            
+            # منابع تکمیلی
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra2",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra3",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra4",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra5",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra6",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra7",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra8",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra9",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/extra10",
+            
+            # منابع معتبر اضافی
+            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/vmess.json",
+            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/vless.json",
+            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/trojan.json",
+            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/ssr.json",
+            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/hy2.json",
+            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/hysteria.json",
+            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/ss.json",
+            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/mix.json",
+            
+            # منابع جایگزین معتبر
+            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/ss-sub.txt",
+            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray.txt",
+            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray2.txt",
+            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray3.txt",
+            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray4.txt",
+            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray5.txt",
+            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray6.txt",
+            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray7.txt",
+            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray8.txt",
+            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray9.txt",
+            "https://raw.githubusercontent.com/Alvin9999/new-pac/master/v2ray10.txt",
+            
+            # منابع متنوع
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/all",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/all2",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/all3",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/all4",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/all5",
+            
+            # منابع پشتیبان
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/backup4",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/backup5",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/backup6",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/backup7",
+            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/backup8"
         ]
 
         # الگوهای regex برای تشخیص پروتکل‌ها
@@ -203,7 +317,13 @@ class V2RayCollector:
             'vless': r'vless://([^@]+)@([^:]+):(\d+)(\?[^#]*)?(#.*)?',
             'trojan': r'trojan://([^@]+)@([^:]+):(\d+)(\?[^#]*)?(#.*)?',
             'ss': r'ss://([A-Za-z0-9+/=]+)',
-            'ssr': r'ssr://([A-Za-z0-9+/=]+)'
+            'ssr': r'ssr://([A-Za-z0-9+/=]+)',
+            'hysteria': r'hysteria://([^#]+)(#.*)?',
+            'hy2': r'hy2://([^#]+)(#.*)?',
+            'wireguard': r'wireguard://([^#]+)(#.*)?',
+            'tuic': r'tuic://([^#]+)(#.*)?',
+            'naive': r'naive://([^#]+)(#.*)?',
+            'hysteria2': r'hysteria2://([^#]+)(#.*)?'
         }
 
     async def fetch_configs_from_source(self, source_url: str) -> List[str]:
@@ -840,8 +960,198 @@ class V2RayCollector:
             return self.parse_ss_config(config_str)
         elif config_str.startswith('ssr://'):
             return self.parse_ssr_config(config_str)
+        elif config_str.startswith('hysteria://') or config_str.startswith('hy2://') or config_str.startswith('hysteria2://'):
+            return self.parse_hysteria_config(config_str)
+        elif config_str.startswith('wireguard://'):
+            return self.parse_wireguard_config(config_str)
+        elif config_str.startswith('tuic://'):
+            return self.parse_tuic_config(config_str)
+        elif config_str.startswith('naive://'):
+            return self.parse_naive_config(config_str)
 
         return None
+
+    def parse_hysteria_config(self, config_str: str) -> Optional[V2RayConfig]:
+        """تجزیه کانفیگ Hysteria"""
+        try:
+            # استخراج بخش اصلی
+            if '://' in config_str:
+                main_part = config_str.split('://', 1)[1]
+            else:
+                return None
+            
+            # تجزیه پارامترها
+            parts = main_part.split('?')
+            server_info = parts[0]
+            
+            # استخراج آدرس و پورت
+            if '@' in server_info:
+                server_part = server_info.split('@')[1]
+            else:
+                server_part = server_info
+            
+            if ':' in server_part:
+                address, port = server_part.rsplit(':', 1)
+                port = int(port)
+            else:
+                return None
+            
+            # استخراج UUID از query params
+            uuid = "hysteria-uuid"
+            if len(parts) > 1:
+                params = parts[1].split('#')[0]
+                for param in params.split('&'):
+                    if '=' in param:
+                        key, value = param.split('=', 1)
+                        if key == 'auth' or key == 'password':
+                            uuid = value
+                            break
+            
+            return V2RayConfig(
+                protocol="hysteria",
+                address=address,
+                port=port,
+                uuid=uuid,
+                raw_config=config_str
+            )
+        except Exception as e:
+            logger.debug(f"خطا در تجزیه Hysteria: {e}")
+            return None
+
+    def parse_wireguard_config(self, config_str: str) -> Optional[V2RayConfig]:
+        """تجزیه کانفیگ WireGuard"""
+        try:
+            # استخراج بخش اصلی
+            if '://' in config_str:
+                main_part = config_str.split('://', 1)[1]
+            else:
+                return None
+            
+            # تجزیه پارامترها
+            parts = main_part.split('?')
+            server_info = parts[0]
+            
+            # استخراج آدرس و پورت
+            if '@' in server_info:
+                server_part = server_info.split('@')[1]
+            else:
+                server_part = server_info
+            
+            if ':' in server_part:
+                address, port = server_part.rsplit(':', 1)
+                port = int(port)
+            else:
+                return None
+            
+            # استخراج Public Key
+            public_key = "wireguard-key"
+            if len(parts) > 1:
+                params = parts[1].split('#')[0]
+                for param in params.split('&'):
+                    if '=' in param:
+                        key, value = param.split('=', 1)
+                        if key == 'publickey':
+                            public_key = value
+                            break
+            
+            return V2RayConfig(
+                protocol="wireguard",
+                address=address,
+                port=port,
+                uuid=public_key,
+                raw_config=config_str
+            )
+        except Exception as e:
+            logger.debug(f"خطا در تجزیه WireGuard: {e}")
+            return None
+
+    def parse_tuic_config(self, config_str: str) -> Optional[V2RayConfig]:
+        """تجزیه کانفیگ TUIC"""
+        try:
+            # استخراج بخش اصلی
+            if '://' in config_str:
+                main_part = config_str.split('://', 1)[1]
+            else:
+                return None
+            
+            # تجزیه پارامترها
+            parts = main_part.split('?')
+            server_info = parts[0]
+            
+            # استخراج آدرس و پورت
+            if '@' in server_info:
+                server_part = server_info.split('@')[1]
+            else:
+                server_part = server_info
+            
+            if ':' in server_part:
+                address, port = server_part.rsplit(':', 1)
+                port = int(port)
+            else:
+                return None
+            
+            # استخراج UUID
+            uuid = "tuic-uuid"
+            if len(parts) > 1:
+                params = parts[1].split('#')[0]
+                for param in params.split('&'):
+                    if '=' in param:
+                        key, value = param.split('=', 1)
+                        if key == 'uuid':
+                            uuid = value
+                            break
+            
+            return V2RayConfig(
+                protocol="tuic",
+                address=address,
+                port=port,
+                uuid=uuid,
+                raw_config=config_str
+            )
+        except Exception as e:
+            logger.debug(f"خطا در تجزیه TUIC: {e}")
+            return None
+
+    def parse_naive_config(self, config_str: str) -> Optional[V2RayConfig]:
+        """تجزیه کانفیگ Naive"""
+        try:
+            # استخراج بخش اصلی
+            if '://' in config_str:
+                main_part = config_str.split('://', 1)[1]
+            else:
+                return None
+            
+            # تجزیه پارامترها
+            parts = main_part.split('?')
+            server_info = parts[0]
+            
+            # استخراج آدرس و پورت
+            if '@' in server_info:
+                server_part = server_info.split('@')[1]
+            else:
+                server_part = server_info
+            
+            if ':' in server_part:
+                address, port = server_part.rsplit(':', 1)
+                port = int(port)
+            else:
+                return None
+            
+            # استخراج username
+            username = "naive-user"
+            if '@' in server_info:
+                username = server_info.split('@')[0]
+            
+            return V2RayConfig(
+                protocol="naive",
+                address=address,
+                port=port,
+                uuid=username,
+                raw_config=config_str
+            )
+        except Exception as e:
+            logger.debug(f"خطا در تجزیه Naive: {e}")
+            return None
 
     def remove_duplicate_configs_advanced(self, configs: List[str]) -> List[str]:
         """حذف تکراری‌های پیشرفته بر اساس محتوا"""
