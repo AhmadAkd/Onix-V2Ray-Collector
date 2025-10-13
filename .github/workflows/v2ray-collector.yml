@@ -8,6 +8,11 @@ on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   collect-and-test:
     runs-on: ubuntu-latest
@@ -15,6 +20,9 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
       
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -208,4 +216,4 @@ jobs:
         git config --local user.name "GitHub Action"
         git add subscriptions/
         git commit -m "Auto-update V2Ray configs $(date '+%Y-%m-%d %H:%M:%S')" || exit 0
-        git push
+        git push origin main
