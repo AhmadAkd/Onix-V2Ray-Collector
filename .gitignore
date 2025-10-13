@@ -129,7 +129,6 @@ dmypy.json
 .pyre/
 
 # V2Ray Collector specific files
-subscriptions/
 backups/
 logs/
 *.log
