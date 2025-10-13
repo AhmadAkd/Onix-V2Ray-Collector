@@ -1306,6 +1306,11 @@ class V2RayCollector:
         """تولید لینک‌های اشتراک"""
         subscription_files = {}
 
+        # ایجاد پوشه‌های مورد نیاز
+        import os
+        os.makedirs('subscriptions/by_protocol', exist_ok=True)
+        os.makedirs('subscriptions/by_country', exist_ok=True)
+
         # تولید فایل برای هر پروتکل
         for protocol, configs in categories.items():
             if configs:
@@ -1316,7 +1321,7 @@ class V2RayCollector:
                 subscription_content = '\n'.join(
                     [config.raw_config for config in configs])
 
-                # ذخیره در فایل
+                # فایل اصلی پروتکل
                 filename = f"subscriptions/{protocol}_subscription.txt"
                 subscription_files[protocol] = {
                     'filename': filename,
@@ -1324,7 +1329,19 @@ class V2RayCollector:
                     'count': len(configs)
                 }
 
+                # فایل در پوشه by_protocol
+                protocol_filename = f"subscriptions/by_protocol/{protocol}.txt"
+                subscription_files[f"{protocol}_by_protocol"] = {
+                    'filename': protocol_filename,
+                    'content': subscription_content,
+                    'count': len(configs)
+                }
+
                 logger.info(f"تولید شد: {filename} با {len(configs)} کانفیگ")
+
+        # تولید فایل‌های بر اساس کشور
+        country_files = self.generate_country_subscriptions(categories)
+        subscription_files.update(country_files)
 
         # تولید فایل ترکیبی
         all_configs = []
@@ -1343,6 +1360,65 @@ class V2RayCollector:
             }
 
         return subscription_files
+
+    def generate_country_subscriptions(self, categories: dict) -> dict:
+        """تولید فایل‌های اشتراک بر اساس کشور"""
+        country_files = {}
+        
+        # جمع‌آوری کانفیگ‌ها بر اساس کشور
+        country_configs = {}
+        
+        for protocol, configs in categories.items():
+            for config in configs:
+                country = config.country.lower()
+                if country not in country_configs:
+                    country_configs[country] = []
+                country_configs[country].append(config)
+        
+        # تولید فایل برای هر کشور
+        for country, configs in country_configs.items():
+            if configs and country != "unknown":
+                # مرتب‌سازی بر اساس سرعت
+                configs.sort(key=lambda x: x.latency)
+                
+                # تولید محتوای اشتراک
+                subscription_content = '\n'.join(
+                    [config.raw_config for config in configs])
+                
+                # پاک‌سازی نام کشور برای نام فایل
+                safe_country_name = self.sanitize_filename(country)
+                filename = f"subscriptions/by_country/{safe_country_name}.txt"
+                
+                country_files[f"{country}_by_country"] = {
+                    'filename': filename,
+                    'content': subscription_content,
+                    'count': len(configs)
+                }
+                
+                logger.info(f"تولید شد: {filename} با {len(configs)} کانفیگ")
+        
+        return country_files
+
+    def sanitize_filename(self, filename: str) -> str:
+        """پاک‌سازی نام فایل از کاراکترهای غیرمجاز"""
+        import re
+        
+        # حذف کاراکترهای غیرمجاز
+        safe_filename = re.sub(r'[<>:"/\\|?*]', '', filename)
+        
+        # حذف فاصله‌های اضافی و کاراکترهای خاص
+        safe_filename = re.sub(r'\s+', '_', safe_filename)
+        safe_filename = safe_filename.replace('|', '_').replace('&', '_').replace('@', '_')
+        
+        # محدود کردن طول نام فایل
+        if len(safe_filename) > 50:
+            safe_filename = safe_filename[:50]
+        
+        # اگر نام فایل خالی شد، نام پیش‌فرض
+        if not safe_filename or safe_filename == '_':
+            safe_filename = 'unknown'
+        
+        return safe_filename
 
     async def run_collection_cycle(self):
         """اجرای یک سیکل کامل جمع‌آوری و تست"""

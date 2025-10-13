@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>انتخاب لینک ساب V2Ray</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 5px;
+        }
+        
+        .tab {
+            padding: 15px 30px;
+            background: transparent;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+        
+        .tab.active {
+            background: #667eea;
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .tab:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .content {
+            display: none;
+        }
+        
+        .content.active {
+            display: block;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+        
+        .card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .card .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #888;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .protocol-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 0.8em;
+        }
+        
+        .vmess { background: #4CAF50; }
+        .vless { background: #2196F3; }
+        .trojan { background: #FF9800; }
+        .ss { background: #9C27B0; }
+        .ssr { background: #E91E63; }
+        .hy2 { background: #00BCD4; }
+        
+        .country-flag {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 10px;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .all-subscription {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .all-subscription h2 {
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .all-subscription p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .copy-btn:hover {
+            background: white;
+            color: #667eea;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                margin: 2px 0;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 انتخاب لینک ساب V2Ray</h1>
+        
+        <div class="all-subscription">
+            <h2>📡 همه کانفیگ‌ها</h2>
+            <p>لینک ساب شامل همه کانفیگ‌های سالم و تست شده</p>
+            <button class="btn copy-btn" onclick="copyToClipboard('subscriptions/all_subscription.txt')">
+                📋 کپی لینک همه کانفیگ‌ها
+            </button>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('protocol')">🔧 بر اساس پروتکل</button>
+            <button class="tab" onclick="showTab('country')">🌍 بر اساس کشور</button>
+        </div>
+        
+        <div id="protocol" class="content active">
+            <h2>انتخاب بر اساس پروتکل</h2>
+            <input type="text" class="search-box" placeholder="🔍 جستجو در پروتکل‌ها..." onkeyup="filterProtocols(this.value)">
+            
+            <div class="grid" id="protocol-grid">
+                <div class="card" data-protocol="vmess">
+                    <h3><span class="protocol-icon vmess">VM</span> VMess</h3>
+                    <p>پروتکل VMess با پشتیبانی از TLS و WebSocket</p>
+                    <div class="stats">
+                        <span>📊 تعداد: <span id="vmess-count">-</span></span>
+                        <span>⚡ سرعت بالا</span>
+                    </div>
+                    <button class="btn" onclick="copyToClipboard('subscriptions/by_protocol/vmess.txt')">
+                        📋 کپی لینک VMess
+                    </button>
+                </div>
+                
+                <div class="card" data-protocol="vless">
+                    <h3><span class="protocol-icon vless">VL</span> VLESS</h3>
+                    <p>پروتکل VLESS جدید و بهینه با عملکرد بهتر</p>
+                    <div class="stats">
+                        <span>📊 تعداد: <span id="vless-count">-</span></span>
+                        <span>🚀 جدیدترین</span>
+                    </div>
+                    <button class="btn" onclick="copyToClipboard('subscriptions/by_protocol/vless.txt')">
+                        📋 کپی لینک VLESS
+                    </button>
+                </div>
+                
+                <div class="card" data-protocol="trojan">
+                    <h3><span class="protocol-icon trojan">TR</span> Trojan</h3>
+                    <p>پروتکل Trojan با امنیت بالا و سرعت مناسب</p>
+                    <div class="stats">
+                        <span>📊 تعداد: <span id="trojan-count">-</span></span>
+                        <span>🔒 امنیت بالا</span>
+                    </div>
+                    <button class="btn" onclick="copyToClipboard('subscriptions/by_protocol/trojan.txt')">
+                        📋 کپی لینک Trojan
+                    </button>
+                </div>
+                
+                <div class="card" data-protocol="ss">
+                    <h3><span class="protocol-icon ss">SS</span> Shadowsocks</h3>
+                    <p>پروتکل Shadowsocks کلاسیک و قابل اعتماد</p>
+                    <div class="stats">
+                        <span>📊 تعداد: <span id="ss-count">-</span></span>
+                        <span>🛡️ قابل اعتماد</span>
+                    </div>
+                    <button class="btn" onclick="copyToClipboard('subscriptions/by_protocol/ss.txt')">
+                        📋 کپی لینک Shadowsocks
+                    </button>
+                </div>
+                
+                <div class="card" data-protocol="ssr">
+                    <h3><span class="protocol-icon ssr">SR</span> ShadowsocksR</h3>
+                    <p>پروتکل ShadowsocksR با قابلیت‌های پیشرفته</p>
+                    <div class="stats">
+                        <span>📊 تعداد: <span id="ssr-count">-</span></span>
+                        <span>⚙️ پیشرفته</span>
+                    </div>
+                    <button class="btn" onclick="copyToClipboard('subscriptions/by_protocol/ssr.txt')">
+                        📋 کپی لینک ShadowsocksR
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="country" class="content">
+            <h2>انتخاب بر اساس کشور</h2>
+            <input type="text" class="search-box" placeholder="🔍 جستجو در کشورها..." onkeyup="filterCountries(this.value)">
+            
+            <div class="grid" id="country-grid">
+                <!-- کشورها به صورت پویا بارگذاری می‌شوند -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // مخفی کردن همه تب‌ها
+            document.querySelectorAll('.content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // حذف کلاس active از همه دکمه‌ها
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // نمایش تب انتخاب شده
+            document.getElementById(tabName).classList.add('active');
+            
+            // اضافه کردن کلاس active به دکمه کلیک شده
+            event.target.classList.add('active');
+            
+            // بارگذاری کشورها اگر تب کشور انتخاب شده
+            if (tabName === 'country') {
+                loadCountries();
+            }
+        }
+        
+        function copyToClipboard(filePath) {
+            const baseUrl = window.location.origin + '/' + filePath;
+            navigator.clipboard.writeText(baseUrl).then(() => {
+                // نمایش پیام موفقیت
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✅ کپی شد!';
+                btn.style.background = '#4CAF50';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('خطا در کپی کردن: ', err);
+                alert('خطا در کپی کردن لینک');
+            });
+        }
+        
+        function filterProtocols(searchTerm) {
+            const cards = document.querySelectorAll('#protocol-grid .card');
+            cards.forEach(card => {
+                const protocol = card.querySelector('h3').textContent.toLowerCase();
+                if (protocol.includes(searchTerm.toLowerCase())) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        
+        function filterCountries(searchTerm) {
+            const cards = document.querySelectorAll('#country-grid .card');
+            cards.forEach(card => {
+                const country = card.querySelector('h3').textContent.toLowerCase();
+                if (country.includes(searchTerm.toLowerCase())) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        
+        function loadCountries() {
+            // لیست کشورهای موجود (این می‌تواند از API دریافت شود)
+            const countries = [
+                { name: 'USA', flag: '🇺🇸', path: 'subscriptions/by_country/Usa.txt' },
+                { name: 'UK', flag: '🇬🇧', path: 'subscriptions/by_country/Uk.txt' },
+                { name: 'Germany', flag: '🇩🇪', path: 'subscriptions/by_country/Germany.txt' },
+                { name: 'France', flag: '🇫🇷', path: 'subscriptions/by_country/France.txt' },
+                { name: 'Canada', flag: '🇨🇦', path: 'subscriptions/by_country/Canada.txt' },
+                { name: 'Japan', flag: '🇯🇵', path: 'subscriptions/by_country/Japan.txt' },
+                { name: 'Singapore', flag: '🇸🇬', path: 'subscriptions/by_country/Singapore.txt' },
+                { name: 'Iran', flag: '🇮🇷', path: 'subscriptions/by_country/Iran.txt' },
+                { name: 'Netherlands', flag: '🇳🇱', path: 'subscriptions/by_country/Netherlands.txt' },
+                { name: 'Switzerland', flag: '🇨🇭', path: 'subscriptions/by_country/Switzerland.txt' },
+                { name: 'Italy', flag: '🇮🇹', path: 'subscriptions/by_country/Italy.txt' },
+                { name: 'Spain', flag: '🇪🇸', path: 'subscriptions/by_country/Spain.txt' },
+                { name: 'Australia', flag: '🇦🇺', path: 'subscriptions/by_country/Australia.txt' },
+                { name: 'Brazil', flag: '🇧🇷', path: 'subscriptions/by_country/Brazil.txt' },
+                { name: 'India', flag: '🇮🇳', path: 'subscriptions/by_country/India.txt' },
+                { name: 'Russia', flag: '🇷🇺', path: 'subscriptions/by_country/Russia.txt' },
+                { name: 'China', flag: '🇨🇳', path: 'subscriptions/by_country/China.txt' },
+                { name: 'South Korea', flag: '🇰🇷', path: 'subscriptions/by_country/South_korea.txt' },
+                { name: 'Turkey', flag: '🇹🇷', path: 'subscriptions/by_country/Turkey.txt' },
+                { name: 'Poland', flag: '🇵🇱', path: 'subscriptions/by_country/Poland.txt' }
+            ];
+            
+            const countryGrid = document.getElementById('country-grid');
+            countryGrid.innerHTML = '';
+            
+            countries.forEach(country => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <h3>${country.flag} ${country.name}</h3>
+                    <p>کانفیگ‌های مخصوص ${country.name}</p>
+                    <div class="stats">
+                        <span>🌍 کشور: ${country.name}</span>
+                        <span>⚡ سرعت بالا</span>
+                    </div>
+                    <button class="btn" onclick="copyToClipboard('${country.path}')">
+                        📋 کپی لینک ${country.name}
+                    </button>
+                `;
+                countryGrid.appendChild(card);
+            });
+        }
+        
+        // بارگذاری تعداد کانفیگ‌ها (این می‌تواند از API دریافت شود)
+        function loadProtocolCounts() {
+            // این اطلاعات می‌تواند از فایل JSON یا API دریافت شود
+            document.getElementById('vmess-count').textContent = '290';
+            document.getElementById('vless-count').textContent = '659';
+            document.getElementById('trojan-count').textContent = '59';
+            document.getElementById('ss-count').textContent = '4';
+            document.getElementById('ssr-count').textContent = '18';
+        }
+        
+        // بارگذاری اولیه
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProtocolCounts();
+        });
+    </script>
+</body>
+</html>
