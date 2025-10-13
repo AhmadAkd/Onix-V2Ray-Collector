@@ -15,7 +15,6 @@ import logging
 from typing import List, Dict, Optional, Tuple
 from dataclasses import dataclass
 from urllib.parse import urlparse
-import yaml
 
 # تنظیم لاگ
 logging.basicConfig(
@@ -53,6 +52,15 @@ class V2RayCollector:
         self.configs: List[V2RayConfig] = []
         self.working_configs: List[V2RayConfig] = []
         self.failed_configs: List[V2RayConfig] = []
+        
+        # اضافه کردن Cache Manager
+        try:
+            from cache_manager import CacheManager
+            self.cache = CacheManager(cache_dir="cache", max_size=2000)
+            logger.info("Cache Manager initialized successfully")
+        except ImportError:
+            logger.warning("Cache Manager not available, running without cache")
+            self.cache = None
 
         # منابع کانفیگ‌های رایگان
         self.config_sources = [
@@ -76,7 +84,14 @@ class V2RayCollector:
         }
 
     async def fetch_configs_from_source(self, source_url: str) -> List[str]:
-        """دریافت کانفیگ‌ها از یک منبع"""
+        """دریافت کانفیگ‌ها از یک منبع با کش"""
+        # بررسی کش
+        if self.cache:
+            cached_configs = self.cache.get(source_url)
+            if cached_configs is not None:
+                logger.info(f"Cache hit for {source_url} - {len(cached_configs)} configs")
+                return cached_configs
+        
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.get(source_url, timeout=30) as response:
@@ -95,6 +110,11 @@ class V2RayCollector:
                                     config.raw_config for config in singbox_configs]
                                 logger.info(
                                     f"دریافت {len(configs)} کانفیگ از SingBox JSON: {source_url}")
+                                
+                                # ذخیره در کش
+                                if self.cache:
+                                    self.cache.set(source_url, configs, ttl=1800)  # 30 دقیقه
+                                
                                 return configs
                             except json.JSONDecodeError:
                                 logger.warning(
@@ -105,8 +125,13 @@ class V2RayCollector:
                         for line in content.strip().split('\n'):
                             if line.strip() and not line.startswith('#'):
                                 configs.append(line.strip())
-                        logger.info(
-                            f"دریافت {len(configs)} کانفیگ از {source_url}")
+                        
+                        logger.info(f"دریافت {len(configs)} کانفیگ از {source_url}")
+                        
+                        # ذخیره در کش
+                        if self.cache:
+                            self.cache.set(source_url, configs, ttl=1800)  # 30 دقیقه
+                        
                         return configs
         except Exception as e:
             logger.error(f"خطا در دریافت از {source_url}: {e}")
@@ -239,32 +264,32 @@ class V2RayCollector:
         try:
             # حذف پیشوند ssr://
             encoded_part = config_str[6:]
-            
+
             # اضافه کردن padding اگر لازم باشد
             missing_padding = len(encoded_part) % 4
             if missing_padding:
                 encoded_part += '=' * (4 - missing_padding)
-            
+
             # decode base64
             decoded = base64.b64decode(encoded_part).decode('utf-8')
-            
+
             # تجزیه پارامترها - SSR format: server:port:protocol:method:obfs:password/base64
             parts = decoded.split('/')
             if len(parts) < 1:
                 return None
-            
+
             # تجزیه بخش اول (server info)
             server_info_parts = parts[0].split(':')
             if len(server_info_parts) < 6:
                 return None
-            
+
             server = server_info_parts[0]
             port = int(server_info_parts[1])
             protocol = server_info_parts[2]
             method = server_info_parts[3]
             obfs = server_info_parts[4]
             password_encoded = server_info_parts[5]
-            
+
             # decode password
             try:
                 password_missing_padding = len(password_encoded) % 4
@@ -273,7 +298,7 @@ class V2RayCollector:
                 password = base64.b64decode(password_encoded).decode('utf-8')
             except:
                 password = password_encoded
-            
+
             return V2RayConfig(
                 protocol="ssr",
                 address=server,
@@ -282,36 +307,137 @@ class V2RayCollector:
                 raw_config=config_str,
                 country="unknown"
             )
-            
+
         except Exception as e:
             logger.debug(f"خطا در تجزیه SSR: {e}")
             return None
 
     async def test_config_connectivity(self, config: V2RayConfig) -> Tuple[bool, float]:
-        """تست اتصال کانفیگ"""
+        """تست اتصال کانفیگ با روش‌های پیشرفته"""
         try:
             start_time = time.time()
-
-            # تست ping به سرور
-            async with aiohttp.ClientSession() as session:
-                # تست HTTP connection
-                test_url = f"http://{config.address}:{config.port}"
-                try:
-                    async with session.get(test_url, timeout=10) as response:
-                        latency = (time.time() - start_time) * 1000
-                        return True, latency
-                except:
-                    # تست HTTPS
-                    test_url = f"https://{config.address}:{config.port}"
-                    try:
-                        async with session.get(test_url, timeout=10) as response:
-                            latency = (time.time() - start_time) * 1000
-                            return True, latency
-                    except:
-                        return False, 0.0
+            
+            # تست‌های مختلف برای پروتکل‌های مختلف
+            if config.protocol == "vmess":
+                return await self._test_vmess_connection(config, start_time)
+            elif config.protocol == "vless":
+                return await self._test_vless_connection(config, start_time)
+            elif config.protocol == "trojan":
+                return await self._test_trojan_connection(config, start_time)
+            elif config.protocol in ["ss", "ssr"]:
+                return await self._test_ss_connection(config, start_time)
+            else:
+                return await self._test_generic_connection(config, start_time)
 
         except Exception as e:
-            logger.debug(f"خطا در تست {config.address}:{config.port} - {e}")
+            logger.debug(f"خطا در تست {config.protocol} {config.address}:{config.port} - {e}")
+            return False, 0.0
+
+    async def _test_vmess_connection(self, config: V2RayConfig, start_time: float) -> Tuple[bool, float]:
+        """تست اتصال VMess"""
+        try:
+            import socket
+            
+            # تست اتصال TCP
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(10)
+            result = sock.connect_ex((config.address, config.port))
+            sock.close()
+            
+            if result == 0:
+                latency = (time.time() - start_time) * 1000
+                return True, latency
+            return False, 0.0
+            
+        except Exception:
+            return False, 0.0
+
+    async def _test_vless_connection(self, config: V2RayConfig, start_time: float) -> Tuple[bool, float]:
+        """تست اتصال VLESS"""
+        try:
+            import socket
+            
+            # تست اتصال TCP
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(10)
+            result = sock.connect_ex((config.address, config.port))
+            sock.close()
+            
+            if result == 0:
+                latency = (time.time() - start_time) * 1000
+                return True, latency
+            return False, 0.0
+            
+        except Exception:
+            return False, 0.0
+
+    async def _test_trojan_connection(self, config: V2RayConfig, start_time: float) -> Tuple[bool, float]:
+        """تست اتصال Trojan"""
+        try:
+            import socket
+            import ssl
+            
+            # تست اتصال TCP + TLS
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(10)
+            
+            try:
+                sock.connect((config.address, config.port))
+                
+                # تست TLS
+                context = ssl.create_default_context()
+                context.check_hostname = False
+                context.verify_mode = ssl.CERT_NONE
+                
+                tls_sock = context.wrap_socket(sock, server_hostname=config.address)
+                tls_sock.close()
+                
+                latency = (time.time() - start_time) * 1000
+                return True, latency
+                
+            except:
+                sock.close()
+                return False, 0.0
+                
+        except Exception:
+            return False, 0.0
+
+    async def _test_ss_connection(self, config: V2RayConfig, start_time: float) -> Tuple[bool, float]:
+        """تست اتصال Shadowsocks"""
+        try:
+            import socket
+            
+            # تست اتصال TCP
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(10)
+            result = sock.connect_ex((config.address, config.port))
+            sock.close()
+            
+            if result == 0:
+                latency = (time.time() - start_time) * 1000
+                return True, latency
+            return False, 0.0
+            
+        except Exception:
+            return False, 0.0
+
+    async def _test_generic_connection(self, config: V2RayConfig, start_time: float) -> Tuple[bool, float]:
+        """تست اتصال عمومی"""
+        try:
+            import socket
+            
+            # تست اتصال TCP ساده
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(10)
+            result = sock.connect_ex((config.address, config.port))
+            sock.close()
+            
+            if result == 0:
+                latency = (time.time() - start_time) * 1000
+                return True, latency
+            return False, 0.0
+            
+        except Exception:
             return False, 0.0
 
     def parse_singbox_config(self, json_data: dict) -> List[V2RayConfig]:
@@ -469,7 +595,7 @@ class V2RayCollector:
     def parse_config(self, config_str: str) -> Optional[V2RayConfig]:
         """تجزیه کانفیگ بر اساس نوع پروتکل"""
         config_str = config_str.strip()
-        
+
         if config_str.startswith('vmess://'):
             return self.parse_vmess_config(config_str)
         elif config_str.startswith('vless://'):
@@ -480,21 +606,22 @@ class V2RayCollector:
             return self.parse_ss_config(config_str)
         elif config_str.startswith('ssr://'):
             return self.parse_ssr_config(config_str)
-        
+
         return None
 
     async def test_all_configs(self, configs: List[str], max_concurrent: int = 100):
         """تست تمام کانفیگ‌ها با بهینه‌سازی"""
-        logger.info(f"شروع تست {len(configs)} کانفیگ با {max_concurrent} همزمان...")
-        
+        logger.info(
+            f"شروع تست {len(configs)} کانفیگ با {max_concurrent} همزمان...")
+
         # فیلتر کانفیگ‌های تکراری
         unique_configs = list(set(configs))
         logger.info(f"حذف {len(configs) - len(unique_configs)} کانفیگ تکراری")
-        
+
         # فیلتر جغرافیایی
         if hasattr(self, 'geo_filter_enabled') and self.geo_filter_enabled:
             unique_configs = self.apply_geo_filter(unique_configs)
-        
+
         semaphore = asyncio.Semaphore(max_concurrent)
 
         async def test_single_config(config_str: str):
@@ -519,18 +646,20 @@ class V2RayCollector:
 
         # تقسیم به batch های کوچک‌تر برای مدیریت بهتر
         batch_size = max_concurrent * 2
-        batches = [unique_configs[i:i + batch_size] for i in range(0, len(unique_configs), batch_size)]
-        
+        batches = [unique_configs[i:i + batch_size]
+                   for i in range(0, len(unique_configs), batch_size)]
+
         total_working = len(self.working_configs)
         total_failed = len(self.failed_configs)
-        
+
         for batch_idx, batch in enumerate(batches):
-            logger.info(f"تست batch {batch_idx + 1}/{len(batches)} ({len(batch)} کانفیگ)")
-            
+            logger.info(
+                f"تست batch {batch_idx + 1}/{len(batches)} ({len(batch)} کانفیگ)")
+
             # اجرای موازی تست‌ها
             tasks = [test_single_config(config) for config in batch]
             await asyncio.gather(*tasks, return_exceptions=True)
-            
+
             # استراحت کوتاه بین batch ها
             if batch_idx < len(batches) - 1:
                 await asyncio.sleep(0.5)
@@ -541,39 +670,41 @@ class V2RayCollector:
     def apply_geo_filter(self, configs: List[str]) -> List[str]:
         """اعمال فیلتر جغرافیایی"""
         from config import GEO_FILTER_CONFIG
-        
+
         if not GEO_FILTER_CONFIG['enabled']:
             return configs
-        
+
         filtered_configs = []
         country_counts = {}
-        
+
         for config_str in configs:
             config = self.parse_config(config_str)
             if not config:
                 continue
-                
+
             country = config.country or 'unknown'
-            
+
             # بررسی کشورهای مسدود
             if country in GEO_FILTER_CONFIG['blocked_countries']:
                 continue
-            
+
             # محدودیت تعداد کانفیگ در هر کشور
-            max_per_country = GEO_FILTER_CONFIG.get('max_configs_per_country', 500)
+            max_per_country = GEO_FILTER_CONFIG.get(
+                'max_configs_per_country', 500)
             if country_counts.get(country, 0) >= max_per_country:
                 continue
-            
+
             filtered_configs.append(config_str)
             country_counts[country] = country_counts.get(country, 0) + 1
-        
-        logger.info(f"فیلتر جغرافیایی: {len(configs)} -> {len(filtered_configs)} کانفیگ")
+
+        logger.info(
+            f"فیلتر جغرافیایی: {len(configs)} -> {len(filtered_configs)} کانفیگ")
         return filtered_configs
 
     def categorize_configs(self):
         """دسته‌بندی کانفیگ‌ها با فیلتر جغرافیایی"""
         from config import CATEGORIZATION_CONFIG, GEO_FILTER_CONFIG
-        
+
         categories = {
             'vmess': [],
             'vless': [],
@@ -581,26 +712,29 @@ class V2RayCollector:
             'ss': [],
             'ssr': []
         }
-        
+
         # دسته‌بندی بر اساس پروتکل
         for config in self.working_configs:
             if config.protocol in categories:
                 categories[config.protocol].append(config)
-        
+
         # اعمال محدودیت‌ها
-        max_per_protocol = CATEGORIZATION_CONFIG.get('max_configs_per_protocol', 1000)
-        max_per_country = CATEGORIZATION_CONFIG.get('max_configs_per_country', 500)
-        
+        max_per_protocol = CATEGORIZATION_CONFIG.get(
+            'max_configs_per_protocol', 1000)
+        max_per_country = CATEGORIZATION_CONFIG.get(
+            'max_configs_per_country', 500)
+
         for protocol, configs in categories.items():
             # مرتب‌سازی بر اساس تأخیر
             if CATEGORIZATION_CONFIG.get('sort_by_latency', True):
                 configs.sort(key=lambda x: x.latency or float('inf'))
-            
+
             # محدودیت تعداد
             if len(configs) > max_per_protocol:
                 categories[protocol] = configs[:max_per_protocol]
-                logger.info(f"محدود کردن {protocol}: {len(configs)} -> {max_per_protocol}")
-        
+                logger.info(
+                    f"محدود کردن {protocol}: {len(configs)} -> {max_per_protocol}")
+
         # دسته‌بندی بر اساس کشور
         if CATEGORIZATION_CONFIG.get('group_by_country', True):
             country_categories = {}
@@ -610,9 +744,9 @@ class V2RayCollector:
                     if country not in country_categories:
                         country_categories[country] = []
                     country_categories[country].append(config)
-            
+
             logger.info(f"دسته‌بندی کشورها: {list(country_categories.keys())}")
-        
+
         return categories
 
     def generate_subscription_links(self, categories: Dict[str, List[V2RayConfig]]):
