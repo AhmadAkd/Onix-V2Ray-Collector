@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  v2ray-collector:
+    build: .
+    container_name: v2ray-collector
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Tehran
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./subscriptions:/app/subscriptions
+      - ./cache:/app/cache
+      - ./analytics:/app/analytics
+      - ./logs:/app/logs
+    networks:
+      - v2ray-network
+    command: python automation.py --mode auto
+
+  v2ray-api:
+    build: .
+    container_name: v2ray-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - TZ=Asia/Tehran
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./subscriptions:/app/subscriptions
+      - ./cache:/app/cache
+    networks:
+      - v2ray-network
+    command: python api_server.py
+    depends_on:
+      - v2ray-collector
+
+networks:
+  v2ray-network:
+    driver: bridge

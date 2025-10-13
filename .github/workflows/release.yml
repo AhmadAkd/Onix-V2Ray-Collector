@@ -1,0 +1,165 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number (e.g., v1.0.1)'
+        required: true
+        default: 'v1.0.1'
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: 📦 Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: 🧪 Run tests
+      run: |
+        python run_tests.py
+    
+    - name: 📝 Generate changelog
+      id: changelog
+      run: |
+        if [ -f "RELEASE_NOTES_${{ github.event.inputs.version || github.ref_name }}.md" ]; then
+          cat "RELEASE_NOTES_${{ github.event.inputs.version || github.ref_name }}.md" > CHANGELOG.txt
+        else
+          echo "Release ${{ github.event.inputs.version || github.ref_name }}" > CHANGELOG.txt
+          echo "" >> CHANGELOG.txt
+          git log --pretty=format:"- %s" $(git describe --tags --abbrev=0 2>/dev/null || git rev-list --max-parents=0 HEAD)..HEAD >> CHANGELOG.txt || echo "Initial release" >> CHANGELOG.txt
+        fi
+        
+        echo "changelog<<EOF" >> $GITHUB_OUTPUT
+        cat CHANGELOG.txt >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+    
+    - name: 📊 Collect statistics
+      run: |
+        echo "## 📊 Release Statistics" > STATS.md
+        echo "" >> STATS.md
+        
+        # تعداد فایل‌ها
+        echo "### Files:" >> STATS.md
+        echo "- Python files: $(find . -name '*.py' -not -path './.venv/*' -not -path './venv/*' | wc -l)" >> STATS.md
+        echo "- Total lines of code: $(find . -name '*.py' -not -path './.venv/*' -not -path './venv/*' -exec cat {} \; | wc -l)" >> STATS.md
+        
+        # تعداد کانفیگ‌ها
+        if [ -d "subscriptions" ]; then
+          echo "" >> STATS.md
+          echo "### Configs:" >> STATS.md
+          for file in subscriptions/*_subscription.txt; do
+            if [ -f "$file" ]; then
+              protocol=$(basename "$file" | sed 's/_subscription.txt//')
+              count=$(wc -l < "$file" 2>/dev/null || echo "0")
+              echo "- $protocol: $count" >> STATS.md
+            fi
+          done
+        fi
+    
+    - name: 📦 Create distribution packages
+      run: |
+        mkdir -p dist
+        
+        # ایجاد ZIP برای Windows
+        zip -r dist/V2Ray-Collector-${{ github.event.inputs.version || github.ref_name }}-windows.zip \
+          *.py \
+          *.ps1 \
+          *.sh \
+          *.md \
+          requirements.txt \
+          -x "*.pyc" "*__pycache__*" "*.git*"
+        
+        # ایجاد tar.gz برای Linux/Mac
+        tar -czf dist/V2Ray-Collector-${{ github.event.inputs.version || github.ref_name }}-linux.tar.gz \
+          --exclude="*.pyc" \
+          --exclude="*__pycache__*" \
+          --exclude=".git*" \
+          *.py *.ps1 *.sh *.md requirements.txt
+    
+    - name: 🏷️ Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ github.event.inputs.version || github.ref_name }}
+        name: Release ${{ github.event.inputs.version || github.ref_name }}
+        body: |
+          ## 🎉 Release ${{ github.event.inputs.version || github.ref_name }}
+          
+          ${{ steps.changelog.outputs.changelog }}
+          
+          ---
+          
+          ## 📥 Installation
+          
+          ### Quick Start:
+          ```bash
+          # Clone repository
+          git clone https://github.com/${{ github.repository }}.git
+          cd V2Ray_Collector
+          
+          # Install dependencies
+          pip install -r requirements.txt
+          
+          # Run
+          python config_collector.py
+          ```
+          
+          ### With Docker:
+          ```bash
+          docker-compose up -d
+          ```
+          
+          ### Windows PowerShell:
+          ```powershell
+          .\run.ps1
+          ```
+          
+          ---
+          
+          ## 📊 Statistics
+          
+          $(cat STATS.md)
+          
+          ---
+          
+          ## 📚 Documentation
+          
+          - [README](README.md)
+          - [Quick Start Guide](QUICKSTART.md)
+          - [Windows Guide](WINDOWS_GUIDE.md)
+          - [Security Policy](SECURITY.md)
+          
+          ---
+          
+          **Full Changelog**: https://github.com/${{ github.repository }}/compare/...HEAD
+        files: |
+          dist/*.zip
+          dist/*.tar.gz
+          subscriptions/*.txt
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: 🎉 Success
+      run: |
+        echo "✅ Release ${{ github.event.inputs.version || github.ref_name }} created successfully!"
+        echo "🔗 https://github.com/${{ github.repository }}/releases"
+

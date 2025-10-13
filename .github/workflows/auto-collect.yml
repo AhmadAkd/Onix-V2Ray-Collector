@@ -1,0 +1,168 @@
+name: Auto Collect and Update Configs
+
+on:
+  # اجرای خودکار هر 30 دقیقه
+  schedule:
+    - cron: '*/30 * * * *'
+  
+  # اجرا با push به main
+  push:
+    branches: [ main ]
+  
+  # اجرا دستی
+  workflow_dispatch:
+
+jobs:
+  collect-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+    
+    - name: 📦 Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: 🧪 Run tests
+      run: |
+        python run_tests.py
+      continue-on-error: true
+    
+    - name: 🔄 Collect configs
+      run: |
+        python config_collector.py
+      timeout-minutes: 30
+    
+    - name: 📊 Generate analytics
+      run: |
+        if [ -f "analytics.py" ]; then
+          python analytics.py
+        fi
+      continue-on-error: true
+    
+    - name: 🏥 Health check
+      run: |
+        if [ -f "health_monitor.py" ]; then
+          python health_monitor.py
+        fi
+      continue-on-error: true
+    
+    - name: 📝 Create summary
+      run: |
+        echo "## 📊 Collection Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        if [ -f "subscriptions/report.json" ]; then
+          echo "### Statistics:" >> $GITHUB_STEP_SUMMARY
+          
+          TOTAL=$(jq -r '.total_configs_tested // 0' subscriptions/report.json)
+          WORKING=$(jq -r '.working_configs // 0' subscriptions/report.json)
+          FAILED=$(jq -r '.failed_configs // 0' subscriptions/report.json)
+          SUCCESS_RATE=$(jq -r '.success_rate // "0%"' subscriptions/report.json)
+          
+          echo "- 📈 Total configs tested: **$TOTAL**" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Working configs: **$WORKING**" >> $GITHUB_STEP_SUMMARY
+          echo "- ❌ Failed configs: **$FAILED**" >> $GITHUB_STEP_SUMMARY
+          echo "- 📊 Success rate: **$SUCCESS_RATE**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          echo "### Files Generated:" >> $GITHUB_STEP_SUMMARY
+          ls -lh subscriptions/*.txt 2>/dev/null | awk '{print "- " $9 " (" $5 ")"}' >> $GITHUB_STEP_SUMMARY || echo "No files generated" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "⚠️ No report generated" >> $GITHUB_STEP_SUMMARY
+        fi
+    
+    - name: 🎯 Count configs by protocol
+      run: |
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Configs by Protocol:" >> $GITHUB_STEP_SUMMARY
+        
+        for file in subscriptions/*_subscription.txt; do
+          if [ -f "$file" ]; then
+            protocol=$(basename "$file" | sed 's/_subscription.txt//')
+            count=$(wc -l < "$file" 2>/dev/null || echo "0")
+            echo "- **$protocol**: $count configs" >> $GITHUB_STEP_SUMMARY
+          fi
+        done
+    
+    - name: 📅 Update timestamp
+      run: |
+        echo "Last updated: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" > subscriptions/LAST_UPDATE.txt
+        echo "Updated by: GitHub Actions" >> subscriptions/LAST_UPDATE.txt
+        echo "Workflow: ${{ github.workflow }}" >> subscriptions/LAST_UPDATE.txt
+        echo "Run: ${{ github.run_number }}" >> subscriptions/LAST_UPDATE.txt
+    
+    - name: 🔄 Commit and push changes
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        
+        git add subscriptions/
+        
+        # بررسی اینکه تغییری وجود داره یا نه
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+          exit 0
+        fi
+        
+        # شمارش تعداد کانفیگ‌ها
+        TOTAL_CONFIGS=$(cat subscriptions/all_subscription.txt 2>/dev/null | wc -l || echo "0")
+        
+        # ایجاد پیام commit
+        git commit -m "🤖 Auto-update: Collected configs - $(date '+%Y-%m-%d %H:%M')
+
+        📊 Total configs: $TOTAL_CONFIGS
+        🤖 Automated by GitHub Actions
+        ⏰ Time: $(date -u '+%Y-%m-%d %H:%M:%S UTC')
+        🔄 Run: #${{ github.run_number }}"
+        
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: 📢 Create issue on failure
+      if: failure()
+      uses: actions/github-script@v6
+      with:
+        script: |
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: '🚨 Auto-collect workflow failed',
+            body: `The auto-collect workflow failed.
+            
+            **Run:** ${context.runNumber}
+            **Workflow:** ${context.workflow}
+            **Time:** ${new Date().toISOString()}
+            
+            Please check the [workflow run](${context.payload.repository.html_url}/actions/runs/${context.runId}) for details.`,
+            labels: ['automated', 'bug']
+          })
+    
+    - name: 📤 Upload artifacts
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: subscriptions-${{ github.run_number }}
+        path: |
+          subscriptions/*.txt
+          subscriptions/*.json
+          subscriptions/*.html
+        retention-days: 7
+    
+    - name: 🎉 Success notification
+      if: success()
+      run: |
+        echo "✅ Collection and update completed successfully!"
+        echo "📊 Check the summary above for details."
+

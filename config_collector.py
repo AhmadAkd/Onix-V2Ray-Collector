@@ -108,7 +108,6 @@ class UltraFastConnectionPool:
     def close(self):
         """بستن executor"""
         self.executor.shutdown(wait=True)
-    speed_test_result: float = 0.0
 
 
 class SmartConfigFilter:
@@ -195,26 +194,26 @@ class V2RayCollector:
         self.config_sources = [
             # منابع اصلی Epodonios (تست شده)
             "https://github.com/Epodonios/v2ray-configs/raw/main/All_Configs_base64_Sub.txt",
-            
+
             # منابع تقسیم شده بر اساس پروتکل (Epodonios)
             "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/vless.txt",
             "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/vmess.txt",
             "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/ss.txt",
             "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/ssr.txt",
             "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/trojan.txt",
-            
+
             # منابع تقسیم شده (Epodonios - 250 کانفیگ در هر فایل)
             "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub1.txt",
             "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub2.txt",
             "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub3.txt",
             "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub4.txt",
             "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub5.txt",
-            
+
             # منابع معتبر دیگر (تست شده)
             "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge.txt",
             "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
             "https://raw.githubusercontent.com/aiboboxx/v2rayfree/main/v2",
-            
+
             # منابع SingBox (تست شده)
             "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/ss.json",
             "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/mix.json",
@@ -222,14 +221,14 @@ class V2RayCollector:
             "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/vless.json",
             "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/trojan.json",
             "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/hy2.json",
-            
+
             # منابع Leon406 SubCrawler (تست شده)
             "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vless",
             "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss",
-            
+
             # منابع Shadowsocks (تست شده)
             "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/sub/sub_merge.txt",
-            
+
             # منابع Argh94/V2RayAutoConfig (تست شده)
             "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/USA.txt",
             "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/UK.txt",
@@ -564,12 +563,21 @@ class V2RayCollector:
 
                 # تست TLS
                 context = ssl.create_default_context()
+                # برای تست فقط hostname check رو غیرفعال می‌کنیم
                 context.check_hostname = False
-                context.verify_mode = ssl.CERT_NONE
+                # اما certificate verification رو نگه می‌داریم برای امنیت بیشتر
+                context.verify_mode = ssl.CERT_OPTIONAL
 
-                tls_sock = context.wrap_socket(
-                    sock, server_hostname=config.address)
-                tls_sock.close()
+                try:
+                    tls_sock = context.wrap_socket(
+                        sock, server_hostname=config.address)
+                    tls_sock.close()
+                except ssl.SSLError:
+                    # اگر TLS verification ناموفق بود، با CERT_NONE امتحان می‌کنیم
+                    context.verify_mode = ssl.CERT_NONE
+                    tls_sock = context.wrap_socket(
+                        sock, server_hostname=config.address)
+                    tls_sock.close()
 
                 latency = (time.time() - start_time) * 1000
                 return True, latency
@@ -1364,60 +1372,61 @@ class V2RayCollector:
     def generate_country_subscriptions(self, categories: dict) -> dict:
         """تولید فایل‌های اشتراک بر اساس کشور"""
         country_files = {}
-        
+
         # جمع‌آوری کانفیگ‌ها بر اساس کشور
         country_configs = {}
-        
+
         for protocol, configs in categories.items():
             for config in configs:
                 country = config.country.lower()
                 if country not in country_configs:
                     country_configs[country] = []
                 country_configs[country].append(config)
-        
+
         # تولید فایل برای هر کشور
         for country, configs in country_configs.items():
             if configs and country != "unknown":
                 # مرتب‌سازی بر اساس سرعت
                 configs.sort(key=lambda x: x.latency)
-                
+
                 # تولید محتوای اشتراک
                 subscription_content = '\n'.join(
                     [config.raw_config for config in configs])
-                
+
                 # پاک‌سازی نام کشور برای نام فایل
                 safe_country_name = self.sanitize_filename(country)
                 filename = f"subscriptions/by_country/{safe_country_name}.txt"
-                
+
                 country_files[f"{country}_by_country"] = {
                     'filename': filename,
                     'content': subscription_content,
                     'count': len(configs)
                 }
-                
+
                 logger.info(f"تولید شد: {filename} با {len(configs)} کانفیگ")
-        
+
         return country_files
 
     def sanitize_filename(self, filename: str) -> str:
         """پاک‌سازی نام فایل از کاراکترهای غیرمجاز"""
         import re
-        
+
         # حذف کاراکترهای غیرمجاز
         safe_filename = re.sub(r'[<>:"/\\|?*]', '', filename)
-        
+
         # حذف فاصله‌های اضافی و کاراکترهای خاص
         safe_filename = re.sub(r'\s+', '_', safe_filename)
-        safe_filename = safe_filename.replace('|', '_').replace('&', '_').replace('@', '_')
-        
+        safe_filename = safe_filename.replace(
+            '|', '_').replace('&', '_').replace('@', '_')
+
         # محدود کردن طول نام فایل
         if len(safe_filename) > 50:
             safe_filename = safe_filename[:50]
-        
+
         # اگر نام فایل خالی شد، نام پیش‌فرض
         if not safe_filename or safe_filename == '_':
             safe_filename = 'unknown'
-        
+
         return safe_filename
 
     async def run_collection_cycle(self):
@@ -1537,6 +1546,10 @@ async def main():
 
     except Exception as e:
         logger.error(f"خطای کلی در اجرا: {e}")
+    finally:
+        # پاکسازی منابع
+        collector.cleanup_resources()
+        logger.info("منابع پاکسازی شدند")
 
 if __name__ == "__main__":
     asyncio.run(main())
