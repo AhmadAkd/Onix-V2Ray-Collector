@@ -1,33 +1,33 @@
 {
-  "timestamp": "2025-10-13 10:19:34",
-  "total_configs_tested": 3462,
-  "working_configs": 2463,
-  "failed_configs": 999,
-  "success_rate": "71.1%",
+  "timestamp": "2025-10-13 10:44:48",
+  "total_configs_tested": 3461,
+  "working_configs": 2456,
+  "failed_configs": 1005,
+  "success_rate": "71.0%",
   "protocols": {
-    "vless": {
-      "count": 750,
-      "avg_latency": "93.0ms"
-    },
     "vmess": {
-      "count": 1527,
-      "avg_latency": "46.7ms"
+      "count": 1530,
+      "avg_latency": "56.1ms"
+    },
+    "vless": {
+      "count": 747,
+      "avg_latency": "121.4ms"
     },
     "trojan": {
       "count": 169,
-      "avg_latency": "188.5ms"
+      "avg_latency": "182.7ms"
     },
     "ssr": {
-      "count": 14,
-      "avg_latency": "108.0ms"
-    },
-    "ss": {
-      "count": 2,
-      "avg_latency": "262.8ms"
+      "count": 7,
+      "avg_latency": "145.8ms"
     },
     "hysteria": {
       "count": 1,
-      "avg_latency": "19.3ms"
+      "avg_latency": "37.0ms"
+    },
+    "ss": {
+      "count": 2,
+      "avg_latency": "236.3ms"
     }
   }
 }
