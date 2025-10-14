@@ -190,6 +190,15 @@ class V2RayCollector:
                 "Advanced Analytics not available, running without analytics")
             self.analytics = None
 
+        # اضافه کردن GeoIP Lookup
+        try:
+            from geoip_lookup import GeoIPLookup
+            self.geoip = GeoIPLookup()
+            logger.info("GeoIP Lookup initialized successfully")
+        except ImportError:
+            logger.warning("GeoIP Lookup not available, running without GeoIP")
+            self.geoip = None
+
         # بارگذاری منابع از config.py
         try:
             from config import CONFIG_SOURCES
@@ -324,13 +333,14 @@ class V2RayCollector:
             decoded = base64.b64decode(encoded + '==').decode('utf-8')
             config_data = json.loads(decoded)
 
-            # استخراج کشور از ps (remark)
+            # استخراج کشور
+            address = config_data.get('add', '')
             ps = config_data.get('ps', '')
-            country = self.extract_country_from_tag(ps) if ps else 'Unknown'
+            country = self.detect_country(address, ps)
 
             return V2RayConfig(
                 protocol="vmess",
-                address=config_data.get('add', ''),
+                address=address,
                 port=int(config_data.get('port', 0)),
                 uuid=config_data.get('id', ''),
                 alter_id=config_data.get('aid', 0),
@@ -360,9 +370,8 @@ class V2RayCollector:
                 decoded_fragment = urllib.parse.unquote(
                     fragment) if fragment else ''
 
-                # استخراج کشور از fragment (remark)
-                country = self.extract_country_from_tag(
-                    decoded_fragment) if decoded_fragment else 'Unknown'
+                # استخراج کشور
+                country = self.detect_country(address, decoded_fragment)
 
                 return V2RayConfig(
                     protocol="vless",
@@ -389,9 +398,8 @@ class V2RayCollector:
                 decoded_fragment = urllib.parse.unquote(
                     fragment) if fragment else ''
 
-                # استخراج کشور از fragment (remark)
-                country = self.extract_country_from_tag(
-                    decoded_fragment) if decoded_fragment else 'Unknown'
+                # استخراج کشور
+                country = self.detect_country(address, decoded_fragment)
 
                 return V2RayConfig(
                     protocol="trojan",
@@ -421,13 +429,12 @@ class V2RayCollector:
                 method, password = method_password.split(':')
                 address, port = address_port.split(':')
 
-                # استخراج کشور از remark (اگر وجود دارد)
+                # استخراج کشور
                 import urllib.parse
                 remark = ''
                 if '#' in config_str:
                     remark = urllib.parse.unquote(config_str.split('#')[-1])
-                country = self.extract_country_from_tag(
-                    remark) if remark else 'Unknown'
+                country = self.detect_country(address, remark)
 
                 return V2RayConfig(
                     protocol="ss",
@@ -490,11 +497,11 @@ class V2RayCollector:
                 if 'remarks=' in params:
                     remarks_match = re.search(r'remarks=([^&]+)', params)
                     if remarks_match:
-                        remarks = urllib.parse.unquote(base64.b64decode(remarks_match.group(1) + '==').decode('utf-8', errors='ignore'))
+                        remarks = urllib.parse.unquote(base64.b64decode(
+                            remarks_match.group(1) + '==').decode('utf-8', errors='ignore'))
 
-            # استخراج کشور از remarks
-            country = self.extract_country_from_tag(
-                remarks) if remarks else 'Unknown'
+            # استخراج کشور
+            country = self.detect_country(server, remarks)
 
             return V2RayConfig(
                 protocol="ssr",
@@ -943,6 +950,28 @@ class V2RayCollector:
             if country_code in valid_codes:
                 return country_code
 
+        return 'Unknown'
+
+    def detect_country(self, address: str, tag: str = '') -> str:
+        """
+        شناسایی کشور با اولویت:
+        1. از tag/remark
+        2. از GeoIP (دامنه یا IP)
+        3. Unknown
+        """
+        # اولویت اول: tag
+        if tag:
+            country_from_tag = self.extract_country_from_tag(tag)
+            if country_from_tag != 'Unknown':
+                return country_from_tag
+
+        # اولویت دوم: GeoIP
+        if self.geoip and address:
+            country_from_geo = self.geoip.get_country(address)
+            if country_from_geo:
+                return country_from_geo
+
+        # اگر هیچ کدام نتوانست، Unknown
         return 'Unknown'
 
     def encode_vmess_config(self, outbound: dict) -> str:

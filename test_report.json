@@ -1,17 +1,52 @@
 {
-  "timestamp": "2025-10-13T09:03:05.291509",
-  "total_tests": 8,
-  "passed_tests": 2,
-  "failed_tests": 6,
-  "success_rate": "25.0%",
-  "test_results": {
-    "imports": true,
-    "file_structure": false,
-    "config_file": true,
-    "config_collector": false,
-    "config_parsing": false,
-    "connectivity": false,
-    "automation": false,
-    "web_server": false
+  "timestamp": "2025-10-14 16:01:47",
+  "total_configs_tested": 12,
+  "working_configs": 11,
+  "failed_configs": 1,
+  "success_rate": "91.7%",
+  "protocols": {
+    "vless": {
+      "count": 9,
+      "avg_latency": "332.5ms"
+    },
+    "vmess": {
+      "count": 2,
+      "avg_latency": "352.8ms"
+    }
+  },
+  "countries": {
+    "US": {
+      "count": 2,
+      "avg_latency": "249.7ms"
+    },
+    "HK": {
+      "count": 1,
+      "avg_latency": "448.2ms"
+    },
+    "IR": {
+      "count": 2,
+      "avg_latency": "236.3ms"
+    }
+  },
+  "available_files": {
+    "protocols": [
+      "hysteria",
+      "ss",
+      "ssr",
+      "trojan",
+      "vless",
+      "vmess"
+    ],
+    "countries": [
+      "CA",
+      "DE",
+      "FR",
+      "GB",
+      "KR",
+      "NL",
+      "SG",
+      "TR",
+      "US"
+    ]
   }
 }
