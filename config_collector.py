@@ -230,6 +230,11 @@ class V2RayCollector:
             from geoip_lookup import GeoIPLookup
             self.geoip = GeoIPLookup()
             logger.info("GeoIP Lookup initialized successfully")
+            
+            # Initialize SingBox parser
+            from singbox_parser import SingBoxParser
+            self.singbox_parser = SingBoxParser()
+            logger.info("SingBox Parser initialized successfully")
         except ImportError:
             logger.warning("GeoIP Lookup not available, running without GeoIP")
             self.geoip = None
@@ -284,15 +289,19 @@ class V2RayCollector:
                         # بررسی فرمت JSON (SingBox)
                         if source_url.endswith('.json') or content.strip().startswith('{'):
                             try:
-                                import json
-                                json_data = json.loads(content)
-                                singbox_configs = self.parse_singbox_config(
-                                    json_data)
-                                # تبدیل به فرمت استاندارد
-                                configs = [
-                                    config.raw_config for config in singbox_configs]
-                                logger.info(
-                                    f"دریافت {len(configs)} کانفیگ از SingBox JSON: {source_url}")
+                                # استفاده از SingBox parser جدید
+                                if hasattr(self, 'singbox_parser') and self.singbox_parser:
+                                    configs = self.singbox_parser.parse_singbox_json(content)
+                                    logger.info(
+                                        f"✅ دریافت {len(configs)} کانفیگ از SingBox JSON: {source_url}")
+                                else:
+                                    # Fallback to old parser
+                                    import json
+                                    json_data = json.loads(content)
+                                    singbox_configs = self.parse_singbox_config(json_data)
+                                    configs = [config.raw_config for config in singbox_configs]
+                                    logger.info(
+                                        f"دریافت {len(configs)} کانفیگ از SingBox JSON: {source_url}")
 
                                 # ذخیره در کش
                                 if self.cache:

@@ -71,23 +71,8 @@ CONFIG_SOURCES = [
     "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/Singapore.txt",
     "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/Iran.txt",
 
-    # منابع بیشتر Leon406
-    "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess",
-    "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/trojan",
+    # منابع بیشتر Leon406 (فقط فعال‌ها)
     "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ssr",
-
-    # منابع yebekhe/TelegramV2rayCollector
-    "https://raw.githubusercontent.com/yebekhe/TelegramV2rayCollector/main/sub/base64/mix",
-    "https://raw.githubusercontent.com/yebekhe/TelegramV2rayCollector/main/sub/normal/vmess",
-    "https://raw.githubusercontent.com/yebekhe/TelegramV2rayCollector/main/sub/normal/vless",
-    "https://raw.githubusercontent.com/yebekhe/TelegramV2rayCollector/main/sub/normal/trojan",
-    "https://raw.githubusercontent.com/yebekhe/TelegramV2rayCollector/main/sub/normal/ss",
-
-    # منابع barry-far/V2ray-Configs
-    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/All_Configs_Sub.txt",
-    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Sub1.txt",
-    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Sub2.txt",
-    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Sub3.txt",
 
     # منابع mfuu/v2ray
     "https://raw.githubusercontent.com/mfuu/v2ray/master/v2ray",
@@ -98,21 +83,6 @@ CONFIG_SOURCES = [
     # منابع ermaozi/get_subscribe
     "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/v2ray.txt",
 
-    # منابع AzadNetCH/Clash
-    "https://raw.githubusercontent.com/AzadNetCH/Clash/main/V2Ray.txt",
-
-    # منابع soroushmirzaei/telegram-configs-collector
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/protocols/vmess",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/protocols/vless",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/protocols/trojan",
-    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/protocols/shadowsocks",
-
-    # منابع MhdiTaheri/V2rayCollector
-    "https://raw.githubusercontent.com/MhdiTaheri/V2rayCollector/main/sub/Mix/mix.txt",
-    "https://raw.githubusercontent.com/MhdiTaheri/V2rayCollector/main/sub/Mix/base64/mix",
-
-    # منابع sashalsk/V2Ray
-    "https://raw.githubusercontent.com/sashalsk/V2Ray/main/V2Config",
 
     # منابع freefq/free
     "https://raw.githubusercontent.com/freefq/free/master/v2",
@@ -120,27 +90,11 @@ CONFIG_SOURCES = [
     # منابع ripaojiedian/freenode
     "https://raw.githubusercontent.com/ripaojiedian/freenode/main/sub",
 
-    # منابع mianfeifq/share
-    "https://raw.githubusercontent.com/mianfeifq/share/main/data2024",
-
-    # منابع اضافی برای SS و SSR
-    "https://raw.githubusercontent.com/freefq/free/master/ss",
-    "https://raw.githubusercontent.com/freefq/free/master/ssr",
-    "https://raw.githubusercontent.com/ripaojiedian/freenode/main/ss",
+    # منابع اضافی فعال
     "https://raw.githubusercontent.com/ripaojiedian/freenode/main/ssr",
 
-    # منابع Hysteria و Hysteria2
-    "https://raw.githubusercontent.com/freefq/free/master/hysteria",
-    "https://raw.githubusercontent.com/ripaojiedian/freenode/main/hysteria",
-
-    # منابع Wireguard و TUIC
-    "https://raw.githubusercontent.com/freefq/free/master/wireguard",
-    "https://raw.githubusercontent.com/ripaojiedian/freenode/main/tuic",
-
-    # منابع جامع
+    # منابع جامع (تکراری حذف شد)
     "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
-    "https://raw.githubusercontent.com/Alvin9999/new-pac/master/ss-sub",
-    "https://raw.githubusercontent.com/ripaojiedian/freenode/main/sub",
 ]
 
 # تنظیمات اتوماسیون
