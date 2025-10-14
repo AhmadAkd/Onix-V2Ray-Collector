@@ -42,20 +42,23 @@
 
 ### 🔄 **Smart Collection**
 
-- 🌍 **57+ Trusted Sources** from around the world
+- 🌍 **68+ Trusted Sources** from around the world
 - 📦 **Full Base64 Support** and various formats
 - 🔄 **Automatic Collection** every 30 minutes via GitHub Actions
 - 💾 **Smart Caching** with TTL for improved performance
 - 🎯 **Smart Filtering** - Pre-filter invalid configs
+- 🤖 **Telegram Bot Integration** - Collect from Telegram channels
+- 🌐 **Multi-Source Support** - Discord, Reddit, GitHub API
 
 ### ✅ **Professional Quality Testing**
 
-- 🔌 **10 Protocols Supported**: VMess, VLESS, Trojan, Shadowsocks, SSR, Hysteria, Hysteria2, WireGuard, TUIC, Naive
-- ⚡ **Ultra-Fast Testing** with 100 concurrent connections
-- 🔐 **Protocol-Based Testing** - Real TCP/TLS testing
+- 🔌 **17 Protocols Supported**: VMess, VLESS, Trojan, Shadowsocks, SSR, Hysteria (1/2/3), WireGuard, TUIC (v4/v5), Naive, Reality, Xray Reality, SingBox, Clash Meta
+- ⚡ **Ultra-Fast Testing** with 200 concurrent connections
+- 🔐 **Advanced Handshake Testing** - Real protocol testing
 - 📊 **95%+ Accuracy** in detecting healthy configs
-- ⏱️ **Precise Latency Measurement** for each config
+- ⏱️ **Precise Latency Measurement** with full details
 - 🔍 **Smart Deduplication** - Remove duplicate configs
+- 📡 **Response Validation** - Server response verification
 
 ### 📊 **Advanced Analytics**
 
@@ -73,6 +76,8 @@
 - 💾 **Disk Space** - Disk space monitoring
 - 🧠 **Memory Usage** - Memory monitoring
 - ⚡ **Cache Performance** - Cache performance tracking
+- 🗄️ **SQLite Database** - History and statistics storage
+- 📊 **Real-time Alerts** - Instant notifications
 
 ### 🌐 **Professional UI/UX**
 

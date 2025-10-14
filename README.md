@@ -42,20 +42,23 @@
 
 ### 🔄 **جمع‌آوری هوشمند**
 
-- 🌍 **57+ منبع معتبر** از سراسر جهان
+- 🌍 **68+ منبع معتبر** از سراسر جهان
 - 📦 **پشتیبانی کامل Base64** و فرمت‌های مختلف
 - 🔄 **جمع‌آوری خودکار** هر 30 دقیقه با GitHub Actions
 - 💾 **Cache هوشمند** با TTL برای بهبود عملکرد
 - 🎯 **Smart Filtering** - پیش‌فیلتر کانفیگ‌های نامعتبر
+- 🤖 **Telegram Bot Integration** - جمع‌آوری از کانال‌های تلگرام
+- 🌐 **Multi-Source Support** - Discord, Reddit, GitHub API
 
 ### ✅ **تست کیفیت حرفه‌ای**
 
-- 🔌 **10 پروتکل پشتیبانی شده**: VMess, VLESS, Trojan, Shadowsocks, SSR, Hysteria, Hysteria2, WireGuard, TUIC, Naive
-- ⚡ **تست فوق سریع** با 100 اتصال همزمان
-- 🔐 **تست پروتکل‌محور** - تست TCP/TLS واقعی
+- 🔌 **17 پروتکل پشتیبانی شده**: VMess, VLESS, Trojan, Shadowsocks, SSR, Hysteria (1/2/3), WireGuard, TUIC (v4/v5), Naive, Reality, Xray Reality, SingBox, Clash Meta
+- ⚡ **تست فوق سریع** با 200 اتصال همزمان
+- 🔐 **تست پیشرفته handshake** - تست واقعی پروتکل‌ها
 - 📊 **دقت 95%+** در تشخیص کانفیگ‌های سالم
-- ⏱️ **اندازه‌گیری Latency** دقیق برای هر کانفیگ
+- ⏱️ **اندازه‌گیری Latency** دقیق با جزئیات کامل
 - 🔍 **Smart Deduplication** - حذف کانفیگ‌های تکراری
+- 📡 **Response Validation** - تأیید پاسخ سرور
 
 ### 📊 **Analytics پیشرفته**
 
@@ -73,6 +76,8 @@
 - 💾 **Disk Space** - نظارت فضای دیسک
 - 🧠 **Memory Usage** - نظارت حافظه
 - ⚡ **Cache Performance** - عملکرد کش
+- 🗄️ **SQLite Database** - ذخیره تاریخچه و آمار
+- 📊 **Real-time Alerts** - هشدارهای لحظه‌ای
 
 ### 🌐 **UI/UX حرفه‌ای**
 
@@ -101,6 +106,93 @@
 
 ---
 
+## 🆕 ویژگی‌های جدید (نسخه پیشرفته)
+
+### 🚀 **تست پیشرفته پروتکل‌ها**
+
+```python
+from config_collector import UltraFastConnectionPool
+
+# تست پیشرفته با handshake واقعی
+pool = UltraFastConnectionPool()
+is_working, latency, details = pool.test_connection_advanced(
+    address='1.1.1.1',
+    port=443,
+    protocol='tcp'
+)
+
+# details شامل:
+# - response_received: آیا پاسخ دریافت شد
+# - response_size: اندازه پاسخ
+# - test_type: نوع تست
+# - latency: تأخیر دقیق
+```
+
+### 🤖 **Telegram Bot Integration**
+
+```python
+from telegram_collector import TelegramCollector, TelegramSource
+
+# ایجاد collector با Bot Token
+collector = TelegramCollector(bot_token="YOUR_BOT_TOKEN")
+
+# اضافه کردن کانال
+source = TelegramSource(
+    channel_id="@v2rayngvpn",
+    channel_name="V2RayNG VPN"
+)
+collector.add_source(source)
+
+# جمع‌آوری از تمام کانال‌ها
+configs = await collector.collect_all_sources()
+
+# نظارت مداوم (هر 10 دقیقه)
+await collector.monitor_channels(interval=600)
+```
+
+### 📊 **Advanced Monitoring**
+
+```python
+from advanced_monitoring import AdvancedMonitor
+
+monitor = AdvancedMonitor()
+
+# نظارت بر سلامت کانفیگ‌ها
+health_data = await monitor.monitor_config_health(configs)
+
+# نظارت بر معیارهای سیستم (CPU, Memory, Network)
+metrics = await monitor.monitor_system_metrics()
+
+# بررسی هشدارها
+alerts = monitor.check_alerts(health_data, metrics)
+
+# تولید گزارش سلامت
+report = monitor.generate_health_report()
+```
+
+### 🔌 **پروتکل‌های جدید**
+
+```python
+from new_protocols import NewProtocolParser
+
+parser = NewProtocolParser()
+
+# تجزیه Reality Protocol
+reality = parser.parse_reality_config("reality://...")
+
+# تجزیه Tuic v5
+tuic5 = parser.parse_tuic5_config("tuic5://...")
+
+# تجزیه Hysteria v3
+hysteria3 = parser.parse_hysteria3_config("hysteria3://...")
+
+# لیست پروتکل‌های پشتیبانی شده
+protocols = parser.get_supported_protocols()
+# ['reality', 'tuic5', 'naive', 'hysteria3', 'singbox', 'clash-meta', ...]
+```
+
+---
+
 ## 🎯 امکانات پیشرفته
 
 ### ⚡ **بهینه‌سازی عملکرد**
@@ -116,11 +208,12 @@
 ### 📁 **دسته‌بندی هوشمند**
 
 ```
-✅ دسته‌بندی بر اساس پروتکل (10 پروتکل)
+✅ دسته‌بندی بر اساس پروتکل (17 پروتکل)
 ✅ دسته‌بندی بر اساس کشور (270+ کشور)
 ✅ مرتب‌سازی بر اساس Latency
 ✅ فیلتر جغرافیایی پیشرفته
 ✅ اولویت‌بندی کشورها
+✅ محدودیت قابل تنظیم (2000 per protocol)
 ```
 
 ### 🔐 **امنیت**
@@ -229,15 +322,49 @@ cd V2Ray_Collector
 
 #### 2️⃣ **نصب وابستگی‌ها**
 
+**نصب استاندارد:**
+
 ```bash
 pip install -r requirements.txt
 ```
 
-#### 3️⃣ **اجرای پروژه**
+**نصب ویژگی‌های پیشرفته (اختیاری):**
+
+```bash
+# پکیج‌های ضروری پیشرفته
+pip install -r requirements_core.txt
+
+# Telegram Bot (اختیاری)
+pip install python-telegram-bot
+
+# Monitoring پیشرفته (اختیاری)  
+pip install prometheus-client
+```
+
+#### 3️⃣ **تنظیمات اولیه (اختیاری)**
+
+```bash
+# کپی فایل نمونه تنظیمات
+cp config.env.example config.env
+
+# ویرایش تنظیمات (برای Telegram Bot و...)
+# nano config.env
+```
+
+#### 4️⃣ **اجرای پروژه**
 
 ```bash
 # جمع‌آوری و تست کانفیگ‌ها
 python config_collector.py
+
+# اجرای collection cycle کامل
+python run_collection.py
+
+# تست Telegram Bot
+python test_telegram.py
+
+# Monitoring پیشرفته
+python advanced_monitoring.py
 
 # اجرای اتوماسیون
 python automation.py
