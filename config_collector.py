@@ -194,7 +194,8 @@ class V2RayCollector:
         try:
             from config import CONFIG_SOURCES
             self.config_sources = CONFIG_SOURCES
-            logger.info(f"Loaded {len(self.config_sources)} sources from config.py")
+            logger.info(
+                f"Loaded {len(self.config_sources)} sources from config.py")
         except ImportError:
             logger.error("Could not import CONFIG_SOURCES from config.py")
             self.config_sources = []
@@ -255,7 +256,21 @@ class V2RayCollector:
 
                         # تجزیه کانفیگ‌ها از متن معمولی
                         configs = []
-                        for line in content.strip().split('\n'):
+                        lines = content.strip().split('\n')
+                        
+                        # اگر فقط یک خط است و بسیار بلند است، احتمالاً Base64 است
+                        if len(lines) == 1 and len(lines[0]) > 1000:
+                            try:
+                                # تلاش برای decode کردن Base64
+                                import base64
+                                decoded_content = base64.b64decode(lines[0]).decode('utf-8')
+                                lines = decoded_content.strip().split('\n')
+                                logger.info(f"Base64 decoded: {len(lines)} lines")
+                            except Exception as e:
+                                logger.debug(f"Not Base64 or decode failed: {e}")
+                        
+                        # تجزیه خطوط
+                        for line in lines:
                             if line.strip() and not line.startswith('#'):
                                 configs.append(line.strip())
 
@@ -309,7 +324,7 @@ class V2RayCollector:
             # استخراج کشور از ps (remark)
             ps = config_data.get('ps', '')
             country = self.extract_country_from_tag(ps) if ps else 'Unknown'
-            
+
             return V2RayConfig(
                 protocol="vmess",
                 address=config_data.get('add', ''),
@@ -338,8 +353,9 @@ class V2RayCollector:
                     tls = True
 
                 # استخراج کشور از fragment (remark)
-                country = self.extract_country_from_tag(fragment) if fragment else 'Unknown'
-                
+                country = self.extract_country_from_tag(
+                    fragment) if fragment else 'Unknown'
+
                 return V2RayConfig(
                     protocol="vless",
                     address=address,
@@ -361,8 +377,9 @@ class V2RayCollector:
                 password, address, port, params, fragment = match.groups()
 
                 # استخراج کشور از fragment (remark)
-                country = self.extract_country_from_tag(fragment) if fragment else 'Unknown'
-                
+                country = self.extract_country_from_tag(
+                    fragment) if fragment else 'Unknown'
+
                 return V2RayConfig(
                     protocol="trojan",
                     address=address,
@@ -395,8 +412,9 @@ class V2RayCollector:
                 remark = ''
                 if '#' in config_str:
                     remark = config_str.split('#')[-1]
-                country = self.extract_country_from_tag(remark) if remark else 'Unknown'
-                
+                country = self.extract_country_from_tag(
+                    remark) if remark else 'Unknown'
+
                 return V2RayConfig(
                     protocol="ss",
                     address=address,
@@ -450,8 +468,9 @@ class V2RayCollector:
                 password = password_encoded
 
             # استخراج کشور از remarks
-            country = self.extract_country_from_tag(remarks) if remarks else 'Unknown'
-            
+            country = self.extract_country_from_tag(
+                remarks) if remarks else 'Unknown'
+
             return V2RayConfig(
                 protocol="ssr",
                 address=server,
