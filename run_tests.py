@@ -10,6 +10,12 @@ import sys
 import asyncio
 import traceback
 
+# Fix encoding for Windows
+if sys.platform == 'win32':
+    import codecs
+    sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+    sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
+
 
 def test_imports():
     """تست import کردن ماژول‌ها"""
