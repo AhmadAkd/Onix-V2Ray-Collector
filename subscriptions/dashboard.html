@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -349,8 +350,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .fade-in {
@@ -362,6 +368,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -373,9 +380,12 @@
         }
 
         @keyframes pulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 1;
             }
+
             50% {
                 opacity: 0.5;
             }
@@ -452,6 +462,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="dashboard-container">
         <!-- Header -->
@@ -686,19 +697,19 @@
                     }
                 });
                 if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                
+
                 const data = await response.json();
-                
+
                 updateStats(data);
                 updateCharts(data);
                 updateTables(data);
                 updateLastUpdateTime(data);
-                
+
                 console.log('✅ Dashboard data loaded successfully');
-                
+
             } catch (error) {
                 console.error('❌ Error loading dashboard:', error);
-                
+
                 // Show error in stats instead of alert
                 const statsGrid = document.getElementById('statsGrid');
                 if (statsGrid) {
@@ -774,137 +785,191 @@
 
         // Update charts with better error handling
         function updateCharts(data) {
-            const protocols = data.protocols || {};
-            const countries = data.countries || {};
+            try {
+                const protocols = data.protocols || {};
+                const countries = data.countries || {};
 
-            // Protocol Chart
-            const protocolLabels = Object.keys(protocols).map(p => protocolInfo[p]?.name || p);
-            const protocolData = Object.values(protocols).map(p => p.count);
-            const protocolColors = Object.keys(protocols).map(p => protocolInfo[p]?.color || '#999');
+                console.log('📊 Updating charts with data:', {
+                    protocols: Object.keys(protocols).length,
+                    countries: Object.keys(countries).length
+                });
 
-            // Destroy existing chart only if it exists
-            if (protocolChart) {
-                protocolChart.destroy();
-                protocolChart = null;
-            }
-            
-            const protocolCtx = document.getElementById('protocolChart');
-            if (protocolCtx) {
-                protocolChart = new Chart(protocolCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: protocolLabels,
-                        datasets: [{
-                            data: protocolData,
-                            backgroundColor: protocolColors,
-                            borderWidth: 0
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                                labels: {
-                                    font: { size: 14 },
-                                    padding: 15
+                // Protocol Chart
+                const protocolLabels = Object.keys(protocols).map(p => protocolInfo[p]?.name || p);
+                const protocolData = Object.values(protocols).map(p => p.count || 0);
+                const protocolColors = Object.keys(protocols).map(p => protocolInfo[p]?.color || '#999');
+
+                // Validate data
+                if (protocolLabels.length === 0 || protocolData.length === 0) {
+                    console.warn('⚠️ No protocol data available');
+                    return;
+                }
+
+                // Destroy existing chart only if it exists
+                if (protocolChart) {
+                    try {
+                        protocolChart.destroy();
+                    } catch (e) {
+                        console.error('Error destroying protocol chart:', e);
+                    }
+                    protocolChart = null;
+                }
+                
+                const protocolCtx = document.getElementById('protocolChart');
+                if (protocolCtx) {
+                    try {
+                        protocolChart = new Chart(protocolCtx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: protocolLabels,
+                                datasets: [{
+                                    data: protocolData,
+                                    backgroundColor: protocolColors,
+                                    borderWidth: 0
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        position: 'bottom',
+                                        labels: {
+                                            font: { size: 14 },
+                                            padding: 15
+                                        }
+                                    }
                                 }
                             }
-                        }
+                        });
+                        console.log('✅ Protocol chart created successfully');
+                    } catch (e) {
+                        console.error('❌ Error creating protocol chart:', e);
                     }
+                }
+
+                // Country Chart (Top 10)
+                const sortedCountries = Object.entries(countries)
+                    .sort((a, b) => (b[1]?.count || 0) - (a[1]?.count || 0))
+                    .slice(0, 10);
+                
+                const countryLabels = sortedCountries.map(([code]) => {
+                    const info = countryInfo[code.toUpperCase()];
+                    return info ? `${info.flag} ${info.name}` : code;
                 });
-            }
+                const countryData = sortedCountries.map(([, data]) => data?.count || 0);
 
-            // Country Chart (Top 10)
-            const sortedCountries = Object.entries(countries)
-                .sort((a, b) => b[1].count - a[1].count)
-                .slice(0, 10);
-            
-            const countryLabels = sortedCountries.map(([code]) => {
-                const info = countryInfo[code.toUpperCase()];
-                return info ? `${info.flag} ${info.name}` : code;
-            });
-            const countryData = sortedCountries.map(([, data]) => data.count);
+                // Validate data
+                if (countryLabels.length === 0 || countryData.length === 0) {
+                    console.warn('⚠️ No country data available');
+                    return;
+                }
 
-            if (countryChart) {
-                countryChart.destroy();
-                countryChart = null;
-            }
-            
-            const countryCtx = document.getElementById('countryChart');
-            if (countryCtx) {
-                countryChart = new Chart(countryCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: countryLabels,
-                        datasets: [{
-                            label: 'تعداد کانفیگ',
-                            data: countryData,
-                            backgroundColor: 'rgba(102, 126, 234, 0.8)',
-                            borderRadius: 8
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: { font: { size: 12 } }
+                if (countryChart) {
+                    try {
+                        countryChart.destroy();
+                    } catch (e) {
+                        console.error('Error destroying country chart:', e);
+                    }
+                    countryChart = null;
+                }
+                
+                const countryCtx = document.getElementById('countryChart');
+                if (countryCtx) {
+                    try {
+                        countryChart = new Chart(countryCtx, {
+                            type: 'bar',
+                            data: {
+                                labels: countryLabels,
+                                datasets: [{
+                                    label: 'تعداد کانفیگ',
+                                    data: countryData,
+                                    backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                                    borderRadius: 8
+                                }]
                             },
-                            x: {
-                                ticks: { font: { size: 11 } }
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: { display: false }
+                                },
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        ticks: { font: { size: 12 } }
+                                    },
+                                    x: {
+                                        ticks: { 
+                                            font: { size: 11 },
+                                            maxRotation: 45,
+                                            minRotation: 0
+                                        }
+                                    }
+                                }
                             }
-                        }
+                        });
+                        console.log('✅ Country chart created successfully');
+                    } catch (e) {
+                        console.error('❌ Error creating country chart:', e);
                     }
+                }
+
+                // Latency Chart
+                const latencyLabels = Object.keys(protocols).map(p => protocolInfo[p]?.name || p);
+                const latencyData = Object.values(protocols).map(p => {
+                    const latency = p?.avg_latency || '0ms';
+                    const value = parseFloat(latency.replace('ms', ''));
+                    return isNaN(value) ? 0 : value;
                 });
-            }
 
-            // Latency Chart
-            const latencyLabels = Object.keys(protocols).map(p => protocolInfo[p]?.name || p);
-            const latencyData = Object.values(protocols).map(p => {
-                const latency = p.avg_latency || '0ms';
-                return parseFloat(latency.replace('ms', ''));
-            });
-
-            if (latencyChart) {
-                latencyChart.destroy();
-                latencyChart = null;
-            }
-            
-            const latencyCtx = document.getElementById('latencyChart');
-            if (latencyCtx) {
-                latencyChart = new Chart(latencyCtx, {
-                    type: 'line',
-                    data: {
-                        labels: latencyLabels,
-                        datasets: [{
-                            label: 'میانگین تأخیر (ms)',
-                            data: latencyData,
-                            borderColor: 'rgb(102, 126, 234)',
-                            backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                            tension: 0.4,
-                            fill: true
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: true }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: { font: { size: 12 } }
+                if (latencyChart) {
+                    try {
+                        latencyChart.destroy();
+                    } catch (e) {
+                        console.error('Error destroying latency chart:', e);
+                    }
+                    latencyChart = null;
+                }
+                
+                const latencyCtx = document.getElementById('latencyChart');
+                if (latencyCtx && latencyLabels.length > 0) {
+                    try {
+                        latencyChart = new Chart(latencyCtx, {
+                            type: 'line',
+                            data: {
+                                labels: latencyLabels,
+                                datasets: [{
+                                    label: 'میانگین تأخیر (ms)',
+                                    data: latencyData,
+                                    borderColor: 'rgb(102, 126, 234)',
+                                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                                    tension: 0.4,
+                                    fill: true
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: { display: true }
+                                },
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        ticks: { font: { size: 12 } }
+                                    }
+                                }
                             }
-                        }
+                        });
+                        console.log('✅ Latency chart created successfully');
+                    } catch (e) {
+                        console.error('❌ Error creating latency chart:', e);
                     }
-                });
+                }
+                
+            } catch (error) {
+                console.error('❌ Critical error in updateCharts:', error);
             }
         }
 
@@ -984,13 +1049,13 @@
             const lastUpdate = new Date(data.timestamp);
             const now = new Date();
             const diff = Math.floor((now - lastUpdate) / 1000);
-            
+
             let relativeTime;
             if (diff < 60) relativeTime = 'چند لحظه پیش';
             else if (diff < 3600) relativeTime = `${Math.floor(diff / 60)} دقیقه پیش`;
             else if (diff < 86400) relativeTime = `${Math.floor(diff / 3600)} ساعت پیش`;
             else relativeTime = `${Math.floor(diff / 86400)} روز پیش`;
-            
+
             document.getElementById('lastUpdateTime').textContent = relativeTime;
         }
 
@@ -1007,4 +1072,5 @@
         // setInterval(loadDashboardData, 5 * 60 * 1000);
     </script>
 </body>
+
 </html>
