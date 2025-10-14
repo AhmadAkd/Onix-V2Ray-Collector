@@ -1,2 +1,5 @@
-vless://e9979910-79d1-4621-a93c-b2a579c44ba7@104.25.131.154:8880?path=%2FC5itOz6YmbLanD7F%3Fed%3D2560&security=none&alpn=http%2F1.1&encryption=none&host=vngsupply.ip-ddns.com&fp=randomized&type=ws&sni=vngsUPPly.IP-DDnS.CoM#%F0%9F%87%A8%F0%9F%87%A6%40vpn_ioss%20%E2%99%BB%EF%B8%8F%20%D8%B9%D8%B6%D9%88%20%D8%B4%D9%88
-vless://70465717-66ae-4756-b28a-ec5899e08b17@104.26.6.89:2095?path=/?ed=2095&security=none&encryption=none&host=ns.teHRantOlIdI.Ir&type=httpupgrade#[🇨🇦] @Hddify
+vless://d2965257-0536-4811-a0d5-cdce54e90326@54.37.64.126:8443?encryption=none&security=tls&sni=fei.634676.xyz&type=ws&host=fei.634676.xyz&path=%2F%3Fed%3D2560#%E6%B3%95%E5%9B%BD_101423456
+vless://d2965257-0536-4811-a0d5-cdce54e90326@54.36.99.6:8443?encryption=none&security=tls&sni=fei.634676.xyz&type=ws&host=fei.634676.xyz&path=%2F%3Fed%3D2560#%E6%B3%95%E5%9B%BD_101423075
+vless://7e948e09-fa6f-4b8e-8c5d-181fa15fbec5@104.17.41.52:8080?path=/ijiDwDw8BcM9ieHc?ed&security=&encryption=none&host=v2ngsupply2.ip-ddns.com&type=ws#🇨🇦𝐣𝐨𝐢𝐍-@𝐅𝐑𝐄𝐄𝐕𝟐𝐑𝐍𝐆
+vless://d2965257-0536-4811-a0d5-cdce54e90326@54.37.64.98:8443?encryption=none&security=tls&sni=fei.634676.xyz&type=ws&host=fei.634676.xyz&path=%2F%3Fed%3D2560#%E6%B3%95%E5%9B%BD_101423293
+vmess://eyJ2IjoiMiIsInBzIjoiW1ZNZXNzXSDwn4eo8J+HpiDliqDmi7/lpKcgVEVMVVMiLCJhZGQiOiI3NC40OC4xOTQuMTI2IiwicG9ydCI6IjUyNDQ5IiwidHlwZSI6Im5vbmUiLCJpZCI6ImE2ODg0MGRhLWYyMDItNGFiNS05YzRhLTIzN2JmZjk4NTgxNCIsImFpZCI6IjAiLCJuZXQiOiJ3cyIsInBhdGgiOiIvYTY4ODQwZGEtZjIwMi00YWI1LTljNGEtMjM3YmZmOTg1ODE0IiwiaG9zdCI6IiIsInRscyI6IiJ9

@@ -1066,5 +1066,58 @@
       "500-1000ms": 123,
       "1000ms+": 39
     }
+  },
+  {
+    "timestamp": "2025-10-14T19:20:58.735943",
+    "total_configs": 8811,
+    "working_configs": 6061,
+    "failed_configs": 2750,
+    "success_rate": 68.78901373283396,
+    "avg_latency": 229.44866236120419,
+    "median_latency": 149.6751308441162,
+    "protocol_distribution": {
+      "vless": 5978,
+      "vmess": 2062,
+      "trojan": 534,
+      "ssr": 17,
+      "ss": 173,
+      "hysteria": 47
+    },
+    "country_distribution": {
+      "EU": 177,
+      "US": 2448,
+      "Unknown": 1931,
+      "DE": 90,
+      "IR": 979,
+      "PL": 4,
+      "HK": 87,
+      "NL": 51,
+      "LT": 39,
+      "FR": 94,
+      "TR": 18,
+      "GB": 21,
+      "FI": 5,
+      "JP": 25,
+      "CF": 15,
+      "CH": 5,
+      "SG": 17,
+      "CA": 16,
+      "TW": 13,
+      "IN": 2,
+      "ES": 1,
+      "RU": 2,
+      "SE": 4,
+      "KR": 6,
+      "BR": 3,
+      "UA": 1,
+      "CN": 7
+    },
+    "latency_distribution": {
+      "0-100ms": 33,
+      "100-300ms": 4996,
+      "300-500ms": 417,
+      "500-1000ms": 532,
+      "1000ms+": 83
+    }
   }
 ]
