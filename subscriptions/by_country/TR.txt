@@ -1,8 +1,9 @@
+vless://2bcfbfba-b446-4ad5-93ad-72af9e008f61@135.84.76.152:2087?path=/free/1.177.76.215:10026&security=tls&alpn=h3&encryption=none&host=tcp.biz.id&fp=chrome&type=ws&sni=tcp.biz.id#🇹🇷@AZARBAYJAB1
 ss://YWVzLTI1Ni1jZmI6QndjQVVaazhoVUZBa0RHTg==@45.89.52.66:9031#%F0%9F%87%B9%F0%9F%87%B7TR-45.89.52.66-8077
-ss://YWVzLTI1Ni1jZmI6VTZxbllSaGZ5RG1uOHNnbg==@45.89.52.66:9041#%F0%9F%87%B9%F0%9F%87%B7TR-45.89.52.66-8074
-ss://YWVzLTI1Ni1jZmI6SFNadXlKUWNXZThkeE5kRg==@45.89.52.66:9043#%F0%9F%87%B9%F0%9F%87%B7TR-45.89.52.66-8072
+trojan://tunnel-astrovpn_official927@193.124.46.134:8441?security=tls&sni=zula.ir.AstroVPN-official.AstroVPN-official.workers.dev.AstroVPN_Official.org.AstroVPN.com.AstroVPN_Official.xyz.AstroVPN_Official.AstroVPN_Official.AstroVPN_Official.AstroVPN_Official.AstroVPN_Official.AstroVPN_Official.AstroVPN_Official.AstroVPN_Official.monster.AstroVPN_OfficialJoinTelegram-------------AstroVPN_Official----------Join.ir&alpn=http/1.1&allowInsecure=1&type=tcp&headerType=none&host=193.124.46.134#@AstroVPN_Official 🇹🇷
 ss://YWVzLTI1Ni1jZmI6UzdLd1V1N3lCeTU4UzNHYQ==@45.89.52.66:9042#%F0%9F%87%B9%F0%9F%87%B7TR-45.89.52.66-8073
 ss://YWVzLTI1Ni1jZmI6cDl6NUJWQURIMllGczNNTg==@45.89.52.66:9040#%F0%9F%87%B9%F0%9F%87%B7TR-45.89.52.66-8075
+ss://YWVzLTI1Ni1jZmI6VTZxbllSaGZ5RG1uOHNnbg==@45.89.52.66:9041#%F0%9F%87%B9%F0%9F%87%B7TR-45.89.52.66-8074
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp3aDJLMHFWVk42ZlRaQUpGc2J1NkRx@62.60.233.220:18685#🔐 @AblNet7 🇹🇷 Istanbul, 34, Türkiye
-trojan://tunnel-astrovpn_official-29@193.124.46.134:8441?security=tls&sni=zula.ir.AstroVPN-official.AstroVPN-official.workers.dev.AstroVPN_Official.org.AstroVPN.com.AstroVPN_Official.xyz.AstroVPN_Official.AstroVPN_Official.AstroVPN_Official.AstroVPN_Official.AstroVPN_Official.AstroVPN_Official.AstroVPN_Official.AstroVPN_Official.monster.AstroVPN_OfficialJoinTelegram-------------AstroVPN_Official----------Join.ir&alpn=http/1.1&allowInsecure=1&type=tcp&headerType=none&host=193.124.46.134#AstroVPN_Official 🇹🇷
 trojan://tunnel-astrovpn_official-tr@tr-1.stunnel.cc:8441?security=tls&sni=zula.ir.AstroVPN-official.AstroVPN-official.workers.dev.AstroVPN_Official.org.AstroVPN.com.AstroVPN_Official.xyz.AstroVPN_Official.monster.JoinTelegram-------------AstroVPN_Official----------Join.ir&alpn=http/1.1&allowInsecure=1&type=tcp&headerType=none&host=tr-1.stunnel.cc#AstroVPN_Official 🇹🇷
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpjNDA2NDFjMWY4OWU3YWNi@tr.vpnsparta.pro:57456#%F0%9F%87%B9%F0%9F%87%B7TR-62.133.63.211-5422
