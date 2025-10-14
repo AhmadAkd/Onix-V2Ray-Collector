@@ -1,15 +1,15 @@
 name: Auto Collect and Update Configs
 
 on:
-  # اجرای خودکار هر 30 دقیقه
-  schedule:
-    - cron: '*/30 * * * *'
+  # schedule غیرفعال - از v2ray-collector.yml استفاده می‌شود
+  # schedule:
+  #   - cron: '*/30 * * * *'
   
-  # اجرا با push به main
-  push:
-    branches: [ main ]
+  # push غیرفعال - از v2ray-collector.yml استفاده می‌شود
+  # push:
+  #   branches: [ main ]
   
-  # اجرا دستی
+  # فقط اجرای دستی
   workflow_dispatch:
 
 permissions:
@@ -17,6 +17,10 @@ permissions:
   pages: write
   id-token: write
   issues: write
+
+concurrency:
+  group: v2ray-collection
+  cancel-in-progress: false
 
 jobs:
   collect-and-test:

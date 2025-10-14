@@ -5,13 +5,17 @@ on:
     # هر 30 دقیقه اجرا شود
     - cron: '*/30 * * * *'
   workflow_dispatch:
-  push:
-    branches: [ main ]
+  # push:
+  #   branches: [ main ]  # غیرفعال - فقط با schedule و manual
 
 permissions:
   contents: write
   pages: write
   id-token: write
+
+concurrency:
+  group: v2ray-collection
+  cancel-in-progress: false  # منتظر بماند تا workflow قبلی تمام شود
 
 jobs:
   collect-and-test:

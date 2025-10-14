@@ -1411,13 +1411,25 @@ class V2RayCollector:
         """پاک‌سازی نام فایل از کاراکترهای غیرمجاز"""
         import re
 
+        # بررسی اینکه آیا نام فایل یک کد کشور معتبر است
+        # کدهای کشور باید 2-3 حرف بزرگ باشند یا نام‌های شناخته شده
+        valid_country_pattern = r'^[A-Z]{2,3}$|^[A-Za-z\-\s]{2,30}$'
+        
+        # اگر نام فایل یک عدد یا شامل اعداد زیاد است، آن را unknown کن
+        if re.match(r'^\d+', filename) or '_' in filename and 'ms' in filename.lower():
+            return 'Unknown'
+        
         # حذف کاراکترهای غیرمجاز
         safe_filename = re.sub(r'[<>:"/\\|?*]', '', filename)
 
-        # حذف فاصله‌های اضافی و کاراکترهای خاص
+        # حذف فاصله‌ها و کاراکترهای خاص
         safe_filename = re.sub(r'\s+', '_', safe_filename)
-        safe_filename = safe_filename.replace(
-            '|', '_').replace('&', '_').replace('@', '_')
+        safe_filename = safe_filename.replace('|', '_').replace('&', '_').replace('@', '_')
+        
+        # اگر نام خیلی عجیب است، unknown کن
+        if not re.match(valid_country_pattern, safe_filename.replace('_', ' ')):
+            if len(safe_filename) > 30 or any(char.isdigit() for char in safe_filename[:5]):
+                return 'Unknown'
 
         # محدود کردن طول نام فایل
         if len(safe_filename) > 50:

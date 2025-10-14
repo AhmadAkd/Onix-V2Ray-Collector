@@ -2,18 +2,22 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ develop ]  # فقط برای develop branch
   pull_request:
     branches: [ main ]
-  schedule:
-    # اجرای خودکار هر 30 دقیقه
-    - cron: '*/30 * * * *'
+  # schedule غیرفعال شد - از v2ray-collector.yml استفاده می‌شود
+  # schedule:
+  #   - cron: '*/30 * * * *'
 
 permissions:
   contents: write
   pages: write
   id-token: write
   issues: write
+
+concurrency:
+  group: ci-pipeline
+  cancel-in-progress: true  # می‌تواند workflow قبلی را لغو کند
 
 jobs:
   test:
@@ -50,7 +54,7 @@ jobs:
     name: Collect and Update Configs
     runs-on: ubuntu-latest
     needs: test
-    if: github.event_name == 'schedule' || github.event_name == 'push'
+    if: false  # Disabled - use v2ray-collector.yml instead
     
     steps:
     - name: Checkout code
