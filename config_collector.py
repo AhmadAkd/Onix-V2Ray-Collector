@@ -355,9 +355,14 @@ class V2RayCollector:
                 if params and 'security=tls' in params:
                     tls = True
 
+                # URL decode fragment
+                import urllib.parse
+                decoded_fragment = urllib.parse.unquote(
+                    fragment) if fragment else ''
+
                 # استخراج کشور از fragment (remark)
                 country = self.extract_country_from_tag(
-                    fragment) if fragment else 'Unknown'
+                    decoded_fragment) if decoded_fragment else 'Unknown'
 
                 return V2RayConfig(
                     protocol="vless",
@@ -379,9 +384,14 @@ class V2RayCollector:
             if match:
                 password, address, port, params, fragment = match.groups()
 
+                # URL decode fragment
+                import urllib.parse
+                decoded_fragment = urllib.parse.unquote(
+                    fragment) if fragment else ''
+
                 # استخراج کشور از fragment (remark)
                 country = self.extract_country_from_tag(
-                    fragment) if fragment else 'Unknown'
+                    decoded_fragment) if decoded_fragment else 'Unknown'
 
                 return V2RayConfig(
                     protocol="trojan",
@@ -412,9 +422,10 @@ class V2RayCollector:
                 address, port = address_port.split(':')
 
                 # استخراج کشور از remark (اگر وجود دارد)
+                import urllib.parse
                 remark = ''
                 if '#' in config_str:
-                    remark = config_str.split('#')[-1]
+                    remark = urllib.parse.unquote(config_str.split('#')[-1])
                 country = self.extract_country_from_tag(
                     remark) if remark else 'Unknown'
 
@@ -469,6 +480,17 @@ class V2RayCollector:
                 password = base64.b64decode(password_encoded).decode('utf-8')
             except:
                 password = password_encoded
+
+            # استخراج remarks اگر وجود دارد
+            import urllib.parse
+            remarks = ''
+            if len(parts) > 1:
+                # پارامترهای اضافی ممکن است شامل remarks باشد
+                params = parts[1] if len(parts) > 1 else ''
+                if 'remarks=' in params:
+                    remarks_match = re.search(r'remarks=([^&]+)', params)
+                    if remarks_match:
+                        remarks = urllib.parse.unquote(base64.b64decode(remarks_match.group(1) + '==').decode('utf-8', errors='ignore'))
 
             # استخراج کشور از remarks
             country = self.extract_country_from_tag(
