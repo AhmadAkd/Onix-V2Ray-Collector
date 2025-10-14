@@ -827,35 +827,35 @@ class V2RayCollector:
         """اعتبارسنجی و نرمال‌سازی نام کشور"""
         if not country:
             return 'Unknown'
-        
+
         # لیست کدهای معتبر کشور (ISO 3166-1 alpha-2)
         valid_country_codes = {
-            'US', 'DE', 'IR', 'CA', 'NL', 'TR', 'SE', 'IN', 'RU', 
+            'US', 'DE', 'IR', 'CA', 'NL', 'TR', 'SE', 'IN', 'RU',
             'ES', 'NO', 'LT', 'HK', 'CN', 'GB', 'FR', 'JP', 'SG',
             'AU', 'BR', 'KR', 'IT', 'CH', 'PL', 'UA', 'TW', 'FI',
             'AT', 'BE', 'DK', 'IE', 'PT', 'GR', 'CZ', 'RO', 'BG',
             'HR', 'SK', 'SI', 'EE', 'LV', 'IS', 'LU', 'MT', 'CY'
         }
-        
+
         # نرمال‌سازی
         country = country.strip().upper()
-        
+
         # اگر شروع با عدد می‌شود، نامعتبر است
         if country and country[0].isdigit():
             return 'Unknown'
-        
+
         # اگر شامل ms یا latency است، نامعتبر است
         if 'MS' in country or 'LATENCY' in country or '_' in country:
             return 'Unknown'
-        
+
         # اگر طول بیش از 30 کاراکتر است، نامعتبر است
         if len(country) > 30:
             return 'Unknown'
-        
+
         # اگر کد 2-3 حرفی معتبر است
         if len(country) <= 3 and country in valid_country_codes:
             return country
-        
+
         # اگر نام کامل کشور است، آن را به کد تبدیل کن
         country_name_to_code = {
             'UNITED STATES': 'US', 'AMERICA': 'US', 'USA': 'US',
@@ -886,14 +886,14 @@ class V2RayCollector:
             'TAIWAN': 'TW',
             'FINLAND': 'FI'
         }
-        
+
         country_upper = country.upper().replace('_', ' ')
         if country_upper in country_name_to_code:
             return country_name_to_code[country_upper]
-        
+
         # در غیر این صورت Unknown
         return 'Unknown'
-    
+
     def extract_country_from_tag(self, tag: str) -> str:
         """استخراج کشور از تگ"""
         country_flags = {
@@ -910,15 +910,15 @@ class V2RayCollector:
         for flag, country in country_flags.items():
             if flag in tag:
                 return country
-        
+
         # بررسی کد کشور (2-3 حرف بزرگ)
         country_match = re.search(r'\b([A-Z]{2,3})\b', tag)
         if country_match:
             country_code = country_match.group(1)
             # لیست کدهای معتبر کشور
-            valid_codes = ['US', 'DE', 'IR', 'CA', 'NL', 'TR', 'SE', 'IN', 'RU', 
-                          'ES', 'NO', 'LT', 'HK', 'CN', 'GB', 'FR', 'JP', 'SG',
-                          'AU', 'BR', 'KR', 'IT', 'CH', 'PL', 'UA', 'TW', 'FI']
+            valid_codes = ['US', 'DE', 'IR', 'CA', 'NL', 'TR', 'SE', 'IN', 'RU',
+                           'ES', 'NO', 'LT', 'HK', 'CN', 'GB', 'FR', 'JP', 'SG',
+                           'AU', 'BR', 'KR', 'IT', 'CH', 'PL', 'UA', 'TW', 'FI']
             if country_code in valid_codes:
                 return country_code
 
@@ -1388,10 +1388,10 @@ class V2RayCollector:
             for protocol, configs in categories.items():
                 for config in configs:
                     country = config.country or 'Unknown'
-                    
+
                     # اعتبارسنجی نام کشور
                     country = self.validate_country_name(country)
-                    
+
                     if country not in country_categories:
                         country_categories[country] = []
                     country_categories[country].append(config)
@@ -1469,8 +1469,9 @@ class V2RayCollector:
         for protocol, configs in categories.items():
             for config in configs:
                 # اعتبارسنجی و نرمال‌سازی کشور
-                country = self.validate_country_name(config.country or 'Unknown')
-                
+                country = self.validate_country_name(
+                    config.country or 'Unknown')
+
                 if country not in country_configs:
                     country_configs[country] = []
                 country_configs[country].append(config)

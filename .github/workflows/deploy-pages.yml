@@ -27,20 +27,30 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      - name: Check subscriptions directory
+      - name: Check project structure
         run: |
+          echo "📁 Checking project structure..."
+          
+          # بررسی index.html در root
+          if [ -f "index.html" ]; then
+            echo "✅ index.html exists in root"
+          else
+            echo "❌ index.html not found in root"
+          fi
+          
+          # بررسی subscriptions directory
           if [ -d "subscriptions" ]; then
             echo "✅ subscriptions directory exists"
-            ls -la subscriptions/
+            ls -la subscriptions/*.html 2>/dev/null || echo "No HTML files"
           else
             echo "❌ subscriptions directory not found"
             mkdir -p subscriptions
-            echo "# Placeholder" > subscriptions/README.md
           fi
+          
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: subscriptions/
+          path: .  # Deploy کل پروژه
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
