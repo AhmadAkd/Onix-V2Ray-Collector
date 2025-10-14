@@ -41,9 +41,23 @@ class TelegramSource:
 class TelegramCollector:
     """جمع‌آورنده کانفیگ‌ها از تلگرام"""
 
-    def __init__(self, bot_token: str):
-        self.bot_token = bot_token
-        self.api_url = f"https://api.telegram.org/bot{bot_token}"
+    def __init__(self, bot_token: Optional[str] = None):
+        """
+        Initialize Telegram Collector
+        
+        Args:
+            bot_token: Telegram Bot Token (از env یا parameter)
+        """
+        import os
+        self.bot_token = bot_token or os.getenv('TELEGRAM_BOT_TOKEN')
+        
+        if not self.bot_token:
+            logger.warning("⚠️ Telegram Bot Token not provided")
+            self.api_url = None
+        else:
+            self.api_url = f"https://api.telegram.org/bot{self.bot_token}"
+            logger.info("✅ Telegram Collector initialized")
+        
         self.sources = []
         self.collected_configs = []
 
