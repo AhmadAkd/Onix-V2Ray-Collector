@@ -56,6 +56,7 @@ class UltraFastConnectionPool:
             max_workers=max_workers)
         self.connection_cache = {}
         self.test_results = {}
+        self.advanced_test = True  # فعال کردن تست پیشرفته
 
     def test_connection_sync(self, address: str, port: int, timeout: float = 2.0) -> Tuple[bool, float]:
         """تست همزمان اتصال"""
@@ -77,6 +78,40 @@ class UltraFastConnectionPool:
 
         except Exception:
             return False, 0.0
+    
+    def test_connection_advanced(self, address: str, port: int, protocol: str = 'tcp', timeout: float = 2.0) -> Tuple[bool, float, Dict]:
+        """تست پیشرفته اتصال با جزئیات بیشتر"""
+        try:
+            start_time = time.time()
+            details = {'protocol': protocol, 'test_type': 'advanced'}
+
+            # استفاده از socket برای تست سریع‌تر
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(timeout)
+
+            result = sock.connect_ex((address, port))
+            
+            if result == 0:
+                # تست ارسال و دریافت داده
+                try:
+                    sock.send(b'\x05\x01\x00')  # SOCKS5 hello
+                    response = sock.recv(1024)
+                    details['response_received'] = len(response) > 0
+                    details['response_size'] = len(response)
+                except:
+                    details['response_received'] = False
+            
+            sock.close()
+
+            latency = (time.time() - start_time) * 1000
+            details['latency'] = latency
+
+            if result == 0:
+                return True, latency, details
+            return False, 0.0, details
+
+        except Exception as e:
+            return False, 0.0, {'error': str(e)}
 
     async def test_multiple_connections(self, configs: List[V2RayConfig]) -> List[Tuple[V2RayConfig, bool, float]]:
         """تست چندگانه اتصالات"""
@@ -218,10 +253,16 @@ class V2RayCollector:
             'ssr': r'ssr://([A-Za-z0-9+/=]+)',
             'hysteria': r'hysteria://([^#]+)(#.*)?',
             'hy2': r'hy2://([^#]+)(#.*)?',
+            'hysteria2': r'hysteria2://([^#]+)(#.*)?',
+            'hysteria3': r'hysteria3://([^#]+)(#.*)?',
             'wireguard': r'wireguard://([^#]+)(#.*)?',
             'tuic': r'tuic://([^#]+)(#.*)?',
+            'tuic5': r'tuic5://([^#]+)(#.*)?',
             'naive': r'naive://([^#]+)(#.*)?',
-            'hysteria2': r'hysteria2://([^#]+)(#.*)?'
+            'reality': r'reality://([^#]+)(#.*)?',
+            'xray-reality': r'xray-reality://([^#]+)(#.*)?',
+            'sing-box': r'sing-box://([^#]+)(#.*)?',
+            'clash-meta': r'clash-meta://([^#]+)(#.*)?'
         }
 
     async def fetch_configs_from_source(self, source_url: str) -> List[str]:
