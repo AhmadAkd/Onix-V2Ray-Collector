@@ -256,9 +256,38 @@ jobs:
         
     - name: Commit and push changes
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
         git add subscriptions/ index.html
-        git commit -m "Auto-update V2Ray configs $(date '+%Y-%m-%d %H:%M:%S')" || exit 0
+        
+        # بررسی تغییرات
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+          exit 0
+        fi
+        
+        git commit -m "🤖 Auto-update V2Ray configs $(date '+%Y-%m-%d %H:%M:%S')" || exit 0
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-        git push origin main
+        
+        # تلاش برای push با retry
+        for i in {1..5}; do
+          if git push origin main; then
+            echo "✅ Push successful"
+            exit 0
+          else
+            echo "⚠️ Push failed, attempt $i/5"
+            
+            # Fetch latest changes
+            git fetch origin main
+            
+            # Reset to remote and reapply our changes
+            git reset --soft origin/main
+            git add subscriptions/ index.html
+            git commit --amend --no-edit || git commit -m "🤖 Auto-update V2Ray configs $(date '+%Y-%m-%d %H:%M:%S')"
+            
+            sleep 3
+          fi
+        done
+        
+        echo "❌ Push failed after 5 attempts"
+        exit 1
