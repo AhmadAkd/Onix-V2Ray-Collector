@@ -190,55 +190,14 @@ class V2RayCollector:
                 "Advanced Analytics not available, running without analytics")
             self.analytics = None
 
-        # منابع کانفیگ‌های رایگان - منابع فعال و معتبر (بهینه‌سازی شده)
-        self.config_sources = [
-            # منابع اصلی Epodonios (تست شده)
-            "https://github.com/Epodonios/v2ray-configs/raw/main/All_Configs_base64_Sub.txt",
-
-            # منابع تقسیم شده بر اساس پروتکل (Epodonios)
-            "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/vless.txt",
-            "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/vmess.txt",
-            "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/ss.txt",
-            "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/ssr.txt",
-            "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/trojan.txt",
-
-            # منابع تقسیم شده (Epodonios - 250 کانفیگ در هر فایل)
-            "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub1.txt",
-            "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub2.txt",
-            "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub3.txt",
-            "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub4.txt",
-            "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub5.txt",
-
-            # منابع معتبر دیگر (تست شده)
-            "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge.txt",
-            "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
-            "https://raw.githubusercontent.com/aiboboxx/v2rayfree/main/v2",
-
-            # منابع SingBox (تست شده)
-            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/ss.json",
-            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/mix.json",
-            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/vmess.json",
-            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/vless.json",
-            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/trojan.json",
-            "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/hy2.json",
-
-            # منابع Leon406 SubCrawler (تست شده)
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vless",
-            "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss",
-
-            # منابع Shadowsocks (تست شده)
-            "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/sub/sub_merge.txt",
-
-            # منابع Argh94/V2RayAutoConfig (تست شده)
-            "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/USA.txt",
-            "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/UK.txt",
-            "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/Germany.txt",
-            "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/France.txt",
-            "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/Canada.txt",
-            "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/Japan.txt",
-            "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/Singapore.txt",
-            "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/Iran.txt",
-        ]
+        # بارگذاری منابع از config.py
+        try:
+            from config import CONFIG_SOURCES
+            self.config_sources = CONFIG_SOURCES
+            logger.info(f"Loaded {len(self.config_sources)} sources from config.py")
+        except ImportError:
+            logger.error("Could not import CONFIG_SOURCES from config.py")
+            self.config_sources = []
 
         # الگوهای regex برای تشخیص پروتکل‌ها
         self.protocol_patterns = {
@@ -347,6 +306,10 @@ class V2RayCollector:
             decoded = base64.b64decode(encoded + '==').decode('utf-8')
             config_data = json.loads(decoded)
 
+            # استخراج کشور از ps (remark)
+            ps = config_data.get('ps', '')
+            country = self.extract_country_from_tag(ps) if ps else 'Unknown'
+            
             return V2RayConfig(
                 protocol="vmess",
                 address=config_data.get('add', ''),
@@ -356,8 +319,7 @@ class V2RayCollector:
                 network=config_data.get('net', 'tcp'),
                 tls=config_data.get('tls') == 'tls',
                 raw_config=config_str,
-                country=config_data.get('ps', '').split(
-                    '-')[-1] if '-' in config_data.get('ps', '') else 'unknown'
+                country=country
             )
         except Exception as e:
             logger.debug(f"خطا در تجزیه VMess: {e}")
@@ -375,6 +337,9 @@ class V2RayCollector:
                 if params and 'security=tls' in params:
                     tls = True
 
+                # استخراج کشور از fragment (remark)
+                country = self.extract_country_from_tag(fragment) if fragment else 'Unknown'
+                
                 return V2RayConfig(
                     protocol="vless",
                     address=address,
@@ -382,7 +347,7 @@ class V2RayCollector:
                     uuid=uuid,
                     raw_config=config_str,
                     tls=tls,
-                    country="unknown"
+                    country=country
                 )
         except Exception as e:
             logger.debug(f"خطا در تجزیه VLESS: {e}")
@@ -395,6 +360,9 @@ class V2RayCollector:
             if match:
                 password, address, port, params, fragment = match.groups()
 
+                # استخراج کشور از fragment (remark)
+                country = self.extract_country_from_tag(fragment) if fragment else 'Unknown'
+                
                 return V2RayConfig(
                     protocol="trojan",
                     address=address,
@@ -402,7 +370,7 @@ class V2RayCollector:
                     uuid=password,  # در Trojan از password به عنوان uuid استفاده می‌کنیم
                     raw_config=config_str,
                     tls=True,  # Trojan همیشه TLS دارد
-                    country="unknown"
+                    country=country
                 )
         except Exception as e:
             logger.debug(f"خطا در تجزیه Trojan: {e}")
@@ -423,13 +391,19 @@ class V2RayCollector:
                 method, password = method_password.split(':')
                 address, port = address_port.split(':')
 
+                # استخراج کشور از remark (اگر وجود دارد)
+                remark = ''
+                if '#' in config_str:
+                    remark = config_str.split('#')[-1]
+                country = self.extract_country_from_tag(remark) if remark else 'Unknown'
+                
                 return V2RayConfig(
                     protocol="ss",
                     address=address,
                     port=int(port),
                     uuid=f"{method}:{password}",
                     raw_config=config_str,
-                    country="unknown"
+                    country=country
                 )
         except Exception as e:
             logger.debug(f"خطا در تجزیه SS: {e}")
@@ -475,13 +449,16 @@ class V2RayCollector:
             except:
                 password = password_encoded
 
+            # استخراج کشور از remarks
+            country = self.extract_country_from_tag(remarks) if remarks else 'Unknown'
+            
             return V2RayConfig(
                 protocol="ssr",
                 address=server,
                 port=port,
                 uuid=f"{method}:{password}",
                 raw_config=config_str,
-                country="unknown"
+                country=country
             )
 
         except Exception as e:
@@ -1369,13 +1346,13 @@ class V2RayCollector:
         # دسته‌بندی بر اساس پروتکل
         for config in self.working_configs:
             protocol = config.protocol.lower()
-            
+
             # Normalize protocol names
             if protocol == 'shadowsocks':
                 protocol = 'ss'
             elif protocol == 'shadowsocksr':
                 protocol = 'ssr'
-            
+
             if protocol in categories:
                 categories[protocol].append(config)
             else:

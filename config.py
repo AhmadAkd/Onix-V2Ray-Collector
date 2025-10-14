@@ -26,26 +26,26 @@ COLLECTION_CONFIG = {
 CONFIG_SOURCES = [
     # منابع اصلی Epodonios (تست شده)
     "https://github.com/Epodonios/v2ray-configs/raw/main/All_Configs_base64_Sub.txt",
-    
+
     # منابع تقسیم شده بر اساس پروتکل (Epodonios)
     "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/vless.txt",
     "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/vmess.txt",
     "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/ss.txt",
     "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/ssr.txt",
     "https://github.com/Epodonios/v2ray-configs/raw/main/Splitted-By-Protocol/trojan.txt",
-    
+
     # منابع تقسیم شده (Epodonios - 250 کانفیگ در هر فایل)
     "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub1.txt",
     "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub2.txt",
     "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub3.txt",
     "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub4.txt",
     "https://raw.githubusercontent.com/Epodonios/v2ray-configs/refs/heads/main/Sub5.txt",
-    
+
     # منابع معتبر دیگر (تست شده)
     "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge.txt",
     "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
     "https://raw.githubusercontent.com/aiboboxx/v2rayfree/main/v2",
-    
+
     # منابع SingBox (تست شده)
     "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/ss.json",
     "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/mix.json",
@@ -53,14 +53,14 @@ CONFIG_SOURCES = [
     "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/vless.json",
     "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/trojan.json",
     "https://raw.githubusercontent.com/itsyebekhe/PSG/main/subscriptions/singbox/hy2.json",
-    
+
     # منابع Leon406 SubCrawler (تست شده)
     "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vless",
     "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ss",
-    
+
     # منابع Shadowsocks (تست شده)
     "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/sub/sub_merge.txt",
-    
+
     # منابع Argh94/V2RayAutoConfig (تست شده)
     "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/USA.txt",
     "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/UK.txt",
@@ -70,56 +70,56 @@ CONFIG_SOURCES = [
     "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/Japan.txt",
     "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/Singapore.txt",
     "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/Iran.txt",
-    
+
     # منابع بیشتر Leon406
     "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess",
     "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/trojan",
     "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ssr",
-    
+
     # منابع yebekhe/TelegramV2rayCollector
     "https://raw.githubusercontent.com/yebekhe/TelegramV2rayCollector/main/sub/base64/mix",
     "https://raw.githubusercontent.com/yebekhe/TelegramV2rayCollector/main/sub/normal/vmess",
     "https://raw.githubusercontent.com/yebekhe/TelegramV2rayCollector/main/sub/normal/vless",
     "https://raw.githubusercontent.com/yebekhe/TelegramV2rayCollector/main/sub/normal/trojan",
     "https://raw.githubusercontent.com/yebekhe/TelegramV2rayCollector/main/sub/normal/ss",
-    
+
     # منابع barry-far/V2ray-Configs
     "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/All_Configs_Sub.txt",
     "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Sub1.txt",
     "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Sub2.txt",
     "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Sub3.txt",
-    
+
     # منابع mfuu/v2ray
     "https://raw.githubusercontent.com/mfuu/v2ray/master/v2ray",
-    
+
     # منابع ts-sf/fly
     "https://raw.githubusercontent.com/ts-sf/fly/main/v2",
-    
+
     # منابع ermaozi/get_subscribe
     "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/v2ray.txt",
-    
+
     # منابع AzadNetCH/Clash
     "https://raw.githubusercontent.com/AzadNetCH/Clash/main/V2Ray.txt",
-    
+
     # منابع soroushmirzaei/telegram-configs-collector
     "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/protocols/vmess",
     "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/protocols/vless",
     "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/protocols/trojan",
     "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/protocols/shadowsocks",
-    
+
     # منابع MhdiTaheri/V2rayCollector
     "https://raw.githubusercontent.com/MhdiTaheri/V2rayCollector/main/sub/Mix/mix.txt",
     "https://raw.githubusercontent.com/MhdiTaheri/V2rayCollector/main/sub/Mix/base64/mix",
-    
+
     # منابع sashalsk/V2Ray
     "https://raw.githubusercontent.com/sashalsk/V2Ray/main/V2Config",
-    
+
     # منابع freefq/free
     "https://raw.githubusercontent.com/freefq/free/master/v2",
-    
+
     # منابع ripaojiedian/freenode
     "https://raw.githubusercontent.com/ripaojiedian/freenode/main/sub",
-    
+
     # منابع mianfeifq/share
     "https://raw.githubusercontent.com/mianfeifq/share/main/data2024",
 ]
