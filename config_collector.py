@@ -257,18 +257,21 @@ class V2RayCollector:
                         # تجزیه کانفیگ‌ها از متن معمولی
                         configs = []
                         lines = content.strip().split('\n')
-                        
+
                         # اگر فقط یک خط است و بسیار بلند است، احتمالاً Base64 است
                         if len(lines) == 1 and len(lines[0]) > 1000:
                             try:
                                 # تلاش برای decode کردن Base64
                                 import base64
-                                decoded_content = base64.b64decode(lines[0]).decode('utf-8')
+                                decoded_content = base64.b64decode(
+                                    lines[0]).decode('utf-8')
                                 lines = decoded_content.strip().split('\n')
-                                logger.info(f"Base64 decoded: {len(lines)} lines")
+                                logger.info(
+                                    f"Base64 decoded: {len(lines)} lines")
                             except Exception as e:
-                                logger.debug(f"Not Base64 or decode failed: {e}")
-                        
+                                logger.debug(
+                                    f"Not Base64 or decode failed: {e}")
+
                         # تجزیه خطوط
                         for line in lines:
                             if line.strip() and not line.startswith('#'):

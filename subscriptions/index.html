@@ -702,11 +702,12 @@
                             </button>
                         </div>
                     </div>
-                    
+
                     <!-- Hysteria2 -->
                     <div class="col-lg-4 col-md-6" data-protocol="hysteria2" style="display: none;" id="hy2-card">
                         <div class="protocol-card">
-                            <div class="protocol-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <div class="protocol-icon"
+                                style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
                                 <i class="fas fa-rocket"></i>
                             </div>
                             <h3 class="card-title">Hysteria2</h3>
@@ -921,7 +922,7 @@
                     Object.entries(report.protocols).forEach(([protocol, data]) => {
                         const countEl = document.getElementById(`${protocol}-count`);
                         const latencyEl = document.getElementById(`${protocol}-latency`);
-                        
+
                         if (countEl) {
                             countEl.textContent = (data.count || 0).toLocaleString('fa-IR');
                             protocolCount++;
@@ -929,14 +930,14 @@
                         if (latencyEl) {
                             latencyEl.textContent = data.avg_latency || 'N/A';
                         }
-                        
+
                         // نمایش کارت‌های پروتکل‌های اضافی
                         const cardEl = document.getElementById(`${protocol}-card`);
                         if (cardEl && data.count > 0) {
                             cardEl.style.display = 'block';
                         }
                     });
-                    
+
                     // Update total protocols count
                     document.getElementById('totalProtocols').textContent = protocolCount;
                 }
