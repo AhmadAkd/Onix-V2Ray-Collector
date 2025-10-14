@@ -176,6 +176,13 @@
             margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(10px);
+            position: relative;
+        }
+        
+        .chart-card canvas {
+            max-height: 400px !important;
+            height: 300px !important;
+            width: 100% !important;
         }
 
         .chart-header {
@@ -525,7 +532,9 @@
                             توزیع پروتکل‌ها
                         </div>
                     </div>
-                    <canvas id="protocolChart" height="300"></canvas>
+                    <div style="position: relative; height: 300px; max-height: 400px;">
+                        <canvas id="protocolChart"></canvas>
+                    </div>
                 </div>
             </div>
 
@@ -538,7 +547,9 @@
                             توزیع جغرافیایی (Top 10)
                         </div>
                     </div>
-                    <canvas id="countryChart" height="300"></canvas>
+                    <div style="position: relative; height: 300px; max-height: 400px;">
+                        <canvas id="countryChart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -551,7 +562,9 @@
                     مقایسه میانگین تأخیر پروتکل‌ها
                 </div>
             </div>
-            <canvas id="latencyChart" height="100"></canvas>
+            <div style="position: relative; height: 250px; max-height: 300px;">
+                <canvas id="latencyChart"></canvas>
+            </div>
         </div>
 
         <!-- Protocol Details Table -->
@@ -814,7 +827,7 @@
                     }
                     protocolChart = null;
                 }
-                
+
                 const protocolCtx = document.getElementById('protocolChart');
                 if (protocolCtx) {
                     try {
@@ -831,12 +844,14 @@
                             options: {
                                 responsive: true,
                                 maintainAspectRatio: false,
+                                aspectRatio: 1,
                                 plugins: {
                                     legend: {
                                         position: 'bottom',
                                         labels: {
-                                            font: { size: 14 },
-                                            padding: 15
+                                            font: { size: 12 },
+                                            padding: 10,
+                                            boxWidth: 15
                                         }
                                     }
                                 }
@@ -852,7 +867,7 @@
                 const sortedCountries = Object.entries(countries)
                     .sort((a, b) => (b[1]?.count || 0) - (a[1]?.count || 0))
                     .slice(0, 10);
-                
+
                 const countryLabels = sortedCountries.map(([code]) => {
                     const info = countryInfo[code.toUpperCase()];
                     return info ? `${info.flag} ${info.name}` : code;
@@ -873,7 +888,7 @@
                     }
                     countryChart = null;
                 }
-                
+
                 const countryCtx = document.getElementById('countryChart');
                 if (countryCtx) {
                     try {
@@ -891,17 +906,20 @@
                             options: {
                                 responsive: true,
                                 maintainAspectRatio: false,
+                                aspectRatio: 1.5,
                                 plugins: {
                                     legend: { display: false }
                                 },
                                 scales: {
                                     y: {
                                         beginAtZero: true,
-                                        ticks: { font: { size: 12 } }
+                                        ticks: { 
+                                            font: { size: 11 }
+                                        }
                                     },
                                     x: {
                                         ticks: { 
-                                            font: { size: 11 },
+                                            font: { size: 10 },
                                             maxRotation: 45,
                                             minRotation: 0
                                         }
@@ -931,7 +949,7 @@
                     }
                     latencyChart = null;
                 }
-                
+
                 const latencyCtx = document.getElementById('latencyChart');
                 if (latencyCtx && latencyLabels.length > 0) {
                     try {
@@ -951,13 +969,23 @@
                             options: {
                                 responsive: true,
                                 maintainAspectRatio: false,
+                                aspectRatio: 2.5,
                                 plugins: {
-                                    legend: { display: true }
+                                    legend: { 
+                                        display: true,
+                                        labels: {
+                                            font: { size: 11 },
+                                            boxWidth: 15
+                                        }
+                                    }
                                 },
                                 scales: {
                                     y: {
                                         beginAtZero: true,
-                                        ticks: { font: { size: 12 } }
+                                        ticks: { font: { size: 11 } }
+                                    },
+                                    x: {
+                                        ticks: { font: { size: 10 } }
                                     }
                                 }
                             }
@@ -967,7 +995,7 @@
                         console.error('❌ Error creating latency chart:', e);
                     }
                 }
-                
+
             } catch (error) {
                 console.error('❌ Critical error in updateCharts:', error);
             }
