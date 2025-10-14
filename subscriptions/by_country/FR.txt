@@ -1,3 +1,4 @@
-vmess://eyJhZGQiOiIxODUuMTYuMTEwLjIxMiIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiVEcuV2FuZ0NhaTIuczQuZGItbGluazAyLnRvcCIsImlkIjoiYjIwOWRmYmYtNmJiMC0zMGIyLWE3N2EtMjg2ZTIzMDQ2NmI1IiwibmV0Ijoid3MiLCJwYXRoIjoiL2RhYmFpIiwicG9ydCI6Ijg4ODAiLCJwcyI6IvCfh6vwn4e3RlItMTg1LjE2LjExMC4yMTItMDczMyIsInNjeSI6ImF1dG8iLCJzbmkiOiIiLCJ0bHMiOiIiLCJ0eXBlIjoiIiwidiI6IjIifQ
-trojan://zsu4Mq3A9J@51.195.254.75:8443?security=tls&sni=uk-02.allhubb.info&type=tcp#FR🇫🇷
+vmess://ewogICAgImFkZCI6ICIxODUuMTYuMTEwLjIxMiIsCiAgICAiYWlkIjogMCwKICAgICJob3N0IjogIlRHLldhbmdDYWkyLnM0LmRiLWxpbmswMi50b3AiLAogICAgImlkIjogImIyMDlkZmJmLTZiYjAtMzBiMi1hNzdhLTI4NmUyMzA0NjZiNSIsCiAgICAibmV0IjogIndzIiwKICAgICJwYXRoIjogIi9kYWJhaSIsCiAgICAicG9ydCI6IDg4ODAsCiAgICAicHMiOiAi8J+Hq/Cfh7dGUi0xODUuMTYuMTEwLjIxMi0wOTM0IiwKICAgICJ0bHMiOiAiIiwKICAgICJ0eXBlIjogImF1dG8iLAogICAgInNlY3VyaXR5IjogImF1dG8iLAogICAgInNraXAtY2VydC12ZXJpZnkiOiB0cnVlLAogICAgInNuaSI6ICIiCn0=
+trojan://installshield@23.162.152.30:8443?security=tls&sni=23.162.152.30#%F0%9F%87%AB%F0%9F%87%B7FR-23.162.152.30-5938
 trojan://1ce1df7962f71c6f@uk-03.allhubb.info:8443?security=tls&alpn=h2%2Chttp%2F1.1&headerType=none&fp=chrome&type=tcp&sni=uk-03.allhubb.info#FR🇫🇷
+trojan://zsu4Mq3A9J@51.195.254.75:8443?security=tls&sni=uk-02.allhubb.info&type=tcp#FR🇫🇷
