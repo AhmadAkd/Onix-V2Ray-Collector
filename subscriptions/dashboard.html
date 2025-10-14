@@ -292,12 +292,31 @@
 
         // Load dashboard data
         async function loadDashboardData() {
-            document.querySelector('.loading').style.display = 'flex';
+            console.log('🔄 شروع بارگذاری داشبورد...');
+            const loadingElement = document.querySelector('.loading');
+            if (loadingElement) {
+                loadingElement.style.display = 'flex';
+            }
+
+            // Timeout after 10 seconds
+            const timeoutId = setTimeout(() => {
+                console.warn('⚠️ Timeout: بارگذاری بیش از 10 ثانیه طول کشید');
+                if (loadingElement) {
+                    loadingElement.style.display = 'none';
+                }
+                showError('بارگذاری داده‌ها بیش از حد معمول طول کشید. لطفاً صفحه را refresh کنید.');
+            }, 10000);
 
             try {
-                // Load latest report
+                console.log('📡 در حال دریافت latest_report.json...');
                 const reportResponse = await fetch('latest_report.json');
+                
+                if (!reportResponse.ok) {
+                    throw new Error(`HTTP error! status: ${reportResponse.status}`);
+                }
+                
                 const report = await reportResponse.json();
+                console.log('✅ داده‌ها دریافت شد:', report);
 
                 updateStatistics(report);
                 updateProtocolStats(report);
@@ -305,12 +324,45 @@
                 updateSystemStatus(report);
                 updateLastUpdate(report);
 
+                console.log('✅ داشبورد به‌روزرسانی شد');
+
             } catch (error) {
-                console.error('Error loading dashboard data:', error);
-                showError('خطا در بارگذاری داده‌ها');
+                // Fallback: Try to load from GitHub raw URL
+                console.log('🔄 تلاش برای بارگذاری از GitHub...');
+                try {
+                    const githubResponse = await fetch('https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/latest_report.json');
+                    if (githubResponse.ok) {
+                        const report = await githubResponse.json();
+                        console.log('✅ داده‌ها از GitHub دریافت شد:', report);
+                        
+                        updateStatistics(report);
+                        updateProtocolStats(report);
+                        updateCountryStats(report);
+                        updateSystemStatus(report);
+                        updateLastUpdate(report);
+                        
+                        console.log('✅ داشبورد از GitHub به‌روزرسانی شد');
+                        return; // Success, exit function
+                    }
+                } catch (githubError) {
+                    console.error('❌ خطا در بارگذاری از GitHub:', githubError);
+                }
+                console.error('❌ خطا در بارگذاری داشبورد:', error);
+                console.error('Error details:', {
+                    message: error.message,
+                    stack: error.stack,
+                    url: window.location.href
+                });
+                showError(`خطا در بارگذاری داده‌ها: ${error.message}`);
             }
 
-            document.querySelector('.loading').style.display = 'none';
+            // Clear timeout
+            clearTimeout(timeoutId);
+            
+            if (loadingElement) {
+                loadingElement.style.display = 'none';
+            }
+            console.log('🏁 بارگذاری کامل شد');
         }
 
         // Update statistics cards
