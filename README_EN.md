@@ -7,7 +7,9 @@
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 ![Stars](https://img.shields.io/github/stars/AhmadAkd/V2Ray_Collector?style=for-the-badge)
 
-**Advanced system for automated collection, testing, and categorization of V2Ray configs from 39+ reliable sources**
+**🚀 Advanced V2Ray Config Collector & Tester | جمع‌آوری و تست هوشمند کانفیگ V2Ray**
+
+**ML scoring + REST API + Health monitoring | Auto-update 6h | بروزرسانی خودکار هر 6 ساعت | 1000+ configs from 40+ sources**
 
 [🌐 Live Demo](https://ahmadakd.github.io/V2Ray_Collector/) • [📚 Documentation](https://github.com/AhmadAkd/V2Ray_Collector/tree/main/docs) • [🐛 Report Bug](https://github.com/AhmadAkd/V2Ray_Collector/issues) • [🌟 Give a Star](https://github.com/AhmadAkd/V2Ray_Collector)
 
