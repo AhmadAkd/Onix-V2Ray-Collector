@@ -128,15 +128,15 @@ CONFIG_SOURCES = [
     "https://raw.githubusercontent.com/freefq/free/master/ssr",
     "https://raw.githubusercontent.com/ripaojiedian/freenode/main/ss",
     "https://raw.githubusercontent.com/ripaojiedian/freenode/main/ssr",
-    
+
     # منابع Hysteria و Hysteria2
     "https://raw.githubusercontent.com/freefq/free/master/hysteria",
     "https://raw.githubusercontent.com/ripaojiedian/freenode/main/hysteria",
-    
+
     # منابع Wireguard و TUIC
     "https://raw.githubusercontent.com/freefq/free/master/wireguard",
     "https://raw.githubusercontent.com/ripaojiedian/freenode/main/tuic",
-    
+
     # منابع جامع
     "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
     "https://raw.githubusercontent.com/Alvin9999/new-pac/master/ss-sub",

@@ -310,11 +310,11 @@
             try {
                 console.log('📡 در حال دریافت latest_report.json...');
                 const reportResponse = await fetch('latest_report.json');
-                
+
                 if (!reportResponse.ok) {
                     throw new Error(`HTTP error! status: ${reportResponse.status}`);
                 }
-                
+
                 const report = await reportResponse.json();
                 console.log('✅ داده‌ها دریافت شد:', report);
 
@@ -334,13 +334,13 @@
                     if (githubResponse.ok) {
                         const report = await githubResponse.json();
                         console.log('✅ داده‌ها از GitHub دریافت شد:', report);
-                        
+
                         updateStatistics(report);
                         updateProtocolStats(report);
                         updateCountryStats(report);
                         updateSystemStatus(report);
                         updateLastUpdate(report);
-                        
+
                         console.log('✅ داشبورد از GitHub به‌روزرسانی شد');
                         return; // Success, exit function
                     }
@@ -358,7 +358,7 @@
 
             // Clear timeout
             clearTimeout(timeoutId);
-            
+
             if (loadingElement) {
                 loadingElement.style.display = 'none';
             }

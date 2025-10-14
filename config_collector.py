@@ -431,9 +431,9 @@ class V2RayCollector:
             padding = 4 - (len(encoded) % 4)
             if padding != 4:
                 encoded += '=' * padding
-                
+
             decoded = base64.b64decode(encoded).decode('utf-8')
-            
+
             if '@' in decoded:
                 method_password, address_port = decoded.split('@', 1)
                 if ':' in method_password and ':' in address_port:
@@ -444,7 +444,8 @@ class V2RayCollector:
                     import urllib.parse
                     remark = ''
                     if '#' in config_str:
-                        remark = urllib.parse.unquote(config_str.split('#')[-1])
+                        remark = urllib.parse.unquote(
+                            config_str.split('#')[-1])
                     country = self.detect_country(address, remark)
 
                     return V2RayConfig(
@@ -462,12 +463,13 @@ class V2RayCollector:
                     if ':' in method_password and ':' in server_port:
                         method, password = method_password.split(':', 1)
                         server, port = server_port.rsplit(':', 1)
-                        
+
                         # استخراج کشور
                         import urllib.parse
                         remark = ''
                         if '#' in config_str:
-                            remark = urllib.parse.unquote(config_str.split('#')[-1])
+                            remark = urllib.parse.unquote(
+                                config_str.split('#')[-1])
                         country = self.detect_country(server, remark)
 
                         return V2RayConfig(
