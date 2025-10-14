@@ -164,7 +164,7 @@ jobs:
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add subscriptions/ index.html
+        git add subscriptions/
         
         # بررسی تغییرات
         if git diff --staged --quiet; then
@@ -188,7 +188,7 @@ jobs:
             
             # Reset to remote and reapply our changes
             git reset --soft origin/main
-            git add subscriptions/ index.html
+            git add subscriptions/
             git commit --amend --no-edit || git commit -m "🤖 Auto-update V2Ray configs $(date '+%Y-%m-%d %H:%M:%S')"
             
             sleep 3
