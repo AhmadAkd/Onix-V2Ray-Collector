@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="V2Ray Config Collector - مجموعه رایگان کانفیگ‌های V2Ray با به‌روزرسانی خودکار">
     <meta name="keywords" content="V2Ray, VPN, Free Config, VMess, VLESS, Trojan, Shadowsocks">
     <title>V2Ray Config Collector | کانفیگ‌های رایگان V2Ray</title>
-    
+
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <style>
         * {
             font-family: 'Vazirmatn', sans-serif;
@@ -263,6 +265,7 @@
                 opacity: 0;
                 transform: translateY(-100%);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -281,7 +284,9 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* Footer */
@@ -328,11 +333,17 @@
         }
 
         @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
         }
     </style>
 </head>
+
 <body>
     <!-- Toast Notification -->
     <div class="toast-container">
@@ -352,7 +363,7 @@
                 <p class="hero-subtitle">
                     کانفیگ‌های رایگان V2Ray با به‌روزرسانی خودکار هر 30 دقیقه
                 </p>
-                
+
                 <!-- Quick Links -->
                 <div class="quick-links justify-content-center">
                     <a href="subscriptions/dashboard.html" class="quick-link">
@@ -468,7 +479,7 @@
         <div class="container">
             <p>
                 <i class="fas fa-code"></i>
-                ساخته شده با ❤️ توسط 
+                ساخته شده با ❤️ توسط
                 <a href="https://github.com/AhmadAkd" target="_blank">Ahmad Akd</a>
             </p>
             <p>
@@ -481,7 +492,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const BASE_URL = 'https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions';
-        
+
         // Protocol configurations
         const protocols = {
             'vmess': {
@@ -570,7 +581,7 @@
                 const originalText = btn.innerHTML;
                 btn.innerHTML = '<i class="fas fa-check"></i> کپی شد!';
                 btn.classList.add('copied');
-                
+
                 setTimeout(() => {
                     btn.innerHTML = originalText;
                     btn.classList.remove('copied');
@@ -600,7 +611,7 @@
                 document.getElementById('totalConfigs').textContent = (report.working_configs || 0).toLocaleString('fa-IR');
                 document.getElementById('totalProtocols').textContent = Object.keys(report.protocols || {}).length;
                 document.getElementById('totalCountries').textContent = Object.keys(report.countries || {}).length;
-                
+
                 // Format last update
                 const timestamp = report.timestamp || 'نامشخص';
                 const timeParts = timestamp.split(' ');
@@ -652,7 +663,7 @@
                 card.className = 'sub-card';
                 card.style.background = config.color;
                 card.onclick = () => copyToClipboard(`protocol-${protocol}`, card);
-                
+
                 card.innerHTML = `
                     <div class="sub-card-icon">
                         <i class="fas ${config.icon}"></i>
@@ -696,7 +707,7 @@
                 const card = document.createElement('div');
                 card.className = 'sub-card';
                 card.onclick = () => copyToClipboard(`country-${code}`, card);
-                
+
                 card.innerHTML = `
                     <div class="sub-card-icon">${country.flag}</div>
                     <div class="sub-card-title">${country.name}</div>
@@ -717,10 +728,11 @@
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             loadStatistics();
-            
+
             // Auto-refresh every 5 minutes
             setInterval(loadStatistics, 5 * 60 * 1000);
         });
     </script>
 </body>
+
 </html>
