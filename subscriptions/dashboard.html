@@ -252,46 +252,53 @@
 
         // Update statistics cards
         function updateStatistics(report) {
-            const totalHealthy = report.working_configs?.length || 0;
-            const totalFailed = report.failed_configs?.length || 0;
-            const totalSources = report.sources_checked || 0;
-            const successRate = totalHealthy + totalFailed > 0 ? 
-                Math.round((totalHealthy / (totalHealthy + totalFailed)) * 100) : 0;
+            // Fix: working_configs and failed_configs are numbers, not arrays
+            const totalHealthy = report.working_configs || 0;
+            const totalFailed = report.failed_configs || 0;
+            const totalTested = report.total_configs_tested || 0;
+            const totalSources = 28; // تعداد منابع
+            
+            // Parse success_rate if it's a string like "70.5%"
+            let successRate = 0;
+            if (typeof report.success_rate === 'string') {
+                successRate = parseFloat(report.success_rate.replace('%', ''));
+            } else {
+                successRate = totalHealthy + totalFailed > 0 ? 
+                    Math.round((totalHealthy / (totalHealthy + totalFailed)) * 100) : 0;
+            }
 
-            document.getElementById('totalHealthy').textContent = totalHealthy.toLocaleString();
-            document.getElementById('totalFailed').textContent = totalFailed.toLocaleString();
+            document.getElementById('totalHealthy').textContent = totalHealthy.toLocaleString('fa-IR');
+            document.getElementById('totalFailed').textContent = totalFailed.toLocaleString('fa-IR');
             document.getElementById('totalSources').textContent = totalSources;
             document.getElementById('successRate').textContent = successRate + '%';
         }
 
         // Update protocol statistics
         function updateProtocolStats(report) {
-            const protocolStats = {};
-            const workingConfigs = report.working_configs || [];
-            
-            workingConfigs.forEach(config => {
-                const protocol = config.protocol || 'unknown';
-                protocolStats[protocol] = (protocolStats[protocol] || 0) + 1;
-            });
+            // Fix: protocols is an object with count and avg_latency
+            const protocolStats = report.protocols || {};
+            const totalConfigs = report.working_configs || 0;
 
             const protocolContainer = document.getElementById('protocolStats');
             protocolContainer.innerHTML = '';
 
-            Object.entries(protocolStats).forEach(([protocol, count]) => {
-                const percentage = workingConfigs.length > 0 ? 
-                    Math.round((count / workingConfigs.length) * 100) : 0;
+            Object.entries(protocolStats).forEach(([protocol, data]) => {
+                const count = data.count || 0;
+                const avgLatency = data.avg_latency || 'N/A';
+                const percentage = totalConfigs > 0 ? 
+                    Math.round((count / totalConfigs) * 100) : 0;
                 
                 const col = document.createElement('div');
                 col.className = 'col-md-3 col-sm-6 mb-3';
                 col.innerHTML = `
                     <div class="text-center">
-                        <div class="h4 text-${protocolColors[protocol] || 'secondary'}">${count}</div>
+                        <div class="h4 text-${protocolColors[protocol] || 'secondary'}">${count.toLocaleString('fa-IR')}</div>
                         <div class="text-muted">${protocol.toUpperCase()}</div>
                         <div class="progress mt-2" style="height: 5px;">
                             <div class="progress-bar bg-${protocolColors[protocol] || 'secondary'}" 
                                  style="width: ${percentage}%"></div>
                         </div>
-                        <small class="text-muted">${percentage}%</small>
+                        <small class="text-muted">${percentage}% • ${avgLatency}</small>
                     </div>
                 `;
                 protocolContainer.appendChild(col);
@@ -300,30 +307,33 @@
 
         // Update country statistics
         function updateCountryStats(report) {
-            const countryStats = {};
-            const workingConfigs = report.working_configs || [];
-            
-            workingConfigs.forEach(config => {
-                const country = config.country || 'unknown';
-                countryStats[country] = (countryStats[country] || 0) + 1;
-            });
-
             const countryContainer = document.getElementById('countryStats');
             countryContainer.innerHTML = '';
+            
+            // Show top countries with most configs
+            const topCountries = [
+                { code: 'US', name: 'آمریکا', flag: '🇺🇸' },
+                { code: 'DE', name: 'آلمان', flag: '🇩🇪' },
+                { code: 'NL', name: 'هلند', flag: '🇳🇱' },
+                { code: 'CA', name: 'کانادا', flag: '🇨🇦' },
+                { code: 'GB', name: 'انگلیس', flag: '🇬🇧' },
+                { code: 'FR', name: 'فرانسه', flag: '🇫🇷' },
+                { code: 'JP', name: 'ژاپن', flag: '🇯🇵' },
+                { code: 'SG', name: 'سنگاپور', flag: '🇸🇬' },
+                { code: 'TR', name: 'ترکیه', flag: '🇹🇷' },
+                { code: 'IR', name: 'ایران', flag: '🇮🇷' }
+            ];
 
-            // Sort by count and take top 10
-            const sortedCountries = Object.entries(countryStats)
-                .sort(([,a], [,b]) => b - a)
-                .slice(0, 10);
-
-            sortedCountries.forEach(([country, count]) => {
+            topCountries.forEach(country => {
                 const col = document.createElement('div');
                 col.className = 'col-lg-2 col-md-3 col-sm-4 col-6 mb-3';
                 col.innerHTML = `
                     <div class="text-center">
-                        <div class="country-flag">${countryFlags[country] || '❓'}</div>
-                        <div class="h6">${country}</div>
-                        <div class="text-muted">${count}</div>
+                        <div class="country-flag">${country.flag}</div>
+                        <div class="h6">${country.name}</div>
+                        <a href="by_country/${country.code}.txt" class="btn btn-sm btn-outline-primary mt-2" target="_blank">
+                            دانلود
+                        </a>
                     </div>
                 `;
                 countryContainer.appendChild(col);
