@@ -309,7 +309,7 @@ class V2RayCollector:
                         lines = content.strip().split('\n')
 
                         # اگر فقط یک خط است و بسیار بلند است، احتمالاً Base64 است
-                        if len(lines) == 1 and len(lines[0]) > 1000:
+                        if len(lines) == 1 and len(lines[0]) > 100:
                             try:
                                 # تلاش برای decode کردن Base64
                                 import base64
@@ -317,15 +317,38 @@ class V2RayCollector:
                                     lines[0]).decode('utf-8')
                                 lines = decoded_content.strip().split('\n')
                                 logger.info(
-                                    f"Base64 decoded: {len(lines)} lines")
+                                    f"✅ Base64 decoded: {len(lines)} configs")
                             except Exception as e:
                                 logger.debug(
                                     f"Not Base64 or decode failed: {e}")
 
-                        # تجزیه خطوط
+                        # تجزیه خطوط - حتی اگر Base64 نبود، ممکن است هر خط یک کانفیگ Base64 باشه
                         for line in lines:
-                            if line.strip() and not line.startswith('#'):
-                                configs.append(line.strip())
+                            line = line.strip()
+                            if not line or line.startswith('#'):
+                                continue
+                            
+                            # اگر خط شامل پروتکل است، مستقیم اضافه کن
+                            if any(proto in line for proto in ['vmess://', 'vless://', 'trojan://', 'ss://', 'ssr://', 'hysteria://', 'hysteria2://', 'hy2://', 'tuic://', 'wireguard://']):
+                                configs.append(line)
+                            # اگر خط بلند است و شبیه Base64، سعی کن decode کنی
+                            elif len(line) > 50 and not ' ' in line:
+                                try:
+                                    # ممکن است Base64 encoded configs باشد
+                                    decoded = base64.b64decode(line).decode('utf-8')
+                                    # اگر داخل decoded چند کانفیگ بود، همشون رو اضافه کن
+                                    if '\n' in decoded:
+                                        for subline in decoded.split('\n'):
+                                            subline = subline.strip()
+                                            if subline and any(proto in subline for proto in ['vmess://', 'vless://', 'trojan://', 'ss://', 'ssr://', 'hysteria://', 'tuic://', 'wireguard://']):
+                                                configs.append(subline)
+                                    elif any(proto in decoded for proto in ['vmess://', 'vless://', 'trojan://', 'ss://', 'ssr://']):
+                                        configs.append(decoded)
+                                except:
+                                    # اگر decode نشد، شاید خود لینک باشد
+                                    configs.append(line)
+                            else:
+                                configs.append(line)
 
                         logger.info(
                             f"دریافت {len(configs)} کانفیگ از {source_url}")
@@ -458,69 +481,93 @@ class V2RayCollector:
     def parse_ss_config(self, config_str: str) -> Optional[V2RayConfig]:
         """تجزیه کانفیگ Shadowsocks"""
         try:
-            if config_str.startswith('ss://'):
-                encoded = config_str[5:]
-            else:
-                encoded = config_str
-
-            # حذف fragment اگر وجود دارد
-            if '#' in encoded:
-                encoded = encoded.split('#')[0]
-
-            # تجزیه کانفیگ SS
-            # اضافه کردن padding برای base64
-            padding = 4 - (len(encoded) % 4)
-            if padding != 4:
-                encoded += '=' * padding
-
-            decoded = base64.b64decode(encoded).decode('utf-8')
-
-            if '@' in decoded:
-                method_password, address_port = decoded.split('@', 1)
-                if ':' in method_password and ':' in address_port:
-                    method, password = method_password.split(':', 1)
-                    address, port = address_port.rsplit(':', 1)
-
+            if not config_str.startswith('ss://'):
+                return None
+            
+            # حذف ss:// از ابتدا
+            config_part = config_str[5:]
+            
+            # استخراج remark اگر وجود دارد
+            import urllib.parse
+            remark = ''
+            if '#' in config_part:
+                config_part, remark = config_part.split('#', 1)
+                remark = urllib.parse.unquote(remark)
+            
+            # فرمت جدید: ss://BASE64(method:password)@host:port
+            if '@' in config_part:
+                encoded_part, server_part = config_part.split('@', 1)
+                
+                # Decode بخش Base64
+                try:
+                    # اضافه کردن padding
+                    padding = 4 - (len(encoded_part) % 4)
+                    if padding != 4:
+                        encoded_part += '=' * padding
+                    
+                    decoded = base64.b64decode(encoded_part).decode('utf-8')
+                    
+                    # Parse method:password
+                    if ':' in decoded:
+                        method, password = decoded.split(':', 1)
+                    else:
+                        logger.debug(f"Invalid decoded SS format: {decoded}")
+                        return None
+                    
+                    # Parse server:port
+                    if ':' in server_part:
+                        address, port = server_part.rsplit(':', 1)
+                        port = int(port)
+                    else:
+                        logger.debug(f"Invalid server part: {server_part}")
+                        return None
+                    
                     # استخراج کشور
-                    import urllib.parse
-                    remark = ''
-                    if '#' in config_str:
-                        remark = urllib.parse.unquote(
-                            config_str.split('#')[-1])
                     country = self.detect_country(address, remark)
-
+                    
                     return V2RayConfig(
                         protocol="ss",
                         address=address,
-                        port=int(port),
+                        port=port,
                         uuid=f"{method}:{password}",
                         raw_config=config_str,
                         country=country
                     )
+                except Exception as e:
+                    logger.debug(f"خطا در decode SS: {e}")
+                    return None
             else:
-                # فرمت قدیمی: method:password@server:port
-                if '@' in config_str:
-                    method_password, server_port = config_str.split('@', 1)
-                    if ':' in method_password and ':' in server_port:
-                        method, password = method_password.split(':', 1)
-                        server, port = server_port.rsplit(':', 1)
-
-                        # استخراج کشور
-                        import urllib.parse
-                        remark = ''
-                        if '#' in config_str:
-                            remark = urllib.parse.unquote(
-                                config_str.split('#')[-1])
-                        country = self.detect_country(server, remark)
-
-                        return V2RayConfig(
-                            protocol="ss",
-                            address=server,
-                            port=int(port),
-                            uuid=f"{method}:{password}",
-                            raw_config=config_str,
-                            country=country
-                        )
+                # فرمت قدیمی: ss://BASE64(method:password@server:port)
+                try:
+                    # اضافه کردن padding
+                    padding = 4 - (len(config_part) % 4)
+                    if padding != 4:
+                        config_part += '=' * padding
+                    
+                    decoded = base64.b64decode(config_part).decode('utf-8')
+                    
+                    if '@' in decoded:
+                        method_password, address_port = decoded.split('@', 1)
+                        if ':' in method_password and ':' in address_port:
+                            method, password = method_password.split(':', 1)
+                            address, port = address_port.rsplit(':', 1)
+                            port = int(port)
+                            
+                            # استخراج کشور
+                            country = self.detect_country(address, remark)
+                            
+                            return V2RayConfig(
+                                protocol="ss",
+                                address=address,
+                                port=port,
+                                uuid=f"{method}:{password}",
+                                raw_config=config_str,
+                                country=country
+                            )
+                except Exception as e:
+                    logger.debug(f"خطا در decode فرمت قدیمی SS: {e}")
+                    return None
+                    
         except Exception as e:
             logger.debug(f"خطا در تجزیه SS: {e}")
         return None
