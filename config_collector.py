@@ -422,28 +422,62 @@ class V2RayCollector:
             else:
                 encoded = config_str
 
+            # حذف fragment اگر وجود دارد
+            if '#' in encoded:
+                encoded = encoded.split('#')[0]
+
             # تجزیه کانفیگ SS
-            decoded = base64.b64decode(encoded + '==').decode('utf-8')
+            # اضافه کردن padding برای base64
+            padding = 4 - (len(encoded) % 4)
+            if padding != 4:
+                encoded += '=' * padding
+                
+            decoded = base64.b64decode(encoded).decode('utf-8')
+            
             if '@' in decoded:
-                method_password, address_port = decoded.split('@')
-                method, password = method_password.split(':')
-                address, port = address_port.split(':')
+                method_password, address_port = decoded.split('@', 1)
+                if ':' in method_password and ':' in address_port:
+                    method, password = method_password.split(':', 1)
+                    address, port = address_port.rsplit(':', 1)
 
-                # استخراج کشور
-                import urllib.parse
-                remark = ''
-                if '#' in config_str:
-                    remark = urllib.parse.unquote(config_str.split('#')[-1])
-                country = self.detect_country(address, remark)
+                    # استخراج کشور
+                    import urllib.parse
+                    remark = ''
+                    if '#' in config_str:
+                        remark = urllib.parse.unquote(config_str.split('#')[-1])
+                    country = self.detect_country(address, remark)
 
-                return V2RayConfig(
-                    protocol="ss",
-                    address=address,
-                    port=int(port),
-                    uuid=f"{method}:{password}",
-                    raw_config=config_str,
-                    country=country
-                )
+                    return V2RayConfig(
+                        protocol="ss",
+                        address=address,
+                        port=int(port),
+                        uuid=f"{method}:{password}",
+                        raw_config=config_str,
+                        country=country
+                    )
+            else:
+                # فرمت قدیمی: method:password@server:port
+                if '@' in config_str:
+                    method_password, server_port = config_str.split('@', 1)
+                    if ':' in method_password and ':' in server_port:
+                        method, password = method_password.split(':', 1)
+                        server, port = server_port.rsplit(':', 1)
+                        
+                        # استخراج کشور
+                        import urllib.parse
+                        remark = ''
+                        if '#' in config_str:
+                            remark = urllib.parse.unquote(config_str.split('#')[-1])
+                        country = self.detect_country(server, remark)
+
+                        return V2RayConfig(
+                            protocol="ss",
+                            address=server,
+                            port=int(port),
+                            uuid=f"{method}:{password}",
+                            raw_config=config_str,
+                            country=country
+                        )
         except Exception as e:
             logger.debug(f"خطا در تجزیه SS: {e}")
         return None

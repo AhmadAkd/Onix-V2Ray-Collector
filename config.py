@@ -122,6 +122,25 @@ CONFIG_SOURCES = [
 
     # منابع mianfeifq/share
     "https://raw.githubusercontent.com/mianfeifq/share/main/data2024",
+
+    # منابع اضافی برای SS و SSR
+    "https://raw.githubusercontent.com/freefq/free/master/ss",
+    "https://raw.githubusercontent.com/freefq/free/master/ssr",
+    "https://raw.githubusercontent.com/ripaojiedian/freenode/main/ss",
+    "https://raw.githubusercontent.com/ripaojiedian/freenode/main/ssr",
+    
+    # منابع Hysteria و Hysteria2
+    "https://raw.githubusercontent.com/freefq/free/master/hysteria",
+    "https://raw.githubusercontent.com/ripaojiedian/freenode/main/hysteria",
+    
+    # منابع Wireguard و TUIC
+    "https://raw.githubusercontent.com/freefq/free/master/wireguard",
+    "https://raw.githubusercontent.com/ripaojiedian/freenode/main/tuic",
+    
+    # منابع جامع
+    "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
+    "https://raw.githubusercontent.com/Alvin9999/new-pac/master/ss-sub",
+    "https://raw.githubusercontent.com/ripaojiedian/freenode/main/sub",
 ]
 
 # تنظیمات اتوماسیون
@@ -147,8 +166,9 @@ CATEGORIZATION_CONFIG = {
     'sort_by_latency': True,  # مرتب‌سازی بر اساس تأخیر
     'group_by_protocol': True,  # دسته‌بندی بر اساس پروتکل
     'group_by_country': True,  # دسته‌بندی بر اساس کشور
-    'max_configs_per_protocol': 1000,  # حداکثر کانفیگ در هر پروتکل
-    'max_configs_per_country': 500,  # حداکثر کانفیگ در هر کشور
+    'max_configs_per_protocol': 2000,  # حداکثر کانفیگ در هر پروتکل
+    'max_configs_per_country': 1000,  # حداکثر کانفیگ در هر کشور
+    'min_configs_per_protocol': 10,  # حداقل کانفیگ برای ایجاد فایل
 }
 
 # تنظیمات فیلتر جغرافیایی
