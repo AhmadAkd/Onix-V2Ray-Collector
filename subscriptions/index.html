@@ -835,12 +835,14 @@
 
         // Copy protocol link
         function copyProtocolLink(protocol, button) {
-            const link = `${BASE_URL}/${protocol}_subscription.txt`;
+            // استفاده از by_protocol برای لینک‌های دسته‌بندی شده
+            const link = `${BASE_URL}/by_protocol/${protocol}.txt`;
             copyLink(link, button);
         }
 
         // Copy country link
         function copyCountryLink(countryCode, button) {
+            // لینک صحیح به by_country
             const link = `${BASE_URL}/by_country/${countryCode}.txt`;
             copyLink(link, button);
         }
@@ -871,7 +873,72 @@
         }
 
         // Load countries
-        function loadCountries() {
+        async function loadCountries() {
+            const grid = document.getElementById('countriesGrid');
+            grid.innerHTML = '<div class="col-12 text-center"><p>در حال بارگذاری کشورها...</p></div>';
+
+            try {
+                // تلاش برای دریافت لیست فایل‌های موجود از GitHub API
+                const response = await fetch('https://api.github.com/repos/AhmadAkd/V2Ray_Collector/contents/subscriptions/by_country');
+                const files = await response.json();
+
+                // فیلتر فایل‌های .txt
+                const countryFiles = files.filter(f => f.name.endsWith('.txt'));
+
+                if (countryFiles.length > 0) {
+                    grid.innerHTML = '';
+
+                    // ایجاد نقشه کد به نام و flag
+                    const countryMap = {};
+                    countries.forEach(c => {
+                        countryMap[c.code] = c;
+                    });
+
+                    countryFiles.forEach(file => {
+                        const code = file.name.replace('.txt', '').toUpperCase();
+                        const countryInfo = countryMap[code] || {
+                            code: code,
+                            name: code,
+                            flag: '🌍',
+                            popular: false
+                        };
+
+                        const col = document.createElement('div');
+                        col.className = 'col-lg-3 col-md-4 col-sm-6';
+                        col.setAttribute('data-country', code.toLowerCase());
+
+                        const popularBadge = countryInfo.popular ?
+                            '<span class="badge bg-warning text-dark mb-2"><i class="fas fa-star"></i> محبوب</span>' : '';
+
+                        col.innerHTML = `
+                            <div class="country-card">
+                                <div class="country-flag">${countryInfo.flag}</div>
+                                ${popularBadge}
+                                <h4 class="card-title">${countryInfo.name}</h4>
+                                <p class="text-muted mb-3">${code}</p>
+                                <button class="btn-copy" onclick="copyCountryLink('${code}', this)">
+                                    <i class="fas fa-copy"></i> کپی لینک
+                                </button>
+                            </div>
+                        `;
+
+                        grid.appendChild(col);
+                    });
+
+                    console.log(`✅ ${countryFiles.length} کشور بارگذاری شد`);
+                } else {
+                    // اگر فایلی نبود، از لیست پیش‌فرض استفاده کن
+                    loadCountriesDefault();
+                }
+            } catch (error) {
+                console.error('خطا در بارگذاری کشورها از API:', error);
+                // در صورت خطا، از لیست پیش‌فرض استفاده کن
+                loadCountriesDefault();
+            }
+        }
+
+        // بارگذاری کشورها از لیست پیش‌فرض
+        function loadCountriesDefault() {
             const grid = document.getElementById('countriesGrid');
             grid.innerHTML = '';
 
@@ -942,9 +1009,15 @@
                     document.getElementById('totalProtocols').textContent = protocolCount;
                 }
 
-                // Count unique countries
-                const countryCount = countries.length;
-                document.getElementById('totalCountries').textContent = countryCount + '+';
+                // بارگذاری کشورها از گزارش
+                if (report.available_files && report.available_files.countries) {
+                    loadCountriesFromReport(report);
+                    document.getElementById('totalCountries').textContent = report.available_files.countries.length;
+                } else {
+                    // Count unique countries
+                    const countryCount = countries.length;
+                    document.getElementById('totalCountries').textContent = countryCount + '+';
+                }
 
             } catch (error) {
                 console.error('خطا در بارگذاری آمار:', error);
@@ -953,6 +1026,64 @@
             } finally {
                 overlay.classList.remove('active');
             }
+        }
+        
+        // بارگذاری کشورها از گزارش
+        function loadCountriesFromReport(report) {
+            if (!report.available_files || !report.available_files.countries || report.available_files.countries.length === 0) {
+                return;
+            }
+            
+            const grid = document.getElementById('countriesGrid');
+            if (!grid) return;
+            
+            grid.innerHTML = '';
+            
+            // ایجاد نقشه کد به نام و flag
+            const countryMap = {};
+            countries.forEach(c => {
+                countryMap[c.code] = c;
+            });
+            
+            report.available_files.countries.forEach(code => {
+                const upperCode = code.toUpperCase();
+                const countryInfo = countryMap[upperCode] || { 
+                    code: upperCode, 
+                    name: upperCode, 
+                    flag: '🌍',
+                    popular: false 
+                };
+                
+                const col = document.createElement('div');
+                col.className = 'col-lg-3 col-md-4 col-sm-6';
+                col.setAttribute('data-country', upperCode.toLowerCase());
+                
+                const popularBadge = countryInfo.popular ? 
+                    '<span class="badge bg-warning text-dark mb-2"><i class="fas fa-star"></i> محبوب</span>' : '';
+                
+                // دریافت آمار از گزارش
+                const countryStats = report.countries && report.countries[upperCode] ? report.countries[upperCode] : null;
+                const countText = countryStats ? `${countryStats.count} سرور` : '';
+                const latencyText = countryStats ? `⚡ ${countryStats.avg_latency}` : '';
+                
+                col.innerHTML = `
+                    <div class="country-card">
+                        <div class="country-flag">${countryInfo.flag}</div>
+                        ${popularBadge}
+                        <h4 class="card-title">${countryInfo.name}</h4>
+                        <p class="text-muted mb-1">${upperCode}</p>
+                        ${countText ? `<p class="text-success mb-1"><small>${countText}</small></p>` : ''}
+                        ${latencyText ? `<p class="text-info mb-3"><small>${latencyText}</small></p>` : '<p class="mb-3"></p>'}
+                        <button class="btn-copy" onclick="copyCountryLink('${upperCode}', this)">
+                            <i class="fas fa-copy"></i> کپی لینک
+                        </button>
+                    </div>
+                `;
+                
+                grid.appendChild(col);
+            });
+            
+            console.log(`✅ ${report.available_files.countries.length} کشور از گزارش بارگذاری شد`);
         }
 
         // Initialize

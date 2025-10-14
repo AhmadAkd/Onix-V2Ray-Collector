@@ -1605,7 +1605,12 @@ class V2RayCollector:
             'working_configs': len(self.working_configs),
             'failed_configs': len(self.failed_configs),
             'success_rate': f"{success_rate:.1f}%",
-            'protocols': {}
+            'protocols': {},
+            'countries': {},
+            'available_files': {
+                'protocols': [],
+                'countries': []
+            }
         }
 
         # آمار پروتکل‌ها
@@ -1615,7 +1620,7 @@ class V2RayCollector:
                     'count': 0, 'avg_latency': 0}
             report['protocols'][config.protocol]['count'] += 1
 
-        # محاسبه میانگین تأخیر
+        # محاسبه میانگین تأخیر پروتکل‌ها
         for protocol in report['protocols']:
             protocol_configs = [
                 c for c in self.working_configs if c.protocol == protocol]
@@ -1623,6 +1628,41 @@ class V2RayCollector:
                 avg_latency = sum(
                     c.latency for c in protocol_configs) / len(protocol_configs)
                 report['protocols'][protocol]['avg_latency'] = f"{avg_latency:.1f}ms"
+
+        # آمار کشورها
+        for config in self.working_configs:
+            country = config.country or 'Unknown'
+            if country != 'Unknown':  # فقط کشورهای معتبر
+                if country not in report['countries']:
+                    report['countries'][country] = {
+                        'count': 0, 'avg_latency': 0}
+                report['countries'][country]['count'] += 1
+
+        # محاسبه میانگین تأخیر کشورها
+        for country in report['countries']:
+            country_configs = [
+                c for c in self.working_configs if c.country == country]
+            if country_configs:
+                avg_latency = sum(
+                    c.latency for c in country_configs) / len(country_configs)
+                report['countries'][country]['avg_latency'] = f"{avg_latency:.1f}ms"
+
+        # اضافه کردن لیست فایل‌های موجود
+        import os
+
+        # فایل‌های پروتکل
+        protocol_dir = 'subscriptions/by_protocol'
+        if os.path.exists(protocol_dir):
+            protocol_files = [f.replace('.txt', '') for f in os.listdir(
+                protocol_dir) if f.endswith('.txt')]
+            report['available_files']['protocols'] = sorted(protocol_files)
+
+        # فایل‌های کشور
+        country_dir = 'subscriptions/by_country'
+        if os.path.exists(country_dir):
+            country_files = [f.replace('.txt', '') for f in os.listdir(
+                country_dir) if f.endswith('.txt')]
+            report['available_files']['countries'] = sorted(country_files)
 
         return report
 
