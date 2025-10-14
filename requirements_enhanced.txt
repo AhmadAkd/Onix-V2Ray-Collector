@@ -10,9 +10,8 @@ discord.py>=2.3.2
 praw>=7.7.1  # Reddit API
 
 # Monitoring & Database
-sqlite3  # Built-in
+# sqlite3 is built-in to Python
 prometheus-client>=0.19.0
-grafana-api>=1.0.3
 
 # Testing & Quality
 pytest>=7.4.3
