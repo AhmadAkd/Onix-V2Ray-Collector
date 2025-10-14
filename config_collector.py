@@ -823,20 +823,106 @@ class V2RayCollector:
 
         return None
 
+    def validate_country_name(self, country: str) -> str:
+        """اعتبارسنجی و نرمال‌سازی نام کشور"""
+        if not country:
+            return 'Unknown'
+        
+        # لیست کدهای معتبر کشور (ISO 3166-1 alpha-2)
+        valid_country_codes = {
+            'US', 'DE', 'IR', 'CA', 'NL', 'TR', 'SE', 'IN', 'RU', 
+            'ES', 'NO', 'LT', 'HK', 'CN', 'GB', 'FR', 'JP', 'SG',
+            'AU', 'BR', 'KR', 'IT', 'CH', 'PL', 'UA', 'TW', 'FI',
+            'AT', 'BE', 'DK', 'IE', 'PT', 'GR', 'CZ', 'RO', 'BG',
+            'HR', 'SK', 'SI', 'EE', 'LV', 'IS', 'LU', 'MT', 'CY'
+        }
+        
+        # نرمال‌سازی
+        country = country.strip().upper()
+        
+        # اگر شروع با عدد می‌شود، نامعتبر است
+        if country and country[0].isdigit():
+            return 'Unknown'
+        
+        # اگر شامل ms یا latency است، نامعتبر است
+        if 'MS' in country or 'LATENCY' in country or '_' in country:
+            return 'Unknown'
+        
+        # اگر طول بیش از 30 کاراکتر است، نامعتبر است
+        if len(country) > 30:
+            return 'Unknown'
+        
+        # اگر کد 2-3 حرفی معتبر است
+        if len(country) <= 3 and country in valid_country_codes:
+            return country
+        
+        # اگر نام کامل کشور است، آن را به کد تبدیل کن
+        country_name_to_code = {
+            'UNITED STATES': 'US', 'AMERICA': 'US', 'USA': 'US',
+            'GERMANY': 'DE', 'DEUTSCHLAND': 'DE',
+            'IRAN': 'IR', 'PERSIA': 'IR',
+            'CANADA': 'CA',
+            'NETHERLANDS': 'NL', 'HOLLAND': 'NL',
+            'TURKEY': 'TR', 'TURKIYE': 'TR',
+            'SWEDEN': 'SE',
+            'INDIA': 'IN',
+            'RUSSIA': 'RU',
+            'SPAIN': 'ES',
+            'NORWAY': 'NO',
+            'LITHUANIA': 'LT',
+            'HONG KONG': 'HK', 'HONGKONG': 'HK',
+            'CHINA': 'CN',
+            'UNITED KINGDOM': 'GB', 'UK': 'GB', 'BRITAIN': 'GB',
+            'FRANCE': 'FR',
+            'JAPAN': 'JP',
+            'SINGAPORE': 'SG',
+            'AUSTRALIA': 'AU',
+            'BRAZIL': 'BR',
+            'SOUTH KOREA': 'KR', 'KOREA': 'KR',
+            'ITALY': 'IT',
+            'SWITZERLAND': 'CH',
+            'POLAND': 'PL',
+            'UKRAINE': 'UA',
+            'TAIWAN': 'TW',
+            'FINLAND': 'FI'
+        }
+        
+        country_upper = country.upper().replace('_', ' ')
+        if country_upper in country_name_to_code:
+            return country_name_to_code[country_upper]
+        
+        # در غیر این صورت Unknown
+        return 'Unknown'
+    
     def extract_country_from_tag(self, tag: str) -> str:
         """استخراج کشور از تگ"""
         country_flags = {
             '🇺🇸': 'US', '🇩🇪': 'DE', '🇮🇷': 'IR', '🇨🇦': 'CA',
             '🇳🇱': 'NL', '🇹🇷': 'TR', '🇸🇪': 'SE', '🇮🇳': 'IN',
             '🇷🇺': 'RU', '🇪🇸': 'ES', '🇳🇴': 'NO', '🇱🇹': 'LT',
-            '🇭🇰': 'HK', '🇨🇳': 'CN', '🚩': 'CF'
+            '🇭🇰': 'HK', '🇨🇳': 'CN', '🚩': 'CF', '🇬🇧': 'GB',
+            '🇫🇷': 'FR', '🇯🇵': 'JP', '🇸🇬': 'SG', '🇦🇺': 'AU',
+            '🇧🇷': 'BR', '🇰🇷': 'KR', '🇮🇹': 'IT', '🇨🇭': 'CH',
+            '🇵🇱': 'PL', '🇺🇦': 'UA', '🇹🇼': 'TW', '🇫🇮': 'FI'
         }
 
+        # بررسی flag در تگ
         for flag, country in country_flags.items():
             if flag in tag:
                 return country
+        
+        # بررسی کد کشور (2-3 حرف بزرگ)
+        country_match = re.search(r'\b([A-Z]{2,3})\b', tag)
+        if country_match:
+            country_code = country_match.group(1)
+            # لیست کدهای معتبر کشور
+            valid_codes = ['US', 'DE', 'IR', 'CA', 'NL', 'TR', 'SE', 'IN', 'RU', 
+                          'ES', 'NO', 'LT', 'HK', 'CN', 'GB', 'FR', 'JP', 'SG',
+                          'AU', 'BR', 'KR', 'IT', 'CH', 'PL', 'UA', 'TW', 'FI']
+            if country_code in valid_codes:
+                return country_code
 
-        return 'unknown'
+        return 'Unknown'
 
     def encode_vmess_config(self, outbound: dict) -> str:
         """کدگذاری کانفیگ VMess به base64"""
@@ -1301,12 +1387,16 @@ class V2RayCollector:
             country_categories = {}
             for protocol, configs in categories.items():
                 for config in configs:
-                    country = config.country or 'unknown'
+                    country = config.country or 'Unknown'
+                    
+                    # اعتبارسنجی نام کشور
+                    country = self.validate_country_name(country)
+                    
                     if country not in country_categories:
                         country_categories[country] = []
                     country_categories[country].append(config)
 
-            logger.info(f"دسته‌بندی کشورها: {list(country_categories.keys())}")
+            logger.info(f"دسته‌بندی {len(country_categories)} کشور")
 
         return categories
 
@@ -1378,14 +1468,17 @@ class V2RayCollector:
 
         for protocol, configs in categories.items():
             for config in configs:
-                country = config.country.lower()
+                # اعتبارسنجی و نرمال‌سازی کشور
+                country = self.validate_country_name(config.country or 'Unknown')
+                
                 if country not in country_configs:
                     country_configs[country] = []
                 country_configs[country].append(config)
 
         # تولید فایل برای هر کشور
         for country, configs in country_configs.items():
-            if configs and country != "unknown":
+            # فقط کشورهای معتبر (نه Unknown)
+            if configs and country != "Unknown" and len(configs) >= 1:
                 # مرتب‌سازی بر اساس سرعت
                 configs.sort(key=lambda x: x.latency)
 
@@ -1393,9 +1486,8 @@ class V2RayCollector:
                 subscription_content = '\n'.join(
                     [config.raw_config for config in configs])
 
-                # پاک‌سازی نام کشور برای نام فایل
-                safe_country_name = self.sanitize_filename(country)
-                filename = f"subscriptions/by_country/{safe_country_name}.txt"
+                # نام فایل با کد کشور
+                filename = f"subscriptions/by_country/{country}.txt"
 
                 country_files[f"{country}_by_country"] = {
                     'filename': filename,
@@ -1414,18 +1506,19 @@ class V2RayCollector:
         # بررسی اینکه آیا نام فایل یک کد کشور معتبر است
         # کدهای کشور باید 2-3 حرف بزرگ باشند یا نام‌های شناخته شده
         valid_country_pattern = r'^[A-Z]{2,3}$|^[A-Za-z\-\s]{2,30}$'
-        
+
         # اگر نام فایل یک عدد یا شامل اعداد زیاد است، آن را unknown کن
         if re.match(r'^\d+', filename) or '_' in filename and 'ms' in filename.lower():
             return 'Unknown'
-        
+
         # حذف کاراکترهای غیرمجاز
         safe_filename = re.sub(r'[<>:"/\\|?*]', '', filename)
 
         # حذف فاصله‌ها و کاراکترهای خاص
         safe_filename = re.sub(r'\s+', '_', safe_filename)
-        safe_filename = safe_filename.replace('|', '_').replace('&', '_').replace('@', '_')
-        
+        safe_filename = safe_filename.replace(
+            '|', '_').replace('&', '_').replace('@', '_')
+
         # اگر نام خیلی عجیب است، unknown کن
         if not re.match(valid_country_pattern, safe_filename.replace('_', ' ')):
             if len(safe_filename) > 30 or any(char.isdigit() for char in safe_filename[:5]):

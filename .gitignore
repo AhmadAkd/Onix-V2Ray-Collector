@@ -1,12 +1,8 @@
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
-
-# C extensions
 *.so
-
-# Distribution / packaging
 .Python
 build/
 develop-eggs/
@@ -20,79 +16,77 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
 MANIFEST
 
-# PyInstaller
-*.manifest
-*.spec
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
-
-# Virtual environments
+# Virtual Environment
 venv/
-ENV/
 env/
+ENV/
 .venv
 
-# IDE
+# IDEs
 .vscode/
 .idea/
 *.swp
 *.swo
-*.sublime-project
-*.sublime-workspace
+*~
+.DS_Store
 
 # Logs
 *.log
 logs/
-automation.log
-v2ray_collector.log
+*.log.*
 
 # Cache
 cache/
+*.cache
 .cache/
-*.pyc
 
-# OS
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# Project specific
-subscriptions/*.txt
-subscriptions/*.json
-!subscriptions/README.md
-analytics/*.json
-cache/*.json
-automation_stats.json
-test_report.json
-
-# Secrets
-.env
-*.key
-*.pem
-secrets.yml
-config_local.py
+# Test
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
 
 # Temporary files
 *.tmp
-*.bak
-*~
+*.temp
 temp/
+tmp/
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Project specific
+automation_stats.json
+test_report.json
+*.171
+
+# Keep subscription files but ignore some patterns
+subscriptions/by_country/*.171
+subscriptions/by_country/*_*.txt
+subscriptions/by_country/[0-9]*.txt
+
+# Analytics data (keep structure, ignore data)
+analytics/historical_data.json
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Environment variables
+.env
+.env.local
+.env.*.local
 
 # Docker
-docker-compose.override.yml
+.dockerignore

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,12 +13,12 @@
             min-height: 100vh;
             padding: 20px;
         }
-        
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
         }
-        
+
         .header {
             background: white;
             border-radius: 20px;
@@ -26,18 +27,18 @@
             margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-        
+
         .header h1 {
             color: #333;
             margin-bottom: 10px;
             font-size: 2.5em;
         }
-        
+
         .header p {
             color: #666;
             font-size: 1.2em;
         }
-        
+
         .nav-tabs {
             border: none;
             background: white;
@@ -45,7 +46,7 @@
             padding: 10px;
             margin-bottom: 30px;
         }
-        
+
         .nav-tabs .nav-link {
             border: none;
             border-radius: 10px;
@@ -55,12 +56,12 @@
             margin: 0 5px;
             transition: all 0.3s;
         }
-        
+
         .nav-tabs .nav-link.active {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
-        
+
         .card {
             border: none;
             border-radius: 15px;
@@ -68,12 +69,12 @@
             transition: all 0.3s;
             height: 100%;
         }
-        
+
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
-        
+
         .protocol-badge {
             display: inline-block;
             padding: 5px 15px;
@@ -82,13 +83,32 @@
             font-weight: 600;
             margin-bottom: 10px;
         }
-        
-        .badge-vmess { background: #4CAF50; color: white; }
-        .badge-vless { background: #2196F3; color: white; }
-        .badge-trojan { background: #FF9800; color: white; }
-        .badge-ss { background: #9C27B0; color: white; }
-        .badge-ssr { background: #E91E63; color: white; }
-        
+
+        .badge-vmess {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .badge-vless {
+            background: #2196F3;
+            color: white;
+        }
+
+        .badge-trojan {
+            background: #FF9800;
+            color: white;
+        }
+
+        .badge-ss {
+            background: #9C27B0;
+            color: white;
+        }
+
+        .badge-ssr {
+            background: #E91E63;
+            color: white;
+        }
+
         .btn-copy {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
@@ -99,16 +119,16 @@
             transition: all 0.3s;
             width: 100%;
         }
-        
+
         .btn-copy:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
-        
+
         .btn-copy.copied {
             background: #4CAF50;
         }
-        
+
         .search-box {
             width: 100%;
             padding: 15px 20px;
@@ -118,13 +138,13 @@
             margin-bottom: 20px;
             transition: all 0.3s;
         }
-        
+
         .search-box:focus {
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
-        
+
         .stats-badge {
             display: inline-block;
             padding: 5px 10px;
@@ -133,13 +153,14 @@
             font-size: 0.85em;
             margin: 5px;
         }
-        
+
         .country-flag {
-                font-size: 2em;
+            font-size: 2em;
             margin-bottom: 10px;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <!-- Header -->
@@ -153,9 +174,9 @@
                 <span class="badge bg-info fs-6">
                     <i class="fas fa-clock"></i> آخرین بروزرسانی: <span id="last-update">در حال بارگذاری...</span>
                 </span>
+            </div>
         </div>
-        </div>
-        
+
         <!-- Navigation Tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item" role="presentation">
@@ -202,8 +223,9 @@
 
             <!-- Protocol Tab -->
             <div class="tab-pane fade" id="protocol-tab">
-                <input type="text" class="search-box" placeholder="🔍 جستجو در پروتکل‌ها..." onkeyup="filterCards('protocol-grid', this.value)">
-                
+                <input type="text" class="search-box" placeholder="🔍 جستجو در پروتکل‌ها..."
+                    onkeyup="filterCards('protocol-grid', this.value)">
+
                 <div class="row g-4" id="protocol-grid">
                     <!-- VMess -->
                     <div class="col-lg-4 col-md-6">
@@ -240,11 +262,11 @@
                                 </div>
                                 <button class="btn-copy mt-3" onclick="copyProtocolLink('vless', this)">
                                     <i class="fas fa-copy"></i> کپی لینک VLESS
-                    </button>
+                                </button>
                             </div>
                         </div>
-                </div>
-                
+                    </div>
+
                     <!-- Trojan -->
                     <div class="col-lg-4 col-md-6">
                         <div class="card">
@@ -280,11 +302,11 @@
                                 </div>
                                 <button class="btn-copy mt-3" onclick="copyProtocolLink('ss', this)">
                                     <i class="fas fa-copy"></i> کپی لینک Shadowsocks
-                    </button>
+                                </button>
                             </div>
                         </div>
-                </div>
-                
+                    </div>
+
                     <!-- ShadowsocksR -->
                     <div class="col-lg-4 col-md-6">
                         <div class="card">
@@ -309,14 +331,15 @@
 
             <!-- Country Tab -->
             <div class="tab-pane fade" id="country-tab">
-                <input type="text" class="search-box" placeholder="🔍 جستجو در کشورها..." onkeyup="filterCards('country-grid', this.value)">
-                
+                <input type="text" class="search-box" placeholder="🔍 جستجو در کشورها..."
+                    onkeyup="filterCards('country-grid', this.value)">
+
                 <div class="row g-4" id="country-grid">
                     <!-- Countries will be loaded dynamically -->
                 </div>
             </div>
         </div>
-        
+
         <!-- Footer -->
         <div class="text-center mt-5">
             <div class="card">
@@ -336,7 +359,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const BASE_URL = 'https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions';
-        
+
         // Country list with flags
         const countries = [
             { code: 'US', name: 'آمریکا', flag: '🇺🇸' },
@@ -370,12 +393,12 @@
         function copyLink(elementId, button) {
             const element = document.getElementById(elementId);
             const text = element.textContent.trim();
-            
+
             navigator.clipboard.writeText(text).then(() => {
                 const originalHTML = button.innerHTML;
                 button.innerHTML = '<i class="fas fa-check"></i> کپی شد!';
                 button.classList.add('copied');
-                
+
                 setTimeout(() => {
                     button.innerHTML = originalHTML;
                     button.classList.remove('copied');
@@ -389,12 +412,12 @@
         // Copy protocol link
         function copyProtocolLink(protocol, button) {
             const link = `${BASE_URL}/${protocol}_subscription.txt`;
-            
+
             navigator.clipboard.writeText(link).then(() => {
                 const originalHTML = button.innerHTML;
                 button.innerHTML = '<i class="fas fa-check"></i> کپی شد!';
                 button.classList.add('copied');
-                
+
                 setTimeout(() => {
                     button.innerHTML = originalHTML;
                     button.classList.remove('copied');
@@ -404,16 +427,16 @@
                 alert('خطا در کپی کردن لینک');
             });
         }
-        
+
         // Copy country link
         function copyCountryLink(countryCode, button) {
             const link = `${BASE_URL}/by_country/${countryCode}.txt`;
-            
+
             navigator.clipboard.writeText(link).then(() => {
                 const originalHTML = button.innerHTML;
                 button.innerHTML = '<i class="fas fa-check"></i> کپی شد!';
                 button.classList.add('copied');
-                
+
                 setTimeout(() => {
                     button.innerHTML = originalHTML;
                     button.classList.remove('copied');
@@ -436,12 +459,12 @@
                 }
             });
         }
-        
+
         // Load countries
         function loadCountries() {
             const countryGrid = document.getElementById('country-grid');
             countryGrid.innerHTML = '';
-            
+
             countries.forEach(country => {
                 const col = document.createElement('div');
                 col.className = 'col-lg-3 col-md-4 col-sm-6';
@@ -466,20 +489,20 @@
             try {
                 const response = await fetch('latest_report.json');
                 const report = await response.json();
-                
+
                 // Update total configs
-                document.getElementById('total-configs').textContent = 
+                document.getElementById('total-configs').textContent =
                     (report.working_configs || 0).toLocaleString('fa-IR');
-                
+
                 // Update last update time
                 document.getElementById('last-update').textContent = report.timestamp || 'نامشخص';
-                
+
                 // Update protocol counts
                 if (report.protocols) {
                     Object.entries(report.protocols).forEach(([protocol, data]) => {
                         const countElement = document.getElementById(`${protocol}-count`);
                         const latencyElement = document.getElementById(`${protocol}-latency`);
-                        
+
                         if (countElement) {
                             countElement.textContent = (data.count || 0).toLocaleString('fa-IR');
                         }
@@ -496,13 +519,14 @@
         }
 
         // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             loadCountries();
             loadStatistics();
-            
+
             // Reload stats every 5 minutes
             setInterval(loadStatistics, 5 * 60 * 1000);
         });
     </script>
 </body>
+
 </html>

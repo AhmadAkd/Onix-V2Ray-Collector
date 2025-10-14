@@ -1,87 +1,150 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>V2Ray Configs - کانفیگ‌های رایگان V2Ray</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
-        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .header { text-align: center; color: #333; margin-bottom: 30px; }
-        .protocol { margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #007bff; }
-        .protocol h3 { margin: 0 0 10px 0; color: #007bff; }
-        .url { background: #e9ecef; padding: 10px; border-radius: 5px; font-family: monospace; word-break: break-all; }
-        .copy-btn { background: #007bff; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; margin-top: 10px; }
-        .stats { background: #d4edda; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-        .footer { text-align: center; margin-top: 30px; color: #666; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .protocol {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+
+        .protocol h3 {
+            margin: 0 0 10px 0;
+            color: #007bff;
+        }
+
+        .url {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .stats {
+            background: #d4edda;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
             <h1>🔒 V2Ray Config Collector</h1>
             <p>کانفیگ‌های رایگان و تست شده V2Ray</p>
         </div>
-        
+
         <div class="stats" id="stats">
             <h3>📊 آمار سیستم</h3>
             <p>آخرین به‌روزرسانی: <span id="lastUpdate">در حال بارگذاری...</span></p>
             <p>کانفیگ‌های سالم: <span id="workingConfigs">-</span></p>
             <p>نرخ موفقیت: <span id="successRate">-</span></p>
         </div>
-        
+
         <div class="protocol">
             <h3>📡 همه کانفیگ‌ها</h3>
-            <div class="url" id="allUrl">https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/all_subscription.txt</div>
+            <div class="url" id="allUrl">
+                https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/all_subscription.txt</div>
             <button class="copy-btn" onclick="copyToClipboard('allUrl')">📋 کپی لینک</button>
         </div>
-        
+
         <div class="protocol">
             <h3>🔵 VMess</h3>
-            <div class="url" id="vmessUrl">https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/vmess_subscription.txt</div>
+            <div class="url" id="vmessUrl">
+                https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/vmess_subscription.txt</div>
             <button class="copy-btn" onclick="copyToClipboard('vmessUrl')">📋 کپی لینک</button>
         </div>
-        
+
         <div class="protocol">
             <h3>🟢 VLESS</h3>
-            <div class="url" id="vlessUrl">https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/vless_subscription.txt</div>
+            <div class="url" id="vlessUrl">
+                https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/vless_subscription.txt</div>
             <button class="copy-btn" onclick="copyToClipboard('vlessUrl')">📋 کپی لینک</button>
         </div>
-        
+
         <div class="protocol">
             <h3>🟡 Trojan</h3>
-            <div class="url" id="trojanUrl">https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/trojan_subscription.txt</div>
+            <div class="url" id="trojanUrl">
+                https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/trojan_subscription.txt</div>
             <button class="copy-btn" onclick="copyToClipboard('trojanUrl')">📋 کپی لینک</button>
         </div>
-        
+
         <div class="protocol">
             <h3>🟠 Shadowsocks</h3>
-            <div class="url" id="ssUrl">https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/ss_subscription.txt</div>
+            <div class="url" id="ssUrl">
+                https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/ss_subscription.txt</div>
             <button class="copy-btn" onclick="copyToClipboard('ssUrl')">📋 کپی لینک</button>
         </div>
-        
+
         <div class="protocol">
             <h3>🟣 ShadowsocksR</h3>
-            <div class="url" id="ssrUrl">https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/ssr_subscription.txt</div>
+            <div class="url" id="ssrUrl">
+                https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/ssr_subscription.txt</div>
             <button class="copy-btn" onclick="copyToClipboard('ssrUrl')">📋 کپی لینک</button>
         </div>
-        
+
         <div class="footer">
             <p>🔄 این کانفیگ‌ها هر 30 دقیقه به‌روزرسانی می‌شوند</p>
             <p>⚡ تمام کانفیگ‌ها تست شده و سالم هستند</p>
             <p>📱 برای استفاده، لینک مورد نظر را در کلاینت V2Ray خود وارد کنید</p>
         </div>
     </div>
-    
+
     <script>
         function copyToClipboard(elementId) {
             const element = document.getElementById(elementId);
             const text = element.textContent;
-            navigator.clipboard.writeText(text).then(function() {
+            navigator.clipboard.writeText(text).then(function () {
                 alert('لینک کپی شد!');
             });
         }
-        
+
         // بارگذاری آمار
         fetch('latest_report.json')
             .then(response => response.json())
@@ -95,4 +158,5 @@
             });
     </script>
 </body>
+
 </html>

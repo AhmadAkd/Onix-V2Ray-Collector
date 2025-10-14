@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,22 +8,83 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
-        .card { border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .stats-card { background: linear-gradient(45deg, #ff6b6b, #ee5a24); color: white; }
-        .stats-card.success { background: linear-gradient(45deg, #00b894, #00a085); }
-        .stats-card.warning { background: linear-gradient(45deg, #fdcb6e, #e17055); }
-        .stats-card.info { background: linear-gradient(45deg, #74b9ff, #0984e3); }
-        .protocol-badge { font-size: 0.8em; padding: 0.3em 0.6em; }
-        .country-flag { font-size: 1.2em; margin-right: 0.3em; }
-        .refresh-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
-        .loading { display: none; }
-        .fade-in { animation: fadeIn 0.5s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .table-responsive { border-radius: 10px; overflow: hidden; }
-        .alert-custom { border: none; border-radius: 10px; }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-card {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+        }
+
+        .stats-card.success {
+            background: linear-gradient(45deg, #00b894, #00a085);
+        }
+
+        .stats-card.warning {
+            background: linear-gradient(45deg, #fdcb6e, #e17055);
+        }
+
+        .stats-card.info {
+            background: linear-gradient(45deg, #74b9ff, #0984e3);
+        }
+
+        .protocol-badge {
+            font-size: 0.8em;
+            padding: 0.3em 0.6em;
+        }
+
+        .country-flag {
+            font-size: 1.2em;
+            margin-right: 0.3em;
+        }
+
+        .refresh-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .loading {
+            display: none;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .table-responsive {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .alert-custom {
+            border: none;
+            border-radius: 10px;
+        }
     </style>
 </head>
+
 <body>
     <div class="container-fluid py-4">
         <!-- Header -->
@@ -138,13 +200,13 @@
                         <div class="btn-group" role="group">
                             <input type="radio" class="btn-check" name="filter" id="all" autocomplete="off" checked>
                             <label class="btn btn-outline-primary btn-sm" for="all">همه</label>
-                            
+
                             <input type="radio" class="btn-check" name="filter" id="vmess" autocomplete="off">
                             <label class="btn btn-outline-primary btn-sm" for="vmess">VMess</label>
-                            
+
                             <input type="radio" class="btn-check" name="filter" id="vless" autocomplete="off">
                             <label class="btn btn-outline-primary btn-sm" for="vless">VLESS</label>
-                            
+
                             <input type="radio" class="btn-check" name="filter" id="trojan" autocomplete="off">
                             <label class="btn btn-outline-primary btn-sm" for="trojan">Trojan</label>
                         </div>
@@ -194,7 +256,8 @@
     </div>
 
     <!-- Loading Overlay -->
-    <div class="loading position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center" style="background: rgba(0,0,0,0.5); z-index: 9999;">
+    <div class="loading position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
+        style="background: rgba(0,0,0,0.5); z-index: 9999;">
         <div class="text-center text-white">
             <div class="spinner-border text-light mb-3" role="status">
                 <span class="visually-hidden">در حال بارگذاری...</span>
@@ -221,7 +284,7 @@
         // Protocol colors
         const protocolColors = {
             'vmess': 'primary',
-            'vless': 'success', 
+            'vless': 'success',
             'trojan': 'warning',
             'ss': 'info',
             'ssr': 'secondary'
@@ -230,23 +293,23 @@
         // Load dashboard data
         async function loadDashboardData() {
             document.querySelector('.loading').style.display = 'flex';
-            
+
             try {
                 // Load latest report
                 const reportResponse = await fetch('latest_report.json');
                 const report = await reportResponse.json();
-                
+
                 updateStatistics(report);
                 updateProtocolStats(report);
                 updateCountryStats(report);
                 updateSystemStatus(report);
                 updateLastUpdate(report);
-                
+
             } catch (error) {
                 console.error('Error loading dashboard data:', error);
                 showError('خطا در بارگذاری داده‌ها');
             }
-            
+
             document.querySelector('.loading').style.display = 'none';
         }
 
@@ -257,13 +320,13 @@
             const totalFailed = report.failed_configs || 0;
             const totalTested = report.total_configs_tested || 0;
             const totalSources = 28; // تعداد منابع
-            
+
             // Parse success_rate if it's a string like "70.5%"
             let successRate = 0;
             if (typeof report.success_rate === 'string') {
                 successRate = parseFloat(report.success_rate.replace('%', ''));
             } else {
-                successRate = totalHealthy + totalFailed > 0 ? 
+                successRate = totalHealthy + totalFailed > 0 ?
                     Math.round((totalHealthy / (totalHealthy + totalFailed)) * 100) : 0;
             }
 
@@ -285,9 +348,9 @@
             Object.entries(protocolStats).forEach(([protocol, data]) => {
                 const count = data.count || 0;
                 const avgLatency = data.avg_latency || 'N/A';
-                const percentage = totalConfigs > 0 ? 
+                const percentage = totalConfigs > 0 ?
                     Math.round((count / totalConfigs) * 100) : 0;
-                
+
                 const col = document.createElement('div');
                 col.className = 'col-md-3 col-sm-6 mb-3';
                 col.innerHTML = `
@@ -309,7 +372,7 @@
         function updateCountryStats(report) {
             const countryContainer = document.getElementById('countryStats');
             countryContainer.innerHTML = '';
-            
+
             // Show top countries with most configs
             const topCountries = [
                 { code: 'US', name: 'آمریکا', flag: '🇺🇸' },
@@ -344,7 +407,7 @@
         function updateSystemStatus(report) {
             const statusContainer = document.getElementById('systemStatus');
             const lastCheck = new Date(report.timestamp || Date.now());
-            
+
             statusContainer.innerHTML = `
                 <div class="col-md-4">
                     <div class="alert alert-success alert-custom">
@@ -370,7 +433,7 @@
         // Update last update time
         function updateLastUpdate(report) {
             const lastUpdate = new Date(report.timestamp || Date.now());
-            document.getElementById('lastUpdate').innerHTML = 
+            document.getElementById('lastUpdate').innerHTML =
                 `<i class="fas fa-clock"></i> آخرین بروزرسانی: ${lastUpdate.toLocaleString('fa-IR')}`;
         }
 
@@ -395,4 +458,5 @@
         setInterval(loadDashboardData, 5 * 60 * 1000);
     </script>
 </body>
+
 </html>
