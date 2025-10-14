@@ -315,11 +315,16 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.7);
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             z-index: 9999;
             backdrop-filter: blur(5px);
+            transition: opacity 0.3s ease;
+        }
+
+        .loading-overlay.show {
+            display: flex;
         }
 
         .loading-content {
@@ -658,14 +663,17 @@
             'UA': { name: 'اوکراین', flag: '🇺🇦' }
         };
 
-        // Load dashboard data
+        // Load dashboard data with better error handling
         async function loadDashboardData() {
             const overlay = document.getElementById('loadingOverlay');
-            overlay.style.display = 'flex';
+            if (overlay) {
+                overlay.style.display = 'flex';
+                overlay.classList.add('show');
+            }
 
             try {
                 const response = await fetch('latest_report.json');
-                if (!response.ok) throw new Error('Failed to fetch data');
+                if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 
                 const data = await response.json();
                 
@@ -674,11 +682,31 @@
                 updateTables(data);
                 updateLastUpdateTime(data);
                 
+                console.log('✅ Dashboard data loaded successfully');
+                
             } catch (error) {
-                console.error('Error loading dashboard:', error);
-                alert('خطا در بارگذاری داده‌ها. لطفاً دوباره تلاش کنید.');
+                console.error('❌ Error loading dashboard:', error);
+                
+                // Show error in stats instead of alert
+                const statsGrid = document.getElementById('statsGrid');
+                if (statsGrid) {
+                    statsGrid.innerHTML = `
+                        <div class="col-12">
+                            <div class="alert alert-danger text-center">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                خطا در بارگذاری داده‌ها: ${error.message}
+                                <br><small>لطفاً صفحه را refresh کنید</small>
+                            </div>
+                        </div>
+                    `;
+                }
             } finally {
-                overlay.style.display = 'none';
+                if (overlay) {
+                    overlay.classList.remove('show');
+                    setTimeout(() => {
+                        overlay.style.display = 'none';
+                    }, 300);
+                }
             }
         }
 
@@ -732,7 +760,7 @@
             `).join('');
         }
 
-        // Update charts
+        // Update charts with better error handling
         function updateCharts(data) {
             const protocols = data.protocols || {};
             const countries = data.countries || {};
@@ -742,31 +770,39 @@
             const protocolData = Object.values(protocols).map(p => p.count);
             const protocolColors = Object.keys(protocols).map(p => protocolInfo[p]?.color || '#999');
 
-            if (protocolChart) protocolChart.destroy();
-            protocolChart = new Chart(document.getElementById('protocolChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: protocolLabels,
-                    datasets: [{
-                        data: protocolData,
-                        backgroundColor: protocolColors,
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                font: { size: 14 },
-                                padding: 15
+            // Destroy existing chart only if it exists
+            if (protocolChart) {
+                protocolChart.destroy();
+                protocolChart = null;
+            }
+            
+            const protocolCtx = document.getElementById('protocolChart');
+            if (protocolCtx) {
+                protocolChart = new Chart(protocolCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: protocolLabels,
+                        datasets: [{
+                            data: protocolData,
+                            backgroundColor: protocolColors,
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    font: { size: 14 },
+                                    padding: 15
+                                }
                             }
                         }
                     }
-                }
-            });
+                });
+            }
 
             // Country Chart (Top 10)
             const sortedCountries = Object.entries(countries)
@@ -779,35 +815,42 @@
             });
             const countryData = sortedCountries.map(([, data]) => data.count);
 
-            if (countryChart) countryChart.destroy();
-            countryChart = new Chart(document.getElementById('countryChart'), {
-                type: 'bar',
-                data: {
-                    labels: countryLabels,
-                    datasets: [{
-                        label: 'تعداد کانفیگ',
-                        data: countryData,
-                        backgroundColor: 'rgba(102, 126, 234, 0.8)',
-                        borderRadius: 8
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
+            if (countryChart) {
+                countryChart.destroy();
+                countryChart = null;
+            }
+            
+            const countryCtx = document.getElementById('countryChart');
+            if (countryCtx) {
+                countryChart = new Chart(countryCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: countryLabels,
+                        datasets: [{
+                            label: 'تعداد کانفیگ',
+                            data: countryData,
+                            backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                            borderRadius: 8
+                        }]
                     },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: { font: { size: 12 } }
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false }
                         },
-                        x: {
-                            ticks: { font: { size: 11 } }
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: { font: { size: 12 } }
+                            },
+                            x: {
+                                ticks: { font: { size: 11 } }
+                            }
                         }
                     }
-                }
-            });
+                });
+            }
 
             // Latency Chart
             const latencyLabels = Object.keys(protocols).map(p => protocolInfo[p]?.name || p);
@@ -816,34 +859,41 @@
                 return parseFloat(latency.replace('ms', ''));
             });
 
-            if (latencyChart) latencyChart.destroy();
-            latencyChart = new Chart(document.getElementById('latencyChart'), {
-                type: 'line',
-                data: {
-                    labels: latencyLabels,
-                    datasets: [{
-                        label: 'میانگین تأخیر (ms)',
-                        data: latencyData,
-                        borderColor: 'rgb(102, 126, 234)',
-                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                        tension: 0.4,
-                        fill: true
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: true }
+            if (latencyChart) {
+                latencyChart.destroy();
+                latencyChart = null;
+            }
+            
+            const latencyCtx = document.getElementById('latencyChart');
+            if (latencyCtx) {
+                latencyChart = new Chart(latencyCtx, {
+                    type: 'line',
+                    data: {
+                        labels: latencyLabels,
+                        datasets: [{
+                            label: 'میانگین تأخیر (ms)',
+                            data: latencyData,
+                            borderColor: 'rgb(102, 126, 234)',
+                            backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
                     },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: { font: { size: 12 } }
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: true }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: { font: { size: 12 } }
+                            }
                         }
                     }
-                }
-            });
+                });
+            }
         }
 
         // Update tables
@@ -940,8 +990,9 @@
         // Load data on page load
         document.addEventListener('DOMContentLoaded', loadDashboardData);
 
-        // Auto-refresh every 5 minutes
-        setInterval(loadDashboardData, 5 * 60 * 1000);
+        // Manual refresh only - no auto-refresh to prevent caching issues
+        // Auto-refresh can be enabled by uncommenting the line below:
+        // setInterval(loadDashboardData, 5 * 60 * 1000);
     </script>
 </body>
 </html>
