@@ -3,90 +3,906 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V2Ray Configs - کانفیگ‌های رایگان V2Ray</title>
+    <title>V2Ray Collector - جمع‌آوری خودکار کانفیگ‌های V2Ray</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
-        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .header { text-align: center; color: #333; margin-bottom: 30px; }
-        .protocol { margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #007bff; }
-        .protocol h3 { margin: 0 0 10px 0; color: #007bff; }
-        .url { background: #e9ecef; padding: 10px; border-radius: 5px; font-family: monospace; word-break: break-all; }
-        .copy-btn { background: #007bff; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; margin-top: 10px; }
-        .stats { background: #d4edda; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-        .footer { text-align: center; margin-top: 30px; color: #666; }
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success-gradient: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            --danger-gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            --warning-gradient: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+            --info-gradient: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            --dark-gradient: linear-gradient(135deg, #2d3436 0%, #000000 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 50px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .section-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title i {
+            font-size: 2.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .protocol-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .protocol-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .protocol-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .protocol-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .protocol-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border-color: #667eea;
+        }
+
+        .protocol-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .protocol-icon {
+            font-size: 2.5rem;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .protocol-info h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .protocol-info p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .url-box {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            word-break: break-all;
+            margin-bottom: 15px;
+            color: #333;
+            max-height: 80px;
+            overflow-y: auto;
+        }
+
+        .btn-copy {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: var(--primary-gradient);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-copy:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-copy.copied {
+            background: var(--success-gradient);
+        }
+
+        .country-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .country-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .country-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+
+        .country-flag {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .country-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .country-count {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .quick-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .quick-link {
+            padding: 15px 30px;
+            border-radius: 50px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quick-link:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .badge-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .badge-success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px;
+            color: white;
+            margin-top: 50px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-link:hover {
+            color: #fdcb6e;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-section {
+                padding: 30px 20px;
+            }
+
+            .section-card {
+                padding: 25px 15px;
+            }
+
+            .protocol-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .country-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .toast-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: none;
+            align-items: center;
+            gap: 15px;
+            z-index: 9999;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast-notification.show {
+            display: flex;
+        }
+
+        .toast-notification.success {
+            border-right: 4px solid #00b894;
+        }
+
+        .toast-notification.error {
+            border-right: 4px solid #ff6b6b;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🔒 V2Ray Config Collector</h1>
-            <p>کانفیگ‌های رایگان و تست شده V2Ray</p>
+    <div class="main-container">
+        <!-- Hero Section -->
+        <div class="hero-section fade-in">
+            <h1 class="hero-title">
+                <i class="fas fa-shield-alt"></i>
+                V2Ray Config Collector
+            </h1>
+            <p class="hero-subtitle">
+                جمع‌آوری، تست و دسته‌بندی خودکار کانفیگ‌های رایگان V2Ray
+            </p>
+            
+            <div class="quick-links">
+                <span class="badge-status badge-success pulse">
+                    <i class="fas fa-circle"></i>
+                    سیستم فعال است
+                </span>
+                <span class="badge-status badge-info">
+                    <i class="fas fa-sync-alt"></i>
+                    به‌روزرسانی هر 30 دقیقه
+                </span>
+                <span class="badge-status badge-info" id="lastUpdateBadge">
+                    <i class="fas fa-clock"></i>
+                    در حال بارگذاری...
+                </span>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-card fade-in">
+                    <div class="stat-icon" style="color: #00b894;">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-value" id="workingConfigs" style="color: #00b894;">-</div>
+                    <div class="stat-label">کانفیگ سالم</div>
+                </div>
+
+                <div class="stat-card fade-in" style="animation-delay: 0.1s;">
+                    <div class="stat-icon" style="color: #0984e3;">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="stat-value" id="totalProtocols" style="color: #0984e3;">-</div>
+                    <div class="stat-label">پروتکل پشتیبانی شده</div>
+                </div>
+
+                <div class="stat-card fade-in" style="animation-delay: 0.2s;">
+                    <div class="stat-icon" style="color: #fdcb6e;">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="stat-value" id="totalCountries" style="color: #fdcb6e;">-</div>
+                    <div class="stat-label">کشور</div>
+                </div>
+
+                <div class="stat-card fade-in" style="animation-delay: 0.3s;">
+                    <div class="stat-icon" style="color: #e17055;">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-value" id="successRate" style="color: #e17055;">-%</div>
+                    <div class="stat-label">نرخ موفقیت</div>
+                </div>
+            </div>
+
+            <div class="quick-links" style="margin-top: 40px;">
+                <a href="dashboard.html" class="quick-link">
+                    <i class="fas fa-chart-bar"></i>
+                    داشبورد تحلیلی
+                </a>
+                <a href="https://github.com/AhmadAkd/V2Ray_Collector" class="quick-link" target="_blank">
+                    <i class="fab fa-github"></i>
+                    GitHub
+                </a>
+                <a href="#protocols" class="quick-link">
+                    <i class="fas fa-download"></i>
+                    دریافت کانفیگ
+                </a>
+            </div>
         </div>
-        
-        <div class="stats" id="stats">
-            <h3>📊 آمار سیستم</h3>
-            <p>آخرین به‌روزرسانی: <span id="lastUpdate">در حال بارگذاری...</span></p>
-            <p>کانفیگ‌های سالم: <span id="workingConfigs">-</span></p>
-            <p>نرخ موفقیت: <span id="successRate">-</span></p>
+
+        <!-- All Configs Section -->
+        <div class="section-card fade-in" id="all-configs">
+            <div class="section-title">
+                <i class="fas fa-star"></i>
+                <span>دریافت تمام کانفیگ‌ها</span>
+            </div>
+            <div class="protocol-grid">
+                <div class="protocol-card">
+                    <div class="protocol-header">
+                        <div class="protocol-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-globe" style="color: white;"></i>
+                        </div>
+                        <div class="protocol-info">
+                            <h3>همه پروتکل‌ها</h3>
+                            <p>تمام کانفیگ‌های سالم و تست شده</p>
+                        </div>
+                    </div>
+                    <div class="url-box" id="urlAll">https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/all_subscription.txt</div>
+                    <button class="btn-copy" onclick="copyUrl('urlAll', this)">
+                        <i class="fas fa-copy"></i>
+                        <span>کپی لینک اشتراک</span>
+                    </button>
+                </div>
+            </div>
         </div>
-        
-        <div class="protocol">
-            <h3>📡 همه کانفیگ‌ها</h3>
-            <div class="url" id="allUrl">https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/all_subscription.txt</div>
-            <button class="copy-btn" onclick="copyToClipboard('allUrl')">📋 کپی لینک</button>
+
+        <!-- Protocols Section -->
+        <div class="section-card fade-in" id="protocols">
+            <div class="section-title">
+                <i class="fas fa-network-wired"></i>
+                <span>دسته‌بندی بر اساس پروتکل</span>
+            </div>
+            <div class="protocol-grid" id="protocolGrid">
+                <!-- Protocols will be loaded dynamically -->
+            </div>
         </div>
-        
-        <div class="protocol">
-            <h3>🔵 VMess</h3>
-            <div class="url" id="vmessUrl">https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/vmess_subscription.txt</div>
-            <button class="copy-btn" onclick="copyToClipboard('vmessUrl')">📋 کپی لینک</button>
+
+        <!-- Countries Section -->
+        <div class="section-card fade-in" id="countries">
+            <div class="section-title">
+                <i class="fas fa-flag"></i>
+                <span>دسته‌بندی بر اساس کشور</span>
+            </div>
+            <div class="country-grid" id="countryGrid">
+                <!-- Countries will be loaded dynamically -->
+            </div>
         </div>
-        
-        <div class="protocol">
-            <h3>🟢 VLESS</h3>
-            <div class="url" id="vlessUrl">https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/vless_subscription.txt</div>
-            <button class="copy-btn" onclick="copyToClipboard('vlessUrl')">📋 کپی لینک</button>
+
+        <!-- Features Section -->
+        <div class="section-card fade-in">
+            <div class="section-title">
+                <i class="fas fa-rocket"></i>
+                <span>ویژگی‌های سیستم</span>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="text-center p-4">
+                        <i class="fas fa-sync fa-3x mb-3" style="color: #667eea;"></i>
+                        <h4>به‌روزرسانی خودکار</h4>
+                        <p class="text-muted">جمع‌آوری و تست خودکار هر 30 دقیقه با GitHub Actions</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center p-4">
+                        <i class="fas fa-bolt fa-3x mb-3" style="color: #fdcb6e;"></i>
+                        <h4>تست سرعت بالا</h4>
+                        <p class="text-muted">تست همزمان صدها کانفیگ با تکنولوژی Ultra-Fast</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center p-4">
+                        <i class="fas fa-shield-alt fa-3x mb-3" style="color: #00b894;"></i>
+                        <h4>فیلتر هوشمند</h4>
+                        <p class="text-muted">حذف کانفیگ‌های تکراری و ناسالم به صورت خودکار</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center p-4">
+                        <i class="fas fa-database fa-3x mb-3" style="color: #e17055;"></i>
+                        <h4>68+ منبع</h4>
+                        <p class="text-muted">جمع‌آوری از بیش از 68 منبع معتبر</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center p-4">
+                        <i class="fab fa-telegram fa-3x mb-3" style="color: #0088cc;"></i>
+                        <h4>پشتیبانی Telegram</h4>
+                        <p class="text-muted">جمع‌آوری از کانال‌های تلگرام</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center p-4">
+                        <i class="fas fa-chart-bar fa-3x mb-3" style="color: #6c5ce7;"></i>
+                        <h4>مانیتورینگ پیشرفته</h4>
+                        <p class="text-muted">ذخیره‌سازی آمار و تاریخچه در SQLite</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="protocol">
-            <h3>🟡 Trojan</h3>
-            <div class="url" id="trojanUrl">https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/trojan_subscription.txt</div>
-            <button class="copy-btn" onclick="copyToClipboard('trojanUrl')">📋 کپی لینک</button>
-        </div>
-        
-        <div class="protocol">
-            <h3>🟠 Shadowsocks</h3>
-            <div class="url" id="ssUrl">https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/ss_subscription.txt</div>
-            <button class="copy-btn" onclick="copyToClipboard('ssUrl')">📋 کپی لینک</button>
-        </div>
-        
+
+        <!-- Footer -->
         <div class="footer">
-            <p>🔄 این کانفیگ‌ها هر 30 دقیقه به‌روزرسانی می‌شوند</p>
-            <p>⚡ تمام کانفیگ‌ها تست شده و سالم هستند</p>
-            <p>📱 برای استفاده، لینک مورد نظر را در کلاینت V2Ray خود وارد کنید</p>
+            <h3>
+                <i class="fas fa-heart" style="color: #ff6b6b;"></i>
+                ساخته شده با عشق برای دسترسی آزاد به اینترنت
+            </h3>
+            <div class="footer-links">
+                <a href="https://github.com/AhmadAkd/V2Ray_Collector" class="footer-link" target="_blank">
+                    <i class="fab fa-github"></i>
+                    GitHub Repository
+                </a>
+                <a href="https://github.com/AhmadAkd/V2Ray_Collector/issues" class="footer-link" target="_blank">
+                    <i class="fas fa-bug"></i>
+                    گزارش باگ
+                </a>
+                <a href="dashboard.html" class="footer-link">
+                    <i class="fas fa-chart-line"></i>
+                    داشبورد
+                </a>
+            </div>
+            <p style="margin-top: 30px; opacity: 0.8;">
+                © 2025 V2Ray Collector - All Rights Reserved
+            </p>
         </div>
     </div>
-    
+
+    <!-- Toast Notification -->
+    <div class="toast-notification" id="toast">
+        <i class="fas fa-check-circle" style="font-size: 1.5rem; color: #00b894;"></i>
+        <span id="toastMessage">لینک با موفقیت کپی شد!</span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function copyToClipboard(elementId) {
-            const element = document.getElementById(elementId);
-            const text = element.textContent;
-            navigator.clipboard.writeText(text).then(function() {
-                alert('لینک کپی شد!');
+        // Protocol configurations
+        const protocols = [
+            {
+                id: 'vmess',
+                name: 'VMess',
+                icon: 'fas fa-bolt',
+                color: '#667eea',
+                description: 'پروتکل VMess با امنیت بالا'
+            },
+            {
+                id: 'vless',
+                name: 'VLESS',
+                icon: 'fas fa-shield-alt',
+                color: '#00b894',
+                description: 'پروتکل سبک و سریع VLESS'
+            },
+            {
+                id: 'trojan',
+                name: 'Trojan',
+                icon: 'fas fa-user-secret',
+                color: '#fdcb6e',
+                description: 'پروتکل Trojan با قابلیت مخفی‌سازی'
+            },
+            {
+                id: 'ss',
+                name: 'Shadowsocks',
+                icon: 'fas fa-eye-slash',
+                color: '#0984e3',
+                description: 'Shadowsocks کلاسیک و پایدار'
+            },
+            {
+                id: 'ssr',
+                name: 'ShadowsocksR',
+                icon: 'fas fa-ghost',
+                color: '#6c5ce7',
+                description: 'ShadowsocksR با قابلیت‌های اضافی'
+            },
+            {
+                id: 'hysteria',
+                name: 'Hysteria',
+                icon: 'fas fa-rocket',
+                color: '#e17055',
+                description: 'پروتکل فوق سریع Hysteria'
+            }
+        ];
+
+        // Country configurations
+        const countryInfo = {
+            'US': { name: 'آمریکا', flag: '🇺🇸' },
+            'DE': { name: 'آلمان', flag: '🇩🇪' },
+            'IR': { name: 'ایران', flag: '🇮🇷' },
+            'CA': { name: 'کانادا', flag: '🇨🇦' },
+            'NL': { name: 'هلند', flag: '🇳🇱' },
+            'TR': { name: 'ترکیه', flag: '🇹🇷' },
+            'FR': { name: 'فرانسه', flag: '🇫🇷' },
+            'GB': { name: 'انگلیس', flag: '🇬🇧' },
+            'JP': { name: 'ژاپن', flag: '🇯🇵' },
+            'SG': { name: 'سنگاپور', flag: '🇸🇬' },
+            'HK': { name: 'هنگ‌کنگ', flag: '🇭🇰' },
+            'CN': { name: 'چین', flag: '🇨🇳' },
+            'RU': { name: 'روسیه', flag: '🇷🇺' },
+            'SE': { name: 'سوئد', flag: '🇸🇪' },
+            'FI': { name: 'فنلاند', flag: '🇫🇮' },
+            'LT': { name: 'لیتوانی', flag: '🇱🇹' },
+            'CH': { name: 'سوئیس', flag: '🇨🇭' },
+            'AU': { name: 'استرالیا', flag: '🇦🇺' },
+            'BR': { name: 'برزیل', flag: '🇧🇷' },
+            'IN': { name: 'هند', flag: '🇮🇳' },
+            'KR': { name: 'کره جنوبی', flag: '🇰🇷' },
+            'TW': { name: 'تایوان', flag: '🇹🇼' },
+            'PL': { name: 'لهستان', flag: '🇵🇱' },
+            'ES': { name: 'اسپانیا', flag: '🇪🇸' },
+            'IT': { name: 'ایتالیا', flag: '🇮🇹' },
+            'EU': { name: 'اتحادیه اروپا', flag: '🇪🇺' },
+            'CF': { name: 'Cloudflare', flag: '☁️' },
+            'UA': { name: 'اوکراین', flag: '🇺🇦' }
+        };
+
+        // Load data from latest_report.json
+        async function loadData() {
+            try {
+                const response = await fetch('latest_report.json');
+                const data = await response.json();
+                
+                updateStatistics(data);
+                loadProtocols(data);
+                loadCountries(data);
+            } catch (error) {
+                console.error('Error loading data:', error);
+                showToast('خطا در بارگذاری داده‌ها', 'error');
+            }
+        }
+
+        // Update statistics
+        function updateStatistics(data) {
+            document.getElementById('workingConfigs').textContent = 
+                (data.working_configs || 0).toLocaleString('fa-IR');
+            
+            const protocolCount = Object.keys(data.protocols || {}).length;
+            document.getElementById('totalProtocols').textContent = protocolCount;
+            
+            const countryCount = Object.keys(data.countries || {}).length;
+            document.getElementById('totalCountries').textContent = countryCount;
+            
+            document.getElementById('successRate').textContent = data.success_rate || '0%';
+            
+            const lastUpdate = new Date(data.timestamp);
+            const relativeTime = getRelativeTime(lastUpdate);
+            document.getElementById('lastUpdateBadge').innerHTML = 
+                `<i class="fas fa-clock"></i> ${relativeTime}`;
+        }
+
+        // Load protocols
+        function loadProtocols(data) {
+            const protocolGrid = document.getElementById('protocolGrid');
+            protocolGrid.innerHTML = '';
+
+            const availableProtocols = data.available_files?.protocols || [];
+            
+            protocols.forEach(protocol => {
+                if (availableProtocols.includes(protocol.id)) {
+                    const protocolData = data.protocols?.[protocol.id];
+                    const count = protocolData?.count || 0;
+                    const latency = protocolData?.avg_latency || 'N/A';
+
+                    const card = document.createElement('div');
+                    card.className = 'protocol-card fade-in';
+                    card.innerHTML = `
+                        <div class="protocol-header">
+                            <div class="protocol-icon" style="background: ${protocol.color};">
+                                <i class="${protocol.icon}" style="color: white;"></i>
+                            </div>
+                            <div class="protocol-info">
+                                <h3>${protocol.name}</h3>
+                                <p>${protocol.description}</p>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <span class="badge bg-primary">${count.toLocaleString('fa-IR')} کانفیگ</span>
+                            <span class="badge bg-success">تأخیر: ${latency}</span>
+                        </div>
+                        <div class="url-box" id="url${protocol.id}">https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/by_protocol/${protocol.id}.txt</div>
+                        <button class="btn-copy" onclick="copyUrl('url${protocol.id}', this)">
+                            <i class="fas fa-copy"></i>
+                            <span>کپی لینک اشتراک</span>
+                        </button>
+                    `;
+                    protocolGrid.appendChild(card);
+                }
             });
         }
-        
-        // بارگذاری آمار
-        fetch('latest_report.json')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('lastUpdate').textContent = data.timestamp || 'نامشخص';
-                document.getElementById('workingConfigs').textContent = data.working_configs || '0';
-                document.getElementById('successRate').textContent = data.success_rate || '0%';
-            })
-            .catch(error => {
-                console.error('خطا در بارگذاری آمار:', error);
+
+        // Load countries
+        function loadCountries(data) {
+            const countryGrid = document.getElementById('countryGrid');
+            countryGrid.innerHTML = '';
+
+            const countries = data.countries || {};
+            const availableCountries = data.available_files?.countries || [];
+
+            // Sort countries by count
+            const sortedCountries = Object.entries(countries)
+                .sort((a, b) => (b[1].count || 0) - (a[1].count || 0));
+
+            sortedCountries.forEach(([code, countryData]) => {
+                const upperCode = code.toUpperCase();
+                if (!availableCountries.includes(code) && !availableCountries.includes(upperCode)) {
+                    return;
+                }
+
+                const info = countryInfo[upperCode] || { name: upperCode, flag: '🏳️' };
+                const count = countryData.count || 0;
+                const latency = countryData.avg_latency || 'N/A';
+
+                const card = document.createElement('div');
+                card.className = 'country-card fade-in';
+                card.onclick = () => copyCountryUrl(code, card);
+                card.innerHTML = `
+                    <div class="country-flag">${info.flag}</div>
+                    <div class="country-name">${info.name}</div>
+                    <div class="country-count">${count.toLocaleString('fa-IR')} کانفیگ</div>
+                    <small class="text-muted" style="font-size: 0.75rem;">${latency}</small>
+                `;
+                countryGrid.appendChild(card);
             });
+        }
+
+        // Copy URL function
+        function copyUrl(elementId, button) {
+            const urlElement = document.getElementById(elementId);
+            const url = urlElement.textContent;
+            
+            navigator.clipboard.writeText(url).then(() => {
+                button.classList.add('copied');
+                button.innerHTML = '<i class="fas fa-check"></i><span>کپی شد!</span>';
+                showToast('لینک با موفقیت کپی شد!', 'success');
+                
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = '<i class="fas fa-copy"></i><span>کپی لینک اشتراک</span>';
+                }, 2000);
+            }).catch(err => {
+                showToast('خطا در کپی کردن', 'error');
+            });
+        }
+
+        // Copy country URL
+        function copyCountryUrl(countryCode, card) {
+            const url = `https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/by_country/${countryCode}.txt`;
+            
+            navigator.clipboard.writeText(url).then(() => {
+                const originalBg = card.style.background;
+                card.style.background = 'linear-gradient(135deg, #00b894, #00cec9)';
+                card.style.color = 'white';
+                showToast('لینک کشور کپی شد!', 'success');
+                
+                setTimeout(() => {
+                    card.style.background = originalBg;
+                    card.style.color = '';
+                }, 1500);
+            }).catch(err => {
+                showToast('خطا در کپی کردن', 'error');
+            });
+        }
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            toast.className = `toast-notification ${type} show`;
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Get relative time
+        function getRelativeTime(date) {
+            const now = new Date();
+            const diff = Math.floor((now - date) / 1000);
+            
+            if (diff < 60) return 'چند لحظه پیش';
+            if (diff < 3600) return `${Math.floor(diff / 60)} دقیقه پیش`;
+            if (diff < 86400) return `${Math.floor(diff / 3600)} ساعت پیش`;
+            return `${Math.floor(diff / 86400)} روز پیش`;
+        }
+
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', loadData);
+
+        // Auto-refresh every 5 minutes
+        setInterval(loadData, 5 * 60 * 1000);
     </script>
 </body>
 </html>
