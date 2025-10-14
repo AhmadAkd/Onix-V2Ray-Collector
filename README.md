@@ -43,6 +43,8 @@
 - ✅ **Base64 Decoding** با پشتیبانی کامل از تمام فرمت‌ها
 - ✅ **حذف خودکار تکراری‌ها** با الگوریتم بهینه
 - ✅ **Cache Manager** برای کاهش درخواست‌های شبکه
+- ✅ **Error Recovery** با retry و fallback
+- ✅ **Health Check** خودکار سیستم و منابع
 
 </td>
 <td width="50%">
@@ -63,8 +65,10 @@
 - ✅ **Dashboard تحلیلی** با Chart.js
 - ✅ **Real-time Statistics** با بروزرسانی خودکار
 - ✅ **طراحی Responsive** سازگار با موبایل
-- ✅ **Dark/Light Theme** (در حال توسعه)
+- ✅ **Dark/Light Theme** با localStorage
 - ✅ **Copy با یک کلیک** برای تمام لینک‌ها
+- ✅ **REST API** با FastAPI و Swagger UI
+- ✅ **Performance Monitoring** و Metrics
 
 </td>
 <td width="50%">
@@ -75,6 +79,8 @@
 - ✅ **فیلتر بر اساس Latency**
 - ✅ **Subscription Links** برای هر دسته
 - ✅ **Auto-Generated Files** در هر 30 دقیقه
+- ✅ **ML-based Scoring** برای انتخاب بهترین کانفیگ
+- ✅ **SQLite Database** برای تاریخچه و trends
 
 </td>
 </tr>
@@ -156,21 +162,31 @@ https://ahmadakd.github.io/V2Ray_Collector/subscriptions/by_protocol/vmess.txt
 https://ahmadakd.github.io/V2Ray_Collector/subscriptions/by_country/US.txt
 ```
 
-#### روش 2: نصب Local
+#### روش 2: نصب Local (راه سریع! ⚡)
 
 ```bash
-# 1. Clone کردن
+# Linux/Mac
+curl -sSL https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/quick_start.sh | bash
+
+# یا دستی:
 git clone https://github.com/AhmadAkd/V2Ray_Collector.git
 cd V2Ray_Collector
+chmod +x quick_start.sh
+./quick_start.sh
+```
 
-# 2. نصب Dependencies
+**Windows PowerShell:**
+```powershell
+# راه سریع
+.\quick_start.ps1
+
+# یا دستی:
+git clone https://github.com/AhmadAkd/V2Ray_Collector.git
+cd V2Ray_Collector
+python -m venv venv
+.\venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-
-# 3. اجرای جمع‌آوری
 python config_collector.py
-
-# 4. مشاهده نتایج
-open subscriptions/index.html
 ```
 
 #### روش 3: استفاده از Docker
@@ -398,21 +414,52 @@ schedule:
 
 ## 🛠️ API و ادغام
 
-### 📡 **REST API** (در حال توسعه)
+### 📡 **REST API** ✅
+
+```bash
+# شروع API Server
+python api_endpoints.py
+
+# یا با Uvicorn
+uvicorn api_endpoints:app --host 0.0.0.0 --port 8000
+
+# یا با Docker
+docker-compose up v2ray-api
+```
+
+**📚 Interactive Docs**: `http://localhost:8000/api/docs`
+
+#### Endpoints:
 
 ```javascript
 // دریافت آمار کلی
 GET /api/v1/stats
 
-// دریافت کانفیگ‌ها بر اساس پروتکل
-GET /api/v1/configs/protocol/:protocol
+// لیست پروتکل‌ها
+GET /api/v1/protocols
 
-// دریافت کانفیگ‌ها بر اساس کشور
-GET /api/v1/configs/country/:country
+// آمار یک پروتکل
+GET /api/v1/protocols/{protocol}
 
-// دریافت گزارش جزئیات
-GET /api/v1/report
+// لیست کشورها
+GET /api/v1/countries
+
+// آمار یک کشور
+GET /api/v1/countries/{country}
+
+// دریافت کانفیگ‌ها
+GET /api/v1/configs/protocol/{protocol}?limit=10
+GET /api/v1/configs/country/{country}?limit=10
+GET /api/v1/configs/all?limit=100
+
+// وضعیت سلامت
+GET /api/v1/health
+
+// تاریخچه
+GET /api/v1/history?hours=24
 ```
+
+**📖 مستندات کامل**: [API Documentation](docs/API.md)
 
 ### 🔗 **Webhook Integration**
 
@@ -474,27 +521,35 @@ curl -X POST https://api.telegram.org/bot{TOKEN}/sendMessage \
 
 ## 🎯 Roadmap
 
-### ✅ **نسخه فعلی (v2.0)**
+### ✅ **نسخه فعلی (v2.0) - همه چیز آماده!**
 - ✅ 39 منبع معتبر
 - ✅ 17+ پروتکل
 - ✅ SingBox Parser
 - ✅ Dashboard مدرن
 - ✅ GeoIP Lookup
 - ✅ Cache Manager
+- ✅ Health Check System
+- ✅ Error Recovery
+- ✅ SQLite Database
+- ✅ ML Config Scoring
+- ✅ REST API با FastAPI
+- ✅ Dark Mode
+- ✅ Security Validation
+- ✅ Performance Monitoring
 
 ### 🚧 **نسخه بعدی (v2.1)**
-- ⏳ Telegram Bot Integration (تکمیل 70%)
-- ⏳ Advanced Monitoring (تکمیل 80%)
-- ⏳ REST API (در حال توسعه)
-- ⏳ Docker Support (تکمیل 60%)
-- ⏳ Dark Mode (در حال طراحی)
+- 🔄 Telegram Bot Commands
+- 🔄 Admin Panel Web UI
+- 🔄 Real-time WebSocket Updates
+- 🔄 Advanced Analytics Dashboard
+- 🔄 Multi-user Support
 
 ### 🔮 **آینده (v3.0)**
-- 🔜 Machine Learning برای انتخاب بهترین کانفیگ
-- 🔜 پشتیبانی از WireGuard
 - 🔜 Mobile App (Android/iOS)
-- 🔜 پنل مدیریت کامل
-- 🔜 Multi-Language Support
+- 🔜 Plugin System
+- 🔜 Blockchain Integration
+- 🔜 P2P Config Sharing
+- 🔜 Enterprise Features
 
 ---
 
