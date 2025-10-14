@@ -1,0 +1,2 @@
+vless://58057294-a9cc-4618-96dd-42f51748e721@www.speedtest.net:2053?path=/&security=tls&encryption=none&host=dl1-uk-cdn.easy-upload.org&type=ws&sni=dl1-uk-cdn.easy-upload.org#🇬🇧 UK - Telegram : @FergalVpnMod
+vmess://eyJhZGQiOiJjc2dvLmNvbSIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiY2RuLW5vZGUtb3NzLTk5LnBhb2Z1LmRlIiwiaWQiOiI2NzgyOGE2ZS0wMTQ0LTRlNTctODE2OS0yNDQ3YTNkZDJlNjEiLCJuZXQiOiJ3cyIsInBhdGgiOiIvcHJvZmlsZS90ZWxlZ3JhbUBzc3JzdWIiLCJwb3J0IjoiODg4MCIsInBzIjoi5Ymp5L2Z5rWB6YeP77yaMTk3NzUuNDggR0IiLCJzY3kiOiJhdXRvIiwic25pIjoiIiwidGxzIjoiIiwidHlwZSI6IiIsInYiOiIyIn0
