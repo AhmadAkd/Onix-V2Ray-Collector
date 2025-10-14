@@ -70,9 +70,58 @@ CONFIG_SOURCES = [
     "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/Japan.txt",
     "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/Singapore.txt",
     "https://raw.githubusercontent.com/Argh94/V2RayAutoConfig/refs/heads/main/configs/Iran.txt",
-
-    # منابع اضافی (اختیاری)
-    # "https://raw.githubusercontent.com/your-source/configs.txt",
+    
+    # منابع بیشتر Leon406
+    "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/vmess",
+    "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/trojan",
+    "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/ssr",
+    
+    # منابع yebekhe/TelegramV2rayCollector
+    "https://raw.githubusercontent.com/yebekhe/TelegramV2rayCollector/main/sub/base64/mix",
+    "https://raw.githubusercontent.com/yebekhe/TelegramV2rayCollector/main/sub/normal/vmess",
+    "https://raw.githubusercontent.com/yebekhe/TelegramV2rayCollector/main/sub/normal/vless",
+    "https://raw.githubusercontent.com/yebekhe/TelegramV2rayCollector/main/sub/normal/trojan",
+    "https://raw.githubusercontent.com/yebekhe/TelegramV2rayCollector/main/sub/normal/ss",
+    
+    # منابع barry-far/V2ray-Configs
+    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/All_Configs_Sub.txt",
+    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Sub1.txt",
+    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Sub2.txt",
+    "https://raw.githubusercontent.com/barry-far/V2ray-Configs/main/Sub3.txt",
+    
+    # منابع mfuu/v2ray
+    "https://raw.githubusercontent.com/mfuu/v2ray/master/v2ray",
+    
+    # منابع ts-sf/fly
+    "https://raw.githubusercontent.com/ts-sf/fly/main/v2",
+    
+    # منابع ermaozi/get_subscribe
+    "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/v2ray.txt",
+    
+    # منابع AzadNetCH/Clash
+    "https://raw.githubusercontent.com/AzadNetCH/Clash/main/V2Ray.txt",
+    
+    # منابع soroushmirzaei/telegram-configs-collector
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/protocols/vmess",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/protocols/vless",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/protocols/trojan",
+    "https://raw.githubusercontent.com/soroushmirzaei/telegram-configs-collector/main/protocols/shadowsocks",
+    
+    # منابع MhdiTaheri/V2rayCollector
+    "https://raw.githubusercontent.com/MhdiTaheri/V2rayCollector/main/sub/Mix/mix.txt",
+    "https://raw.githubusercontent.com/MhdiTaheri/V2rayCollector/main/sub/Mix/base64/mix",
+    
+    # منابع sashalsk/V2Ray
+    "https://raw.githubusercontent.com/sashalsk/V2Ray/main/V2Config",
+    
+    # منابع freefq/free
+    "https://raw.githubusercontent.com/freefq/free/master/v2",
+    
+    # منابع ripaojiedian/freenode
+    "https://raw.githubusercontent.com/ripaojiedian/freenode/main/sub",
+    
+    # منابع mianfeifq/share
+    "https://raw.githubusercontent.com/mianfeifq/share/main/data2024",
 ]
 
 # تنظیمات اتوماسیون
@@ -182,6 +231,29 @@ SUPPORTED_PROTOCOLS = {
     'shadowsocksr': {
         'enabled': True,
         'priority': 5,
+    },
+    'hysteria': {
+        'enabled': True,
+        'priority': 6,
+        'require_tls': True,
+    },
+    'hysteria2': {
+        'enabled': True,
+        'priority': 7,
+        'require_tls': True,
+    },
+    'wireguard': {
+        'enabled': True,
+        'priority': 8,
+    },
+    'tuic': {
+        'enabled': True,
+        'priority': 9,
+        'require_tls': True,
+    },
+    'naive': {
+        'enabled': True,
+        'priority': 10,
     }
 }
 

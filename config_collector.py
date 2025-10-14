@@ -1357,13 +1357,33 @@ class V2RayCollector:
             'vless': [],
             'trojan': [],
             'ss': [],
-            'ssr': []
+            'ssr': [],
+            'hysteria': [],
+            'hysteria2': [],
+            'hy2': [],  # alias for hysteria2
+            'wireguard': [],
+            'tuic': [],
+            'naive': []
         }
 
         # دسته‌بندی بر اساس پروتکل
         for config in self.working_configs:
-            if config.protocol in categories:
-                categories[config.protocol].append(config)
+            protocol = config.protocol.lower()
+            
+            # Normalize protocol names
+            if protocol == 'shadowsocks':
+                protocol = 'ss'
+            elif protocol == 'shadowsocksr':
+                protocol = 'ssr'
+            
+            if protocol in categories:
+                categories[protocol].append(config)
+            else:
+                # اگر پروتکل جدیدی بود، آن را اضافه کن
+                logger.warning(f"پروتکل ناشناخته: {protocol}")
+                if protocol not in categories:
+                    categories[protocol] = []
+                categories[protocol].append(config)
 
         # اعمال محدودیت‌ها
         max_per_protocol = CATEGORIZATION_CONFIG.get(

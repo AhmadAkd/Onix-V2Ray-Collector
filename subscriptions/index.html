@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="کانفیگ‌های رایگان و تست شده V2Ray - به‌روزرسانی خودکار هر 30 دقیقه">
     <meta name="keywords" content="V2Ray, VMess, VLESS, Trojan, Shadowsocks, Free VPN, Iran">
     <title>V2Ray Config Collector - کانفیگ‌های رایگان V2Ray</title>
-    
+
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
+
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -19,19 +20,19 @@
             --warning-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --info-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         }
-        
+
         body {
             background: var(--primary-gradient);
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         .main-container {
             padding: 20px;
             max-width: 1400px;
             margin: 0 auto;
         }
-        
+
         /* Header Card */
         .header-card {
             background: white;
@@ -42,7 +43,7 @@
             margin-bottom: 30px;
             animation: fadeInDown 0.6s ease;
         }
-        
+
         .header-card h1 {
             font-size: 3em;
             font-weight: 800;
@@ -51,13 +52,13 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 15px;
         }
-        
+
         .header-card .subtitle {
             font-size: 1.3em;
             color: #666;
             margin-bottom: 25px;
         }
-        
+
         .stats-row {
             display: flex;
             justify-content: center;
@@ -65,7 +66,7 @@
             flex-wrap: wrap;
             margin-top: 20px;
         }
-        
+
         .stat-badge {
             background: var(--primary-gradient);
             color: white;
@@ -76,7 +77,7 @@
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
             animation: pulse 2s infinite;
         }
-        
+
         /* Navigation Tabs */
         .custom-tabs {
             background: white;
@@ -85,7 +86,7 @@
             margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-        
+
         .custom-tabs .nav-link {
             border: none;
             border-radius: 15px;
@@ -96,20 +97,21 @@
             transition: all 0.3s;
             margin: 0 5px;
         }
-        
+
         .custom-tabs .nav-link.active {
             background: var(--primary-gradient);
             color: white;
             transform: scale(1.05);
         }
-        
+
         .custom-tabs .nav-link:hover:not(.active) {
             background: #f8f9fa;
             transform: translateY(-2px);
         }
-        
+
         /* Cards */
-        .protocol-card, .country-card {
+        .protocol-card,
+        .country-card {
             background: white;
             border-radius: 20px;
             padding: 25px;
@@ -118,12 +120,13 @@
             height: 100%;
             animation: fadeInUp 0.6s ease;
         }
-        
-        .protocol-card:hover, .country-card:hover {
+
+        .protocol-card:hover,
+        .country-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
         }
-        
+
         .protocol-icon {
             width: 60px;
             height: 60px;
@@ -136,28 +139,45 @@
             color: white;
             margin: 0 auto 15px;
         }
-        
-        .icon-vmess { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
-        .icon-vless { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
-        .icon-trojan { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
-        .icon-ss { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
-        .icon-ssr { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
-        .icon-all { background: var(--primary-gradient); }
-        
+
+        .icon-vmess {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .icon-vless {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .icon-trojan {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .icon-ss {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .icon-ssr {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        }
+
+        .icon-all {
+            background: var(--primary-gradient);
+        }
+
         .card-title {
             font-size: 1.5em;
             font-weight: 700;
             color: #333;
             margin-bottom: 10px;
         }
-        
+
         .card-description {
             color: #666;
             font-size: 1em;
             margin-bottom: 20px;
             line-height: 1.6;
         }
-        
+
         .stats-container {
             display: flex;
             justify-content: space-around;
@@ -166,23 +186,23 @@
             background: #f8f9fa;
             border-radius: 15px;
         }
-        
+
         .stat-item {
             text-align: center;
         }
-        
+
         .stat-value {
             font-size: 1.8em;
             font-weight: 700;
             color: #667eea;
         }
-        
+
         .stat-label {
             font-size: 0.9em;
             color: #666;
             margin-top: 5px;
         }
-        
+
         /* Buttons */
         .btn-copy {
             background: var(--primary-gradient);
@@ -197,25 +217,25 @@
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
         }
-        
+
         .btn-copy:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
         }
-        
+
         .btn-copy.copied {
             background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
         }
-        
+
         .btn-copy i {
             margin-left: 8px;
         }
-        
+
         /* Search Box */
         .search-container {
             margin-bottom: 25px;
         }
-        
+
         .search-box {
             width: 100%;
             padding: 18px 25px;
@@ -225,19 +245,19 @@
             transition: all 0.3s;
             background: white;
         }
-        
+
         .search-box:focus {
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 5px rgba(102, 126, 234, 0.1);
         }
-        
+
         /* Country Flag */
         .country-flag {
             font-size: 3em;
             margin-bottom: 15px;
         }
-        
+
         /* All Configs Special Card */
         .all-configs-card {
             background: var(--primary-gradient);
@@ -249,30 +269,30 @@
             margin-bottom: 30px;
             animation: fadeIn 0.6s ease;
         }
-        
+
         .all-configs-card h2 {
             font-size: 2.5em;
             font-weight: 800;
             margin-bottom: 15px;
         }
-        
+
         .all-configs-card p {
             font-size: 1.2em;
             opacity: 0.95;
             margin-bottom: 25px;
         }
-        
+
         .all-configs-card .btn-copy {
             background: rgba(255, 255, 255, 0.2);
             border: 3px solid white;
             backdrop-filter: blur(10px);
         }
-        
+
         .all-configs-card .btn-copy:hover {
             background: white;
             color: #667eea;
         }
-        
+
         /* Quick Links */
         .quick-links {
             background: white;
@@ -281,7 +301,7 @@
             margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
-        
+
         .quick-link-btn {
             display: inline-block;
             padding: 10px 20px;
@@ -293,46 +313,60 @@
             font-weight: 600;
             transition: all 0.3s;
         }
-        
+
         .quick-link-btn:hover {
             background: var(--primary-gradient);
             color: white;
             transform: translateY(-2px);
         }
-        
+
         /* Animations */
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
-        
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         @keyframes fadeInDown {
             from {
                 opacity: 0;
                 transform: translateY(-30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
         }
-        
+
         /* Loading */
         .loading-overlay {
             display: none;
@@ -346,11 +380,11 @@
             justify-content: center;
             align-items: center;
         }
-        
+
         .loading-overlay.active {
             display: flex;
         }
-        
+
         .spinner {
             border: 5px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
@@ -359,12 +393,17 @@
             height: 60px;
             animation: spin 1s linear infinite;
         }
-        
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
-        
+
         /* Toast Notification */
         .toast-notification {
             position: fixed;
@@ -378,45 +417,46 @@
             z-index: 10000;
             animation: slideInRight 0.4s ease;
         }
-        
+
         .toast-notification.show {
             display: block;
         }
-        
+
         @keyframes slideInRight {
             from {
                 transform: translateX(400px);
                 opacity: 0;
             }
+
             to {
                 transform: translateX(0);
                 opacity: 1;
             }
         }
-        
+
         /* Responsive */
         @media (max-width: 768px) {
             .header-card h1 {
                 font-size: 2em;
             }
-            
+
             .header-card .subtitle {
                 font-size: 1em;
             }
-            
+
             .all-configs-card h2 {
                 font-size: 1.8em;
             }
-            
+
             .stats-row {
                 flex-direction: column;
             }
-            
+
             .stat-badge {
                 width: 100%;
             }
         }
-        
+
         /* Footer */
         .footer {
             background: white;
@@ -426,7 +466,7 @@
             margin-top: 40px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
-        
+
         .footer-links a {
             color: #667eea;
             text-decoration: none;
@@ -434,13 +474,14 @@
             font-weight: 600;
             transition: all 0.3s;
         }
-        
+
         .footer-links a:hover {
             color: #764ba2;
             text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
@@ -449,7 +490,7 @@
             <p class="text-white mt-3 fs-5">در حال بارگذاری...</p>
         </div>
     </div>
-    
+
     <!-- Toast Notification -->
     <div class="toast-notification" id="toastNotification">
         <i class="fas fa-check-circle text-success fs-4"></i>
@@ -461,7 +502,7 @@
         <div class="header-card">
             <h1><i class="fas fa-rocket"></i> V2Ray Config Collector</h1>
             <p class="subtitle">کانفیگ‌های رایگان، تست شده و به‌روزرسانی خودکار</p>
-            
+
             <div class="stats-row">
                 <div class="stat-badge">
                     <i class="fas fa-check-circle"></i>
@@ -507,7 +548,8 @@
         <div class="all-configs-card">
             <h2><i class="fas fa-download"></i> دانلود همه کانفیگ‌ها</h2>
             <p>شامل تمام پروتکل‌ها و کشورها - بهترین گزینه برای شروع</p>
-            <button class="btn-copy" onclick="copyLink('https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/all_subscription.txt', this)">
+            <button class="btn-copy"
+                onclick="copyLink('https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/all_subscription.txt', this)">
                 <i class="fas fa-copy"></i> کپی لینک اشتراک همه کانفیگ‌ها
             </button>
         </div>
@@ -533,9 +575,10 @@
             <!-- Protocols Tab -->
             <div class="tab-pane fade show active" id="protocols">
                 <div class="search-container">
-                    <input type="text" class="search-box" placeholder="🔍 جستجو در پروتکل‌ها..." onkeyup="filterItems('protocolsGrid', this.value)">
+                    <input type="text" class="search-box" placeholder="🔍 جستجو در پروتکل‌ها..."
+                        onkeyup="filterItems('protocolsGrid', this.value)">
                 </div>
-                
+
                 <div class="row g-4" id="protocolsGrid">
                     <!-- VMess -->
                     <div class="col-lg-4 col-md-6" data-protocol="vmess">
@@ -544,7 +587,8 @@
                                 <i class="fas fa-shield-alt"></i>
                             </div>
                             <h3 class="card-title">VMess</h3>
-                            <p class="card-description">پروتکل VMess با پشتیبانی کامل TLS و WebSocket - مناسب برای استفاده عمومی</p>
+                            <p class="card-description">پروتکل VMess با پشتیبانی کامل TLS و WebSocket - مناسب برای
+                                استفاده عمومی</p>
                             <div class="stats-container">
                                 <div class="stat-item">
                                     <div class="stat-value" id="vmess-count">-</div>
@@ -568,7 +612,8 @@
                                 <i class="fas fa-bolt"></i>
                             </div>
                             <h3 class="card-title">VLESS</h3>
-                            <p class="card-description">پروتکل VLESS جدید با عملکرد بهینه - سریع‌ترین و جدیدترین پروتکل</p>
+                            <p class="card-description">پروتکل VLESS جدید با عملکرد بهینه - سریع‌ترین و جدیدترین پروتکل
+                            </p>
                             <div class="stats-container">
                                 <div class="stat-item">
                                     <div class="stat-value" id="vless-count">-</div>
@@ -592,7 +637,8 @@
                                 <i class="fas fa-lock"></i>
                             </div>
                             <h3 class="card-title">Trojan</h3>
-                            <p class="card-description">پروتکل Trojan با امنیت بالا - بهترین گزینه برای امنیت و رمزنگاری</p>
+                            <p class="card-description">پروتکل Trojan با امنیت بالا - بهترین گزینه برای امنیت و رمزنگاری
+                            </p>
                             <div class="stats-container">
                                 <div class="stat-item">
                                     <div class="stat-value" id="trojan-count">-</div>
@@ -656,15 +702,40 @@
                             </button>
                         </div>
                     </div>
+                    
+                    <!-- Hysteria2 -->
+                    <div class="col-lg-4 col-md-6" data-protocol="hysteria2" style="display: none;" id="hy2-card">
+                        <div class="protocol-card">
+                            <div class="protocol-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h3 class="card-title">Hysteria2</h3>
+                            <p class="card-description">پروتکل Hysteria2 فوق سریع - نسل جدید با سرعت بالا</p>
+                            <div class="stats-container">
+                                <div class="stat-item">
+                                    <div class="stat-value" id="hysteria2-count">-</div>
+                                    <div class="stat-label">سرور</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value" id="hysteria2-latency">-</div>
+                                    <div class="stat-label">میانگین تأخیر</div>
+                                </div>
+                            </div>
+                            <button class="btn-copy" onclick="copyProtocolLink('hysteria2', this)">
+                                <i class="fas fa-copy"></i> کپی لینک Hysteria2
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Countries Tab -->
             <div class="tab-pane fade" id="countries">
                 <div class="search-container">
-                    <input type="text" class="search-box" placeholder="🔍 جستجو در کشورها..." onkeyup="filterItems('countriesGrid', this.value)">
+                    <input type="text" class="search-box" placeholder="🔍 جستجو در کشورها..."
+                        onkeyup="filterItems('countriesGrid', this.value)">
                 </div>
-                
+
                 <div class="row g-4" id="countriesGrid">
                     <!-- Countries will be loaded dynamically -->
                 </div>
@@ -688,9 +759,9 @@
                     <p class="text-muted">لینک را در کلاینت V2Ray وارد کنید</p>
                 </div>
             </div>
-            
+
             <hr class="my-4">
-            
+
             <div class="footer-links">
                 <a href="dashboard.html"><i class="fas fa-chart-line"></i> داشبورد</a>
                 <a href="https://github.com/AhmadAkd/V2Ray_Collector" target="_blank">
@@ -700,7 +771,7 @@
                     <i class="fas fa-bug"></i> گزارش باگ
                 </a>
             </div>
-            
+
             <p class="text-muted mt-4 mb-0">
                 <i class="fas fa-sync-alt"></i> به‌روزرسانی خودکار هر 30 دقیقه
                 <br>
@@ -712,7 +783,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const BASE_URL = 'https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions';
-        
+
         // Country list
         const countries = [
             { code: 'US', name: 'آمریکا', flag: '🇺🇸', popular: true },
@@ -746,11 +817,11 @@
         function copyLink(link, button) {
             navigator.clipboard.writeText(link).then(() => {
                 showToast();
-                
+
                 const originalHTML = button.innerHTML;
                 button.innerHTML = '<i class="fas fa-check"></i> کپی شد!';
                 button.classList.add('copied');
-                
+
                 setTimeout(() => {
                     button.innerHTML = originalHTML;
                     button.classList.remove('copied');
@@ -777,7 +848,7 @@
         function showToast() {
             const toast = document.getElementById('toastNotification');
             toast.classList.add('show');
-            
+
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 2500);
@@ -787,7 +858,7 @@
         function filterItems(gridId, searchTerm) {
             const grid = document.getElementById(gridId);
             const items = grid.querySelectorAll('[class*="col-"]');
-            
+
             items.forEach(item => {
                 const text = item.textContent.toLowerCase();
                 if (text.includes(searchTerm.toLowerCase())) {
@@ -802,15 +873,15 @@
         function loadCountries() {
             const grid = document.getElementById('countriesGrid');
             grid.innerHTML = '';
-            
+
             countries.forEach(country => {
                 const col = document.createElement('div');
                 col.className = 'col-lg-3 col-md-4 col-sm-6';
                 col.setAttribute('data-country', country.code.toLowerCase());
-                
-                const popularBadge = country.popular ? 
+
+                const popularBadge = country.popular ?
                     '<span class="badge bg-warning text-dark mb-2"><i class="fas fa-star"></i> محبوب</span>' : '';
-                
+
                 col.innerHTML = `
                     <div class="country-card">
                         <div class="country-flag">${country.flag}</div>
@@ -822,7 +893,7 @@
                         </button>
                     </div>
                 `;
-                
+
                 grid.appendChild(col);
             });
         }
@@ -831,38 +902,49 @@
         async function loadStatistics() {
             const overlay = document.getElementById('loadingOverlay');
             overlay.classList.add('active');
-            
+
             try {
                 const response = await fetch('latest_report.json');
                 const report = await response.json();
-                
+
                 // Update total configs
                 const totalConfigs = report.working_configs || 0;
                 document.getElementById('totalConfigs').textContent = totalConfigs.toLocaleString('fa-IR');
-                
+
                 // Update last update
                 const lastUpdate = report.timestamp || 'نامشخص';
                 document.getElementById('lastUpdate').textContent = lastUpdate;
-                
+
                 // Update protocol stats
                 if (report.protocols) {
+                    let protocolCount = 0;
                     Object.entries(report.protocols).forEach(([protocol, data]) => {
                         const countEl = document.getElementById(`${protocol}-count`);
                         const latencyEl = document.getElementById(`${protocol}-latency`);
                         
                         if (countEl) {
                             countEl.textContent = (data.count || 0).toLocaleString('fa-IR');
+                            protocolCount++;
                         }
                         if (latencyEl) {
                             latencyEl.textContent = data.avg_latency || 'N/A';
                         }
+                        
+                        // نمایش کارت‌های پروتکل‌های اضافی
+                        const cardEl = document.getElementById(`${protocol}-card`);
+                        if (cardEl && data.count > 0) {
+                            cardEl.style.display = 'block';
+                        }
                     });
+                    
+                    // Update total protocols count
+                    document.getElementById('totalProtocols').textContent = protocolCount;
                 }
-                
+
                 // Count unique countries
                 const countryCount = countries.length;
                 document.getElementById('totalCountries').textContent = countryCount + '+';
-                
+
             } catch (error) {
                 console.error('خطا در بارگذاری آمار:', error);
                 document.getElementById('totalConfigs').textContent = 'خطا';
@@ -873,17 +955,17 @@
         }
 
         // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             loadCountries();
             loadStatistics();
-            
+
             // Auto-refresh every 5 minutes
             setInterval(loadStatistics, 5 * 60 * 1000);
         });
 
         // Tab change handler
         document.querySelectorAll('[data-bs-toggle="pill"]').forEach(tab => {
-            tab.addEventListener('shown.bs.tab', function(event) {
+            tab.addEventListener('shown.bs.tab', function (event) {
                 const target = event.target.getAttribute('data-bs-target');
                 if (target === '#countries') {
                     // Reload countries when tab is shown
@@ -893,4 +975,5 @@
         });
     </script>
 </body>
+
 </html>

@@ -42,7 +42,7 @@
 
 ### 🔄 **Smart Collection**
 
-- 🌍 **28+ Trusted Sources** from around the world
+- 🌍 **57+ Trusted Sources** from around the world
 - 📦 **Full Base64 Support** and various formats
 - 🔄 **Automatic Collection** every 30 minutes via GitHub Actions
 - 💾 **Smart Caching** with TTL for improved performance
@@ -740,11 +740,11 @@ TELEGRAM_CHAT_ID: Telegram chat ID (optional)
 ### 📊 **Project Stats**
 
 ```
-📦 File Count: 364
+📦 File Count: 350+
 📝 Lines of Code: ~15,000
 🔌 Supported Protocols: 10
-🌍 Config Sources: 28+
-🌏 Supported Countries: 270+
+🌍 Config Sources: 57+
+🌏 Supported Countries: 40+
 ⭐ Code Quality: A+
 ```
 
