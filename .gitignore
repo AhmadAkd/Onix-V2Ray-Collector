@@ -69,6 +69,9 @@ desktop.ini
 automation_stats.json
 test_report.json
 *.171
+health_report.json
+performance_history.json
+backup_*.json
 
 # Keep subscription files but ignore some patterns
 subscriptions/by_country/*.171
@@ -88,5 +91,16 @@ analytics/historical_data.json
 .env.local
 .env.*.local
 
+# Database
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
 # Docker
 .dockerignore
+
+# Test files
+test_*.py
+debug_*.py
+*_test.py

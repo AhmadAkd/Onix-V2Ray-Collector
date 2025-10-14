@@ -26,14 +26,21 @@ services:
     environment:
       - TZ=Asia/Tehran
       - PYTHONUNBUFFERED=1
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-}
     volumes:
       - ./subscriptions:/app/subscriptions
       - ./cache:/app/cache
+      - ./v2ray_collector.db:/app/v2ray_collector.db
     networks:
       - v2ray-network
-    command: python api_server.py
+    command: python api_endpoints.py
     depends_on:
       - v2ray-collector
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
 
 networks:
   v2ray-network:

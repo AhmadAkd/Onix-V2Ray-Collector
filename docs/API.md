@@ -1,475 +1,382 @@
-# 🚀 V2Ray Collector API Documentation
+# 📡 V2Ray Collector API Documentation
 
 <div align="center">
 
-![API](https://img.shields.io/badge/API-Documentation-blue?style=for-the-badge)
-![REST](https://img.shields.io/badge/REST-API-green?style=for-the-badge)
-![FastAPI](https://img.shields.io/badge/FastAPI-Powered-red?style=for-the-badge)
+**REST API Documentation for V2Ray Collector**
 
-**📡 Complete API Reference for V2Ray Config Collector**
-
-*RESTful API • JSON Responses • Real-time Data • Comprehensive Endpoints*
+Version 2.0.0
 
 </div>
 
 ---
 
-## 🌐 Base URL
+## 📑 Table of Contents
+
+- [🚀 Quick Start](#-quick-start)
+- [🔐 Authentication](#-authentication)
+- [📊 Endpoints](#-endpoints)
+- [📝 Examples](#-examples)
+- [⚠️ Rate Limits](#️-rate-limits)
+- [🐛 Error Handling](#-error-handling)
+
+---
+
+## 🚀 Quick Start
+
+### Start API Server
+
+```bash
+# Method 1: Direct
+python api_endpoints.py
+
+# Method 2: Uvicorn
+uvicorn api_endpoints:app --host 0.0.0.0 --port 8000
+
+# Method 3: Docker
+docker-compose up v2ray-api
+```
+
+### Base URL
 
 ```
-https://ahmadakd.github.io/V2Ray_Collector/
+http://localhost:8000
+```
+
+### Interactive Documentation
+
+```
+Swagger UI: http://localhost:8000/api/docs
+ReDoc: http://localhost:8000/api/redoc
 ```
 
 ---
 
-## 📋 Available Endpoints
+## 🔐 Authentication
 
-### 📊 **System Statistics**
+Currently, the API is **open** and doesn't require authentication.
 
-#### `GET /api/stats`
-**دریافت آمار کلی سیستم**
+**Coming Soon**: API Key authentication
+
+```bash
+# Future usage
+curl -H "X-API-Key: your_api_key_here" \
+  http://localhost:8000/api/v1/stats
+```
+
+---
+
+## 📊 Endpoints
+
+### 📈 Statistics
+
+#### Get Overall Stats
+
+```http
+GET /api/v1/stats
+```
 
 **Response:**
 ```json
 {
-  "timestamp": "2024-01-15T10:30:00Z",
-  "total_configs": 1250,
-  "working_configs": 1180,
-  "failed_configs": 70,
-  "success_rate": 94.4,
-  "protocols": {
-    "vmess": 450,
-    "vless": 320,
-    "trojan": 280,
-    "ss": 130,
-    "ssr": 70
+  "timestamp": "2025-10-14 18:08:56",
+  "total_configs": 10583,
+  "working_configs": 7449,
+  "failed_configs": 3134,
+  "success_rate": "70.4%",
+  "total_protocols": 5,
+  "total_countries": 27
+}
+```
+
+#### Get Protocol List
+
+```http
+GET /api/v1/protocols
+```
+
+**Response:**
+```json
+{
+  "vmess": {
+    "count": 1617,
+    "avg_latency": "64.7ms"
   },
-  "countries": {
-    "US": 280,
-    "DE": 220,
-    "JP": 180,
-    "SG": 150,
-    "UK": 120
-  },
-  "performance": {
-    "avg_latency": 245.5,
-    "median_latency": 198.2,
-    "cache_hit_rate": 67.3
+  "vless": {
+    "count": 5119,
+    "avg_latency": "77.0ms"
   }
 }
 ```
 
----
+#### Get Protocol Stats
 
-### 📋 **All Configurations**
-
-#### `GET /api/configs`
-**دریافت همه کانفیگ‌های سالم**
-
-**Query Parameters:**
-- `protocol` (optional): فیلتر بر اساس پروتکل
-- `country` (optional): فیلتر بر اساس کشور
-- `limit` (optional): محدود کردن تعداد نتایج (default: 100)
-
-**Example:**
-```bash
-GET /api/configs?protocol=vmess&country=US&limit=50
+```http
+GET /api/v1/protocols/{protocol}
 ```
-
-**Response:**
-```json
-{
-  "timestamp": "2024-01-15T10:30:00Z",
-  "total_count": 1180,
-  "filtered_count": 45,
-  "configs": [
-    {
-      "protocol": "vmess",
-      "address": "server1.example.com",
-      "port": 443,
-      "uuid": "12345678-1234-1234-1234-123456789abc",
-      "alter_id": 0,
-      "network": "tcp",
-      "tls": true,
-      "latency": 198.5,
-      "country": "US",
-      "speed_test_result": 85.2
-    }
-  ]
-}
-```
-
----
-
-### 🔗 **Subscription Links**
-
-#### `GET /api/subscription/{protocol}`
-**دریافت لینک اشتراک پروتکل خاص**
 
 **Parameters:**
-- `protocol`: پروتکل مورد نظر (`vmess`, `vless`, `trojan`, `ss`, `ssr`, `all`)
-
-**Example:**
-```bash
-GET /api/subscription/vmess
-```
+- `protocol` (path): Protocol name (vmess, vless, trojan, ss, ssr, hysteria)
 
 **Response:**
 ```json
 {
-  "protocol": "vmess",
-  "subscription_url": "https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/vmess_subscription.txt",
-  "count": 450,
-  "last_updated": "2024-01-15T10:30:00Z",
-  "description": "VMess configurations with TLS support"
+  "protocol": "vless",
+  "stats": {
+    "count": 5119,
+    "avg_latency": "77.0ms"
+  },
+  "subscription_url": "/subscriptions/by_protocol/vless.txt"
 }
 ```
 
----
+#### Get Country List
 
-### 📈 **Analytics Data**
-
-#### `GET /api/analytics`
-**دریافت داده‌های تحلیلی پیشرفته**
+```http
+GET /api/v1/countries
+```
 
 **Response:**
 ```json
 {
-  "generated_at": "2024-01-15T10:30:00Z",
-  "current_performance": {
-    "total_configs": 1250,
-    "working_configs": 1180,
-    "failed_configs": 70,
-    "success_rate": 94.4,
-    "avg_latency": 245.5,
-    "median_latency": 198.2,
-    "protocol_distribution": {
-      "vmess": 450,
-      "vless": 320,
-      "trojan": 280,
-      "ss": 130,
-      "ssr": 70
-    },
-    "country_distribution": {
-      "US": 280,
-      "DE": 220,
-      "JP": 180,
-      "SG": 150,
-      "UK": 120
-    },
-    "latency_distribution": {
-      "0-100ms": 120,
-      "100-300ms": 680,
-      "300-500ms": 280,
-      "500-1000ms": 80,
-      "1000ms+": 20
-    },
-    "top_performing_protocols": [
-      {
-        "protocol": "trojan",
-        "count": 280,
-        "avg_latency": 189.5,
-        "success_rate": 96.8
-      }
-    ],
-    "top_performing_countries": [
-      {
-        "country": "JP",
-        "count": 180,
-        "avg_latency": 156.2
-      }
-    ]
+  "US": {
+    "count": 2829,
+    "avg_latency": "36.9ms"
   },
-  "trends": {
-    "period": "7 days",
-    "config_count_trend": "increasing",
-    "success_rate_trend": "stable",
-    "latency_trend": "decreasing",
-    "top_growing_protocols": ["trojan", "vless"],
-    "top_declining_protocols": ["ssr"]
-  },
-  "summary": {
-    "overall_status": "excellent",
-    "key_insights": [
-      "عالی! نرخ موفقیت 94.4% است",
-      "تأخیر متوسط 245.5ms عالی است",
-      "پروتکل محبوب: vmess با 450 کانفیگ",
-      "روند مثبت: تعداد کانفیگ‌ها در حال افزایش است"
-    ],
-    "recommendations": [
-      "افزایش منابع کانفیگ با کیفیت بالا",
-      "بهینه‌سازی تست‌های اتصال و فیلتر کردن سرورهای کند"
-    ]
+  "IR": {
+    "count": 1179,
+    "avg_latency": "85.3ms"
   }
 }
 ```
 
----
+#### Get Country Stats
 
-### 🏥 **Health Status**
+```http
+GET /api/v1/countries/{country}
+```
 
-#### `GET /api/health`
-**بررسی وضعیت سلامت سیستم**
+**Parameters:**
+- `country` (path): Country code (US, DE, IR, etc)
 
 **Response:**
 ```json
 {
-  "overall_status": "healthy",
-  "timestamp": "2024-01-15T10:30:00Z",
-  "components": {
-    "github_connectivity": {
-      "status": "healthy",
-      "message": "GitHub API accessible",
-      "response_time": 1250.5,
-      "details": {
-        "status_code": 200
-      }
-    },
-    "config_sources": {
-      "status": "healthy",
-      "message": "5/5 sources accessible",
-      "response_time": 0,
-      "details": {
-        "total_sources": 8,
-        "accessible": 5,
-        "accessibility_rate": "100.0%"
-      }
-    },
-    "disk_space": {
-      "status": "healthy",
-      "message": "Disk space OK (45.2% free)",
-      "response_time": 0,
-      "details": {
-        "free_gb": 12.5,
-        "total_gb": 27.8,
-        "free_percent": 45.2
-      }
-    },
-    "memory_usage": {
-      "status": "healthy",
-      "message": "Memory usage OK (68.3%)",
-      "response_time": 0,
-      "details": {
-        "used_gb": 4.2,
-        "total_gb": 6.1,
-        "percent": 68.3
-      }
-    },
-    "cache_performance": {
-      "status": "healthy",
-      "message": "Cache performance good (73.2% hit rate)",
-      "response_time": 0,
-      "details": {
-        "hits": 1250,
-        "misses": 450,
-        "hit_rate": "73.2%",
-        "evictions": 12,
-        "size": 850,
-        "max_size": 2000,
-        "memory_usage_mb": 2.5
-      }
+  "country": "US",
+  "stats": {
+    "count": 2829,
+    "avg_latency": "36.9ms"
+  },
+  "subscription_url": "/subscriptions/by_country/US.txt"
+}
+```
+
+---
+
+### 🔧 Config Retrieval
+
+#### Get Configs by Protocol
+
+```http
+GET /api/v1/configs/protocol/{protocol}?limit={limit}
+```
+
+**Parameters:**
+- `protocol` (path): Protocol name
+- `limit` (query, optional): Number of configs to return
+
+**Response:** Plain text, one config per line
+
+```
+vless://12345@example.com:443?...
+vless://67890@example2.com:443?...
+```
+
+#### Get Configs by Country
+
+```http
+GET /api/v1/configs/country/{country}?limit={limit}
+```
+
+**Parameters:**
+- `country` (path): Country code
+- `limit` (query, optional): Number of configs to return
+
+**Response:** Plain text, one config per line
+
+#### Get All Configs
+
+```http
+GET /api/v1/configs/all?limit={limit}
+```
+
+**Parameters:**
+- `limit` (query, optional): Number of configs to return
+
+**Response:** Plain text, all configs
+
+---
+
+### 🏥 Health & Monitoring
+
+#### Get Health Status
+
+```http
+GET /api/v1/health
+```
+
+**Response:**
+```json
+{
+  "timestamp": "2025-10-14T18:30:00",
+  "is_healthy": true,
+  "system": {
+    "cpu_usage": "25.5%",
+    "memory_usage": "45.2%",
+    "disk_usage": "60.1%"
+  },
+  "sources": {
+    "active": 35,
+    "failed": 4
+  },
+  "errors": [],
+  "warnings": []
+}
+```
+
+#### Get Collection History
+
+```http
+GET /api/v1/history?hours={hours}
+```
+
+**Parameters:**
+- `hours` (query, default: 24): Hours of history to retrieve
+
+**Response:**
+```json
+{
+  "history": [
+    {
+      "timestamp": "2025-10-14 18:00:00",
+      "total_configs": 10583,
+      "working_configs": 7449,
+      "success_rate": 70.4
     }
-  },
-  "statistics": {
-    "total_checks": 5,
-    "healthy": 5,
-    "warning": 0,
-    "critical": 0
-  }
+  ],
+  "count": 48
 }
 ```
 
 ---
 
-## 🔧 Usage Examples
+## 📝 Examples
 
-### 📊 **Get System Statistics**
+### cURL
+
 ```bash
-curl -X GET "https://ahmadakd.github.io/V2Ray_Collector/api/stats" \
-  -H "Accept: application/json"
+# Get stats
+curl http://localhost:8000/api/v1/stats
+
+# Get VLESS configs
+curl http://localhost:8000/api/v1/configs/protocol/vless?limit=10
+
+# Get US configs
+curl http://localhost:8000/api/v1/configs/country/US?limit=5
+
+# Get health status
+curl http://localhost:8000/api/v1/health
 ```
 
-### 🔍 **Filter Configurations**
-```bash
-curl -X GET "https://ahmadakd.github.io/V2Ray_Collector/api/configs?protocol=vmess&country=US&limit=10" \
-  -H "Accept: application/json"
+### Python
+
+```python
+import requests
+
+# Get stats
+response = requests.get('http://localhost:8000/api/v1/stats')
+stats = response.json()
+print(f"Working configs: {stats['working_configs']}")
+
+# Get configs
+response = requests.get('http://localhost:8000/api/v1/configs/protocol/vless?limit=10')
+configs = response.text.split('\n')
+print(f"Retrieved {len(configs)} configs")
 ```
 
-### 📈 **Get Analytics**
-```bash
-curl -X GET "https://ahmadakd.github.io/V2Ray_Collector/api/analytics" \
-  -H "Accept: application/json"
-```
+### JavaScript
 
-### 🏥 **Check Health**
-```bash
-curl -X GET "https://ahmadakd.github.io/V2Ray_Collector/api/health" \
-  -H "Accept: application/json"
+```javascript
+// Get stats
+fetch('http://localhost:8000/api/v1/stats')
+  .then(response => response.json())
+  .then(data => {
+    console.log(`Working configs: ${data.working_configs}`);
+  });
+
+// Get configs
+fetch('http://localhost:8000/api/v1/configs/protocol/vless?limit=10')
+  .then(response => response.text())
+  .then(configs => {
+    const configList = configs.split('\n');
+    console.log(`Retrieved ${configList.length} configs`);
+  });
 ```
 
 ---
 
-## 📋 Response Codes
+## ⚠️ Rate Limits
+
+Currently: **No rate limiting**
+
+**Coming Soon:**
+- 100 requests per hour per IP
+- 1000 requests per day per IP
+- Configurable limits
+
+---
+
+## 🐛 Error Handling
+
+### HTTP Status Codes
 
 | Code | Description |
 |------|-------------|
 | `200` | Success |
-| `400` | Bad Request |
 | `404` | Not Found |
-| `429` | Rate Limited |
+| `429` | Too Many Requests (future) |
 | `500` | Internal Server Error |
 
----
+### Error Response Format
 
-## 🔒 Rate Limiting
-
-- **Default Limit**: 100 requests per minute
-- **Burst Limit**: 200 requests per minute
-- **Headers**:
-  - `X-RateLimit-Limit`: Maximum requests per minute
-  - `X-RateLimit-Remaining`: Remaining requests in current window
-  - `X-RateLimit-Reset`: Time when rate limit resets
-
----
-
-## 📝 Error Responses
-
-### 400 Bad Request
 ```json
 {
-  "error": "Bad Request",
-  "message": "Invalid protocol specified",
-  "details": {
-    "supported_protocols": ["vmess", "vless", "trojan", "ss", "ssr", "all"]
-  }
-}
-```
-
-### 404 Not Found
-```json
-{
-  "error": "Not Found",
-  "message": "Endpoint not found",
-  "path": "/api/invalid-endpoint"
-}
-```
-
-### 429 Rate Limited
-```json
-{
-  "error": "Rate Limited",
-  "message": "Too many requests",
-  "retry_after": 60
-}
-```
-
-### 500 Internal Server Error
-```json
-{
-  "error": "Internal Server Error",
-  "message": "An unexpected error occurred",
-  "timestamp": "2024-01-15T10:30:00Z"
+  "detail": "Protocol 'invalid' not found"
 }
 ```
 
 ---
 
-## 🚀 SDK Examples
+## 🎯 Response Format
 
-### 🐍 **Python**
-```python
-import requests
+### JSON Responses
 
-# Get system statistics
-response = requests.get("https://ahmadakd.github.io/V2Ray_Collector/api/stats")
-stats = response.json()
+All JSON responses include:
+- Proper content-type header
+- UTF-8 encoding
+- Pretty-printed (in development)
 
-# Get VMess configurations
-response = requests.get("https://ahmadakd.github.io/V2Ray_Collector/api/configs?protocol=vmess")
-configs = response.json()
+### Text Responses
 
-# Get analytics
-response = requests.get("https://ahmadakd.github.io/V2Ray_Collector/api/analytics")
-analytics = response.json()
-```
-
-### 🟨 **JavaScript**
-```javascript
-// Get system statistics
-fetch('https://ahmadakd.github.io/V2Ray_Collector/api/stats')
-  .then(response => response.json())
-  .then(data => console.log(data));
-
-// Get configurations with filters
-fetch('https://ahmadakd.github.io/V2Ray_Collector/api/configs?protocol=vmess&limit=10')
-  .then(response => response.json())
-  .then(data => console.log(data));
-```
-
-### 🦀 **Rust**
-```rust
-use reqwest;
-use serde_json::Value;
-
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let client = reqwest::Client::new();
-    
-    // Get system statistics
-    let response = client
-        .get("https://ahmadakd.github.io/V2Ray_Collector/api/stats")
-        .send()
-        .await?;
-    
-    let stats: Value = response.json().await?;
-    println!("Stats: {}", stats);
-    
-    Ok(())
-}
-```
-
----
-
-## 🔧 Development
-
-### 🏃 **Running Locally**
-```bash
-# Clone repository
-git clone https://github.com/AhmadAkd/V2Ray_Collector.git
-cd V2Ray_Collector
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run API server
-python api_server.py
-```
-
-### 🧪 **Testing**
-```bash
-# Test all endpoints
-python -m pytest tests/test_api.py
-
-# Test specific endpoint
-curl http://localhost:8000/api/stats
-```
-
----
-
-## 📞 Support
-
-- **GitHub Issues**: [Report API Issues](https://github.com/AhmadAkd/V2Ray_Collector/issues)
-- **Documentation**: [Complete Guide](../README.md)
-- **Examples**: [SDK Examples](./examples/)
+Config endpoints return:
+- Plain text
+- UTF-8 encoding
+- One config per line
+- No HTML/JSON wrapper
 
 ---
 
 <div align="center">
 
-**⭐ If this API was helpful, please give the project a star! ⭐**
-
-![Made with ❤️](https://img.shields.io/badge/Made%20with-❤️-red?style=for-the-badge)
-
-*Made with ❤️ for the V2Ray community*
+**[🏠 Back to README](../README.md)** • **[📚 Documentation](README.md)**
 
 </div>
