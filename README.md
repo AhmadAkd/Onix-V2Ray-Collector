@@ -1,38 +1,29 @@
-# 🚀 V2Ray Config Collector & Tester
+# 🚀 V2Ray Collector - جمع‌آوری هوشمند کانفیگ‌های V2Ray
 
 <div align="center">
 
-[![V2Ray Collector](https://img.shields.io/badge/V2Ray-Collector-blue?style=for-the-badge&logo=v2ray)](https://github.com/AhmadAkd/V2Ray_Collector)
-[![Python](https://img.shields.io/badge/Python-3.8+-green?style=for-the-badge&logo=python)](https://www.python.org/)
-[![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-Automated-orange?style=for-the-badge&logo=github)](https://github.com/features/actions)
-[![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
-[![Docker](https://img.shields.io/badge/Docker-Ready-blue?style=for-the-badge&logo=docker)](https://www.docker.com/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-API-teal?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+![V2Ray Collector](https://img.shields.io/badge/V2Ray-Collector-blue?style=for-the-badge&logo=v2ray)
+![Python](https://img.shields.io/badge/Python-3.8+-green?style=for-the-badge&logo=python)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+![Stars](https://img.shields.io/github/stars/AhmadAkd/V2Ray_Collector?style=for-the-badge)
 
-**🔒 سیستم پیشرفته جمع‌آوری، تست و دسته‌بندی اتوماتیک کانفیگ‌های رایگان V2Ray**
+**سیستم پیشرفته جمع‌آوری، تست و دسته‌بندی خودکار کانفیگ‌های V2Ray از 39+ منبع معتبر**
 
-*اتوماسیون هوشمند • تست پروتکل‌محور • Analytics پیشرفته • Health Monitoring • API RESTful*
-
-[🌐 مشاهده صفحه اصلی](https://ahmadakd.github.io/V2Ray_Collector/) •
-[📊 Dashboard](https://ahmadakd.github.io/V2Ray_Collector/subscriptions/dashboard.html) •
-[📚 مستندات](docs/) •
-[🐛 گزارش باگ](https://github.com/AhmadAkd/V2Ray_Collector/issues)
+[🌐 دموی زنده](https://ahmadakd.github.io/V2Ray_Collector/) • [📚 مستندات](https://github.com/AhmadAkd/V2Ray_Collector/tree/main/docs) • [🐛 گزارش باگ](https://github.com/AhmadAkd/V2Ray_Collector/issues) • [🌟 ستاره بدهید](https://github.com/AhmadAkd/V2Ray_Collector)
 
 </div>
 
 ---
 
-## 📖 فهرست مطالب
+## 📑 فهرست مطالب
 
-- [✨ ویژگی‌های کلیدی](#-ویژگی-های-کلیدی)
-- [🎯 امکانات پیشرفته](#-امکانات-پیشرفته)
-- [📡 لینک‌های اشتراک](#-لینک-های-اشتراک)
-- [🚀 نصب و راه‌اندازی](#-نصب-و-راه-اندازی)
-- [🔧 استفاده](#-استفاده)
-- [📊 API Documentation](#-api-documentation)
-- [🐳 استقرار با Docker](#-استقرار-با-docker)
-- [⚙️ تنظیمات](#️-تنظیمات)
-- [📈 نظارت و Analytics](#-نظارت-و-analytics)
+- [✨ ویژگی‌های کلیدی](#-ویژگیهای-کلیدی)
+- [🎯 معماری سیستم](#-معماری-سیستم)
+- [🚀 شروع سریع](#-شروع-سریع)
+- [📊 داشبورد و آمار](#-داشبورد-و-آمار)
+- [🔧 پیکربندی پیشرفته](#-پیکربندی-پیشرفته)
+- [📡 پروتکل‌های پشتیبانی شده](#-پروتکلهای-پشتیبانی-شده)
+- [🌍 دسته‌بندی جغرافیایی](#-دستهبندی-جغرافیایی)
 - [🤝 مشارکت](#-مشارکت)
 - [📄 مجوز](#-مجوز)
 
@@ -40,864 +31,440 @@
 
 ## ✨ ویژگی‌های کلیدی
 
-### 🔄 **جمع‌آوری هوشمند**
+### 🔥 **قابلیت‌های اصلی**
 
-- 🌍 **68+ منبع معتبر** از سراسر جهان
-- 📦 **پشتیبانی کامل Base64** و فرمت‌های مختلف
-- 🔄 **جمع‌آوری خودکار** هر 30 دقیقه با GitHub Actions
-- 💾 **Cache هوشمند** با TTL برای بهبود عملکرد
-- 🎯 **Smart Filtering** - پیش‌فیلتر کانفیگ‌های نامعتبر
-- 🤖 **Telegram Bot Integration** - جمع‌آوری از کانال‌های تلگرام
-- 🌐 **Multi-Source Support** - Discord, Reddit, GitHub API
+<table>
+<tr>
+<td width="50%">
 
-### ✅ **تست کیفیت حرفه‌ای**
+#### 🤖 **جمع‌آوری هوشمند**
+- ✅ **39+ منبع معتبر** از GitHub و منابع عمومی
+- ✅ **پشتیبانی SingBox JSON** برای فرمت‌های مختلف
+- ✅ **Base64 Decoding** با پشتیبانی کامل از تمام فرمت‌ها
+- ✅ **حذف خودکار تکراری‌ها** با الگوریتم بهینه
+- ✅ **Cache Manager** برای کاهش درخواست‌های شبکه
 
-- 🔌 **17 پروتکل پشتیبانی شده**: VMess, VLESS, Trojan, Shadowsocks, SSR, Hysteria (1/2/3), WireGuard, TUIC (v4/v5), Naive, Reality, Xray Reality, SingBox, Clash Meta
-- ⚡ **تست فوق سریع** با 200 اتصال همزمان
-- 🔐 **تست پیشرفته handshake** - تست واقعی پروتکل‌ها
-- 📊 **دقت 95%+** در تشخیص کانفیگ‌های سالم
-- ⏱️ **اندازه‌گیری Latency** دقیق با جزئیات کامل
-- 🔍 **Smart Deduplication** - حذف کانفیگ‌های تکراری
-- 📡 **Response Validation** - تأیید پاسخ سرور
+</td>
+<td width="50%">
 
-### 📊 **Analytics پیشرفته**
+#### ⚡ **تست فوق سریع**
+- ✅ **Ultra-Fast Connection Pool** با 50 تست همزمان
+- ✅ **Advanced Protocol Testing** با handshake و response validation
+- ✅ **Timeout Management** برای عملکرد بهینه
+- ✅ **Retry Logic** با exponential backoff
+- ✅ **میانگین 10,000+ کانفیگ** در هر بروزرسانی
 
-- 📈 **Performance Metrics** - معیارهای عملکرد جامع
-- 📉 **Trend Analysis** - تحلیل روند با داده‌های تاریخی
-- 💡 **Key Insights** - بینش‌های هوشمند و توصیه‌ها
-- 🎯 **Optimization Recommendations** - پیشنهادات بهینه‌سازی
-- 📊 **Protocol Distribution** - توزیع پروتکل‌ها و کشورها
+</td>
+</tr>
+<tr>
+<td width="50%">
 
-### 🏥 **Health Monitoring**
+#### 🎨 **رابط کاربری مدرن**
+- ✅ **Dashboard تحلیلی** با Chart.js
+- ✅ **Real-time Statistics** با بروزرسانی خودکار
+- ✅ **طراحی Responsive** سازگار با موبایل
+- ✅ **Dark/Light Theme** (در حال توسعه)
+- ✅ **Copy با یک کلیک** برای تمام لینک‌ها
 
-- ✅ **6 نوع بررسی سلامت** مختلف
-- 🌐 **GitHub Connectivity** - نظارت بر اتصال
-- 📡 **Config Sources** - بررسی دسترسی منابع
-- 💾 **Disk Space** - نظارت فضای دیسک
-- 🧠 **Memory Usage** - نظارت حافظه
-- ⚡ **Cache Performance** - عملکرد کش
-- 🗄️ **SQLite Database** - ذخیره تاریخچه و آمار
-- 📊 **Real-time Alerts** - هشدارهای لحظه‌ای
+</td>
+<td width="50%">
 
-### 🌐 **UI/UX حرفه‌ای**
+#### 🗂️ **دسته‌بندی هوشمند**
+- ✅ **دسته‌بندی پروتکل** (VMess, VLESS, Trojan, SS, SSR, Hysteria)
+- ✅ **دسته‌بندی کشور** با GeoIP Lookup
+- ✅ **فیلتر بر اساس Latency**
+- ✅ **Subscription Links** برای هر دسته
+- ✅ **Auto-Generated Files** در هر 30 دقیقه
 
-- 🎨 **Dashboard پیشرفته** با Bootstrap 5
-- 📱 **Responsive Design** - سازگار با همه دستگاه‌ها
-- 📊 **نمودارهای تعاملی** - Chart.js
-- 🔄 **Real-time Statistics** - آمار لحظه‌ای
-- 🎯 **Subscription Selector** - انتخابگر هوشمند
-- 🌓 **Dark/Light Mode** - حالت تاریک/روشن
-
-### 🔌 **RESTful API**
-
-- ⚡ **FastAPI Framework** - سریع و مدرن
-- 📡 **Endpoints کامل** - دسترسی به همه امکانات
-- 📊 **آمار لحظه‌ای** - Statistics API
-- 🔐 **CORS Support** - پشتیبانی CORS
-- 📝 **Auto Documentation** - مستندات خودکار Swagger
-
-### 🤖 **اتوماسیون کامل**
-
-- ⏰ **Scheduled Jobs** - وظایف زمان‌بندی شده
-- 🔄 **Auto Deployment** - استقرار خودکار
-- 📊 **Stats Tracking** - ردیابی آمار
-- 🔔 **Notifications** - اعلان‌های هوشمند (Telegram, Email, Webhook)
-- 🔧 **Error Recovery** - بازیابی خودکار خطاها
+</td>
+</tr>
+</table>
 
 ---
 
-## 🆕 ویژگی‌های جدید (نسخه پیشرفته)
+## 🎯 معماری سیستم
 
-### 🚀 **تست پیشرفته پروتکل‌ها**
-
-```python
-from config_collector import UltraFastConnectionPool
-
-# تست پیشرفته با handshake واقعی
-pool = UltraFastConnectionPool()
-is_working, latency, details = pool.test_connection_advanced(
-    address='1.1.1.1',
-    port=443,
-    protocol='tcp'
-)
-
-# details شامل:
-# - response_received: آیا پاسخ دریافت شد
-# - response_size: اندازه پاسخ
-# - test_type: نوع تست
-# - latency: تأخیر دقیق
+```mermaid
+graph TD
+    A[39+ Sources] -->|Fetch| B[Config Collector]
+    B -->|Parse| C[Protocol Parsers]
+    C -->|Validate| D[Ultra-Fast Tester]
+    D -->|Filter| E[Working Configs]
+    E -->|Categorize| F[By Protocol]
+    E -->|GeoIP| G[By Country]
+    F --> H[Subscription Files]
+    G --> H
+    H --> I[GitHub Pages]
+    I --> J[Users]
+    
+    K[GitHub Actions] -->|Every 30min| B
+    L[Cache Manager] -.->|Optimize| B
+    M[Advanced Analytics] -.->|Monitor| D
 ```
 
-### 🤖 **Telegram Bot Integration**
+### 🏗️ **ساختار پروژه**
 
-```python
-from telegram_collector import TelegramCollector, TelegramSource
-
-# ایجاد collector با Bot Token
-collector = TelegramCollector(bot_token="YOUR_BOT_TOKEN")
-
-# اضافه کردن کانال
-source = TelegramSource(
-    channel_id="@v2rayngvpn",
-    channel_name="V2RayNG VPN"
-)
-collector.add_source(source)
-
-# جمع‌آوری از تمام کانال‌ها
-configs = await collector.collect_all_sources()
-
-# نظارت مداوم (هر 10 دقیقه)
-await collector.monitor_channels(interval=600)
 ```
-
-### 📊 **Advanced Monitoring**
-
-```python
-from advanced_monitoring import AdvancedMonitor
-
-monitor = AdvancedMonitor()
-
-# نظارت بر سلامت کانفیگ‌ها
-health_data = await monitor.monitor_config_health(configs)
-
-# نظارت بر معیارهای سیستم (CPU, Memory, Network)
-metrics = await monitor.monitor_system_metrics()
-
-# بررسی هشدارها
-alerts = monitor.check_alerts(health_data, metrics)
-
-# تولید گزارش سلامت
-report = monitor.generate_health_report()
-```
-
-### 🔌 **پروتکل‌های جدید**
-
-```python
-from new_protocols import NewProtocolParser
-
-parser = NewProtocolParser()
-
-# تجزیه Reality Protocol
-reality = parser.parse_reality_config("reality://...")
-
-# تجزیه Tuic v5
-tuic5 = parser.parse_tuic5_config("tuic5://...")
-
-# تجزیه Hysteria v3
-hysteria3 = parser.parse_hysteria3_config("hysteria3://...")
-
-# لیست پروتکل‌های پشتیبانی شده
-protocols = parser.get_supported_protocols()
-# ['reality', 'tuic5', 'naive', 'hysteria3', 'singbox', 'clash-meta', ...]
+V2Ray_Collector/
+├── 🎯 Core Components
+│   ├── config_collector.py      # موتور اصلی جمع‌آوری
+│   ├── singbox_parser.py        # Parser فرمت SingBox
+│   ├── geoip_lookup.py          # شناسایی کشور
+│   └── cache_manager.py         # مدیریت کش
+│
+├── 🌐 Web Interface
+│   ├── subscriptions/
+│   │   ├── index.html           # صفحه اصلی
+│   │   ├── dashboard.html       # داشبورد تحلیلی
+│   │   ├── by_protocol/         # دسته‌بندی پروتکل
+│   │   └── by_country/          # دسته‌بندی کشور
+│   │
+├── 🤖 Automation
+│   ├── .github/workflows/
+│   │   ├── v2ray-collector.yml # جمع‌آوری خودکار
+│   │   └── deploy-pages.yml    # استقرار GitHub Pages
+│   │
+├── 📚 Documentation
+│   ├── docs/                    # مستندات کامل
+│   ├── README.md                # فارسی
+│   └── README_EN.md             # انگلیسی
+│
+└── ⚙️ Configuration
+    ├── config.py                # تنظیمات اصلی
+    ├── requirements.txt         # وابستگی‌های Python
+    └── config.env.example       # متغیرهای محیطی
 ```
 
 ---
 
-## 🎯 امکانات پیشرفته
+## 🚀 شروع سریع
 
-### ⚡ **بهینه‌سازی عملکرد**
+### 📦 **نصب**
 
-```python
-✅ UltraFastConnectionPool - تست 100 کانفیگ همزمان
-✅ SmartConfigFilter - پیش‌فیلتر هوشمند
-✅ MD5 Hash Deduplication - حذف تکراری با هش
-✅ Async/Await - برنامه‌نویسی ناهمگام
-✅ Connection Pooling - استفاده بهینه از منابع
-```
+#### روش 1: استفاده مستقیم از Subscription Links
 
-### 📁 **دسته‌بندی هوشمند**
-
-```
-✅ دسته‌بندی بر اساس پروتکل (17 پروتکل)
-✅ دسته‌بندی بر اساس کشور (270+ کشور)
-✅ مرتب‌سازی بر اساس Latency
-✅ فیلتر جغرافیایی پیشرفته
-✅ اولویت‌بندی کشورها
-✅ محدودیت قابل تنظیم (2000 per protocol)
-```
-
-### 🔐 **امنیت**
-
-```
-✅ Rate Limiting - محدودیت درخواست
-✅ IP Blacklisting - مسدودسازی IP
-✅ SSL/TLS Verification - تأیید گواهی
-✅ Input Validation - اعتبارسنجی ورودی
-✅ Secure Headers - هدرهای امن
-```
-
-### 📊 **گزارش‌دهی**
-
-```
-✅ JSON Reports - گزارش‌های JSON
-✅ Performance Metrics - معیارهای عملکرد
-✅ Error Analysis - تحلیل خطاها
-✅ Geographic Distribution - توزیع جغرافیایی
-✅ Historical Data - داده‌های تاریخی
-```
-
----
-
-## 📡 لینک‌های اشتراک
-
-### 🌐 **صفحات وب**
-
-| صفحه | توضیحات | لینک |
-|------|---------|------|
-| 🏠 **صفحه اصلی** | نمایش تمام لینک‌های اشتراک | [مشاهده](https://ahmadakd.github.io/V2Ray_Collector/) |
-| 📊 **Dashboard** | داشبورد مدیریتی با آمار کامل | [مشاهده](https://ahmadakd.github.io/V2Ray_Collector/subscriptions/dashboard.html) |
-| 🎯 **Selector** | انتخابگر هوشمند لینک‌ها | [مشاهده](https://ahmadakd.github.io/V2Ray_Collector/subscriptions/subscription_selector.html) |
-
-### 📋 **لینک‌های مستقیم اشتراک**
-
-#### 📦 **همه کانفیگ‌ها** (توصیه می‌شود)
-
-```
-https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/all_subscription.txt
-```
-
-#### 🔵 **VMess** (بیشترین تعداد)
-
-```
-https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/vmess_subscription.txt
-```
-
-#### 🟢 **VLESS** (سریع‌ترین)
-
-```
-https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/vless_subscription.txt
-```
-
-#### 🟡 **Trojan** (امن‌ترین)
-
-```
-https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/trojan_subscription.txt
-```
-
-#### 🟠 **Shadowsocks**
-
-```
-https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/ss_subscription.txt
-```
-
-#### 🟣 **ShadowsocksR**
-
-```
-https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/ssr_subscription.txt
-```
-
-### 🌍 **دسته‌بندی کشوری**
-
-لینک‌های اشتراک بر اساس کشور:
-
-```
-https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/by_country/{COUNTRY_CODE}.txt
-```
-
-**مثال:**
-
-- 🇺🇸 آمریکا: `by_country/US.txt`
-- 🇩🇪 آلمان: `by_country/DE.txt`
-- 🇳🇱 هلند: `by_country/NL.txt`
-- 🇬🇧 انگلیس: `by_country/GB.txt`
-
----
-
-## 🚀 نصب و راه‌اندازی
-
-### 📋 **پیش‌نیازها**
-
-- Python 3.8 یا بالاتر
-- pip (مدیر بسته Python)
-- Git
-
-### 📥 **نصب سریع**
-
-#### 1️⃣ **کلون کردن پروژه**
+ساده‌ترین روش! فقط لینک مورد نظر رو کپی کنید:
 
 ```bash
+# تمام کانفیگ‌ها
+https://ahmadakd.github.io/V2Ray_Collector/subscriptions/all_subscription.txt
+
+# فقط VMess
+https://ahmadakd.github.io/V2Ray_Collector/subscriptions/by_protocol/vmess.txt
+
+# فقط آمریکا
+https://ahmadakd.github.io/V2Ray_Collector/subscriptions/by_country/US.txt
+```
+
+#### روش 2: نصب Local
+
+```bash
+# 1. Clone کردن
 git clone https://github.com/AhmadAkd/V2Ray_Collector.git
 cd V2Ray_Collector
-```
 
-#### 2️⃣ **نصب وابستگی‌ها**
-
-**نصب استاندارد:**
-
-```bash
+# 2. نصب Dependencies
 pip install -r requirements.txt
-```
 
-**نصب ویژگی‌های پیشرفته (اختیاری):**
-
-```bash
-# پکیج‌های ضروری پیشرفته
-pip install -r requirements_core.txt
-
-# Telegram Bot (اختیاری)
-pip install python-telegram-bot
-
-# Monitoring پیشرفته (اختیاری)  
-pip install prometheus-client
-```
-
-#### 3️⃣ **تنظیمات اولیه (اختیاری)**
-
-```bash
-# کپی فایل نمونه تنظیمات
-cp config.env.example config.env
-
-# ویرایش تنظیمات (برای Telegram Bot و...)
-# nano config.env
-```
-
-#### 4️⃣ **اجرای پروژه**
-
-```bash
-# جمع‌آوری و تست کانفیگ‌ها
+# 3. اجرای جمع‌آوری
 python config_collector.py
 
-# اجرای collection cycle کامل
-python run_collection.py
-
-# تست Telegram Bot
-python test_telegram.py
-
-# Monitoring پیشرفته
-python advanced_monitoring.py
-
-# اجرای اتوماسیون
-python automation.py
-
-# راه‌اندازی API سرور
-python api_server.py
+# 4. مشاهده نتایج
+open subscriptions/index.html
 ```
 
-### 🪟 **Windows**
-
-برای کاربران ویندوز، از اسکریپت‌های PowerShell استفاده کنید:
-
-```powershell
-# اجرای سریع
-.\run.ps1
-
-# اجرای با زبان فارسی
-.\run-fa.ps1
-
-# Push به GitHub
-.\push-to-github.ps1
-```
-
-### 🐧 **Linux/macOS**
+#### روش 3: استفاده از Docker
 
 ```bash
-# اجرای اتوماسیون
-chmod +x push-to-github.sh
-./push-to-github.sh
-```
-
----
-
-## 🔧 استفاده
-
-### 1️⃣ **جمع‌آوری دستی**
-
-```python
-from config_collector import V2RayCollector
-import asyncio
-
-async def main():
-    collector = V2RayCollector()
-    
-    # جمع‌آوری کانفیگ‌ها
-    configs = await collector.collect_all_configs()
-    print(f"✅ {len(configs)} کانفیگ جمع‌آوری شد")
-    
-    # تست کانفیگ‌ها
-    await collector.test_all_configs(configs)
-    print(f"✅ {len(collector.working_configs)} کانفیگ سالم")
-    
-    # دسته‌بندی
-    categories = collector.categorize_configs()
-    
-    # تولید فایل‌های اشتراک
-    subscription_files = collector.generate_subscription_links(categories)
-    
-    # تولید گزارش
-    report = collector.generate_report()
-    print(report)
-
-asyncio.run(main())
-```
-
-### 2️⃣ **اتوماسیون**
-
-```python
-from automation import AutomationManager
-
-# ایجاد منیجر اتوماسیون
-manager = AutomationManager()
-
-# اجرای یک بار
-await manager.run_collection_job()
-
-# اجرای برنامه‌ریزی شده
-manager.start_scheduler()
-```
-
-### 3️⃣ **استفاده از API**
-
-```python
-import requests
-
-# دریافت آمار کلی
-response = requests.get('http://localhost:8000/api/stats')
-print(response.json())
-
-# دریافت تمام کانفیگ‌ها
-response = requests.get('http://localhost:8000/api/configs')
-configs = response.json()
-
-# دریافت لینک اشتراک VMess
-response = requests.get('http://localhost:8000/api/subscription/vmess')
-vmess_link = response.text
-```
-
-### 4️⃣ **نظارت سلامت**
-
-```python
-from health_monitor import HealthMonitor
-import asyncio
-
-async def check_health():
-    monitor = HealthMonitor()
-    
-    # بررسی تمام اجزا
-    health_report = await monitor.run_all_health_checks()
-    
-    # نمایش گزارش
-    for component, status in health_report.items():
-        print(f"{component}: {status.status} - {status.message}")
-
-asyncio.run(check_health())
-```
-
-### 5️⃣ **Analytics**
-
-```python
-from analytics import AdvancedAnalytics
-
-# ایجاد analytics
-analytics = AdvancedAnalytics()
-
-# تحلیل عملکرد
-metrics = analytics.analyze_performance(configs_data)
-
-# تحلیل روند
-trends = analytics.analyze_trends()
-
-# دریافت بینش‌ها
-insights = analytics.get_key_insights(metrics)
-
-# تولید گزارش کامل
-report = analytics.generate_comprehensive_report(configs_data)
-```
-
----
-
-## 📊 API Documentation
-
-### 🔌 **Endpoints**
-
-#### **1. دریافت آمار کلی**
-
-```http
-GET /api/stats
-```
-
-**پاسخ:**
-
-```json
-{
-  "total_configs": 2448,
-  "working_configs": 2448,
-  "protocols": {
-    "vmess": 1526,
-    "vless": 746,
-    "trojan": 167
-  },
-  "countries": 270,
-  "last_update": "2025-10-14 10:30:00",
-  "success_rate": "70.5%"
-}
-```
-
-#### **2. دریافت تمام کانفیگ‌ها**
-
-```http
-GET /api/configs?protocol=vmess&limit=100
-```
-
-**پارامترها:**
-
-- `protocol` (optional): فیلتر بر اساس پروتکل
-- `country` (optional): فیلتر بر اساس کشور
-- `limit` (optional): تعداد کانفیگ‌ها
-- `offset` (optional): شروع از کدام ردیف
-
-#### **3. دریافت لینک اشتراک**
-
-```http
-GET /api/subscription/{protocol}
-```
-
-**مثال:**
-
-```bash
-curl http://localhost:8000/api/subscription/vmess
-```
-
-#### **4. بررسی سلامت**
-
-```http
-GET /health
-```
-
-**پاسخ:**
-
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-10-14T10:30:00",
-  "components": {
-    "github_connectivity": "healthy",
-    "config_sources": "healthy",
-    "disk_space": "healthy"
-  }
-}
-```
-
-#### **5. دریافت گزارش Analytics**
-
-```http
-GET /api/analytics
-```
-
-**پاسخ شامل:**
-
-- Performance metrics
-- Trend analysis
-- Key insights
-- Recommendations
-
-### 📚 **مستندات کامل**
-
-مستندات کامل API در آدرس زیر در دسترس است:
-
-```
-http://localhost:8000/docs      # Swagger UI
-http://localhost:8000/redoc     # ReDoc
-```
-
----
-
-## 🐳 استقرار با Docker
-
-### 🚀 **راه‌اندازی سریع**
-
-#### **1. ساخت و اجرای با Docker Compose**
-
-```bash
-# ساخت و اجرا
-docker-compose up -d
-
-# مشاهده لاگ‌ها
-docker-compose logs -f
-
-# توقف
-docker-compose down
-```
-
-#### **2. ساخت Image دستی**
-
-```bash
-# ساخت image
+# Build
 docker build -t v2ray-collector .
 
-# اجرای container
+# Run
 docker run -d \
   --name v2ray-collector \
   -v $(pwd)/subscriptions:/app/subscriptions \
-  -v $(pwd)/cache:/app/cache \
-  -p 8000:8000 \
   v2ray-collector
-```
 
-### 🎯 **سرویس‌های Docker**
-
-پروژه شامل 2 سرویس است:
-
-1. **v2ray-collector**: جمع‌آوری و تست خودکار
-2. **v2ray-api**: API Server (پورت 8000)
-
-### 📊 **Health Check**
-
-Docker image شامل health check خودکار است:
-
-```dockerfile
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD python -c "import requests; requests.get('http://localhost:8000/health')"
+# مشاهده logs
+docker logs -f v2ray-collector
 ```
 
 ---
 
-## ⚙️ تنظیمات
+## 📊 داشبورد و آمار
 
-### 📝 **فایل config.py**
+### 🎨 **رابط کاربری**
 
-تمام تنظیمات پروژه در فایل `config.py` قرار دارند:
+<table>
+<tr>
+<td width="50%">
 
-#### **1. تنظیمات عمومی**
+#### 🏠 **صفحه اصلی**
+- آمار کلی (Working/Failed/Success Rate)
+- لینک‌های Subscription بر اساس پروتکل
+- لینک‌های Subscription بر اساس کشور
+- کپی سریع با یک کلیک
+- دکمه دانلود برای تمام فایل‌ها
+
+</td>
+<td width="50%">
+
+#### 📈 **داشبورد تحلیلی**
+- نمودار دایره‌ای توزیع پروتکل‌ها
+- نمودار میله‌ای Top 10 کشورها
+- نمودار خطی مقایسه Latency
+- جداول تفصیلی آماری
+- بروزرسانی Real-time
+
+</td>
+</tr>
+</table>
+
+### 📈 **آمار زنده**
+
+<div align="center">
+
+| 📊 Metric | 📈 Value | 📝 Description |
+|-----------|----------|----------------|
+| **🌐 منابع فعال** | `39` | منابع معتبر و تست شده |
+| **🔧 پروتکل‌ها** | `17+` | پشتیبانی از پروتکل‌های مختلف |
+| **🌍 کشورها** | `25+` | پوشش جهانی |
+| **⚡ کانفیگ‌های سالم** | `7,000+` | تست شده و کارآمد |
+| **🔄 بروزرسانی** | `30 دقیقه` | جمع‌آوری خودکار |
+| **📊 Success Rate** | `70%+` | نرخ موفقیت تست |
+
+</div>
+
+---
+
+## 🔧 پیکربندی پیشرفته
+
+### ⚙️ **تنظیمات اصلی** (`config.py`)
 
 ```python
-GENERAL_CONFIG = {
-    'log_level': 'INFO',
-    'max_retries': 3,
-    'request_timeout': 30,
-    'cleanup_days': 7
-}
-```
-
-#### **2. تنظیمات جمع‌آوری**
-
-```python
+# تنظیمات جمع‌آوری
 COLLECTION_CONFIG = {
-    'max_concurrent_tests': 50,
-    'test_timeout': 10,
-    'min_latency_threshold': 5000,
-    'enable_speed_test': True,
-    'enable_ssl_check': True
+    'max_concurrent_tests': 50,      # تعداد تست همزمان
+    'test_timeout': 10,              # Timeout به ثانیه
+    'min_latency_threshold': 5000,   # حداکثر تأخیر قابل قبول (ms)
+    'enable_speed_test': True,       # فعال‌سازی تست سرعت
+    'enable_ssl_check': True,        # بررسی گواهی SSL
+}
+
+# تنظیمات دسته‌بندی
+CATEGORIZATION_CONFIG = {
+    'max_configs_per_protocol': 2000,  # حداکثر کانفیگ به ازای هر پروتکل
+    'max_configs_per_country': 1000,   # حداکثر کانفیگ به ازای هر کشور
+    'min_configs_per_protocol': 10,    # حداقل برای ایجاد فایل
+    'enable_deduplication': True,       # حذف تکراری‌ها
+}
+
+# تنظیمات Cache
+CACHE_CONFIG = {
+    'enable_cache': True,           # فعال‌سازی کش
+    'cache_ttl': 1800,              # مدت اعتبار (ثانیه)
+    'cache_dir': 'cache',           # مسیر ذخیره کش
 }
 ```
 
-#### **3. منابع کانفیگ**
-
-```python
-CONFIG_SOURCES = [
-    "https://github.com/Epodonios/v2ray-configs/raw/main/All_Configs_base64_Sub.txt",
-    "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge.txt",
-    # ... 26 منبع دیگر
-]
-```
-
-#### **4. پروتکل‌های پشتیبانی شده**
-
-```python
-SUPPORTED_PROTOCOLS = {
-    'vmess': {'enabled': True, 'priority': 1},
-    'vless': {'enabled': True, 'priority': 2},
-    'trojan': {'enabled': True, 'priority': 3},
-    'shadowsocks': {'enabled': True, 'priority': 4},
-    'shadowsocksr': {'enabled': True, 'priority': 5}
-}
-```
-
-#### **5. تنظیمات اعلان‌ها**
-
-```python
-NOTIFICATION_CONFIG = {
-    'enable_notifications': False,
-    'notification_methods': ['email', 'webhook', 'telegram'],
-    'alert_conditions': {
-        'low_success_rate': 50,
-        'high_error_rate': 20,
-        'no_working_configs': True
-    }
-}
-```
-
-### 🔐 **متغیرهای محیطی**
+### 🔐 **متغیرهای محیطی** (`.env`)
 
 ```bash
-# تنظیم پروفایل
-export ACTIVE_PROFILE=production  # development, production, testing
+# Telegram Bot (اختیاری)
+TELEGRAM_BOT_TOKEN=your_bot_token_here
+TELEGRAM_CHAT_ID=your_chat_id_here
 
-# تنظیمات Telegram
-export TELEGRAM_BOT_TOKEN=your_bot_token
-export TELEGRAM_CHAT_ID=your_chat_id
+# GitHub (برای استقرار خودکار)
+GITHUB_TOKEN=ghp_your_token_here
+GITHUB_REPOSITORY=username/repository
 
-# تنظیمات Email
-export SMTP_SERVER=smtp.gmail.com
-export SMTP_PORT=587
-export SMTP_USERNAME=your_email
-export SMTP_PASSWORD=your_password
+# Advanced Settings
+LOG_LEVEL=INFO
+ENABLE_ANALYTICS=true
+ENABLE_NOTIFICATIONS=true
 ```
 
 ---
 
-## 📈 نظارت و Analytics
+## 📡 پروتکل‌های پشتیبانی شده
 
-### 📊 **Dashboard**
+<table>
+<tr>
+<td width="33%">
 
-داشبورد مدیریتی شامل:
+### ⚡ **High Performance**
+- ✅ VMess
+- ✅ VLESS
+- ✅ Trojan
+- ✅ Hysteria / Hysteria2
+- ✅ Hysteria3
 
-- 📈 **آمار لحظه‌ای** - تعداد کانفیگ‌های سالم/ناسالم
-- 📊 **نمودارها** - توزیع پروتکل و کشور
-- 🌍 **نقشه جغرافیایی** - توزیع جغرافیایی کانفیگ‌ها
-- ⏱️ **Latency Charts** - نمودار تأخیر
-- 📉 **Trend Analysis** - روند تغییرات
+</td>
+<td width="33%">
 
-### 🏥 **Health Monitoring**
+### 🔒 **Classic Protocols**
+- ✅ Shadowsocks (SS)
+- ✅ ShadowsocksR (SSR)
+- ✅ TUIC / TUIC v5
+- ✅ WireGuard
+- ✅ Naive
 
-سیستم نظارت سلامت شامل:
+</td>
+<td width="33%">
 
-1. **GitHub Connectivity** - اتصال به GitHub
-2. **Config Sources** - دسترسی به منابع
-3. **API Endpoints** - وضعیت API
-4. **Disk Space** - فضای دیسک
-5. **Memory Usage** - استفاده از حافظه
-6. **Cache Performance** - عملکرد کش
+### 🚀 **Advanced**
+- ✅ Reality
+- ✅ Xray Reality
+- ✅ SingBox
+- ✅ Clash Meta
+- ✅ و بیشتر...
 
-### 📊 **Analytics Reports**
+</td>
+</tr>
+</table>
 
-گزارش‌های Analytics شامل:
+### 📊 **آمار پروتکل‌ها**
 
-```json
-{
-  "performance_metrics": {
-    "total_configs": 3470,
-    "working_configs": 2448,
-    "success_rate": 70.5,
-    "avg_latency": 89.3
-  },
-  "trend_analysis": {
-    "config_count_trend": "increasing",
-    "success_rate_trend": "stable",
-    "latency_trend": "improving"
-  },
-  "key_insights": [
-    "VMess has the best performance",
-    "US configs have lowest latency",
-    "Success rate improved by 5%"
-  ],
-  "recommendations": [
-    "Add more Trojan sources",
-    "Optimize connection pool size",
-    "Increase test timeout for slow regions"
-  ]
-}
+```
+VLESS     ████████████████████████████ 68%  (5,119)
+VMess     █████████████ 22%  (1,617)
+Trojan    ███ 5%  (175)
+SS        ███ 3%  (536)
+SSR       █ 1%  (2)
+Hysteria  █ 1%  (تعداد متغیر)
 ```
 
 ---
 
-## 🤖 GitHub Actions
+## 🌍 دسته‌بندی جغرافیایی
 
-### ⚙️ **Workflows**
+### 🗺️ **پوشش کشورها**
 
-پروژه شامل 7 workflow است:
+<table>
+<tr>
+<td>
 
-#### **1. V2Ray Collector** (`v2ray-collector.yml`)
+#### 🌎 **آمریکای شمالی**
+- 🇺🇸 آمریکا (2,800+ کانفیگ)
+- 🇨🇦 کانادا (20+ کانفیگ)
 
-- ⏰ اجرا هر 30 دقیقه
-- ✅ تست منابع
-- 📦 جمع‌آوری کانفیگ‌ها
-- 🧪 تست کیفیت
-- 📊 تولید گزارش
-- 🚀 Deploy به GitHub Pages
+#### 🌍 **اروپا**
+- 🇩🇪 آلمان (100+ کانفیگ)
+- 🇬🇧 انگلستان (30+ کانفیگ)
+- 🇫🇷 فرانسه (110+ کانفیگ)
+- 🇳🇱 هلند (75+ کانفیگ)
+- و 10+ کشور دیگر
 
-#### **2. Deploy Pages** (`deploy-pages.yml`)
+</td>
+<td>
 
-- 🌐 استقرار به GitHub Pages
-- 🔄 Trigger بعد از Collector
-- ✅ بررسی فایل‌ها
+#### 🌏 **آسیا**
+- 🇮🇷 ایران (1,180+ کانفیگ)
+- 🇯🇵 ژاپن (30+ کانفیگ)
+- 🇸🇬 سنگاپور (20+ کانفیگ)
+- 🇭🇰 هنگ کنگ (85+ کانفیگ)
+- 🇰🇷 کره جنوبی (8+ کانفیگ)
 
-#### **3. Auto Collect** (`auto-collect.yml`)
+#### 🌍 **سایر مناطق**
+- 🇦🇺 استرالیا
+- 🇧🇷 برزیل
+- و موارد دیگر...
 
-- 🔄 جمع‌آوری خودکار
-- ⏰ برنامه‌ریزی شده
+</td>
+</tr>
+</table>
 
-#### **4. CI** (`ci.yml`)
+---
 
-- 🧪 اجرای تست‌ها
-- ✅ Linting
-- 📊 Coverage Report
+## 🤖 Automation با GitHub Actions
 
-#### **5. Docker Build** (`docker-build.yml`)
+سیستم به صورت کاملاً خودکار هر **30 دقیقه** یکبار:
 
-- 🐳 ساخت Docker image
-- 📦 Push به Docker Hub
-- 🏷️ Tagging
+1. ✅ از 39+ منبع کانفیگ جمع‌آوری می‌کند
+2. ✅ تمام کانفیگ‌ها را تست می‌کند
+3. ✅ کانفیگ‌های سالم را دسته‌بندی می‌کند
+4. ✅ فایل‌های Subscription را بروز می‌کند
+5. ✅ داشبورد و آمار را refresh می‌کند
+6. ✅ به GitHub Pages deploy می‌کند
 
-#### **6. Test** (`test.yml`)
-
-- 🧪 تست‌های واحد
-- 🔍 Integration tests
-- ✅ E2E tests
-
-#### **7. Release** (`release.yml`)
-
-- 📦 ایجاد release
-- 📝 Changelog generation
-- 🏷️ Version tagging
-
-### 🔐 **Secrets مورد نیاز**
-
-برای استفاده از GitHub Actions:
+### 📅 **زمان‌بندی**
 
 ```yaml
-GITHUB_TOKEN: توکن GitHub (خودکار)
-DOCKER_USERNAME: نام کاربری Docker Hub (اختیاری)
-DOCKER_PASSWORD: رمز عبور Docker Hub (اختیاری)
-TELEGRAM_BOT_TOKEN: توکن ربات تلگرام (اختیاری)
-TELEGRAM_CHAT_ID: شناسه چت تلگرام (اختیاری)
+schedule:
+  - cron: '*/30 * * * *'  # هر 30 دقیقه
 ```
 
 ---
 
-## 📚 مستندات
+## 🛠️ API و ادغام
+
+### 📡 **REST API** (در حال توسعه)
+
+```javascript
+// دریافت آمار کلی
+GET /api/v1/stats
+
+// دریافت کانفیگ‌ها بر اساس پروتکل
+GET /api/v1/configs/protocol/:protocol
+
+// دریافت کانفیگ‌ها بر اساس کشور
+GET /api/v1/configs/country/:country
+
+// دریافت گزارش جزئیات
+GET /api/v1/report
+```
+
+### 🔗 **Webhook Integration**
+
+```bash
+# ارسال اعلان به Telegram
+curl -X POST https://api.telegram.org/bot{TOKEN}/sendMessage \
+  -d chat_id={CHAT_ID} \
+  -d text="🚀 V2Ray Collector: 7,449 کانفیگ سالم جمع‌آوری شد!"
+```
+
+---
+
+## 📚 مستندات کامل
+
+<table>
+<tr>
+<td width="50%">
 
 ### 📖 **راهنماها**
+- [📘 نصب و راه‌اندازی](docs/INSTALLATION.md)
+- [👤 راهنمای کاربر](docs/USER_GUIDE.md)
+- [💻 راهنمای توسعه‌دهنده](docs/DEVELOPER.md)
+- [🐛 عیب‌یابی](docs/TROUBLESHOOTING.md)
 
-- 📘 [راهنمای نصب](docs/INSTALLATION.md) - نصب کامل گام به گام
-- 📗 [راهنمای کاربر](docs/USER_GUIDE.md) - استفاده از پروژه
-- 📕 [راهنمای توسعه‌دهنده](docs/DEVELOPER.md) - توسعه و مشارکت
-- 📙 [API Documentation](docs/API.md) - مستندات کامل API
-- 📔 [عیب‌یابی](docs/TROUBLESHOOTING.md) - حل مشکلات رایج
+</td>
+<td width="50%">
 
-### 📊 **آمار پروژه**
+### 📝 **سند‌ها**
+- [🔄 CHANGELOG](CHANGELOG.md)
+- [🤝 مشارکت](CONTRIBUTING.md)
+- [🔒 امنیت](SECURITY.md)
+- [✨ بهبودها](IMPROVEMENTS.md)
 
-```
-📦 تعداد فایل‌ها: 350+
-📝 خطوط کد: ~15,000
-🔌 پروتکل‌های پشتیبانی: 10
-🌍 منابع کانفیگ: 57+
-🌏 کشورهای پشتیبانی: 40+
-⭐ کیفیت کد: A+
-```
+</td>
+</tr>
+</table>
 
 ---
 
 ## 🤝 مشارکت
 
-مشارکت شما در بهبود این پروژه بسیار ارزشمند است! 🙏
+می‌خواهید در بهبود این پروژه مشارکت کنید؟ عالیه! 🎉
 
-### 📝 **نحوه مشارکت**
+### 🌟 **روش‌های مشارکت**
 
-1. **Fork** کردن پروژه
-2. ایجاد **Branch** جدید (`git checkout -b feature/amazing-feature`)
-3. **Commit** تغییرات (`git commit -m 'Add amazing feature'`)
-4. **Push** به Branch (`git push origin feature/amazing-feature`)
-5. ایجاد **Pull Request**
+1. **🐛 گزارش باگ**: [Issues](https://github.com/AhmadAkd/V2Ray_Collector/issues)
+2. **💡 پیشنهاد ویژگی**: [Feature Requests](https://github.com/AhmadAkd/V2Ray_Collector/issues/new)
+3. **🔧 Pull Request**: [Contributing Guide](CONTRIBUTING.md)
+4. **⭐ ستاره بدهید**: اگر مفید بود!
+5. **📢 به اشتراک بگذارید**: با دوستان خود
 
-### 🐛 **گزارش باگ**
-
-برای گزارش باگ از [Issues](https://github.com/AhmadAkd/V2Ray_Collector/issues) استفاده کنید.
-
-### 💡 **پیشنهادات**
-
-پیشنهادات خود را از طریق [Discussions](https://github.com/AhmadAkd/V2Ray_Collector/discussions) با ما در میان بگذارید.
-
-### 🌟 **Contributors**
+### 🏆 **مشارکت‌کنندگان**
 
 <a href="https://github.com/AhmadAkd/V2Ray_Collector/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=AhmadAkd/V2Ray_Collector" />
@@ -905,81 +472,84 @@ TELEGRAM_CHAT_ID: شناسه چت تلگرام (اختیاری)
 
 ---
 
-## 📊 وضعیت پروژه
+## 🎯 Roadmap
 
-### ✅ **فعالیت‌های اخیر**
+### ✅ **نسخه فعلی (v2.0)**
+- ✅ 39 منبع معتبر
+- ✅ 17+ پروتکل
+- ✅ SingBox Parser
+- ✅ Dashboard مدرن
+- ✅ GeoIP Lookup
+- ✅ Cache Manager
 
-- ✅ افزودن 28 منبع جدید کانفیگ
-- ✅ پیاده‌سازی تست فوق سریع (100 concurrent)
-- ✅ افزودن Analytics پیشرفته
-- ✅ پیاده‌سازی Health Monitoring
-- ✅ طراحی Dashboard حرفه‌ای
-- ✅ ایجاد API RESTful
-- ✅ پشتیبانی Docker کامل
-- ✅ مستندات جامع فارسی و انگلیسی
+### 🚧 **نسخه بعدی (v2.1)**
+- ⏳ Telegram Bot Integration (تکمیل 70%)
+- ⏳ Advanced Monitoring (تکمیل 80%)
+- ⏳ REST API (در حال توسعه)
+- ⏳ Docker Support (تکمیل 60%)
+- ⏳ Dark Mode (در حال طراحی)
 
-### 🚀 **برنامه آینده**
-
-- [ ] افزودن پشتیبانی از Hysteria v3
-- [ ] پیاده‌سازی Load Balancing
-- [ ] افزودن Grafana Dashboard
-- [ ] پشتیبانی از Kubernetes
-- [ ] ایجاد Mobile App
-- [ ] افزودن Machine Learning برای پیش‌بینی کیفیت
+### 🔮 **آینده (v3.0)**
+- 🔜 Machine Learning برای انتخاب بهترین کانفیگ
+- 🔜 پشتیبانی از WireGuard
+- 🔜 Mobile App (Android/iOS)
+- 🔜 پنل مدیریت کامل
+- 🔜 Multi-Language Support
 
 ---
 
-## 🔒 امنیت
+## 📊 آمار پروژه
 
-برای گزارش مشکلات امنیتی، لطفاً به [SECURITY.md](SECURITY.md) مراجعه کنید.
+<div align="center">
 
-**توجه:** هرگز اطلاعات حساس (API keys, tokens, passwords) را در کدها commit نکنید.
+![GitHub stars](https://img.shields.io/github/stars/AhmadAkd/V2Ray_Collector?style=social)
+![GitHub forks](https://img.shields.io/github/forks/AhmadAkd/V2Ray_Collector?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/AhmadAkd/V2Ray_Collector?style=social)
+
+![GitHub issues](https://img.shields.io/github/issues/AhmadAkd/V2Ray_Collector)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/AhmadAkd/V2Ray_Collector)
+![GitHub last commit](https://img.shields.io/github/last-commit/AhmadAkd/V2Ray_Collector)
+![GitHub code size](https://img.shields.io/github/languages/code-size/AhmadAkd/V2Ray_Collector)
+
+</div>
+
+---
+
+## 💖 حمایت از پروژه
+
+اگر این پروژه برای شما مفید بود:
+
+- ⭐ **ستاره بدهید** به این Repository
+- 🐛 **باگ‌ها را گزارش کنید** در Issues
+- 💡 **ایده‌های جدید** را با ما به اشتراک بگذارید
+- 📢 **به اشتراک بگذارید** با دوستان خود
+- ☕ **حمایت مالی** (در صورت تمایل)
 
 ---
 
 ## 📄 مجوز
 
-این پروژه تحت مجوز MIT منتشر شده است. برای اطلاعات بیشتر به فایل [LICENSE](LICENSE) مراجعه کنید.
+این پروژه تحت مجوز [MIT License](LICENSE) منتشر شده است.
 
 ```
 MIT License
 
 Copyright (c) 2025 Ahmad Akd
 
-مجاز به استفاده، کپی، تغییر، ادغام، انتشار، توزیع، اعطای مجوز فرعی
-و/یا فروش نسخه‌هایی از نرم‌افزار هستید.
+مجوز استفاده، کپی، تغییر و توزیع رایگان داده می‌شود.
 ```
 
 ---
 
-## 🙏 تشکر و قدردانی
+## 📞 تماس با ما
 
-### 📚 **منابع استفاده شده**
+<div align="center">
 
-- [V2Ray](https://www.v2ray.com/) - پروتکل اصلی
-- [FastAPI](https://fastapi.tiangolo.com/) - API Framework
-- [Bootstrap](https://getbootstrap.com/) - UI Framework
-- [Chart.js](https://www.chartjs.org/) - نمودارها
-- منابع کانفیگ رایگان جامعه V2Ray
+[![GitHub](https://img.shields.io/badge/GitHub-AhmadAkd-181717?style=for-the-badge&logo=github)](https://github.com/AhmadAkd)
+[![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail)](mailto:your.email@example.com)
+[![Telegram](https://img.shields.io/badge/Telegram-Channel-2CA5E0?style=for-the-badge&logo=telegram)](https://t.me/your_channel)
 
-### ⭐ **حمایت از پروژه**
-
-اگر این پروژه برای شما مفید بود:
-
-- ⭐ **Star** دادن به پروژه
-- 🐛 **گزارش** باگ‌ها
-- 💡 **پیشنهاد** ویژگی‌های جدید
-- 🤝 **مشارکت** در توسعه
-- 📢 **اشتراک‌گذاری** با دیگران
-
----
-
-## 📞 ارتباط با ما
-
-- 🐛 **Issues:** [GitHub Issues](https://github.com/AhmadAkd/V2Ray_Collector/issues)
-- 💬 **Discussions:** [GitHub Discussions](https://github.com/AhmadAkd/V2Ray_Collector/discussions)
-- 📧 **Email:** <ahmad.akd@example.com>
-- 🌐 **Website:** [ahmadakd.github.io](https://ahmadakd.github.io/V2Ray_Collector/)
+</div>
 
 ---
 
@@ -987,16 +557,18 @@ Copyright (c) 2025 Ahmad Akd
 
 **ساخته شده با ❤️ توسط [Ahmad Akd](https://github.com/AhmadAkd)**
 
-⭐ اگر این پروژه برایتان مفید بود، Star بدهید! ⭐
-
-[![GitHub stars](https://img.shields.io/github/stars/AhmadAkd/V2Ray_Collector?style=social)](https://github.com/AhmadAkd/V2Ray_Collector/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/AhmadAkd/V2Ray_Collector?style=social)](https://github.com/AhmadAkd/V2Ray_Collector/network/members)
-[![GitHub watchers](https://img.shields.io/github/watchers/AhmadAkd/V2Ray_Collector?style=social)](https://github.com/AhmadAkd/V2Ray_Collector/watchers)
+**اگر این پروژه برایتان مفید بود، ⭐ ستاره فراموش نشه!**
 
 </div>
 
 ---
 
-**نسخه:** 2.0.0  
-**آخرین به‌روزرسانی:** 2025-10-14  
-**وضعیت:** ✅ فعال و در حال توسعه
+## 🎉 تشکر ویژه
+
+از تمام منابع، مشارکت‌کنندگان و کاربرانی که این پروژه را بهتر می‌کنند، سپاسگزاریم! 🙏
+
+<div align="center">
+
+**[🏠 بازگشت به بالا](#-v2ray-collector---جمعآوری-هوشمند-کانفیگهای-v2ray)**
+
+</div>

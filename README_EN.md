@@ -1,38 +1,29 @@
-# 🚀 V2Ray Config Collector & Tester
+# 🚀 V2Ray Collector - Intelligent V2Ray Config Collection System
 
 <div align="center">
 
-[![V2Ray Collector](https://img.shields.io/badge/V2Ray-Collector-blue?style=for-the-badge&logo=v2ray)](https://github.com/AhmadAkd/V2Ray_Collector)
-[![Python](https://img.shields.io/badge/Python-3.8+-green?style=for-the-badge&logo=python)](https://www.python.org/)
-[![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-Automated-orange?style=for-the-badge&logo=github)](https://github.com/features/actions)
-[![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
-[![Docker](https://img.shields.io/badge/Docker-Ready-blue?style=for-the-badge&logo=docker)](https://www.docker.com/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-API-teal?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+![V2Ray Collector](https://img.shields.io/badge/V2Ray-Collector-blue?style=for-the-badge&logo=v2ray)
+![Python](https://img.shields.io/badge/Python-3.8+-green?style=for-the-badge&logo=python)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+![Stars](https://img.shields.io/github/stars/AhmadAkd/V2Ray_Collector?style=for-the-badge)
 
-**🔒 Advanced System for Automated Collection, Testing & Categorization of Free V2Ray Configs**
+**Advanced system for automated collection, testing, and categorization of V2Ray configs from 39+ reliable sources**
 
-*Smart Automation • Protocol-Based Testing • Advanced Analytics • Health Monitoring • RESTful API*
-
-[🌐 View Main Page](https://ahmadakd.github.io/V2Ray_Collector/) •
-[📊 Dashboard](https://ahmadakd.github.io/V2Ray_Collector/subscriptions/dashboard.html) •
-[📚 Documentation](docs/) •
-[🐛 Report Bug](https://github.com/AhmadAkd/V2Ray_Collector/issues)
+[🌐 Live Demo](https://ahmadakd.github.io/V2Ray_Collector/) • [📚 Documentation](https://github.com/AhmadAkd/V2Ray_Collector/tree/main/docs) • [🐛 Report Bug](https://github.com/AhmadAkd/V2Ray_Collector/issues) • [🌟 Give a Star](https://github.com/AhmadAkd/V2Ray_Collector)
 
 </div>
 
 ---
 
-## 📖 Table of Contents
+## 📑 Table of Contents
 
 - [✨ Key Features](#-key-features)
-- [🎯 Advanced Capabilities](#-advanced-capabilities)
-- [📡 Subscription Links](#-subscription-links)
-- [🚀 Installation & Setup](#-installation--setup)
-- [🔧 Usage](#-usage)
-- [📊 API Documentation](#-api-documentation)
-- [🐳 Docker Deployment](#-docker-deployment)
-- [⚙️ Configuration](#️-configuration)
-- [📈 Monitoring & Analytics](#-monitoring--analytics)
+- [🎯 System Architecture](#-system-architecture)
+- [🚀 Quick Start](#-quick-start)
+- [📊 Dashboard & Statistics](#-dashboard--statistics)
+- [🔧 Advanced Configuration](#-advanced-configuration)
+- [📡 Supported Protocols](#-supported-protocols)
+- [🌍 Geographic Categories](#-geographic-categories)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
 
@@ -40,742 +31,440 @@
 
 ## ✨ Key Features
 
-### 🔄 **Smart Collection**
+### 🔥 **Core Capabilities**
 
-- 🌍 **68+ Trusted Sources** from around the world
-- 📦 **Full Base64 Support** and various formats
-- 🔄 **Automatic Collection** every 30 minutes via GitHub Actions
-- 💾 **Smart Caching** with TTL for improved performance
-- 🎯 **Smart Filtering** - Pre-filter invalid configs
-- 🤖 **Telegram Bot Integration** - Collect from Telegram channels
-- 🌐 **Multi-Source Support** - Discord, Reddit, GitHub API
+<table>
+<tr>
+<td width="50%">
 
-### ✅ **Professional Quality Testing**
+#### 🤖 **Smart Collection**
+- ✅ **39+ Verified Sources** from GitHub and public repositories
+- ✅ **SingBox JSON Support** for various formats
+- ✅ **Complete Base64 Decoding** with full format support
+- ✅ **Automatic Duplicate Removal** with optimized algorithm
+- ✅ **Cache Manager** to reduce network requests
 
-- 🔌 **17 Protocols Supported**: VMess, VLESS, Trojan, Shadowsocks, SSR, Hysteria (1/2/3), WireGuard, TUIC (v4/v5), Naive, Reality, Xray Reality, SingBox, Clash Meta
-- ⚡ **Ultra-Fast Testing** with 200 concurrent connections
-- 🔐 **Advanced Handshake Testing** - Real protocol testing
-- 📊 **95%+ Accuracy** in detecting healthy configs
-- ⏱️ **Precise Latency Measurement** with full details
-- 🔍 **Smart Deduplication** - Remove duplicate configs
-- 📡 **Response Validation** - Server response verification
+</td>
+<td width="50%">
 
-### 📊 **Advanced Analytics**
+#### ⚡ **Ultra-Fast Testing**
+- ✅ **Ultra-Fast Connection Pool** with 50 concurrent tests
+- ✅ **Advanced Protocol Testing** with handshake & response validation
+- ✅ **Timeout Management** for optimal performance
+- ✅ **Retry Logic** with exponential backoff
+- ✅ **Average 10,000+ configs** per update
 
-- 📈 **Performance Metrics** - Comprehensive performance metrics
-- 📉 **Trend Analysis** - Historical data trend analysis
-- 💡 **Key Insights** - Intelligent insights and recommendations
-- 🎯 **Optimization Recommendations** - Performance optimization tips
-- 📊 **Protocol Distribution** - Protocol and country distribution
+</td>
+</tr>
+<tr>
+<td width="50%">
 
-### 🏥 **Health Monitoring**
+#### 🎨 **Modern UI**
+- ✅ **Analytical Dashboard** with Chart.js
+- ✅ **Real-time Statistics** with auto-refresh
+- ✅ **Responsive Design** mobile-friendly
+- ✅ **Dark/Light Theme** (in development)
+- ✅ **One-click Copy** for all links
 
-- ✅ **6 Different Health Checks**
-- 🌐 **GitHub Connectivity** - Connection monitoring
-- 📡 **Config Sources** - Source accessibility check
-- 💾 **Disk Space** - Disk space monitoring
-- 🧠 **Memory Usage** - Memory monitoring
-- ⚡ **Cache Performance** - Cache performance tracking
-- 🗄️ **SQLite Database** - History and statistics storage
-- 📊 **Real-time Alerts** - Instant notifications
+</td>
+<td width="50%">
 
-### 🌐 **Professional UI/UX**
+#### 🗂️ **Smart Categorization**
+- ✅ **Protocol Categories** (VMess, VLESS, Trojan, SS, SSR, Hysteria)
+- ✅ **Country Categories** with GeoIP Lookup
+- ✅ **Latency-based Filtering**
+- ✅ **Subscription Links** for each category
+- ✅ **Auto-Generated Files** every 30 minutes
 
-- 🎨 **Advanced Dashboard** with Bootstrap 5
-- 📱 **Responsive Design** - Compatible with all devices
-- 📊 **Interactive Charts** - Chart.js
-- 🔄 **Real-time Statistics** - Live stats
-- 🎯 **Subscription Selector** - Smart selector
-- 🌓 **Dark/Light Mode** - Dark/Light theme support
-
-### 🔌 **RESTful API**
-
-- ⚡ **FastAPI Framework** - Fast and modern
-- 📡 **Complete Endpoints** - Access to all features
-- 📊 **Real-time Stats** - Statistics API
-- 🔐 **CORS Support** - CORS enabled
-- 📝 **Auto Documentation** - Automatic Swagger docs
-
-### 🤖 **Complete Automation**
-
-- ⏰ **Scheduled Jobs** - Scheduled tasks
-- 🔄 **Auto Deployment** - Automatic deployment
-- 📊 **Stats Tracking** - Statistics tracking
-- 🔔 **Notifications** - Smart notifications (Telegram, Email, Webhook)
-- 🔧 **Error Recovery** - Automatic error recovery
+</td>
+</tr>
+</table>
 
 ---
 
-## 🎯 Advanced Capabilities
+## 🎯 System Architecture
 
-### ⚡ **Performance Optimization**
-
-```python
-✅ UltraFastConnectionPool - Test 100 configs simultaneously
-✅ SmartConfigFilter - Smart pre-filtering
-✅ MD5 Hash Deduplication - Hash-based deduplication
-✅ Async/Await - Asynchronous programming
-✅ Connection Pooling - Optimal resource usage
+```mermaid
+graph TD
+    A[39+ Sources] -->|Fetch| B[Config Collector]
+    B -->|Parse| C[Protocol Parsers]
+    C -->|Validate| D[Ultra-Fast Tester]
+    D -->|Filter| E[Working Configs]
+    E -->|Categorize| F[By Protocol]
+    E -->|GeoIP| G[By Country]
+    F --> H[Subscription Files]
+    G --> H
+    H --> I[GitHub Pages]
+    I --> J[Users]
+    
+    K[GitHub Actions] -->|Every 30min| B
+    L[Cache Manager] -.->|Optimize| B
+    M[Advanced Analytics] -.->|Monitor| D
 ```
 
-### 📁 **Smart Categorization**
+### 🏗️ **Project Structure**
 
 ```
-✅ Categorization by Protocol (10 protocols)
-✅ Categorization by Country (270+ countries)
-✅ Sorting by Latency
-✅ Advanced Geographic Filtering
-✅ Country Prioritization
-```
-
-### 🔐 **Security**
-
-```
-✅ Rate Limiting - Request limiting
-✅ IP Blacklisting - IP blocking
-✅ SSL/TLS Verification - Certificate verification
-✅ Input Validation - Input validation
-✅ Secure Headers - Secure headers
-```
-
-### 📊 **Reporting**
-
-```
-✅ JSON Reports - JSON reports
-✅ Performance Metrics - Performance metrics
-✅ Error Analysis - Error analysis
-✅ Geographic Distribution - Geographic distribution
-✅ Historical Data - Historical data
+V2Ray_Collector/
+├── 🎯 Core Components
+│   ├── config_collector.py      # Main collection engine
+│   ├── singbox_parser.py        # SingBox format parser
+│   ├── geoip_lookup.py          # Country detection
+│   └── cache_manager.py         # Cache management
+│
+├── 🌐 Web Interface
+│   ├── subscriptions/
+│   │   ├── index.html           # Main page
+│   │   ├── dashboard.html       # Analytics dashboard
+│   │   ├── by_protocol/         # Protocol categories
+│   │   └── by_country/          # Country categories
+│   │
+├── 🤖 Automation
+│   ├── .github/workflows/
+│   │   ├── v2ray-collector.yml # Auto collection
+│   │   └── deploy-pages.yml    # GitHub Pages deployment
+│   │
+├── 📚 Documentation
+│   ├── docs/                    # Complete documentation
+│   ├── README.md                # Persian
+│   └── README_EN.md             # English
+│
+└── ⚙️ Configuration
+    ├── config.py                # Main settings
+    ├── requirements.txt         # Python dependencies
+    └── config.env.example       # Environment variables
 ```
 
 ---
 
-## 📡 Subscription Links
+## 🚀 Quick Start
 
-### 🌐 **Web Pages**
+### 📦 **Installation**
 
-| Page | Description | Link |
-|------|-------------|------|
-| 🏠 **Main Page** | Display all subscription links | [View](https://ahmadakd.github.io/V2Ray_Collector/) |
-| 📊 **Dashboard** | Management dashboard with complete stats | [View](https://ahmadakd.github.io/V2Ray_Collector/subscriptions/dashboard.html) |
-| 🎯 **Selector** | Smart link selector | [View](https://ahmadakd.github.io/V2Ray_Collector/subscriptions/subscription_selector.html) |
+#### Method 1: Direct Subscription Links
 
-### 📋 **Direct Subscription Links**
-
-#### 📦 **All Configs** (Recommended)
-
-```
-https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/all_subscription.txt
-```
-
-#### 🔵 **VMess** (Most Configs)
-
-```
-https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/vmess_subscription.txt
-```
-
-#### 🟢 **VLESS** (Fastest)
-
-```
-https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/vless_subscription.txt
-```
-
-#### 🟡 **Trojan** (Most Secure)
-
-```
-https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/trojan_subscription.txt
-```
-
-#### 🟠 **Shadowsocks**
-
-```
-https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/ss_subscription.txt
-```
-
-#### 🟣 **ShadowsocksR**
-
-```
-https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/ssr_subscription.txt
-```
-
-### 🌍 **Country-Based Categorization**
-
-Subscription links by country:
-
-```
-https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/by_country/{COUNTRY_CODE}.txt
-```
-
-**Examples:**
-
-- 🇺🇸 United States: `by_country/US.txt`
-- 🇩🇪 Germany: `by_country/DE.txt`
-- 🇳🇱 Netherlands: `by_country/NL.txt`
-- 🇬🇧 United Kingdom: `by_country/GB.txt`
-
----
-
-## 🚀 Installation & Setup
-
-### 📋 **Prerequisites**
-
-- Python 3.8 or higher
-- pip (Python package manager)
-- Git
-
-### 📥 **Quick Install**
-
-#### 1️⃣ **Clone the Repository**
+Easiest way! Just copy the link you need:
 
 ```bash
+# All configs
+https://ahmadakd.github.io/V2Ray_Collector/subscriptions/all_subscription.txt
+
+# VMess only
+https://ahmadakd.github.io/V2Ray_Collector/subscriptions/by_protocol/vmess.txt
+
+# USA only
+https://ahmadakd.github.io/V2Ray_Collector/subscriptions/by_country/US.txt
+```
+
+#### Method 2: Local Installation
+
+```bash
+# 1. Clone repository
 git clone https://github.com/AhmadAkd/V2Ray_Collector.git
 cd V2Ray_Collector
-```
 
-#### 2️⃣ **Install Dependencies**
-
-```bash
+# 2. Install dependencies
 pip install -r requirements.txt
-```
 
-#### 3️⃣ **Run the Project**
-
-```bash
-# Collect and test configs
+# 3. Run collection
 python config_collector.py
 
-# Run automation
-python automation.py
-
-# Start API server
-python api_server.py
+# 4. View results
+open subscriptions/index.html
 ```
 
-### 🪟 **Windows**
-
-For Windows users, use PowerShell scripts:
-
-```powershell
-# Quick run
-.\run.ps1
-
-# Run with Persian language
-.\run-fa.ps1
-
-# Push to GitHub
-.\push-to-github.ps1
-```
-
-### 🐧 **Linux/macOS**
+#### Method 3: Docker
 
 ```bash
-# Run automation
-chmod +x push-to-github.sh
-./push-to-github.sh
-```
-
----
-
-## 🔧 Usage
-
-### 1️⃣ **Manual Collection**
-
-```python
-from config_collector import V2RayCollector
-import asyncio
-
-async def main():
-    collector = V2RayCollector()
-    
-    # Collect configs
-    configs = await collector.collect_all_configs()
-    print(f"✅ {len(configs)} configs collected")
-    
-    # Test configs
-    await collector.test_all_configs(configs)
-    print(f"✅ {len(collector.working_configs)} healthy configs")
-    
-    # Categorize
-    categories = collector.categorize_configs()
-    
-    # Generate subscription files
-    subscription_files = collector.generate_subscription_links(categories)
-    
-    # Generate report
-    report = collector.generate_report()
-    print(report)
-
-asyncio.run(main())
-```
-
-### 2️⃣ **Automation**
-
-```python
-from automation import AutomationManager
-
-# Create automation manager
-manager = AutomationManager()
-
-# Run once
-await manager.run_collection_job()
-
-# Run scheduled
-manager.start_scheduler()
-```
-
-### 3️⃣ **Using the API**
-
-```python
-import requests
-
-# Get overall stats
-response = requests.get('http://localhost:8000/api/stats')
-print(response.json())
-
-# Get all configs
-response = requests.get('http://localhost:8000/api/configs')
-configs = response.json()
-
-# Get VMess subscription link
-response = requests.get('http://localhost:8000/api/subscription/vmess')
-vmess_link = response.text
-```
-
-### 4️⃣ **Health Monitoring**
-
-```python
-from health_monitor import HealthMonitor
-import asyncio
-
-async def check_health():
-    monitor = HealthMonitor()
-    
-    # Check all components
-    health_report = await monitor.run_all_health_checks()
-    
-    # Display report
-    for component, status in health_report.items():
-        print(f"{component}: {status.status} - {status.message}")
-
-asyncio.run(check_health())
-```
-
-### 5️⃣ **Analytics**
-
-```python
-from analytics import AdvancedAnalytics
-
-# Create analytics
-analytics = AdvancedAnalytics()
-
-# Analyze performance
-metrics = analytics.analyze_performance(configs_data)
-
-# Analyze trends
-trends = analytics.analyze_trends()
-
-# Get insights
-insights = analytics.get_key_insights(metrics)
-
-# Generate comprehensive report
-report = analytics.generate_comprehensive_report(configs_data)
-```
-
----
-
-## 📊 API Documentation
-
-### 🔌 **Endpoints**
-
-#### **1. Get Overall Stats**
-
-```http
-GET /api/stats
-```
-
-**Response:**
-
-```json
-{
-  "total_configs": 2448,
-  "working_configs": 2448,
-  "protocols": {
-    "vmess": 1526,
-    "vless": 746,
-    "trojan": 167
-  },
-  "countries": 270,
-  "last_update": "2025-10-14 10:30:00",
-  "success_rate": "70.5%"
-}
-```
-
-#### **2. Get All Configs**
-
-```http
-GET /api/configs?protocol=vmess&limit=100
-```
-
-**Parameters:**
-
-- `protocol` (optional): Filter by protocol
-- `country` (optional): Filter by country
-- `limit` (optional): Number of configs
-- `offset` (optional): Starting index
-
-#### **3. Get Subscription Link**
-
-```http
-GET /api/subscription/{protocol}
-```
-
-**Example:**
-
-```bash
-curl http://localhost:8000/api/subscription/vmess
-```
-
-#### **4. Health Check**
-
-```http
-GET /health
-```
-
-**Response:**
-
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-10-14T10:30:00",
-  "components": {
-    "github_connectivity": "healthy",
-    "config_sources": "healthy",
-    "disk_space": "healthy"
-  }
-}
-```
-
-#### **5. Get Analytics Report**
-
-```http
-GET /api/analytics
-```
-
-**Response includes:**
-
-- Performance metrics
-- Trend analysis
-- Key insights
-- Recommendations
-
-### 📚 **Full Documentation**
-
-Complete API documentation is available at:
-
-```
-http://localhost:8000/docs      # Swagger UI
-http://localhost:8000/redoc     # ReDoc
-```
-
----
-
-## 🐳 Docker Deployment
-
-### 🚀 **Quick Start**
-
-#### **1. Build and Run with Docker Compose**
-
-```bash
-# Build and run
-docker-compose up -d
-
-# View logs
-docker-compose logs -f
-
-# Stop
-docker-compose down
-```
-
-#### **2. Manual Image Build**
-
-```bash
-# Build image
+# Build
 docker build -t v2ray-collector .
 
-# Run container
+# Run
 docker run -d \
   --name v2ray-collector \
   -v $(pwd)/subscriptions:/app/subscriptions \
-  -v $(pwd)/cache:/app/cache \
-  -p 8000:8000 \
   v2ray-collector
-```
 
-### 🎯 **Docker Services**
-
-The project includes 2 services:
-
-1. **v2ray-collector**: Automatic collection and testing
-2. **v2ray-api**: API Server (port 8000)
-
-### 📊 **Health Check**
-
-Docker image includes automatic health check:
-
-```dockerfile
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD python -c "import requests; requests.get('http://localhost:8000/health')"
+# View logs
+docker logs -f v2ray-collector
 ```
 
 ---
 
-## ⚙️ Configuration
+## 📊 Dashboard & Statistics
 
-### 📝 **config.py File**
+### 🎨 **User Interface**
 
-All project settings are in the `config.py` file:
+<table>
+<tr>
+<td width="50%">
 
-#### **1. General Settings**
+#### 🏠 **Main Page**
+- Overall statistics (Working/Failed/Success Rate)
+- Subscription links by protocol
+- Subscription links by country
+- Quick copy with one click
+- Download buttons for all files
+
+</td>
+<td width="50%">
+
+#### 📈 **Analytics Dashboard**
+- Pie chart for protocol distribution
+- Bar chart for Top 10 countries
+- Line chart for latency comparison
+- Detailed statistical tables
+- Real-time updates
+
+</td>
+</tr>
+</table>
+
+### 📈 **Live Statistics**
+
+<div align="center">
+
+| 📊 Metric | 📈 Value | 📝 Description |
+|-----------|----------|----------------|
+| **🌐 Active Sources** | `39` | Verified and tested sources |
+| **🔧 Protocols** | `17+` | Support for various protocols |
+| **🌍 Countries** | `25+` | Global coverage |
+| **⚡ Working Configs** | `7,000+` | Tested and functional |
+| **🔄 Updates** | `30 min` | Automated collection |
+| **📊 Success Rate** | `70%+` | Test success rate |
+
+</div>
+
+---
+
+## 🔧 Advanced Configuration
+
+### ⚙️ **Main Settings** (`config.py`)
 
 ```python
-GENERAL_CONFIG = {
-    'log_level': 'INFO',
-    'max_retries': 3,
-    'request_timeout': 30,
-    'cleanup_days': 7
-}
-```
-
-#### **2. Collection Settings**
-
-```python
+# Collection settings
 COLLECTION_CONFIG = {
-    'max_concurrent_tests': 50,
-    'test_timeout': 10,
-    'min_latency_threshold': 5000,
-    'enable_speed_test': True,
-    'enable_ssl_check': True
+    'max_concurrent_tests': 50,      # Concurrent tests
+    'test_timeout': 10,              # Timeout in seconds
+    'min_latency_threshold': 5000,   # Max acceptable latency (ms)
+    'enable_speed_test': True,       # Enable speed testing
+    'enable_ssl_check': True,        # SSL certificate check
+}
+
+# Categorization settings
+CATEGORIZATION_CONFIG = {
+    'max_configs_per_protocol': 2000,  # Max configs per protocol
+    'max_configs_per_country': 1000,   # Max configs per country
+    'min_configs_per_protocol': 10,    # Min to create file
+    'enable_deduplication': True,       # Remove duplicates
+}
+
+# Cache settings
+CACHE_CONFIG = {
+    'enable_cache': True,           # Enable caching
+    'cache_ttl': 1800,              # TTL in seconds
+    'cache_dir': 'cache',           # Cache directory
 }
 ```
 
-#### **3. Config Sources**
-
-```python
-CONFIG_SOURCES = [
-    "https://github.com/Epodonios/v2ray-configs/raw/main/All_Configs_base64_Sub.txt",
-    "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge.txt",
-    # ... 26 more sources
-]
-```
-
-#### **4. Supported Protocols**
-
-```python
-SUPPORTED_PROTOCOLS = {
-    'vmess': {'enabled': True, 'priority': 1},
-    'vless': {'enabled': True, 'priority': 2},
-    'trojan': {'enabled': True, 'priority': 3},
-    'shadowsocks': {'enabled': True, 'priority': 4},
-    'shadowsocksr': {'enabled': True, 'priority': 5}
-}
-```
-
-#### **5. Notification Settings**
-
-```python
-NOTIFICATION_CONFIG = {
-    'enable_notifications': False,
-    'notification_methods': ['email', 'webhook', 'telegram'],
-    'alert_conditions': {
-        'low_success_rate': 50,
-        'high_error_rate': 20,
-        'no_working_configs': True
-    }
-}
-```
-
-### 🔐 **Environment Variables**
+### 🔐 **Environment Variables** (`.env`)
 
 ```bash
-# Set profile
-export ACTIVE_PROFILE=production  # development, production, testing
+# Telegram Bot (optional)
+TELEGRAM_BOT_TOKEN=your_bot_token_here
+TELEGRAM_CHAT_ID=your_chat_id_here
 
-# Telegram settings
-export TELEGRAM_BOT_TOKEN=your_bot_token
-export TELEGRAM_CHAT_ID=your_chat_id
+# GitHub (for auto deployment)
+GITHUB_TOKEN=ghp_your_token_here
+GITHUB_REPOSITORY=username/repository
 
-# Email settings
-export SMTP_SERVER=smtp.gmail.com
-export SMTP_PORT=587
-export SMTP_USERNAME=your_email
-export SMTP_PASSWORD=your_password
+# Advanced Settings
+LOG_LEVEL=INFO
+ENABLE_ANALYTICS=true
+ENABLE_NOTIFICATIONS=true
 ```
 
 ---
 
-## 📈 Monitoring & Analytics
+## 📡 Supported Protocols
 
-### 📊 **Dashboard**
+<table>
+<tr>
+<td width="33%">
 
-Management dashboard includes:
+### ⚡ **High Performance**
+- ✅ VMess
+- ✅ VLESS
+- ✅ Trojan
+- ✅ Hysteria / Hysteria2
+- ✅ Hysteria3
 
-- 📈 **Real-time Stats** - Healthy/Unhealthy configs count
-- 📊 **Charts** - Protocol and country distribution
-- 🌍 **Geographic Map** - Geographic distribution of configs
-- ⏱️ **Latency Charts** - Latency charts
-- 📉 **Trend Analysis** - Trend changes
+</td>
+<td width="33%">
 
-### 🏥 **Health Monitoring**
+### 🔒 **Classic Protocols**
+- ✅ Shadowsocks (SS)
+- ✅ ShadowsocksR (SSR)
+- ✅ TUIC / TUIC v5
+- ✅ WireGuard
+- ✅ Naive
 
-Health monitoring system includes:
+</td>
+<td width="33%">
 
-1. **GitHub Connectivity** - GitHub connection
-2. **Config Sources** - Source accessibility
-3. **API Endpoints** - API status
-4. **Disk Space** - Disk space
-5. **Memory Usage** - Memory usage
-6. **Cache Performance** - Cache performance
+### 🚀 **Advanced**
+- ✅ Reality
+- ✅ Xray Reality
+- ✅ SingBox
+- ✅ Clash Meta
+- ✅ And more...
 
-### 📊 **Analytics Reports**
+</td>
+</tr>
+</table>
 
-Analytics reports include:
+### 📊 **Protocol Statistics**
 
-```json
-{
-  "performance_metrics": {
-    "total_configs": 3470,
-    "working_configs": 2448,
-    "success_rate": 70.5,
-    "avg_latency": 89.3
-  },
-  "trend_analysis": {
-    "config_count_trend": "increasing",
-    "success_rate_trend": "stable",
-    "latency_trend": "improving"
-  },
-  "key_insights": [
-    "VMess has the best performance",
-    "US configs have lowest latency",
-    "Success rate improved by 5%"
-  ],
-  "recommendations": [
-    "Add more Trojan sources",
-    "Optimize connection pool size",
-    "Increase test timeout for slow regions"
-  ]
-}
+```
+VLESS     ████████████████████████████ 68%  (5,119)
+VMess     █████████████ 22%  (1,617)
+Trojan    ███ 5%  (175)
+SS        ███ 3%  (536)
+SSR       █ 1%  (2)
+Hysteria  █ 1%  (variable)
 ```
 
 ---
 
-## 🤖 GitHub Actions
+## 🌍 Geographic Categories
 
-### ⚙️ **Workflows**
+### 🗺️ **Country Coverage**
 
-The project includes 7 workflows:
+<table>
+<tr>
+<td>
 
-#### **1. V2Ray Collector** (`v2ray-collector.yml`)
+#### 🌎 **North America**
+- 🇺🇸 USA (2,800+ configs)
+- 🇨🇦 Canada (20+ configs)
 
-- ⏰ Runs every 30 minutes
-- ✅ Test sources
-- 📦 Collect configs
-- 🧪 Quality testing
-- 📊 Generate reports
-- 🚀 Deploy to GitHub Pages
+#### 🌍 **Europe**
+- 🇩🇪 Germany (100+ configs)
+- 🇬🇧 UK (30+ configs)
+- 🇫🇷 France (110+ configs)
+- 🇳🇱 Netherlands (75+ configs)
+- And 10+ more countries
 
-#### **2. Deploy Pages** (`deploy-pages.yml`)
+</td>
+<td>
 
-- 🌐 Deploy to GitHub Pages
-- 🔄 Trigger after Collector
-- ✅ File verification
+#### 🌏 **Asia**
+- 🇮🇷 Iran (1,180+ configs)
+- 🇯🇵 Japan (30+ configs)
+- 🇸🇬 Singapore (20+ configs)
+- 🇭🇰 Hong Kong (85+ configs)
+- 🇰🇷 South Korea (8+ configs)
 
-#### **3. Auto Collect** (`auto-collect.yml`)
+#### 🌍 **Other Regions**
+- 🇦🇺 Australia
+- 🇧🇷 Brazil
+- And more...
 
-- 🔄 Automatic collection
-- ⏰ Scheduled
+</td>
+</tr>
+</table>
 
-#### **4. CI** (`ci.yml`)
+---
 
-- 🧪 Run tests
-- ✅ Linting
-- 📊 Coverage Report
+## 🤖 Automation with GitHub Actions
 
-#### **5. Docker Build** (`docker-build.yml`)
+System automatically runs every **30 minutes** to:
 
-- 🐳 Build Docker image
-- 📦 Push to Docker Hub
-- 🏷️ Tagging
+1. ✅ Collect configs from 39+ sources
+2. ✅ Test all configs
+3. ✅ Categorize working configs
+4. ✅ Update subscription files
+5. ✅ Refresh dashboard and statistics
+6. ✅ Deploy to GitHub Pages
 
-#### **6. Test** (`test.yml`)
-
-- 🧪 Unit tests
-- 🔍 Integration tests
-- ✅ E2E tests
-
-#### **7. Release** (`release.yml`)
-
-- 📦 Create release
-- 📝 Changelog generation
-- 🏷️ Version tagging
-
-### 🔐 **Required Secrets**
-
-For GitHub Actions:
+### 📅 **Schedule**
 
 ```yaml
-GITHUB_TOKEN: GitHub token (automatic)
-DOCKER_USERNAME: Docker Hub username (optional)
-DOCKER_PASSWORD: Docker Hub password (optional)
-TELEGRAM_BOT_TOKEN: Telegram bot token (optional)
-TELEGRAM_CHAT_ID: Telegram chat ID (optional)
+schedule:
+  - cron: '*/30 * * * *'  # Every 30 minutes
 ```
 
 ---
 
-## 📚 Documentation
+## 🛠️ API & Integration
+
+### 📡 **REST API** (in development)
+
+```javascript
+// Get overall statistics
+GET /api/v1/stats
+
+// Get configs by protocol
+GET /api/v1/configs/protocol/:protocol
+
+// Get configs by country
+GET /api/v1/configs/country/:country
+
+// Get detailed report
+GET /api/v1/report
+```
+
+### 🔗 **Webhook Integration**
+
+```bash
+# Send notification to Telegram
+curl -X POST https://api.telegram.org/bot{TOKEN}/sendMessage \
+  -d chat_id={CHAT_ID} \
+  -d text="🚀 V2Ray Collector: 7,449 working configs collected!"
+```
+
+---
+
+## 📚 Complete Documentation
+
+<table>
+<tr>
+<td width="50%">
 
 ### 📖 **Guides**
+- [📘 Installation Guide](docs/INSTALLATION.md)
+- [👤 User Guide](docs/USER_GUIDE.md)
+- [💻 Developer Guide](docs/DEVELOPER.md)
+- [🐛 Troubleshooting](docs/TROUBLESHOOTING.md)
 
-- 📘 [Installation Guide](docs/INSTALLATION.md) - Complete step-by-step installation
-- 📗 [User Guide](docs/USER_GUIDE.md) - Using the project
-- 📕 [Developer Guide](docs/DEVELOPER.md) - Development and contribution
-- 📙 [API Documentation](docs/API.md) - Complete API docs
-- 📔 [Troubleshooting](docs/TROUBLESHOOTING.md) - Common issues
+</td>
+<td width="50%">
 
-### 📊 **Project Stats**
+### 📝 **Documents**
+- [🔄 CHANGELOG](CHANGELOG.md)
+- [🤝 Contributing](CONTRIBUTING.md)
+- [🔒 Security](SECURITY.md)
+- [✨ Improvements](IMPROVEMENTS.md)
 
-```
-📦 File Count: 350+
-📝 Lines of Code: ~15,000
-🔌 Supported Protocols: 10
-🌍 Config Sources: 57+
-🌏 Supported Countries: 40+
-⭐ Code Quality: A+
-```
+</td>
+</tr>
+</table>
 
 ---
 
 ## 🤝 Contributing
 
-Your contribution to improving this project is highly valuable! 🙏
+Want to contribute to this project? Great! 🎉
 
-### 📝 **How to Contribute**
+### 🌟 **Ways to Contribute**
 
-1. **Fork** the project
-2. Create a **Branch** (`git checkout -b feature/amazing-feature`)
-3. **Commit** changes (`git commit -m 'Add amazing feature'`)
-4. **Push** to Branch (`git push origin feature/amazing-feature`)
-5. Create a **Pull Request**
+1. **🐛 Report Bugs**: [Issues](https://github.com/AhmadAkd/V2Ray_Collector/issues)
+2. **💡 Suggest Features**: [Feature Requests](https://github.com/AhmadAkd/V2Ray_Collector/issues/new)
+3. **🔧 Pull Requests**: [Contributing Guide](CONTRIBUTING.md)
+4. **⭐ Give a Star**: If you find it useful!
+5. **📢 Share**: Tell your friends about it
 
-### 🐛 **Report Bugs**
-
-Use [Issues](https://github.com/AhmadAkd/V2Ray_Collector/issues) to report bugs.
-
-### 💡 **Suggestions**
-
-Share your suggestions via [Discussions](https://github.com/AhmadAkd/V2Ray_Collector/discussions).
-
-### 🌟 **Contributors**
+### 🏆 **Contributors**
 
 <a href="https://github.com/AhmadAkd/V2Ray_Collector/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=AhmadAkd/V2Ray_Collector" />
@@ -783,81 +472,84 @@ Share your suggestions via [Discussions](https://github.com/AhmadAkd/V2Ray_Colle
 
 ---
 
-## 📊 Project Status
+## 🎯 Roadmap
 
-### ✅ **Recent Activities**
+### ✅ **Current Version (v2.0)**
+- ✅ 39 verified sources
+- ✅ 17+ protocols
+- ✅ SingBox Parser
+- ✅ Modern Dashboard
+- ✅ GeoIP Lookup
+- ✅ Cache Manager
 
-- ✅ Added 28 new config sources
-- ✅ Implemented ultra-fast testing (100 concurrent)
-- ✅ Added Advanced Analytics
-- ✅ Implemented Health Monitoring
-- ✅ Designed Professional Dashboard
-- ✅ Created RESTful API
-- ✅ Complete Docker support
-- ✅ Comprehensive documentation in Persian and English
+### 🚧 **Next Version (v2.1)**
+- ⏳ Telegram Bot Integration (70% complete)
+- ⏳ Advanced Monitoring (80% complete)
+- ⏳ REST API (in development)
+- ⏳ Docker Support (60% complete)
+- ⏳ Dark Mode (in design)
 
-### 🚀 **Future Plans**
-
-- [ ] Add Hysteria v3 support
-- [ ] Implement Load Balancing
-- [ ] Add Grafana Dashboard
-- [ ] Kubernetes support
-- [ ] Create Mobile App
-- [ ] Add Machine Learning for quality prediction
+### 🔮 **Future (v3.0)**
+- 🔜 Machine Learning for best config selection
+- 🔜 WireGuard support
+- 🔜 Mobile App (Android/iOS)
+- 🔜 Complete management panel
+- 🔜 Multi-Language Support
 
 ---
 
-## 🔒 Security
+## 📊 Project Statistics
 
-To report security issues, please refer to [SECURITY.md](SECURITY.md).
+<div align="center">
 
-**Note:** Never commit sensitive information (API keys, tokens, passwords) in code.
+![GitHub stars](https://img.shields.io/github/stars/AhmadAkd/V2Ray_Collector?style=social)
+![GitHub forks](https://img.shields.io/github/forks/AhmadAkd/V2Ray_Collector?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/AhmadAkd/V2Ray_Collector?style=social)
+
+![GitHub issues](https://img.shields.io/github/issues/AhmadAkd/V2Ray_Collector)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/AhmadAkd/V2Ray_Collector)
+![GitHub last commit](https://img.shields.io/github/last-commit/AhmadAkd/V2Ray_Collector)
+![GitHub code size](https://img.shields.io/github/languages/code-size/AhmadAkd/V2Ray_Collector)
+
+</div>
+
+---
+
+## 💖 Support the Project
+
+If this project was helpful:
+
+- ⭐ **Give a Star** to this repository
+- 🐛 **Report Bugs** in Issues
+- 💡 **Share New Ideas** with us
+- 📢 **Share** with your friends
+- ☕ **Financial Support** (if you wish)
 
 ---
 
 ## 📄 License
 
-This project is released under the MIT License. For more information, refer to the [LICENSE](LICENSE) file.
+This project is released under the [MIT License](LICENSE).
 
 ```
 MIT License
 
 Copyright (c) 2025 Ahmad Akd
 
-Permission is hereby granted to use, copy, modify, merge, publish, distribute,
-sublicense, and/or sell copies of the software.
+Free to use, copy, modify, and distribute.
 ```
-
----
-
-## 🙏 Acknowledgments
-
-### 📚 **Resources Used**
-
-- [V2Ray](https://www.v2ray.com/) - Main protocol
-- [FastAPI](https://fastapi.tiangolo.com/) - API Framework
-- [Bootstrap](https://getbootstrap.com/) - UI Framework
-- [Chart.js](https://www.chartjs.org/) - Charts
-- V2Ray community free config sources
-
-### ⭐ **Support the Project**
-
-If this project was helpful to you:
-
-- ⭐ **Star** the project
-- 🐛 **Report** bugs
-- 💡 **Suggest** new features
-- 🤝 **Contribute** to development
-- 📢 **Share** with others
 
 ---
 
 ## 📞 Contact Us
 
-- 🐛 **Issues:** [GitHub Issues](https://github.com/AhmadAkd/V2Ray_Collector/issues)
-- 💬 **Discussions:** [GitHub Discussions](https://github.com/AhmadAkd/V2Ray_Collector/discussions)
-- 📧 **Email:** <ahmad.akd@example.com>
-- 🌐 **Website:** [ahmadakd.github.io](https://ahmadakd.github.io/V2Ray_Collector/)
+<div align="center">
+
+[![GitHub](https://img.shields.io/badge/GitHub-AhmadAkd-181717?style=for-the-badge&logo=github)](https://github.com/AhmadAkd)
+[![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail)](mailto:your.email@example.com)
+[![Telegram](https://img.shields.io/badge/Telegram-Channel-2CA5E0?style=for-the-badge&logo=telegram)](https://t.me/your_channel)
+
+</div>
 
 ---
 
@@ -865,16 +557,18 @@ If this project was helpful to you:
 
 **Made with ❤️ by [Ahmad Akd](https://github.com/AhmadAkd)**
 
-⭐ If this project was useful to you, give it a Star! ⭐
-
-[![GitHub stars](https://img.shields.io/github/stars/AhmadAkd/V2Ray_Collector?style=social)](https://github.com/AhmadAkd/V2Ray_Collector/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/AhmadAkd/V2Ray_Collector?style=social)](https://github.com/AhmadAkd/V2Ray_Collector/network/members)
-[![GitHub watchers](https://img.shields.io/github/watchers/AhmadAkd/V2Ray_Collector?style=social)](https://github.com/AhmadAkd/V2Ray_Collector/watchers)
+**If you found this project useful, don't forget to ⭐ star it!**
 
 </div>
 
 ---
 
-**Version:** 2.0.0  
-**Last Updated:** 2025-10-14  
-**Status:** ✅ Active and under development
+## 🎉 Special Thanks
+
+Thanks to all sources, contributors, and users who make this project better! 🙏
+
+<div align="center">
+
+**[🏠 Back to Top](#-v2ray-collector---intelligent-v2ray-config-collection-system)**
+
+</div>
