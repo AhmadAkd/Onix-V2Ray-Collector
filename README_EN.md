@@ -40,6 +40,7 @@
 <td width="50%">
 
 #### 🤖 **Smart Collection**
+
 - ✅ **39+ Verified Sources** from GitHub and public repositories
 - ✅ **SingBox JSON Support** for various formats
 - ✅ **Complete Base64 Decoding** with full format support
@@ -50,6 +51,7 @@
 <td width="50%">
 
 #### ⚡ **Ultra-Fast Testing**
+
 - ✅ **Ultra-Fast Connection Pool** with 50 concurrent tests
 - ✅ **Advanced Protocol Testing** with handshake & response validation
 - ✅ **Timeout Management** for optimal performance
@@ -62,6 +64,7 @@
 <td width="50%">
 
 #### 🎨 **Modern UI**
+
 - ✅ **Analytical Dashboard** with Chart.js
 - ✅ **Real-time Statistics** with auto-refresh
 - ✅ **Responsive Design** mobile-friendly
@@ -72,6 +75,7 @@
 <td width="50%">
 
 #### 🗂️ **Smart Categorization**
+
 - ✅ **Protocol Categories** (VMess, VLESS, Trojan, SS, SSR, Hysteria)
 - ✅ **Country Categories** with GeoIP Lookup
 - ✅ **Latency-based Filtering**
@@ -202,6 +206,7 @@ docker logs -f v2ray-collector
 <td width="50%">
 
 #### 🏠 **Main Page**
+
 - Overall statistics (Working/Failed/Success Rate)
 - Subscription links by protocol
 - Subscription links by country
@@ -212,6 +217,7 @@ docker logs -f v2ray-collector
 <td width="50%">
 
 #### 📈 **Analytics Dashboard**
+
 - Pie chart for protocol distribution
 - Bar chart for Top 10 countries
 - Line chart for latency comparison
@@ -295,6 +301,7 @@ ENABLE_NOTIFICATIONS=true
 <td width="33%">
 
 ### ⚡ **High Performance**
+
 - ✅ VMess
 - ✅ VLESS
 - ✅ Trojan
@@ -305,6 +312,7 @@ ENABLE_NOTIFICATIONS=true
 <td width="33%">
 
 ### 🔒 **Classic Protocols**
+
 - ✅ Shadowsocks (SS)
 - ✅ ShadowsocksR (SSR)
 - ✅ TUIC / TUIC v5
@@ -315,6 +323,7 @@ ENABLE_NOTIFICATIONS=true
 <td width="33%">
 
 ### 🚀 **Advanced**
+
 - ✅ Reality
 - ✅ Xray Reality
 - ✅ SingBox
@@ -347,10 +356,12 @@ Hysteria  █ 1%  (variable)
 <td>
 
 #### 🌎 **North America**
+
 - 🇺🇸 USA (2,800+ configs)
 - 🇨🇦 Canada (20+ configs)
 
 #### 🌍 **Europe**
+
 - 🇩🇪 Germany (100+ configs)
 - 🇬🇧 UK (30+ configs)
 - 🇫🇷 France (110+ configs)
@@ -361,6 +372,7 @@ Hysteria  █ 1%  (variable)
 <td>
 
 #### 🌏 **Asia**
+
 - 🇮🇷 Iran (1,180+ configs)
 - 🇯🇵 Japan (30+ configs)
 - 🇸🇬 Singapore (20+ configs)
@@ -368,6 +380,7 @@ Hysteria  █ 1%  (variable)
 - 🇰🇷 South Korea (8+ configs)
 
 #### 🌍 **Other Regions**
+
 - 🇦🇺 Australia
 - 🇧🇷 Brazil
 - And more...
@@ -434,6 +447,7 @@ curl -X POST https://api.telegram.org/bot{TOKEN}/sendMessage \
 <td width="50%">
 
 ### 📖 **Guides**
+
 - [📘 Installation Guide](docs/INSTALLATION.md)
 - [👤 User Guide](docs/USER_GUIDE.md)
 - [💻 Developer Guide](docs/DEVELOPER.md)
@@ -443,6 +457,7 @@ curl -X POST https://api.telegram.org/bot{TOKEN}/sendMessage \
 <td width="50%">
 
 ### 📝 **Documents**
+
 - [🔄 CHANGELOG](CHANGELOG.md)
 - [🤝 Contributing](CONTRIBUTING.md)
 - [🔒 Security](SECURITY.md)
@@ -477,6 +492,7 @@ Want to contribute to this project? Great! 🎉
 ## 🎯 Roadmap
 
 ### ✅ **Current Version (v2.0) - Everything Ready!**
+
 - ✅ 39 verified sources
 - ✅ 17+ protocols
 - ✅ SingBox Parser
@@ -493,6 +509,7 @@ Want to contribute to this project? Great! 🎉
 - ✅ Performance Monitoring
 
 ### 🚧 **Next Version (v2.1)**
+
 - 🔄 Telegram Bot Commands
 - 🔄 Admin Panel Web UI
 - 🔄 Real-time WebSocket Updates
@@ -500,6 +517,7 @@ Want to contribute to this project? Great! 🎉
 - 🔄 Multi-user Support
 
 ### 🔮 **Future (v3.0)**
+
 - 🔜 Mobile App (Android/iOS)
 - 🔜 Plugin System
 - 🔜 Blockchain Integration

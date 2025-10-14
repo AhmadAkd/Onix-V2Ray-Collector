@@ -94,11 +94,11 @@
 
 ## 🔗 Links | لینک‌ها
 
-- 🌐 **Live Demo**: https://ahmadakd.github.io/V2Ray_Collector/
-- 📚 **Documentation**: https://github.com/AhmadAkd/V2Ray_Collector/tree/main/docs
-- 📡 **API Docs**: https://github.com/AhmadAkd/V2Ray_Collector/blob/main/docs/API.md
-- 🐛 **Issues**: https://github.com/AhmadAkd/V2Ray_Collector/issues
-- 💬 **Discussions**: https://github.com/AhmadAkd/V2Ray_Collector/discussions
+- 🌐 **Live Demo**: <https://ahmadakd.github.io/V2Ray_Collector/>
+- 📚 **Documentation**: <https://github.com/AhmadAkd/V2Ray_Collector/tree/main/docs>
+- 📡 **API Docs**: <https://github.com/AhmadAkd/V2Ray_Collector/blob/main/docs/API.md>
+- 🐛 **Issues**: <https://github.com/AhmadAkd/V2Ray_Collector/issues>
+- 💬 **Discussions**: <https://github.com/AhmadAkd/V2Ray_Collector/discussions>
 
 ---
 
@@ -128,4 +128,3 @@
 [![GitHub stars](https://img.shields.io/github/stars/AhmadAkd/V2Ray_Collector?style=social)](https://github.com/AhmadAkd/V2Ray_Collector)
 
 </div>
-
