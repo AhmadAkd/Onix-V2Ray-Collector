@@ -41,6 +41,7 @@
 ## ✨ Key Features
 
 ### 🔄 **Smart Collection**
+
 - 🌍 **28+ Trusted Sources** from around the world
 - 📦 **Full Base64 Support** and various formats
 - 🔄 **Automatic Collection** every 30 minutes via GitHub Actions
@@ -48,6 +49,7 @@
 - 🎯 **Smart Filtering** - Pre-filter invalid configs
 
 ### ✅ **Professional Quality Testing**
+
 - 🔌 **10 Protocols Supported**: VMess, VLESS, Trojan, Shadowsocks, SSR, Hysteria, Hysteria2, WireGuard, TUIC, Naive
 - ⚡ **Ultra-Fast Testing** with 100 concurrent connections
 - 🔐 **Protocol-Based Testing** - Real TCP/TLS testing
@@ -56,6 +58,7 @@
 - 🔍 **Smart Deduplication** - Remove duplicate configs
 
 ### 📊 **Advanced Analytics**
+
 - 📈 **Performance Metrics** - Comprehensive performance metrics
 - 📉 **Trend Analysis** - Historical data trend analysis
 - 💡 **Key Insights** - Intelligent insights and recommendations
@@ -63,6 +66,7 @@
 - 📊 **Protocol Distribution** - Protocol and country distribution
 
 ### 🏥 **Health Monitoring**
+
 - ✅ **6 Different Health Checks**
 - 🌐 **GitHub Connectivity** - Connection monitoring
 - 📡 **Config Sources** - Source accessibility check
@@ -71,6 +75,7 @@
 - ⚡ **Cache Performance** - Cache performance tracking
 
 ### 🌐 **Professional UI/UX**
+
 - 🎨 **Advanced Dashboard** with Bootstrap 5
 - 📱 **Responsive Design** - Compatible with all devices
 - 📊 **Interactive Charts** - Chart.js
@@ -79,6 +84,7 @@
 - 🌓 **Dark/Light Mode** - Dark/Light theme support
 
 ### 🔌 **RESTful API**
+
 - ⚡ **FastAPI Framework** - Fast and modern
 - 📡 **Complete Endpoints** - Access to all features
 - 📊 **Real-time Stats** - Statistics API
@@ -86,6 +92,7 @@
 - 📝 **Auto Documentation** - Automatic Swagger docs
 
 ### 🤖 **Complete Automation**
+
 - ⏰ **Scheduled Jobs** - Scheduled tasks
 - 🔄 **Auto Deployment** - Automatic deployment
 - 📊 **Stats Tracking** - Statistics tracking
@@ -97,6 +104,7 @@
 ## 🎯 Advanced Capabilities
 
 ### ⚡ **Performance Optimization**
+
 ```python
 ✅ UltraFastConnectionPool - Test 100 configs simultaneously
 ✅ SmartConfigFilter - Smart pre-filtering
@@ -106,6 +114,7 @@
 ```
 
 ### 📁 **Smart Categorization**
+
 ```
 ✅ Categorization by Protocol (10 protocols)
 ✅ Categorization by Country (270+ countries)
@@ -115,6 +124,7 @@
 ```
 
 ### 🔐 **Security**
+
 ```
 ✅ Rate Limiting - Request limiting
 ✅ IP Blacklisting - IP blocking
@@ -124,6 +134,7 @@
 ```
 
 ### 📊 **Reporting**
+
 ```
 ✅ JSON Reports - JSON reports
 ✅ Performance Metrics - Performance metrics
@@ -147,31 +158,37 @@
 ### 📋 **Direct Subscription Links**
 
 #### 📦 **All Configs** (Recommended)
+
 ```
 https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/all_subscription.txt
 ```
 
 #### 🔵 **VMess** (Most Configs)
+
 ```
 https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/vmess_subscription.txt
 ```
 
 #### 🟢 **VLESS** (Fastest)
+
 ```
 https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/vless_subscription.txt
 ```
 
 #### 🟡 **Trojan** (Most Secure)
+
 ```
 https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/trojan_subscription.txt
 ```
 
 #### 🟠 **Shadowsocks**
+
 ```
 https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/ss_subscription.txt
 ```
 
 #### 🟣 **ShadowsocksR**
+
 ```
 https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/ssr_subscription.txt
 ```
@@ -179,11 +196,13 @@ https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/ss
 ### 🌍 **Country-Based Categorization**
 
 Subscription links by country:
+
 ```
 https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/by_country/{COUNTRY_CODE}.txt
 ```
 
 **Examples:**
+
 - 🇺🇸 United States: `by_country/US.txt`
 - 🇩🇪 Germany: `by_country/DE.txt`
 - 🇳🇱 Netherlands: `by_country/NL.txt`
@@ -202,17 +221,20 @@ https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/by
 ### 📥 **Quick Install**
 
 #### 1️⃣ **Clone the Repository**
+
 ```bash
 git clone https://github.com/AhmadAkd/V2Ray_Collector.git
 cd V2Ray_Collector
 ```
 
 #### 2️⃣ **Install Dependencies**
+
 ```bash
 pip install -r requirements.txt
 ```
 
 #### 3️⃣ **Run the Project**
+
 ```bash
 # Collect and test configs
 python config_collector.py
@@ -361,11 +383,13 @@ report = analytics.generate_comprehensive_report(configs_data)
 ### 🔌 **Endpoints**
 
 #### **1. Get Overall Stats**
+
 ```http
 GET /api/stats
 ```
 
 **Response:**
+
 ```json
 {
   "total_configs": 2448,
@@ -382,32 +406,38 @@ GET /api/stats
 ```
 
 #### **2. Get All Configs**
+
 ```http
 GET /api/configs?protocol=vmess&limit=100
 ```
 
 **Parameters:**
+
 - `protocol` (optional): Filter by protocol
 - `country` (optional): Filter by country
 - `limit` (optional): Number of configs
 - `offset` (optional): Starting index
 
 #### **3. Get Subscription Link**
+
 ```http
 GET /api/subscription/{protocol}
 ```
 
 **Example:**
+
 ```bash
 curl http://localhost:8000/api/subscription/vmess
 ```
 
 #### **4. Health Check**
+
 ```http
 GET /health
 ```
 
 **Response:**
+
 ```json
 {
   "status": "healthy",
@@ -421,11 +451,13 @@ GET /health
 ```
 
 #### **5. Get Analytics Report**
+
 ```http
 GET /api/analytics
 ```
 
 **Response includes:**
+
 - Performance metrics
 - Trend analysis
 - Key insights
@@ -447,6 +479,7 @@ http://localhost:8000/redoc     # ReDoc
 ### 🚀 **Quick Start**
 
 #### **1. Build and Run with Docker Compose**
+
 ```bash
 # Build and run
 docker-compose up -d
@@ -459,6 +492,7 @@ docker-compose down
 ```
 
 #### **2. Manual Image Build**
+
 ```bash
 # Build image
 docker build -t v2ray-collector .
@@ -497,6 +531,7 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 All project settings are in the `config.py` file:
 
 #### **1. General Settings**
+
 ```python
 GENERAL_CONFIG = {
     'log_level': 'INFO',
@@ -507,6 +542,7 @@ GENERAL_CONFIG = {
 ```
 
 #### **2. Collection Settings**
+
 ```python
 COLLECTION_CONFIG = {
     'max_concurrent_tests': 50,
@@ -518,6 +554,7 @@ COLLECTION_CONFIG = {
 ```
 
 #### **3. Config Sources**
+
 ```python
 CONFIG_SOURCES = [
     "https://github.com/Epodonios/v2ray-configs/raw/main/All_Configs_base64_Sub.txt",
@@ -527,6 +564,7 @@ CONFIG_SOURCES = [
 ```
 
 #### **4. Supported Protocols**
+
 ```python
 SUPPORTED_PROTOCOLS = {
     'vmess': {'enabled': True, 'priority': 1},
@@ -538,6 +576,7 @@ SUPPORTED_PROTOCOLS = {
 ```
 
 #### **5. Notification Settings**
+
 ```python
 NOTIFICATION_CONFIG = {
     'enable_notifications': False,
@@ -631,6 +670,7 @@ Analytics reports include:
 The project includes 7 workflows:
 
 #### **1. V2Ray Collector** (`v2ray-collector.yml`)
+
 - ⏰ Runs every 30 minutes
 - ✅ Test sources
 - 📦 Collect configs
@@ -639,30 +679,36 @@ The project includes 7 workflows:
 - 🚀 Deploy to GitHub Pages
 
 #### **2. Deploy Pages** (`deploy-pages.yml`)
+
 - 🌐 Deploy to GitHub Pages
 - 🔄 Trigger after Collector
 - ✅ File verification
 
 #### **3. Auto Collect** (`auto-collect.yml`)
+
 - 🔄 Automatic collection
 - ⏰ Scheduled
 
 #### **4. CI** (`ci.yml`)
+
 - 🧪 Run tests
 - ✅ Linting
 - 📊 Coverage Report
 
 #### **5. Docker Build** (`docker-build.yml`)
+
 - 🐳 Build Docker image
 - 📦 Push to Docker Hub
 - 🏷️ Tagging
 
 #### **6. Test** (`test.yml`)
+
 - 🧪 Unit tests
 - 🔍 Integration tests
 - ✅ E2E tests
 
 #### **7. Release** (`release.yml`)
+
 - 📦 Create release
 - 📝 Changelog generation
 - 🏷️ Version tagging
@@ -805,7 +851,7 @@ If this project was helpful to you:
 
 - 🐛 **Issues:** [GitHub Issues](https://github.com/AhmadAkd/V2Ray_Collector/issues)
 - 💬 **Discussions:** [GitHub Discussions](https://github.com/AhmadAkd/V2Ray_Collector/discussions)
-- 📧 **Email:** ahmad.akd@example.com
+- 📧 **Email:** <ahmad.akd@example.com>
 - 🌐 **Website:** [ahmadakd.github.io](https://ahmadakd.github.io/V2Ray_Collector/)
 
 ---

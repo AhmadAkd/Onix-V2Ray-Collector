@@ -41,6 +41,7 @@
 ## ✨ ویژگی‌های کلیدی
 
 ### 🔄 **جمع‌آوری هوشمند**
+
 - 🌍 **28+ منبع معتبر** از سراسر جهان
 - 📦 **پشتیبانی کامل Base64** و فرمت‌های مختلف
 - 🔄 **جمع‌آوری خودکار** هر 30 دقیقه با GitHub Actions
@@ -48,6 +49,7 @@
 - 🎯 **Smart Filtering** - پیش‌فیلتر کانفیگ‌های نامعتبر
 
 ### ✅ **تست کیفیت حرفه‌ای**
+
 - 🔌 **10 پروتکل پشتیبانی شده**: VMess, VLESS, Trojan, Shadowsocks, SSR, Hysteria, Hysteria2, WireGuard, TUIC, Naive
 - ⚡ **تست فوق سریع** با 100 اتصال همزمان
 - 🔐 **تست پروتکل‌محور** - تست TCP/TLS واقعی
@@ -56,6 +58,7 @@
 - 🔍 **Smart Deduplication** - حذف کانفیگ‌های تکراری
 
 ### 📊 **Analytics پیشرفته**
+
 - 📈 **Performance Metrics** - معیارهای عملکرد جامع
 - 📉 **Trend Analysis** - تحلیل روند با داده‌های تاریخی
 - 💡 **Key Insights** - بینش‌های هوشمند و توصیه‌ها
@@ -63,6 +66,7 @@
 - 📊 **Protocol Distribution** - توزیع پروتکل‌ها و کشورها
 
 ### 🏥 **Health Monitoring**
+
 - ✅ **6 نوع بررسی سلامت** مختلف
 - 🌐 **GitHub Connectivity** - نظارت بر اتصال
 - 📡 **Config Sources** - بررسی دسترسی منابع
@@ -71,6 +75,7 @@
 - ⚡ **Cache Performance** - عملکرد کش
 
 ### 🌐 **UI/UX حرفه‌ای**
+
 - 🎨 **Dashboard پیشرفته** با Bootstrap 5
 - 📱 **Responsive Design** - سازگار با همه دستگاه‌ها
 - 📊 **نمودارهای تعاملی** - Chart.js
@@ -79,6 +84,7 @@
 - 🌓 **Dark/Light Mode** - حالت تاریک/روشن
 
 ### 🔌 **RESTful API**
+
 - ⚡ **FastAPI Framework** - سریع و مدرن
 - 📡 **Endpoints کامل** - دسترسی به همه امکانات
 - 📊 **آمار لحظه‌ای** - Statistics API
@@ -86,6 +92,7 @@
 - 📝 **Auto Documentation** - مستندات خودکار Swagger
 
 ### 🤖 **اتوماسیون کامل**
+
 - ⏰ **Scheduled Jobs** - وظایف زمان‌بندی شده
 - 🔄 **Auto Deployment** - استقرار خودکار
 - 📊 **Stats Tracking** - ردیابی آمار
@@ -97,6 +104,7 @@
 ## 🎯 امکانات پیشرفته
 
 ### ⚡ **بهینه‌سازی عملکرد**
+
 ```python
 ✅ UltraFastConnectionPool - تست 100 کانفیگ همزمان
 ✅ SmartConfigFilter - پیش‌فیلتر هوشمند
@@ -106,6 +114,7 @@
 ```
 
 ### 📁 **دسته‌بندی هوشمند**
+
 ```
 ✅ دسته‌بندی بر اساس پروتکل (10 پروتکل)
 ✅ دسته‌بندی بر اساس کشور (270+ کشور)
@@ -115,6 +124,7 @@
 ```
 
 ### 🔐 **امنیت**
+
 ```
 ✅ Rate Limiting - محدودیت درخواست
 ✅ IP Blacklisting - مسدودسازی IP
@@ -124,6 +134,7 @@
 ```
 
 ### 📊 **گزارش‌دهی**
+
 ```
 ✅ JSON Reports - گزارش‌های JSON
 ✅ Performance Metrics - معیارهای عملکرد
@@ -147,31 +158,37 @@
 ### 📋 **لینک‌های مستقیم اشتراک**
 
 #### 📦 **همه کانفیگ‌ها** (توصیه می‌شود)
+
 ```
 https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/all_subscription.txt
 ```
 
 #### 🔵 **VMess** (بیشترین تعداد)
+
 ```
 https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/vmess_subscription.txt
 ```
 
 #### 🟢 **VLESS** (سریع‌ترین)
+
 ```
 https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/vless_subscription.txt
 ```
 
 #### 🟡 **Trojan** (امن‌ترین)
+
 ```
 https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/trojan_subscription.txt
 ```
 
 #### 🟠 **Shadowsocks**
+
 ```
 https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/ss_subscription.txt
 ```
 
 #### 🟣 **ShadowsocksR**
+
 ```
 https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/ssr_subscription.txt
 ```
@@ -179,11 +196,13 @@ https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/ss
 ### 🌍 **دسته‌بندی کشوری**
 
 لینک‌های اشتراک بر اساس کشور:
+
 ```
 https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/by_country/{COUNTRY_CODE}.txt
 ```
 
 **مثال:**
+
 - 🇺🇸 آمریکا: `by_country/US.txt`
 - 🇩🇪 آلمان: `by_country/DE.txt`
 - 🇳🇱 هلند: `by_country/NL.txt`
@@ -202,17 +221,20 @@ https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/by
 ### 📥 **نصب سریع**
 
 #### 1️⃣ **کلون کردن پروژه**
+
 ```bash
 git clone https://github.com/AhmadAkd/V2Ray_Collector.git
 cd V2Ray_Collector
 ```
 
 #### 2️⃣ **نصب وابستگی‌ها**
+
 ```bash
 pip install -r requirements.txt
 ```
 
 #### 3️⃣ **اجرای پروژه**
+
 ```bash
 # جمع‌آوری و تست کانفیگ‌ها
 python config_collector.py
@@ -361,11 +383,13 @@ report = analytics.generate_comprehensive_report(configs_data)
 ### 🔌 **Endpoints**
 
 #### **1. دریافت آمار کلی**
+
 ```http
 GET /api/stats
 ```
 
 **پاسخ:**
+
 ```json
 {
   "total_configs": 2448,
@@ -382,32 +406,38 @@ GET /api/stats
 ```
 
 #### **2. دریافت تمام کانفیگ‌ها**
+
 ```http
 GET /api/configs?protocol=vmess&limit=100
 ```
 
 **پارامترها:**
+
 - `protocol` (optional): فیلتر بر اساس پروتکل
 - `country` (optional): فیلتر بر اساس کشور
 - `limit` (optional): تعداد کانفیگ‌ها
 - `offset` (optional): شروع از کدام ردیف
 
 #### **3. دریافت لینک اشتراک**
+
 ```http
 GET /api/subscription/{protocol}
 ```
 
 **مثال:**
+
 ```bash
 curl http://localhost:8000/api/subscription/vmess
 ```
 
 #### **4. بررسی سلامت**
+
 ```http
 GET /health
 ```
 
 **پاسخ:**
+
 ```json
 {
   "status": "healthy",
@@ -421,11 +451,13 @@ GET /health
 ```
 
 #### **5. دریافت گزارش Analytics**
+
 ```http
 GET /api/analytics
 ```
 
 **پاسخ شامل:**
+
 - Performance metrics
 - Trend analysis
 - Key insights
@@ -447,6 +479,7 @@ http://localhost:8000/redoc     # ReDoc
 ### 🚀 **راه‌اندازی سریع**
 
 #### **1. ساخت و اجرای با Docker Compose**
+
 ```bash
 # ساخت و اجرا
 docker-compose up -d
@@ -459,6 +492,7 @@ docker-compose down
 ```
 
 #### **2. ساخت Image دستی**
+
 ```bash
 # ساخت image
 docker build -t v2ray-collector .
@@ -497,6 +531,7 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 تمام تنظیمات پروژه در فایل `config.py` قرار دارند:
 
 #### **1. تنظیمات عمومی**
+
 ```python
 GENERAL_CONFIG = {
     'log_level': 'INFO',
@@ -507,6 +542,7 @@ GENERAL_CONFIG = {
 ```
 
 #### **2. تنظیمات جمع‌آوری**
+
 ```python
 COLLECTION_CONFIG = {
     'max_concurrent_tests': 50,
@@ -518,6 +554,7 @@ COLLECTION_CONFIG = {
 ```
 
 #### **3. منابع کانفیگ**
+
 ```python
 CONFIG_SOURCES = [
     "https://github.com/Epodonios/v2ray-configs/raw/main/All_Configs_base64_Sub.txt",
@@ -527,6 +564,7 @@ CONFIG_SOURCES = [
 ```
 
 #### **4. پروتکل‌های پشتیبانی شده**
+
 ```python
 SUPPORTED_PROTOCOLS = {
     'vmess': {'enabled': True, 'priority': 1},
@@ -538,6 +576,7 @@ SUPPORTED_PROTOCOLS = {
 ```
 
 #### **5. تنظیمات اعلان‌ها**
+
 ```python
 NOTIFICATION_CONFIG = {
     'enable_notifications': False,
@@ -631,6 +670,7 @@ export SMTP_PASSWORD=your_password
 پروژه شامل 7 workflow است:
 
 #### **1. V2Ray Collector** (`v2ray-collector.yml`)
+
 - ⏰ اجرا هر 30 دقیقه
 - ✅ تست منابع
 - 📦 جمع‌آوری کانفیگ‌ها
@@ -639,30 +679,36 @@ export SMTP_PASSWORD=your_password
 - 🚀 Deploy به GitHub Pages
 
 #### **2. Deploy Pages** (`deploy-pages.yml`)
+
 - 🌐 استقرار به GitHub Pages
 - 🔄 Trigger بعد از Collector
 - ✅ بررسی فایل‌ها
 
 #### **3. Auto Collect** (`auto-collect.yml`)
+
 - 🔄 جمع‌آوری خودکار
 - ⏰ برنامه‌ریزی شده
 
 #### **4. CI** (`ci.yml`)
+
 - 🧪 اجرای تست‌ها
 - ✅ Linting
 - 📊 Coverage Report
 
 #### **5. Docker Build** (`docker-build.yml`)
+
 - 🐳 ساخت Docker image
 - 📦 Push به Docker Hub
 - 🏷️ Tagging
 
 #### **6. Test** (`test.yml`)
+
 - 🧪 تست‌های واحد
 - 🔍 Integration tests
 - ✅ E2E tests
 
 #### **7. Release** (`release.yml`)
+
 - 📦 ایجاد release
 - 📝 Changelog generation
 - 🏷️ Version tagging
@@ -805,7 +851,7 @@ Copyright (c) 2025 Ahmad Akd
 
 - 🐛 **Issues:** [GitHub Issues](https://github.com/AhmadAkd/V2Ray_Collector/issues)
 - 💬 **Discussions:** [GitHub Discussions](https://github.com/AhmadAkd/V2Ray_Collector/discussions)
-- 📧 **Email:** ahmad.akd@example.com
+- 📧 **Email:** <ahmad.akd@example.com>
 - 🌐 **Website:** [ahmadakd.github.io](https://ahmadakd.github.io/V2Ray_Collector/)
 
 ---
