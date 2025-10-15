@@ -20,20 +20,24 @@
 ## 1️⃣ تنظیم Description و About
 
 ### مرحله 1: باز کردن صفحه Repository
+
 ```
 https://github.com/AhmadAkd/V2Ray_Collector
 ```
 
 ### مرحله 2: کلیک روی Settings
+
 - در صفحه اصلی repository، **بالای صفحه** سمت راست، آیکون **⚙️ Settings** رو پیدا کن
 - روش کلیک کن
 
 ### مرحله 3: ویرایش About
+
 - در سمت راست صفحه، بخش **"About"** رو پیدا کن
 - روی آیکون **⚙️** (کنار کلمه About) کلیک کن
 - یا مستقیم روی **"Edit repository details"** کلیک کن
 
 ### مرحله 4: وارد کردن Description
+
 در کادر **"Description"** این متن رو کپی کن:
 
 ```
@@ -51,6 +55,7 @@ https://github.com/AhmadAkd/V2Ray_Collector
 ## 2️⃣ اضافه کردن Topics
 
 ### مرحله 1: در همون پنجره About
+
 - پایین‌تر، بخش **"Topics"** رو پیدا کن
 - این Topics رو **یکی یکی** اضافه کن:
 
@@ -78,6 +83,7 @@ health-monitoring
 ```
 
 ### مرحله 2: نحوه اضافه کردن
+
 1. کادر "Add topics" رو پیدا کن
 2. هر کلمه رو تایپ کن (مثل `v2ray`)
 3. Enter بزن یا از dropdown انتخاب کن
@@ -90,7 +96,8 @@ health-monitoring
 
 ## 3️⃣ تنظیم Website
 
-### در همون پنجره About:
+### در همون پنجره About
+
 - کادر **"Website"** رو پیدا کن
 - این لینک رو وارد کن:
 
@@ -98,7 +105,8 @@ health-monitoring
 https://ahmadakd.github.io/V2Ray_Collector/
 ```
 
-### بعد از تمام تنظیمات About:
+### بعد از تمام تنظیمات About
+
 - روی دکمه **"Save changes"** کلیک کن
 
 ---
@@ -108,8 +116,10 @@ https://ahmadakd.github.io/V2Ray_Collector/
 این تصویر وقتی لینک GitHub رو در Twitter, Telegram, Discord و... share می‌کنی نمایش داده میشه.
 
 ### مرحله 1: ساخت تصویر
+
 **گزینه A: استفاده از Canva (آسان‌تر)**
-1. برو به: https://www.canva.com
+
+1. برو به: <https://www.canva.com>
 2. سایز: **1280 × 640 پیکسل**
 3. المان‌ها:
    - پس‌زمینه: گرادیانت آبی/بنفش (#4158D0 → #C850C0)
@@ -119,16 +129,19 @@ https://ahmadakd.github.io/V2Ray_Collector/
    - آیکون‌ها: 🚀 ⚡ 🔒 📊
 
 **گزینه B: استفاده از Figma (حرفه‌ای‌تر)**
-1. برو به: https://www.figma.com
+
+1. برو به: <https://www.figma.com>
 2. ایجاد Frame با سایز 1280×640
 3. طراحی مشابه UI پروژه
 
 **گزینه C: استفاده از PhotoShop/GIMP**
+
 - سایز: 1280×640
 - فرمت: PNG یا JPG
 - حجم: کمتر از 1MB
 
 ### مرحله 2: آپلود تصویر
+
 1. برو به: **Settings** > **Options**
 2. پایین صفحه scroll کن
 3. بخش **"Social preview"** رو پیدا کن
@@ -144,29 +157,35 @@ https://ahmadakd.github.io/V2Ray_Collector/
 ## 5️⃣ فعال‌سازی GitHub Pages
 
 ### مرحله 1: رفتن به تنظیمات Pages
+
 ```
 Repository > Settings > Pages (از منوی سمت چپ)
 ```
 
 ### مرحله 2: تنظیم Source
+
 - **Source**: Deploy from a branch
 - **Branch**: `main`
 - **Folder**: `/ (root)` یا `docs` (اگر موجوده)
 - روی **"Save"** کلیک کن
 
 ### مرحله 3: منتظر بمون
+
 - ممکنه 2-3 دقیقه طول بکشه
 - بعد از آماده شدن، یه لینک سبز رنگ نشون داده میشه:
+
 ```
 ✅ Your site is live at https://ahmadakd.github.io/V2Ray_Collector/
 ```
 
 ### مرحله 4: تست
+
 - روی لینک کلیک کن
 - صفحه اصلی پروژه باید لود بشه
 
 **⚠️ مشکل؟**
 اگر صفحه 404 داد:
+
 1. مطمئن شو که فایل `index.html` در `subscriptions/` موجوده
 2. یا تنظیمات رو به `docs` تغییر بده (اگر فایل‌ها توی docs هستن)
 
@@ -175,20 +194,25 @@ Repository > Settings > Pages (از منوی سمت چپ)
 ## 6️⃣ فعال‌سازی Discussions
 
 ### مرحله 1: رفتن به Settings
+
 ```
 Repository > Settings > General
 ```
 
 ### مرحله 2: پیدا کردن بخش Features
+
 - Scroll کن تا بخش **"Features"** رو ببینی
 - گزینه **"Discussions"** رو پیدا کن
 
 ### مرحله 3: فعال‌سازی
+
 - چک‌باکس **"Discussions"** رو تیک بزن
 - منتظر بمون تا فعال بشه (چند ثانیه)
 
 ### مرحله 4: تنظیم Categories (اختیاری)
+
 بعد از فعال شدن، می‌تونی Categories بسازی:
+
 - 💬 General
 - 💡 Ideas
 - 🐛 Troubleshooting
@@ -200,24 +224,30 @@ Repository > Settings > General
 ## 7️⃣ ایجاد Release اول
 
 ### مرحله 1: رفتن به Releases
+
 ```
 Repository > Releases (در سمت راست صفحه اصلی)
 ```
+
 یا مستقیم:
+
 ```
 https://github.com/AhmadAkd/V2Ray_Collector/releases/new
 ```
 
 ### مرحله 2: ایجاد Tag
+
 - **Choose a tag**: `v2.0.0`
 - **Target**: `main`
 
 ### مرحله 3: عنوان Release
+
 ```
 🚀 V2Ray Collector v2.0.0 - Enterprise Edition
 ```
 
 ### مرحله 4: توضیحات Release
+
 کپی کن و Paste کن:
 
 ```markdown
@@ -260,7 +290,8 @@ https://github.com/AhmadAkd/V2Ray_Collector/releases/new
 
 ### روش 1: استفاده از Subscription Links (آسان‌ترین)
 ```
-https://ahmadakd.github.io/V2Ray_Collector/
+<https://ahmadakd.github.io/V2Ray_Collector/>
+
 ```
 
 ### روش 2: نصب Local
@@ -272,6 +303,7 @@ python run_collection.py
 ```
 
 ### روش 3: Docker
+
 ```bash
 docker-compose up -d
 ```
@@ -312,6 +344,7 @@ docker-compose up -d
 ---
 
 **⭐ اگر این پروژه رو دوست دارید، لطفا ستاره بدهید!**
+
 ```
 
 ### مرحله 5: انتشار
@@ -323,13 +356,17 @@ docker-compose up -d
 
 ### مرحله 1: فعال‌سازی Security Advisories
 ```
+
 Settings > Security > Security advisories
+
 ```
 - **"Enable"** رو بزن
 
 ### مرحله 2: فعال‌سازی Dependabot
 ```
+
 Settings > Security > Dependabot
+
 ```
 - **Dependabot alerts**: Enable
 - **Dependabot security updates**: Enable
@@ -337,7 +374,9 @@ Settings > Security > Dependabot
 
 ### مرحله 3: Code Scanning (پیشنهادی)
 ```
+
 Security > Code scanning > Set up code scanning
+
 ```
 - **CodeQL Analysis** رو انتخاب کن
 - روی **"Set up this workflow"** کلیک کن
@@ -349,6 +388,7 @@ Security > Code scanning > Set up code scanning
 بعد از انجام همه کارها، این موارد رو چک کن:
 
 ```
+
 ✅ Description تنظیم شده
 ✅ Topics اضافه شده (حداقل 10 تا)
 ✅ Website لینک شده
@@ -357,6 +397,7 @@ Security > Code scanning > Set up code scanning
 ✅ Discussions فعال شده
 ✅ Release v2.0.0 منتشر شده
 ✅ Security features فعال شده
+
 ```
 
 ---

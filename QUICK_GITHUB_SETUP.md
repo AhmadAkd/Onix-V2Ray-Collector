@@ -5,6 +5,7 @@
 ### 1️⃣ تنظیم About (2 دقیقه)
 
 **مسیر:**
+
 ```
 GitHub.com > Repository خودت > ⚙️ (بالا سمت راست) > About بخش
 ```
@@ -14,16 +15,19 @@ GitHub.com > Repository خودت > ⚙️ (بالا سمت راست) > About ب�
 **کپی کن این‌ها:**
 
 **Description:**
+
 ```
 🚀 Smart V2Ray Config Collector | جمع‌آوری هوشمند V2Ray | ML + API + Monitor | Auto 6h | 1000+ configs
 ```
 
 **Website:**
+
 ```
 https://ahmadakd.github.io/V2Ray_Collector/
 ```
 
 **Topics:** (یکی یکی تایپ کن)
+
 ```
 v2ray
 proxy
@@ -42,11 +46,13 @@ auto-update
 ### 2️⃣ فعال کردن GitHub Pages (1 دقیقه)
 
 **مسیر:**
+
 ```
 Settings (بالا) > Pages (منوی چپ)
 ```
 
 **تنظیمات:**
+
 - Source: **Deploy from a branch**
 - Branch: **main**
 - Folder: **/ (root)**
@@ -61,6 +67,7 @@ Settings (بالا) > Pages (منوی چپ)
 ### 3️⃣ فعال کردن Discussions (30 ثانیه)
 
 **مسیر:**
+
 ```
 Settings > General > Features بخش
 ```
@@ -72,11 +79,13 @@ Settings > General > Features بخش
 ### 4️⃣ ساخت Release اول (2 دقیقه)
 
 **مسیر:**
+
 ```
 Repository اصلی صفحه > Releases (سمت راست) > Create a new release
 ```
 
 **پر کن:**
+
 - Tag: `v2.0.0`
 - Title: `🚀 V2Ray Collector v2.0.0`
 - Description: (کپی کن از فایل GITHUB_SETUP_GUIDE.md)
@@ -85,7 +94,7 @@ Repository اصلی صفحه > Releases (سمت راست) > Create a new release
 
 ---
 
-## ✅ تمام!
+## ✅ تمام
 
 حالا repository تو حرفه‌ای به نظر میاد! 🎉
 
@@ -96,11 +105,13 @@ Repository اصلی صفحه > Releases (سمت راست) > Create a new release
 اگر خواستی عکس preview هم اضافه کنی:
 
 **مسیر:**
+
 ```
 Settings > Options > Social preview (پایین صفحه)
 ```
 
 **عکس:**
+
 - سایز: 1280 × 640
 - با Canva.com بساز
 - محتوا: لوگو + نام پروژه + "1000+ Configs"
@@ -110,5 +121,3 @@ Settings > Options > Social preview (پایین صفحه)
 ## ❓ مشکل داری؟
 
 اگر هر کدوم کار نکرد، بهم بگو! 😊
-
-
