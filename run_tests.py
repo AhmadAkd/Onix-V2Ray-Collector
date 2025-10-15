@@ -41,7 +41,6 @@ def test_file_structure():
     required_files = [
         'config_collector.py',
         'config.py',
-        'notifications.py',
         'api_server.py',
         'requirements.txt',
         'README.md'
@@ -181,31 +180,6 @@ async def test_connectivity():
         return True
 
 
-def test_notifications():
-    """تست سیستم اعلان‌ها"""
-    print("🧪 تست سیستم اعلان‌ها...")
-
-    try:
-        from notifications import NotificationManager, DEFAULT_NOTIFICATION_CONFIG
-
-        manager = NotificationManager(DEFAULT_NOTIFICATION_CONFIG)
-
-        # تست ایجاد گزارش
-        test_report = {
-            'timestamp': '2024-01-01T00:00:00',
-            'working_configs': [{'protocol': 'vmess', 'country': 'US'}],
-            'failed_configs': [{'protocol': 'vless', 'country': 'DE'}],
-            'sources_checked': 5,
-            'success_rate': 50.0
-        }
-
-        print("✅ سیستم اعلان‌ها به درستی کار می‌کند")
-        return True
-    except Exception as e:
-        print(f"❌ خطا در تست سیستم اعلان‌ها: {e}")
-        return False
-
-
 def test_api_server():
     """تست API Server"""
     print("🧪 تست API Server...")
@@ -233,7 +207,6 @@ async def main():
         ("config_collector", test_config_collector),
         ("config_parsing", test_config_parsing),
         ("connectivity", test_connectivity),
-        ("notifications", test_notifications),
         ("api_server", test_api_server),
     ]
 
