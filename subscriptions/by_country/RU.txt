@@ -1,6 +1,7 @@
-vless://89ba9206-305a-4dbf-bd62-9144c1b0e0c4@www.speedtest.net:2095?path=%2Fhajmi%3Fed%3D2050&security=none&encryption=none&host=dbe661d5a761ff6c.s-5HU09JDF-97SHS.WWWrubika.irto.xn--ls8haaaaaaaaaaaaaaaaaa.la.which.xn--ls8haaaaaaaaaaaaaaaaaa.xn-ls8faaaaaaaaaa.speedtest.net.google.com.eu.ir.nl.aparat.com.komak.IR.Nb-En.85858599.xYz.&type=ws#%F0%9F%87%B7%F0%9F%87%BA%D8%B3%D8%B1%D9%88%D8%B1%20%D9%87%D8%A7%DB%8C%20%D8%A8%DB%8C%D8%B4%D8%AA%D8%B1%3A%20%40customv2ray
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpZUUZtakthYW1TclBxVnkxanRYRVg0@212.192.14.226:41968#🆔freeconfigsplus%20🔒%20SS-TCP-TLS%20🇷🇺%20RU%20122ms
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo5MkpIQ3JmZURyOVBRa0l3bHJJdldV@45.151.62.132:58010#RU%F0%9F%87%B7%F0%9F%87%BA+%7C+45.151.62.132-58010+%7C+133.95ms
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpPUmsxemNQaFlyZWNZaU5tdzd3cW5n@89.23.113.144:47767#RU%F0%9F%87%B7%F0%9F%87%BA+%7C+89.23.113.144-47767+%7C+198.11ms
+vmess://eyJhZGQiOiJjcy5mbGhhLnJ1IiwiYWlkIjoiMCIsImFscG4iOiIiLCJmcCI6IiIsImhvc3QiOiJjcy5mbGhhLnJ1IiwiaWQiOiIyZjgyMTE1Mi1jM2U5LTQwNzQtOTE4NS0yNzkwZTc0MjVmNDIiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwicG9ydCI6IjIwODIiLCJwcyI6IuKbiO+4jzYxQG9uZWNsaWNrdnBua2V5cyIsInNjeSI6ImF1dG8iLCJzbmkiOiIiLCJ0bHMiOiIiLCJ0eXBlIjoiIiwidiI6IjIifQ
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpHNGFwTThqZUxWS0FidGloQ3NtVkZK@aus.un1c4d3.ru:22899 # 🔒 [By EbraSha]
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo1VFpud1BiMjNwUVMzOWxJdWNzcEp3@fin.outlinebot1.ru:5904#🔥Join+Telegram:@Farah_VPN🟣
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp5QUx0eUF0SGZidzFWdTRwcWg2d1Vj@5.129.201.43:23256#https:%2F%2Ft.me%2FForceRunVPN-%F0%9F%87%B7%F0%9F%87%BA-Moscow-483ms-TimeWeb%20LLC
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpPUmsxemNQaFlyZWNZaU5tdzd3cW5n@89.23.113.144:47767#RU%F0%9F%87%B7%F0%9F%87%BA+%7C+89.23.113.144-47767+%7C+198.11ms
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo5MkpIQ3JmZURyOVBRa0l3bHJJdldV@45.151.62.132:58010#RU%F0%9F%87%B7%F0%9F%87%BA+%7C+45.151.62.132-58010+%7C+133.95ms
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo1VFpud1BiMjNwUVMzOWxJdWNzcEp3@fin.outlinebot1.ru:5904 # 🔒 [By EbraSha]
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTozNjBlMjFkMjE5NzdkYzEx@ru.vmagnum.win:57456#%F0%9F%87%B7%F0%9F%87%BA%20Moscow%2C%20MOW%2C%20Russia%20%282%29
