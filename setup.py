@@ -19,8 +19,8 @@ def read_requirements():
         return [line.strip() for line in fh if line.strip() and not line.startswith("#")]
 
 setup(
-    name="v2ray-config-collector",
-    version="1.0.0",
+    name="onix-v2ray-collector",
+    version="2.0.0",
     author="AhmadAkd",
     author_email="your-email@example.com",
     description="Automated V2Ray Configuration Collection, Testing & Categorization System",
@@ -69,10 +69,9 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "v2ray-collector=config_collector:main",
-            "v2ray-automation=automation:main",
-            "v2ray-server=web_server:main",
-            "v2ray-start=start:main",
+            "onix-collector=config_collector:main",
+            "onix-automation=automation:main",
+            "onix-api=api_server:main",
         ],
     },
     include_package_data=True,
