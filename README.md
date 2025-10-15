@@ -11,7 +11,7 @@
 
 **ML scoring + REST API + Health monitoring | Auto-update 6h | بروزرسانی خودکار هر 6 ساعت | 1000+ configs from 40+ sources**
 
-[🌐 دموی زنده](https://ahmadakd.github.io/Onix-V2Ray-Collector/) • [📚 مستندات](https://github.com/AhmadAkd/Onix-V2Ray-Collector/tree/main/docs) • [🐛 گزارش باگ](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues) • [🌟 ستاره بدهید](https://github.com/AhmadAkd/Onix-V2Ray-Collector)
+[🌐 دریافت کانفیگ](https://ahmadakd.github.io/Onix-V2Ray-Collector/) • [📚 مستندات](https://github.com/AhmadAkd/Onix-V2Ray-Collector/tree/main/docs) • [🐛 گزارش باگ](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues) • [🌟 ستاره بدهید](https://github.com/AhmadAkd/Onix-V2Ray-Collector)
 
 </div>
 
