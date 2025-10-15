@@ -32,8 +32,9 @@ Fixes #(issue number)
 - [ ] هیچ تست جدیدی نیازه
 
 **محیط تست:**
-- OS: 
-- Python Version: 
+
+- OS:
+- Python Version:
 - Browser (اگر UI هست):
 
 ## ✅ Checklist
@@ -52,9 +53,7 @@ Fixes #(issue number)
 
 **Before:**
 
-
 **After:**
-
 
 ## 🔍 اطلاعات اضافی
 
@@ -63,4 +62,3 @@ Fixes #(issue number)
 ## 📋 Breaking Changes
 
 <!-- اگر breaking change هست، توضیح بده چطوری migrate کنن -->
-

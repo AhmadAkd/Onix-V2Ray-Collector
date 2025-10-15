@@ -32,4 +32,3 @@ assignees: ''
 - **OS:** [مثلا Windows 11]
 - **Python Version:** [مثلا 3.11]
 - **Version:** [مثلا v2.0.0]
-
