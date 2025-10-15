@@ -1,147 +1,151 @@
 {
-  "timestamp": "2025-10-15 14:20:51",
-  "total_configs_tested": 15886,
-  "working_configs": 9224,
-  "failed_configs": 6662,
+  "timestamp": "2025-10-15 14:47:32",
+  "total_configs_tested": 15881,
+  "working_configs": 9220,
+  "failed_configs": 6661,
   "success_rate": "58.1%",
   "protocols": {
-    "ss": {
-      "count": 862,
-      "avg_latency": "204.3ms"
+    "vless": {
+      "count": 5973,
+      "avg_latency": "62.5ms"
     },
     "vmess": {
-      "count": 2136,
-      "avg_latency": "64.6ms"
+      "count": 2137,
+      "avg_latency": "61.5ms"
     },
-    "vless": {
-      "count": 5986,
-      "avg_latency": "81.1ms"
+    "ss": {
+      "count": 863,
+      "avg_latency": "208.0ms"
     },
     "trojan": {
-      "count": 237,
-      "avg_latency": "141.2ms"
-    },
-    "hysteria": {
-      "count": 1,
-      "avg_latency": "36.3ms"
+      "count": 238,
+      "avg_latency": "162.0ms"
     },
     "ssr": {
+      "count": 7,
+      "avg_latency": "520.9ms"
+    },
+    "hysteria": {
       "count": 2,
-      "avg_latency": "258.8ms"
+      "avg_latency": "22.1ms"
     }
   },
   "countries": {
     "US": {
-      "count": 3528,
-      "avg_latency": "35.6ms"
-    },
-    "NL": {
-      "count": 118,
-      "avg_latency": "135.8ms"
+      "count": 3511,
+      "avg_latency": "20.6ms"
     },
     "IR": {
-      "count": 1309,
-      "avg_latency": "90.3ms"
-    },
-    "GB": {
-      "count": 60,
-      "avg_latency": "116.8ms"
-    },
-    "FR": {
-      "count": 199,
-      "avg_latency": "159.9ms"
-    },
-    "EU": {
-      "count": 216,
-      "avg_latency": "48.6ms"
-    },
-    "DE": {
-      "count": 125,
-      "avg_latency": "136.6ms"
+      "count": 1315,
+      "avg_latency": "65.0ms"
     },
     "CF": {
-      "count": 53,
-      "avg_latency": "45.3ms"
+      "count": 42,
+      "avg_latency": "30.5ms"
+    },
+    "FR": {
+      "count": 188,
+      "avg_latency": "116.3ms"
+    },
+    "GB": {
+      "count": 47,
+      "avg_latency": "146.9ms"
+    },
+    "NL": {
+      "count": 128,
+      "avg_latency": "96.6ms"
+    },
+    "EU": {
+      "count": 221,
+      "avg_latency": "42.5ms"
+    },
+    "IN": {
+      "count": 10,
+      "avg_latency": "198.8ms"
+    },
+    "TR": {
+      "count": 47,
+      "avg_latency": "196.8ms"
+    },
+    "RU": {
+      "count": 26,
+      "avg_latency": "109.3ms"
     },
     "FI": {
       "count": 18,
-      "avg_latency": "184.3ms"
+      "avg_latency": "210.9ms"
     },
-    "SE": {
-      "count": 12,
-      "avg_latency": "145.8ms"
-    },
-    "TR": {
-      "count": 45,
-      "avg_latency": "225.3ms"
+    "DE": {
+      "count": 118,
+      "avg_latency": "103.8ms"
     },
     "LT": {
-      "count": 39,
-      "avg_latency": "199.3ms"
+      "count": 36,
+      "avg_latency": "116.1ms"
     },
     "SG": {
-      "count": 34,
-      "avg_latency": "162.4ms"
-    },
-    "RU": {
-      "count": 31,
-      "avg_latency": "182.7ms"
-    },
-    "ES": {
-      "count": 11,
-      "avg_latency": "144.8ms"
-    },
-    "BR": {
-      "count": 3,
-      "avg_latency": "245.7ms"
+      "count": 33,
+      "avg_latency": "181.5ms"
     },
     "HK": {
-      "count": 71,
-      "avg_latency": "403.6ms"
+      "count": 87,
+      "avg_latency": "510.0ms"
     },
-    "IN": {
-      "count": 4,
-      "avg_latency": "240.6ms"
+    "ES": {
+      "count": 9,
+      "avg_latency": "118.5ms"
     },
     "PL": {
-      "count": 33,
-      "avg_latency": "158.5ms"
-    },
-    "CH": {
-      "count": 5,
-      "avg_latency": "163.3ms"
-    },
-    "CA": {
-      "count": 22,
-      "avg_latency": "101.9ms"
+      "count": 44,
+      "avg_latency": "108.2ms"
     },
     "JP": {
-      "count": 27,
-      "avg_latency": "258.2ms"
-    },
-    "AU": {
-      "count": 3,
-      "avg_latency": "111.5ms"
-    },
-    "CN": {
-      "count": 16,
-      "avg_latency": "469.9ms"
-    },
-    "KR": {
-      "count": 3,
-      "avg_latency": "154.9ms"
-    },
-    "IT": {
-      "count": 2,
-      "avg_latency": "170.1ms"
+      "count": 32,
+      "avg_latency": "222.0ms"
     },
     "TW": {
       "count": 15,
-      "avg_latency": "351.1ms"
+      "avg_latency": "627.4ms"
+    },
+    "AU": {
+      "count": 3,
+      "avg_latency": "135.3ms"
+    },
+    "CN": {
+      "count": 18,
+      "avg_latency": "643.4ms"
+    },
+    "CA": {
+      "count": 22,
+      "avg_latency": "69.2ms"
+    },
+    "BR": {
+      "count": 7,
+      "avg_latency": "138.3ms"
+    },
+    "SE": {
+      "count": 13,
+      "avg_latency": "163.3ms"
     },
     "unknown": {
+      "count": 2,
+      "avg_latency": "22.1ms"
+    },
+    "KR": {
+      "count": 4,
+      "avg_latency": "224.2ms"
+    },
+    "CH": {
+      "count": 5,
+      "avg_latency": "128.7ms"
+    },
+    "IT": {
+      "count": 2,
+      "avg_latency": "102.1ms"
+    },
+    "UA": {
       "count": 1,
-      "avg_latency": "36.3ms"
+      "avg_latency": "2.3ms"
     }
   },
   "available_files": {

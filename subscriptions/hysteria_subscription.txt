@@ -1,1 +1,2 @@
 hysteria2://862e90e1-2f26-4506-b8b9-0adf20da05fc@40.233.103.51:47262?insecure=1&sni=www.bing.com#%F0%9F%87%A8%F0%9F%87%A6%20%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%3Adafei.de%20%E5%8A%A0%E6%8B%BF%E5%A4%A7%2001
+hysteria://www2.dtku48.xyz:22334?alpn=h3&auth=dongtaiwang.com&insecure=1&peer=www2.dtku48.xyz#⭐@mshojaei77 | %F0%9F%92%A5%F0%9F%87%B9%F0%9F%87%BC%20%E2%97%88%20TW%201.162.142.9%20%E2%97%88%20udp:22334%20%E2%97%88%20Chunghwa%20Telecom%20Co.,%20Ltd.%20%E2%97%88%20b2d55
