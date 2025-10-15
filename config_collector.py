@@ -724,6 +724,7 @@ class V2RayCollector:
 
                 # تست TLS
                 context = ssl.create_default_context()
+                context.minimum_version = ssl.TLSVersion.TLSv1_2
                 # برای تست فقط hostname check رو غیرفعال می‌کنیم
                 context.check_hostname = False
                 # اما certificate verification رو نگه می‌داریم برای امنیت بیشتر
