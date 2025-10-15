@@ -17,7 +17,6 @@ from pydantic import BaseModel
 import uvicorn
 
 from config_collector import V2RayCollector
-from notifications import NotificationManager, DEFAULT_NOTIFICATION_CONFIG
 from config import API_CONFIG, SECURITY_CONFIG
 
 # تنظیم لاگ‌گیری
@@ -44,7 +43,7 @@ app.add_middleware(
 
 # Global collector instance
 collector = None
-notification_manager = None
+# notification_manager removed
 
 # Pydantic models
 
@@ -113,14 +112,11 @@ def get_client_ip(request):
 @app.on_event("startup")
 async def startup_event():
     """شروع سرور"""
-    global collector, notification_manager
+    global collector
     logger.info("🚀 شروع V2Ray Collector API Server...")
 
     # ایجاد collector
     collector = V2RayCollector()
-
-    # ایجاد notification manager
-    notification_manager = NotificationManager(DEFAULT_NOTIFICATION_CONFIG)
 
     logger.info("✅ سرور API آماده است")
 
