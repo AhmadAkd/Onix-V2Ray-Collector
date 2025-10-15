@@ -1,5 +1,5 @@
-vless://d60fc3c5-9f07-4cdb-b81f-70af27936bdc@74.49.215.247:8880?security=none&type=ws&path=%2FTelegram%F0%9F%87%A8%F0%9F%87%B3&host=ex.sue.x10.mx&sni=ex.sue.x10.mx#%F0%9F%87%A8%F0%9F%87%A6%20%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%3Adafei.de%20%E5%8A%A0%E6%8B%BF%E5%A4%A7%2002
-vless://70465717-66ae-4756-b28a-ec5899e08b17@104.26.6.89:2095?path=/?ed=2095&security=none&encryption=none&host=ns.teHRantOlIdI.Ir&type=httpupgrade#[🇨🇦] @Hddify
 vless://MahsaNG-vpn-47774155@188.114.98.4:8443?mode=stream-up&path=%2F&security=tls&alpn=h2&encryption=none&host=h10-7.tap30.site&fp=chrome&type=xhttp&sni=h10-7.tap30.site#👉🆔@v2ray_configs_pool📡🇨🇦®️Canada©️Toronto🅿️ping:27.52ms
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNToyYTZjMDM2NS1lM2VkLTRhZWYtODFjYS1iMWI2YjQ2MDg4ZGE=@132.145.102.60:21001#CA%F0%9F%87%A8%F0%9F%87%A6+%7C+132.145.102.60-21001+%7C+14.6ms
+vless://4319b62e-38d0-4439-8891-2ea6265ed30e@ip.hostingcloud.reallyclody.ir:2052?path=%2F%3Fed%3D2048&security=&encryption=none&host=Rep-Netherlans-abc.iranshopering.ir.&type=httpupgrade#👉🆔@freenettir📡🇨🇦®️Canada©️Toronto🅿️ping:28.53ms
+vless://b65f4df7-f6af-42b2-877a-cef33f21675e@74.49.215.32:2096?security=tls&type=ws&path=%2Fsnippets&host=kejiland.freewarp.eu.org&allowInsecure=1&sni=kejiland.freewarp.eu.org#%F0%9F%87%A8%F0%9F%87%A6%20%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%3Adafei.de%20%E5%8A%A0%E6%8B%BF%E5%A4%A7%2006
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpUSlo0NHNic0JUbG5TVEVLejJ5UkQx@103.98.215.192:8443#%F0%9F%87%A8%F0%9F%87%A6CA%28AzadNet.t.me%29
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNToyYTZjMDM2NS1lM2VkLTRhZWYtODFjYS1iMWI2YjQ2MDg4ZGE=@132.145.102.60:21001#CA%F0%9F%87%A8%F0%9F%87%A6+%7C+132.145.102.60-21001+%7C+14.6ms
