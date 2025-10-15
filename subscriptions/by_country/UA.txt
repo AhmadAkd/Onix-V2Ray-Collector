@@ -1,2 +1,1 @@
 vless://12345678-1234-1234-1234-123456789123@89.116.180.62:2096?path=%2Fsnippets%26Telegram%F0%9F%87%A8%F0%9F%87%B3+%40WangCai2+%2F%3Fed%3D2560&security=tls&encryption=none&host=ss.nzvrn.com&type=ws&sni=ss.nzvrn.com#🆔configfa%20🔒%20VL-WS-N/A%20🇺🇦%20UA%206ms
-vmess://eyJhZGQiOiIxNzYuOTcuMjEwLjIiLCJhaWQiOiIwIiwiYWxwbiI6IiIsImZwIjoiIiwiaG9zdCI6IiIsImlkIjoiQEdlZWtfU3BvdCIsIm5ldCI6InRjcCIsInBhdGgiOiIvQEdlZWtfU3BvdCIsInBvcnQiOiI0NTE0MyIsInBzIjoi8J+HuvCfh6YgVWtyYWluZSAyIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiJodHRwIiwidiI6IjIifQ==
