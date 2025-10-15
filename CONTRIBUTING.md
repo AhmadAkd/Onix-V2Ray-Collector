@@ -28,7 +28,7 @@
 
 ### 1. **🐛 گزارش باگ**
 اگر باگی پیدا کردید، لطفاً:
-- از قسمت [Issues](https://github.com/AhmadAkd/V2Ray_Collector/issues) گزارش دهید
+- از قسمت [Issues](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues) گزارش دهید
 - توضیح دقیق از مشکل
 - مراحل بازتولید باگ
 - اسکرین‌شات (در صورت امکان)
@@ -67,11 +67,11 @@
 ```bash
 # 1. از GitHub روی دکمه Fork کلیک کنید
 # 2. Clone کنید
-git clone https://github.com/YOUR_USERNAME/V2Ray_Collector.git
-cd V2Ray_Collector
+git clone https://github.com/YOUR_USERNAME/Onix-V2Ray-Collector.git
+cd Onix-V2Ray-Collector
 
 # 3. Remote اضافه کنید
-git remote add upstream https://github.com/AhmadAkd/V2Ray_Collector.git
+git remote add upstream https://github.com/AhmadAkd/Onix-V2Ray-Collector.git
 ```
 
 ### 2. **نصب Dependencies**
@@ -116,7 +116,7 @@ git checkout -b fix/bug-description
 ### 🏗️ **ساختار پروژه**
 
 ```
-V2Ray_Collector/
+Onix-V2Ray-Collector/
 ├── config_collector.py      # ⚡ Core: موتور اصلی
 ├── singbox_parser.py        # 📦 Parser: SingBox JSON
 ├── geoip_lookup.py          # 🌍 GeoIP: شناسایی کشور
@@ -474,8 +474,8 @@ Fixes #456
 
 ### 🌟 **مشارکت‌کنندگان برتر**
 
-<a href="https://github.com/AhmadAkd/V2Ray_Collector/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=AhmadAkd/V2Ray_Collector" />
+<a href="https://github.com/AhmadAkd/Onix-V2Ray-Collector/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=AhmadAkd/Onix-V2Ray-Collector" />
 </a>
 
 ### 💝 **تشکر ویژه از:**
@@ -491,8 +491,8 @@ Fixes #456
 
 ### 💬 **راه‌های ارتباطی**
 
-- 🐛 **باگ و مشکلات**: [GitHub Issues](https://github.com/AhmadAkd/V2Ray_Collector/issues)
-- 💡 **ایده‌ها**: [GitHub Discussions](https://github.com/AhmadAkd/V2Ray_Collector/discussions)
+- 🐛 **باگ و مشکلات**: [GitHub Issues](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues)
+- 💡 **ایده‌ها**: [GitHub Discussions](https://github.com/AhmadAkd/Onix-V2Ray-Collector/discussions)
 - 📧 **ایمیل**: your.email@example.com
 - 💬 **Telegram**: [@your_channel](https://t.me/your_channel)
 

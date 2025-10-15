@@ -23,7 +23,7 @@ GitHub.com > Repository خودت > ⚙️ (بالا سمت راست) > About ب�
 **Website:**
 
 ```
-https://ahmadakd.github.io/V2Ray_Collector/
+https://ahmadakd.github.io/Onix-V2Ray-Collector/
 ```
 
 **Topics:** (یکی یکی تایپ کن)
@@ -60,7 +60,7 @@ Settings (بالا) > Pages (منوی چپ)
 
 **صبر کن 2 دقیقه تا سایت آماده بشه!**
 
-**تست:** برو به `https://ahmadakd.github.io/V2Ray_Collector/`
+**تست:** برو به `https://ahmadakd.github.io/Onix-V2Ray-Collector/`
 
 ---
 

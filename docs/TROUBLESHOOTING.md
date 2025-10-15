@@ -188,7 +188,7 @@ python -c "import sys; print(sys.path)"
 export PYTHONPATH="${PYTHONPATH}:$(pwd)"
 
 # Or run from project directory
-cd /path/to/V2Ray_Collector
+cd /path/to/Onix-V2Ray-Collector
 python config_collector.py
 ```
 
@@ -501,8 +501,8 @@ asyncio.run(HealthMonitor().run_health_checks())
 ## 📞 Getting Help
 
 ### 💬 **Support Channels**
-- **GitHub Issues**: [Create Issue](https://github.com/AhmadAkd/V2Ray_Collector/issues)
-- **Discussions**: [Community Help](https://github.com/AhmadAkd/V2Ray_Collector/discussions)
+- **GitHub Issues**: [Create Issue](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues)
+- **Discussions**: [Community Help](https://github.com/AhmadAkd/Onix-V2Ray-Collector/discussions)
 - **Documentation**: [Complete Guide](../README.md)
 
 ### 📝 **Reporting Issues**

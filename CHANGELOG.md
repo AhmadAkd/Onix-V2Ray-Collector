@@ -164,10 +164,10 @@ configs = await collector.collect_all()
 
 ## Links
 
-- 🌐 [Live Demo](https://ahmadakd.github.io/V2Ray_Collector/)
-- 📚 [Documentation](https://github.com/AhmadAkd/V2Ray_Collector/tree/main/docs)
-- 🐛 [Issue Tracker](https://github.com/AhmadAkd/V2Ray_Collector/issues)
-- 💬 [Discussions](https://github.com/AhmadAkd/V2Ray_Collector/discussions)
+- 🌐 [Live Demo](https://ahmadakd.github.io/Onix-V2Ray-Collector/)
+- 📚 [Documentation](https://github.com/AhmadAkd/Onix-V2Ray-Collector/tree/main/docs)
+- 🐛 [Issue Tracker](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues)
+- 💬 [Discussions](https://github.com/AhmadAkd/Onix-V2Ray-Collector/discussions)
 
 ---
 

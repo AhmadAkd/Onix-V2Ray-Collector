@@ -36,7 +36,7 @@ docs/
 ### 👤 **For End Users**
 If you just want to use the V2Ray configurations:
 1. 📖 Read the [User Guide](./USER_GUIDE.md)
-2. 🔗 Visit the [Subscription Links](https://ahmadakd.github.io/V2Ray_Collector/subscriptions/)
+2. 🔗 Visit the [Subscription Links](https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/)
 3. 📱 Add to your V2Ray client
 
 ### 👨‍💻 **For Developers**
@@ -139,7 +139,7 @@ If you want to deploy and manage the system:
 ### 📱 **For Mobile Users**
 If you're accessing this on mobile:
 1. Use the [User Guide](./USER_GUIDE.md) for quick setup
-2. Bookmark the [Subscription Links](https://ahmadakd.github.io/V2Ray_Collector/subscriptions/)
+2. Bookmark the [Subscription Links](https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/)
 3. Follow client-specific instructions in the user guide
 
 ### 🖥️ **For Desktop Users**
@@ -183,8 +183,8 @@ If you want to contribute or extend:
 - **As needed**: Update user guides based on feedback
 
 ### 📝 **Contributing to Documentation**
-1. **Report Issues**: [GitHub Issues](https://github.com/AhmadAkd/V2Ray_Collector/issues)
-2. **Suggest Improvements**: [Discussions](https://github.com/AhmadAkd/V2Ray_Collector/discussions)
+1. **Report Issues**: [GitHub Issues](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues)
+2. **Suggest Improvements**: [Discussions](https://github.com/AhmadAkd/Onix-V2Ray-Collector/discussions)
 3. **Submit Pull Requests**: Follow the [Developer Guide](./DEVELOPER.md)
 4. **Provide Feedback**: Help us improve the documentation
 
@@ -193,8 +193,8 @@ If you want to contribute or extend:
 ## 📞 Support & Resources
 
 ### 💬 **Getting Help**
-- **GitHub Issues**: [Report Documentation Issues](https://github.com/AhmadAkd/V2Ray_Collector/issues)
-- **Discussions**: [Community Help](https://github.com/AhmadAkd/V2Ray_Collector/discussions)
+- **GitHub Issues**: [Report Documentation Issues](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues)
+- **Discussions**: [Community Help](https://github.com/AhmadAkd/Onix-V2Ray-Collector/discussions)
 - **Main Documentation**: [Project README](../README.md)
 
 ### 🔗 **External Resources**
@@ -203,9 +203,9 @@ If you want to contribute or extend:
 - **Configuration Examples**: [V2Ray Examples](https://github.com/v2ray/v2ray-examples)
 
 ### 📋 **Quick Links**
-- **Main Project**: [V2Ray Collector](https://github.com/AhmadAkd/V2Ray_Collector)
-- **Live Demo**: [Subscription Links](https://ahmadakd.github.io/V2Ray_Collector/subscriptions/)
-- **Dashboard**: [Management Dashboard](https://ahmadakd.github.io/V2Ray_Collector/subscriptions/dashboard.html)
+- **Main Project**: [V2Ray Collector](https://github.com/AhmadAkd/Onix-V2Ray-Collector)
+- **Live Demo**: [Subscription Links](https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/)
+- **Dashboard**: [Management Dashboard](https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/dashboard.html)
 
 ---
 

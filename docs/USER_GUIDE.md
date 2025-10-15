@@ -31,7 +31,7 @@ V2Ray Collector is an advanced system that automatically collects, tests, and ca
 ## 🚀 Quick Start
 
 ### 1️⃣ **Access Subscription Links**
-Visit the main page: [https://ahmadakd.github.io/V2Ray_Collector/subscriptions/](https://ahmadakd.github.io/V2Ray_Collector/subscriptions/)
+Visit the main page: [https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/](https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/)
 
 ### 2️⃣ **Choose Your Protocol**
 Select the subscription link for your preferred protocol:
@@ -64,7 +64,7 @@ Copy the subscription URL and add it to your V2Ray client:
 2. Click **"添加"**
 3. Enter subscription URL:
    ```
-   https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/all_subscription.txt
+   https://github.com/AhmadAkd/Onix-V2Ray-Collector/raw/main/subscriptions/all_subscription.txt
    ```
 4. Click **"确定"**
 
@@ -114,7 +114,7 @@ Copy the subscription URL and add it to your V2Ray client:
 ## 🌐 Using Web Interface
 
 ### 📊 **Dashboard Access**
-Visit: [https://ahmadakd.github.io/V2Ray_Collector/subscriptions/dashboard.html](https://ahmadakd.github.io/V2Ray_Collector/subscriptions/dashboard.html)
+Visit: [https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/dashboard.html](https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/dashboard.html)
 
 ### 📈 **Viewing Statistics**
 The dashboard shows:
@@ -137,7 +137,7 @@ Use the dashboard to:
 
 ### 🔍 **Get System Statistics**
 ```bash
-curl https://ahmadakd.github.io/V2Ray_Collector/api/stats
+curl https://ahmadakd.github.io/Onix-V2Ray-Collector/api/stats
 ```
 
 **Response:**
@@ -157,28 +157,28 @@ curl https://ahmadakd.github.io/V2Ray_Collector/api/stats
 ### 📋 **Get Configurations**
 ```bash
 # Get all configurations
-curl https://ahmadakd.github.io/V2Ray_Collector/api/configs
+curl https://ahmadakd.github.io/Onix-V2Ray-Collector/api/configs
 
 # Filter by protocol
-curl "https://ahmadakd.github.io/V2Ray_Collector/api/configs?protocol=vmess"
+curl "https://ahmadakd.github.io/Onix-V2Ray-Collector/api/configs?protocol=vmess"
 
 # Filter by country
-curl "https://ahmadakd.github.io/V2Ray_Collector/api/configs?country=US"
+curl "https://ahmadakd.github.io/Onix-V2Ray-Collector/api/configs?country=US"
 
 # Limit results
-curl "https://ahmadakd.github.io/V2Ray_Collector/api/configs?limit=50"
+curl "https://ahmadakd.github.io/Onix-V2Ray-Collector/api/configs?limit=50"
 ```
 
 ### 🔗 **Get Subscription Links**
 ```bash
 # VMess subscription
-curl https://ahmadakd.github.io/V2Ray_Collector/api/subscription/vmess
+curl https://ahmadakd.github.io/Onix-V2Ray-Collector/api/subscription/vmess
 
 # VLESS subscription
-curl https://ahmadakd.github.io/V2Ray_Collector/api/subscription/vless
+curl https://ahmadakd.github.io/Onix-V2Ray-Collector/api/subscription/vless
 
 # All protocols
-curl https://ahmadakd.github.io/V2Ray_Collector/api/subscription/all
+curl https://ahmadakd.github.io/Onix-V2Ray-Collector/api/subscription/all
 ```
 
 ---
@@ -358,13 +358,13 @@ Use API parameters to customize your experience:
 
 ```bash
 # Get only US servers
-curl "https://ahmadakd.github.io/V2Ray_Collector/api/configs?country=US"
+curl "https://ahmadakd.github.io/Onix-V2Ray-Collector/api/configs?country=US"
 
 # Get only fast servers (low latency)
-curl "https://ahmadakd.github.io/V2Ray_Collector/api/configs?max_latency=200"
+curl "https://ahmadakd.github.io/Onix-V2Ray-Collector/api/configs?max_latency=200"
 
 # Get only VMess with TLS
-curl "https://ahmadakd.github.io/V2Ray_Collector/api/configs?protocol=vmess&tls=true"
+curl "https://ahmadakd.github.io/Onix-V2Ray-Collector/api/configs?protocol=vmess&tls=true"
 ```
 
 ### 📊 **Monitoring**
@@ -372,13 +372,13 @@ Set up monitoring for your configurations:
 
 ```bash
 # Check system health
-curl https://ahmadakd.github.io/V2Ray_Collector/api/health
+curl https://ahmadakd.github.io/Onix-V2Ray-Collector/api/health
 
 # Get analytics
-curl https://ahmadakd.github.io/V2Ray_Collector/api/analytics
+curl https://ahmadakd.github.io/Onix-V2Ray-Collector/api/analytics
 
 # Monitor performance
-watch -n 60 'curl -s https://ahmadakd.github.io/V2Ray_Collector/api/stats | jq .success_rate'
+watch -n 60 'curl -s https://ahmadakd.github.io/Onix-V2Ray-Collector/api/stats | jq .success_rate'
 ```
 
 ### 🔗 **Integration**
@@ -388,7 +388,7 @@ Integrate with other tools:
 import requests
 
 # Get configurations programmatically
-response = requests.get('https://ahmadakd.github.io/V2Ray_Collector/api/configs')
+response = requests.get('https://ahmadakd.github.io/Onix-V2Ray-Collector/api/configs')
 configs = response.json()
 
 # Filter and use configurations
@@ -400,7 +400,7 @@ fast_configs = [c for c in configs['configs'] if c['latency'] < 200]
 ## 📞 Support & Help
 
 ### 💬 **Getting Help**
-- **GitHub Issues**: [Report Problems](https://github.com/AhmadAkd/V2Ray_Collector/issues)
+- **GitHub Issues**: [Report Problems](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues)
 - **Documentation**: [Complete Guide](../README.md)
 - **API Reference**: [API Documentation](./API.md)
 
@@ -412,13 +412,13 @@ fast_configs = [c for c in configs['configs'] if c['latency'] < 200]
 ### 📋 **Quick Commands**
 ```bash
 # Check system status
-curl -s https://ahmadakd.github.io/V2Ray_Collector/api/stats | jq .
+curl -s https://ahmadakd.github.io/Onix-V2Ray-Collector/api/stats | jq .
 
 # Get subscription URL
-curl -s https://ahmadakd.github.io/V2Ray_Collector/api/subscription/vmess | jq .subscription_url
+curl -s https://ahmadakd.github.io/Onix-V2Ray-Collector/api/subscription/vmess | jq .subscription_url
 
 # Check health
-curl -s https://ahmadakd.github.io/V2Ray_Collector/api/health | jq .overall_status
+curl -s https://ahmadakd.github.io/Onix-V2Ray-Collector/api/health | jq .overall_status
 ```
 
 ---

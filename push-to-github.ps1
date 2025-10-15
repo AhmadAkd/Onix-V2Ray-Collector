@@ -155,9 +155,9 @@ Write-Host "   ✅ Push Completed Successfully!" -ForegroundColor Green
 Write-Host "======================================================" -ForegroundColor Green
 Write-Host ""
 Write-Host "📍 Next steps:" -ForegroundColor Cyan
-Write-Host "  1. Check GitHub Actions: https://github.com/AhmadAkd/V2Ray_Collector/actions" -ForegroundColor White
-Write-Host "  2. Verify changes: https://github.com/AhmadAkd/V2Ray_Collector" -ForegroundColor White
-Write-Host "  3. Create Release: https://github.com/AhmadAkd/V2Ray_Collector/releases/new" -ForegroundColor White
+Write-Host "  1. Check GitHub Actions: https://github.com/AhmadAkd/Onix-V2Ray-Collector/actions" -ForegroundColor White
+Write-Host "  2. Verify changes: https://github.com/AhmadAkd/Onix-V2Ray-Collector" -ForegroundColor White
+Write-Host "  3. Create Release: https://github.com/AhmadAkd/Onix-V2Ray-Collector/releases/new" -ForegroundColor White
 Write-Host "  4. Update README badges if needed" -ForegroundColor White
 Write-Host ""
 Write-Host "🎉 Great job! Your changes are now on GitHub!" -ForegroundColor Green

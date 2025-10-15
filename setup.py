@@ -26,11 +26,11 @@ setup(
     description="Automated V2Ray Configuration Collection, Testing & Categorization System",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
-    url="https://github.com/AhmadAkd/V2Ray_Collector",
+    url="https://github.com/AhmadAkd/Onix-V2Ray-Collector",
     project_urls={
-        "Bug Reports": "https://github.com/AhmadAkd/V2Ray_Collector/issues",
-        "Source": "https://github.com/AhmadAkd/V2Ray_Collector",
-        "Documentation": "https://github.com/AhmadAkd/V2Ray_Collector#readme",
+        "Bug Reports": "https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues",
+        "Source": "https://github.com/AhmadAkd/Onix-V2Ray-Collector",
+        "Documentation": "https://github.com/AhmadAkd/Onix-V2Ray-Collector#readme",
     },
     packages=find_packages(),
     classifiers=[

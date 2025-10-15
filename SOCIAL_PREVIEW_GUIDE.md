@@ -65,7 +65,7 @@ V2Ray Collector
 ### مرحله 7: اضافه کردن GitHub Link (اختیاری)
 در پایین صفحه:
 ```
-github.com/AhmadAkd/V2Ray_Collector
+github.com/AhmadAkd/Onix-V2Ray-Collector
 ```
 - سایز: **20-24**
 - رنگ: **سفید کمرنگ**
@@ -248,7 +248,7 @@ github.com/AhmadAkd/V2Ray_Collector
             <div class="feature">✅ Health Monitor</div>
         </div>
         
-        <div class="github-link">github.com/AhmadAkd/V2Ray_Collector</div>
+        <div class="github-link">github.com/AhmadAkd/Onix-V2Ray-Collector</div>
     </div>
 </body>
 </html>

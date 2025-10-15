@@ -42,19 +42,19 @@
 کپی کردن لینک و وارد کردن در کلاینت V2Ray:
 
 ```
-https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/subscriptions/all_subscription.txt
+https://raw.githubusercontent.com/AhmadAkd/Onix-V2Ray-Collector/main/subscriptions/all_subscription.txt
 ```
 
 ### 2️⃣ استفاده از صفحات وب
 
-- مراجعه به [index.html](https://ahmadakd.github.io/V2Ray_Collector/)
+- مراجعه به [index.html](https://ahmadakd.github.io/Onix-V2Ray-Collector/)
 - انتخاب پروتکل یا کشور مورد نظر
 - کپی لینک با یک کلیک
 
 ### 3️⃣ استفاده از API
 
 ```bash
-curl https://ahmadakd.github.io/V2Ray_Collector/subscriptions/latest_report.json
+curl https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/latest_report.json
 ```
 
 ## 📈 آمار

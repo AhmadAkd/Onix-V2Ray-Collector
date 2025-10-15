@@ -206,8 +206,8 @@ class NotificationManager:
 📊 نرخ موفقیت: {report.get('success_rate', 0):.1f}%
 
 <b>لینک‌های اشتراک:</b>
-🔗 <a href="https://ahmadakd.github.io/V2Ray_Collector/subscriptions/">صفحه اصلی</a>
-📱 <a href="https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/all_subscription.txt">همه کانفیگ‌ها</a>
+🔗 <a href="https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/">صفحه اصلی</a>
+📱 <a href="https://github.com/AhmadAkd/Onix-V2Ray-Collector/raw/main/subscriptions/all_subscription.txt">همه کانفیگ‌ها</a>
         """
         
         return message.strip()
@@ -280,8 +280,8 @@ class NotificationManager:
 {country_text}
 
 <b>لینک‌های اشتراک:</b>
-🔗 <a href="https://ahmadakd.github.io/V2Ray_Collector/subscriptions/">صفحه اصلی</a>
-📱 <a href="https://github.com/AhmadAkd/V2Ray_Collector/raw/main/subscriptions/all_subscription.txt">همه کانفیگ‌ها</a>
+🔗 <a href="https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/">صفحه اصلی</a>
+📱 <a href="https://github.com/AhmadAkd/Onix-V2Ray-Collector/raw/main/subscriptions/all_subscription.txt">همه کانفیگ‌ها</a>
         """
         
         return message.strip()

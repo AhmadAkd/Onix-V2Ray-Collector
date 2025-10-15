@@ -151,7 +151,7 @@ V2Ray Collector API Server
 - /docs - Swagger UI
 - /redoc - ReDoc
 
-🔗 Repository: https://github.com/AhmadAkd/V2Ray_Collector
+🔗 Repository: https://github.com/AhmadAkd/Onix-V2Ray-Collector
 """
 
 

@@ -23,7 +23,7 @@
 
 به جای آن:
 1. 📧 ایمیل به: `security@yourproject.com`
-2. 🔐 یا از [GitHub Security Advisories](https://github.com/AhmadAkd/V2Ray_Collector/security/advisories) استفاده کنید
+2. 🔐 یا از [GitHub Security Advisories](https://github.com/AhmadAkd/Onix-V2Ray-Collector/security/advisories) استفاده کنید
 
 ### 📋 **اطلاعات مورد نیاز**
 
@@ -247,8 +247,8 @@ git secrets --scan
 - 🔐 GPG Key: [Download](link-to-gpg-key)
 
 ### 💬 **سؤالات عمومی**
-- 💬 [GitHub Discussions](https://github.com/AhmadAkd/V2Ray_Collector/discussions)
-- 🐛 [GitHub Issues](https://github.com/AhmadAkd/V2Ray_Collector/issues) (فقط برای مشکلات غیرامنیتی)
+- 💬 [GitHub Discussions](https://github.com/AhmadAkd/Onix-V2Ray-Collector/discussions)
+- 🐛 [GitHub Issues](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues) (فقط برای مشکلات غیرامنیتی)
 
 ---
 

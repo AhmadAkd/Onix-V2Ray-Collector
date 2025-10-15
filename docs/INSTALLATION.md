@@ -37,8 +37,8 @@
 
 #### **Step 1: Clone Repository**
 ```bash
-git clone https://github.com/AhmadAkd/V2Ray_Collector.git
-cd V2Ray_Collector
+git clone https://github.com/AhmadAkd/Onix-V2Ray-Collector.git
+cd Onix-V2Ray-Collector
 ```
 
 #### **Step 2: Install Dependencies**
@@ -71,7 +71,7 @@ cd v2ray-collector
 
 #### **Step 2: Clone Repository**
 ```bash
-git clone https://github.com/AhmadAkd/V2Ray_Collector.git .
+git clone https://github.com/AhmadAkd/Onix-V2Ray-Collector.git .
 ```
 
 #### **Step 3: Install Python Dependencies**
@@ -416,12 +416,12 @@ python -v config_collector.py
 ```bash
 # Windows (start.bat)
 @echo off
-cd /d "C:\path\to\V2Ray_Collector"
+cd /d "C:\path\to\Onix-V2Ray-Collector"
 python automation.py --mode auto
 
 # macOS/Linux (start.sh)
 #!/bin/bash
-cd /path/to/V2Ray_Collector
+cd /path/to/Onix-V2Ray-Collector
 python automation.py --mode auto
 ```
 
@@ -437,7 +437,7 @@ After=network.target
 [Service]
 Type=simple
 User=www-data
-WorkingDirectory=/path/to/V2Ray_Collector
+WorkingDirectory=/path/to/Onix-V2Ray-Collector
 ExecStart=/usr/bin/python3 automation.py --mode auto
 Restart=always
 
@@ -455,7 +455,7 @@ sudo systemctl start v2ray-collector
 crontab -e
 
 # Run every 30 minutes
-*/30 * * * * cd /path/to/V2Ray_Collector && python config_collector.py
+*/30 * * * * cd /path/to/Onix-V2Ray-Collector && python config_collector.py
 ```
 
 ---
@@ -490,9 +490,9 @@ python -c "from analytics import AdvancedAnalytics; print(AdvancedAnalytics().ge
 ## 📞 Support
 
 ### 💬 **Get Help**
-- **GitHub Issues**: [Report Installation Issues](https://github.com/AhmadAkd/V2Ray_Collector/issues)
+- **GitHub Issues**: [Report Installation Issues](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues)
 - **Documentation**: [Complete Guide](../README.md)
-- **Community**: [Discussions](https://github.com/AhmadAkd/V2Ray_Collector/discussions)
+- **Community**: [Discussions](https://github.com/AhmadAkd/Onix-V2Ray-Collector/discussions)
 
 ### 🔧 **Common Commands**
 ```bash

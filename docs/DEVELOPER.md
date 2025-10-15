@@ -30,7 +30,7 @@
 
 ### 🔧 **Component Architecture**
 ```
-V2Ray_Collector/
+Onix-V2Ray-Collector/
 ├── 🔄 Core Engine
 │   ├── config_collector.py    # Main collection logic
 │   ├── config.py             # Configuration management
@@ -446,8 +446,8 @@ async def fetch_single_config(session: aiohttp.ClientSession, url: str) -> List[
 ### 1️⃣ **Development Environment**
 ```bash
 # Clone repository
-git clone https://github.com/AhmadAkd/V2Ray_Collector.git
-cd V2Ray_Collector
+git clone https://github.com/AhmadAkd/Onix-V2Ray-Collector.git
+cd Onix-V2Ray-Collector
 
 # Create virtual environment
 python -m venv venv
@@ -506,8 +506,8 @@ repos:
 ### 1️⃣ **Contribution Workflow**
 ```bash
 # Fork repository
-git clone https://github.com/YOUR_USERNAME/V2Ray_Collector.git
-cd V2Ray_Collector
+git clone https://github.com/YOUR_USERNAME/Onix-V2Ray-Collector.git
+cd Onix-V2Ray-Collector
 
 # Create feature branch
 git checkout -b feature/new-feature
@@ -668,8 +668,8 @@ class RateLimiter:
 ## 📞 Support & Resources
 
 ### 💬 **Developer Support**
-- **GitHub Issues**: [Technical Issues](https://github.com/AhmadAkd/V2Ray_Collector/issues)
-- **Discussions**: [Developer Discussions](https://github.com/AhmadAkd/V2Ray_Collector/discussions)
+- **GitHub Issues**: [Technical Issues](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues)
+- **Discussions**: [Developer Discussions](https://github.com/AhmadAkd/Onix-V2Ray-Collector/discussions)
 - **Documentation**: [Complete Guide](../README.md)
 
 ### 📚 **Additional Resources**

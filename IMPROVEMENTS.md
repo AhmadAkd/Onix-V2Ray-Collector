@@ -297,8 +297,8 @@ print(protocols)
 
 ## 📞 پشتیبانی
 
-- **Issues**: [GitHub Issues](https://github.com/AhmadAkd/V2Ray_Collector/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/AhmadAkd/V2Ray_Collector/discussions)
+- **Issues**: [GitHub Issues](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/AhmadAkd/Onix-V2Ray-Collector/discussions)
 - **Email**: your.email@example.com
 
 ---

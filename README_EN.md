@@ -5,13 +5,13 @@
 ![V2Ray Collector](https://img.shields.io/badge/V2Ray-Collector-blue?style=for-the-badge&logo=v2ray)
 ![Python](https://img.shields.io/badge/Python-3.8+-green?style=for-the-badge&logo=python)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
-![Stars](https://img.shields.io/github/stars/AhmadAkd/V2Ray_Collector?style=for-the-badge)
+![Stars](https://img.shields.io/github/stars/AhmadAkd/Onix-V2Ray-Collector?style=for-the-badge)
 
 **🚀 Advanced V2Ray Config Collector & Tester | جمع‌آوری و تست هوشمند کانفیگ V2Ray**
 
 **ML scoring + REST API + Health monitoring | Auto-update 6h | بروزرسانی خودکار هر 6 ساعت | 1000+ configs from 40+ sources**
 
-[🌐 Live Demo](https://ahmadakd.github.io/V2Ray_Collector/) • [📚 Documentation](https://github.com/AhmadAkd/V2Ray_Collector/tree/main/docs) • [🐛 Report Bug](https://github.com/AhmadAkd/V2Ray_Collector/issues) • [🌟 Give a Star](https://github.com/AhmadAkd/V2Ray_Collector)
+[🌐 Live Demo](https://ahmadakd.github.io/Onix-V2Ray-Collector/) • [📚 Documentation](https://github.com/AhmadAkd/Onix-V2Ray-Collector/tree/main/docs) • [🐛 Report Bug](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues) • [🌟 Give a Star](https://github.com/AhmadAkd/Onix-V2Ray-Collector)
 
 </div>
 
@@ -111,7 +111,7 @@ graph TD
 ### 🏗️ **Project Structure**
 
 ```
-V2Ray_Collector/
+Onix-V2Ray-Collector/
 ├── 🎯 Core Components
 │   ├── config_collector.py      # Main collection engine
 │   ├── singbox_parser.py        # SingBox format parser
@@ -153,21 +153,21 @@ Easiest way! Just copy the link you need:
 
 ```bash
 # All configs
-https://ahmadakd.github.io/V2Ray_Collector/subscriptions/all_subscription.txt
+https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/all_subscription.txt
 
 # VMess only
-https://ahmadakd.github.io/V2Ray_Collector/subscriptions/by_protocol/vmess.txt
+https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/by_protocol/vmess.txt
 
 # USA only
-https://ahmadakd.github.io/V2Ray_Collector/subscriptions/by_country/US.txt
+https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/by_country/US.txt
 ```
 
 #### Method 2: Local Installation
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/AhmadAkd/V2Ray_Collector.git
-cd V2Ray_Collector
+git clone https://github.com/AhmadAkd/Onix-V2Ray-Collector.git
+cd Onix-V2Ray-Collector
 
 # 2. Install dependencies
 pip install -r requirements.txt
@@ -475,16 +475,16 @@ Want to contribute to this project? Great! 🎉
 
 ### 🌟 **Ways to Contribute**
 
-1. **🐛 Report Bugs**: [Issues](https://github.com/AhmadAkd/V2Ray_Collector/issues)
-2. **💡 Suggest Features**: [Feature Requests](https://github.com/AhmadAkd/V2Ray_Collector/issues/new)
+1. **🐛 Report Bugs**: [Issues](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues)
+2. **💡 Suggest Features**: [Feature Requests](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues/new)
 3. **🔧 Pull Requests**: [Contributing Guide](CONTRIBUTING.md)
 4. **⭐ Give a Star**: If you find it useful!
 5. **📢 Share**: Tell your friends about it
 
 ### 🏆 **Contributors**
 
-<a href="https://github.com/AhmadAkd/V2Ray_Collector/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=AhmadAkd/V2Ray_Collector" />
+<a href="https://github.com/AhmadAkd/Onix-V2Ray-Collector/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=AhmadAkd/Onix-V2Ray-Collector" />
 </a>
 
 ---
@@ -530,14 +530,14 @@ Want to contribute to this project? Great! 🎉
 
 <div align="center">
 
-![GitHub stars](https://img.shields.io/github/stars/AhmadAkd/V2Ray_Collector?style=social)
-![GitHub forks](https://img.shields.io/github/forks/AhmadAkd/V2Ray_Collector?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/AhmadAkd/V2Ray_Collector?style=social)
+![GitHub stars](https://img.shields.io/github/stars/AhmadAkd/Onix-V2Ray-Collector?style=social)
+![GitHub forks](https://img.shields.io/github/forks/AhmadAkd/Onix-V2Ray-Collector?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/AhmadAkd/Onix-V2Ray-Collector?style=social)
 
-![GitHub issues](https://img.shields.io/github/issues/AhmadAkd/V2Ray_Collector)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/AhmadAkd/V2Ray_Collector)
-![GitHub last commit](https://img.shields.io/github/last-commit/AhmadAkd/V2Ray_Collector)
-![GitHub code size](https://img.shields.io/github/languages/code-size/AhmadAkd/V2Ray_Collector)
+![GitHub issues](https://img.shields.io/github/issues/AhmadAkd/Onix-V2Ray-Collector)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/AhmadAkd/Onix-V2Ray-Collector)
+![GitHub last commit](https://img.shields.io/github/last-commit/AhmadAkd/Onix-V2Ray-Collector)
+![GitHub code size](https://img.shields.io/github/languages/code-size/AhmadAkd/Onix-V2Ray-Collector)
 
 </div>
 

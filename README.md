@@ -5,13 +5,13 @@
 ![V2Ray Collector](https://img.shields.io/badge/V2Ray-Collector-blue?style=for-the-badge&logo=v2ray)
 ![Python](https://img.shields.io/badge/Python-3.8+-green?style=for-the-badge&logo=python)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
-![Stars](https://img.shields.io/github/stars/AhmadAkd/V2Ray_Collector?style=for-the-badge)
+![Stars](https://img.shields.io/github/stars/AhmadAkd/Onix-V2Ray-Collector?style=for-the-badge)
 
 **🚀 Advanced V2Ray Config Collector & Tester | جمع‌آوری و تست هوشمند کانفیگ V2Ray**
 
 **ML scoring + REST API + Health monitoring | Auto-update 6h | بروزرسانی خودکار هر 6 ساعت | 1000+ configs from 40+ sources**
 
-[🌐 دموی زنده](https://ahmadakd.github.io/V2Ray_Collector/) • [📚 مستندات](https://github.com/AhmadAkd/V2Ray_Collector/tree/main/docs) • [🐛 گزارش باگ](https://github.com/AhmadAkd/V2Ray_Collector/issues) • [🌟 ستاره بدهید](https://github.com/AhmadAkd/V2Ray_Collector)
+[🌐 دموی زنده](https://ahmadakd.github.io/Onix-V2Ray-Collector/) • [📚 مستندات](https://github.com/AhmadAkd/Onix-V2Ray-Collector/tree/main/docs) • [🐛 گزارش باگ](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues) • [🌟 ستاره بدهید](https://github.com/AhmadAkd/Onix-V2Ray-Collector)
 
 </div>
 
@@ -117,7 +117,7 @@ graph TD
 ### 🏗️ **ساختار پروژه**
 
 ```
-V2Ray_Collector/
+Onix-V2Ray-Collector/
 ├── 🎯 Core Components
 │   ├── config_collector.py      # موتور اصلی جمع‌آوری
 │   ├── singbox_parser.py        # Parser فرمت SingBox
@@ -159,24 +159,24 @@ V2Ray_Collector/
 
 ```bash
 # تمام کانفیگ‌ها
-https://ahmadakd.github.io/V2Ray_Collector/subscriptions/all_subscription.txt
+https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/all_subscription.txt
 
 # فقط VMess
-https://ahmadakd.github.io/V2Ray_Collector/subscriptions/by_protocol/vmess.txt
+https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/by_protocol/vmess.txt
 
 # فقط آمریکا
-https://ahmadakd.github.io/V2Ray_Collector/subscriptions/by_country/US.txt
+https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/by_country/US.txt
 ```
 
 #### روش 2: نصب Local (راه سریع! ⚡)
 
 ```bash
 # Linux/Mac
-curl -sSL https://raw.githubusercontent.com/AhmadAkd/V2Ray_Collector/main/quick_start.sh | bash
+curl -sSL https://raw.githubusercontent.com/AhmadAkd/Onix-V2Ray-Collector/main/quick_start.sh | bash
 
 # یا دستی:
-git clone https://github.com/AhmadAkd/V2Ray_Collector.git
-cd V2Ray_Collector
+git clone https://github.com/AhmadAkd/Onix-V2Ray-Collector.git
+cd Onix-V2Ray-Collector
 chmod +x quick_start.sh
 ./quick_start.sh
 ```
@@ -188,8 +188,8 @@ chmod +x quick_start.sh
 .\quick_start.ps1
 
 # یا دستی:
-git clone https://github.com/AhmadAkd/V2Ray_Collector.git
-cd V2Ray_Collector
+git clone https://github.com/AhmadAkd/Onix-V2Ray-Collector.git
+cd Onix-V2Ray-Collector
 python -m venv venv
 .\venv\Scripts\Activate.ps1
 pip install -r requirements.txt
@@ -523,16 +523,16 @@ curl -X POST https://api.telegram.org/bot{TOKEN}/sendMessage \
 
 ### 🌟 **روش‌های مشارکت**
 
-1. **🐛 گزارش باگ**: [Issues](https://github.com/AhmadAkd/V2Ray_Collector/issues)
-2. **💡 پیشنهاد ویژگی**: [Feature Requests](https://github.com/AhmadAkd/V2Ray_Collector/issues/new)
+1. **🐛 گزارش باگ**: [Issues](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues)
+2. **💡 پیشنهاد ویژگی**: [Feature Requests](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues/new)
 3. **🔧 Pull Request**: [Contributing Guide](CONTRIBUTING.md)
 4. **⭐ ستاره بدهید**: اگر مفید بود!
 5. **📢 به اشتراک بگذارید**: با دوستان خود
 
 ### 🏆 **مشارکت‌کنندگان**
 
-<a href="https://github.com/AhmadAkd/V2Ray_Collector/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=AhmadAkd/V2Ray_Collector" />
+<a href="https://github.com/AhmadAkd/Onix-V2Ray-Collector/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=AhmadAkd/Onix-V2Ray-Collector" />
 </a>
 
 ---
@@ -578,14 +578,14 @@ curl -X POST https://api.telegram.org/bot{TOKEN}/sendMessage \
 
 <div align="center">
 
-![GitHub stars](https://img.shields.io/github/stars/AhmadAkd/V2Ray_Collector?style=social)
-![GitHub forks](https://img.shields.io/github/forks/AhmadAkd/V2Ray_Collector?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/AhmadAkd/V2Ray_Collector?style=social)
+![GitHub stars](https://img.shields.io/github/stars/AhmadAkd/Onix-V2Ray-Collector?style=social)
+![GitHub forks](https://img.shields.io/github/forks/AhmadAkd/Onix-V2Ray-Collector?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/AhmadAkd/Onix-V2Ray-Collector?style=social)
 
-![GitHub issues](https://img.shields.io/github/issues/AhmadAkd/V2Ray_Collector)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/AhmadAkd/V2Ray_Collector)
-![GitHub last commit](https://img.shields.io/github/last-commit/AhmadAkd/V2Ray_Collector)
-![GitHub code size](https://img.shields.io/github/languages/code-size/AhmadAkd/V2Ray_Collector)
+![GitHub issues](https://img.shields.io/github/issues/AhmadAkd/Onix-V2Ray-Collector)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/AhmadAkd/Onix-V2Ray-Collector)
+![GitHub last commit](https://img.shields.io/github/last-commit/AhmadAkd/Onix-V2Ray-Collector)
+![GitHub code size](https://img.shields.io/github/languages/code-size/AhmadAkd/Onix-V2Ray-Collector)
 
 </div>
 

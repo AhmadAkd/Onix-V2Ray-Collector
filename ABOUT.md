@@ -94,11 +94,11 @@
 
 ## 🔗 Links | لینک‌ها
 
-- 🌐 **Live Demo**: <https://ahmadakd.github.io/V2Ray_Collector/>
-- 📚 **Documentation**: <https://github.com/AhmadAkd/V2Ray_Collector/tree/main/docs>
-- 📡 **API Docs**: <https://github.com/AhmadAkd/V2Ray_Collector/blob/main/docs/API.md>
-- 🐛 **Issues**: <https://github.com/AhmadAkd/V2Ray_Collector/issues>
-- 💬 **Discussions**: <https://github.com/AhmadAkd/V2Ray_Collector/discussions>
+- 🌐 **Live Demo**: <https://ahmadakd.github.io/Onix-V2Ray-Collector/>
+- 📚 **Documentation**: <https://github.com/AhmadAkd/Onix-V2Ray-Collector/tree/main/docs>
+- 📡 **API Docs**: <https://github.com/AhmadAkd/Onix-V2Ray-Collector/blob/main/docs/API.md>
+- 🐛 **Issues**: <https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues>
+- 💬 **Discussions**: <https://github.com/AhmadAkd/Onix-V2Ray-Collector/discussions>
 
 ---
 
@@ -125,6 +125,6 @@
 
 **اگر این پروژه را دوست دارید، لطفا ستاره بدهید!**
 
-[![GitHub stars](https://img.shields.io/github/stars/AhmadAkd/V2Ray_Collector?style=social)](https://github.com/AhmadAkd/V2Ray_Collector)
+[![GitHub stars](https://img.shields.io/github/stars/AhmadAkd/Onix-V2Ray-Collector?style=social)](https://github.com/AhmadAkd/Onix-V2Ray-Collector)
 
 </div>

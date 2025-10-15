@@ -22,7 +22,7 @@
 ### مرحله 1: باز کردن صفحه Repository
 
 ```
-https://github.com/AhmadAkd/V2Ray_Collector
+https://github.com/AhmadAkd/Onix-V2Ray-Collector
 ```
 
 ### مرحله 2: کلیک روی Settings
@@ -102,7 +102,7 @@ health-monitoring
 - این لینک رو وارد کن:
 
 ```
-https://ahmadakd.github.io/V2Ray_Collector/
+https://ahmadakd.github.io/Onix-V2Ray-Collector/
 ```
 
 ### بعد از تمام تنظیمات About
@@ -175,7 +175,7 @@ Repository > Settings > Pages (از منوی سمت چپ)
 - بعد از آماده شدن، یه لینک سبز رنگ نشون داده میشه:
 
 ```
-✅ Your site is live at https://ahmadakd.github.io/V2Ray_Collector/
+✅ Your site is live at https://ahmadakd.github.io/Onix-V2Ray-Collector/
 ```
 
 ### مرحله 4: تست
@@ -232,7 +232,7 @@ Repository > Releases (در سمت راست صفحه اصلی)
 یا مستقیم:
 
 ```
-https://github.com/AhmadAkd/V2Ray_Collector/releases/new
+https://github.com/AhmadAkd/Onix-V2Ray-Collector/releases/new
 ```
 
 ### مرحله 2: ایجاد Tag
@@ -290,14 +290,14 @@ https://github.com/AhmadAkd/V2Ray_Collector/releases/new
 
 ### روش 1: استفاده از Subscription Links (آسان‌ترین)
 ```
-<https://ahmadakd.github.io/V2Ray_Collector/>
+<https://ahmadakd.github.io/Onix-V2Ray-Collector/>
 
 ```
 
 ### روش 2: نصب Local
 ```bash
-git clone https://github.com/AhmadAkd/V2Ray_Collector.git
-cd V2Ray_Collector
+git clone https://github.com/AhmadAkd/Onix-V2Ray-Collector.git
+cd Onix-V2Ray-Collector
 pip install -r requirements.txt
 python run_collection.py
 ```
@@ -310,10 +310,10 @@ docker-compose up -d
 
 ## 📚 مستندات
 
-- 📖 [راهنمای کاربر](https://github.com/AhmadAkd/V2Ray_Collector/blob/main/docs/USER_GUIDE.md)
-- 🔧 [راهنمای توسعه‌دهنده](https://github.com/AhmadAkd/V2Ray_Collector/blob/main/docs/DEVELOPER.md)
-- 📡 [API Documentation](https://github.com/AhmadAkd/V2Ray_Collector/blob/main/docs/API.md)
-- 🐛 [عیب‌یابی](https://github.com/AhmadAkd/V2Ray_Collector/blob/main/docs/TROUBLESHOOTING.md)
+- 📖 [راهنمای کاربر](https://github.com/AhmadAkd/Onix-V2Ray-Collector/blob/main/docs/USER_GUIDE.md)
+- 🔧 [راهنمای توسعه‌دهنده](https://github.com/AhmadAkd/Onix-V2Ray-Collector/blob/main/docs/DEVELOPER.md)
+- 📡 [API Documentation](https://github.com/AhmadAkd/Onix-V2Ray-Collector/blob/main/docs/API.md)
+- 🐛 [عیب‌یابی](https://github.com/AhmadAkd/Onix-V2Ray-Collector/blob/main/docs/TROUBLESHOOTING.md)
 
 ## 🔄 تغییرات نسبت به v1.x
 
@@ -337,8 +337,8 @@ docker-compose up -d
 
 ## 📧 پشتیبانی
 
-- 🐛 [گزارش باگ](https://github.com/AhmadAkd/V2Ray_Collector/issues)
-- 💬 [بحث و گفتگو](https://github.com/AhmadAkd/V2Ray_Collector/discussions)
+- 🐛 [گزارش باگ](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues)
+- 💬 [بحث و گفتگو](https://github.com/AhmadAkd/Onix-V2Ray-Collector/discussions)
 - 📧 Email: [Your Email]
 
 ---
