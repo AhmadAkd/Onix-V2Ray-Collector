@@ -1,12 +1,10 @@
-ss://YWVzLTI1Ni1jZmI6QndjQVVaazhoVUZBa0RHTg==@45.89.52.66:9031#%F0%9F%87%B9%F0%9F%87%B7TR-45.89.52.66-8165
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpxc2NhdkY1VXZpSUwtOFYtRTRyYUJB@83.217.9.125:2222#TR%F0%9F%87%B9%F0%9F%87%B7+%7C+83.217.9.125-2222+%7C+135.38ms
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprVndOTXQxT2UxbmlXS1B6NUdXN29W@62.60.233.219:55922#TR%F0%9F%87%B9%F0%9F%87%B7+%7C+62.60.233.219-55922+%7C+134.13ms
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp3aDJLMHFWVk42ZlRaQUpGc2J1NkRx@62.60.233.220:18685#🔐 @AblNet7 🇹🇷 Istanbul, 34, Türkiye
 ss://YWVzLTI1Ni1jZmI6TTN0MlpFUWNNR1JXQmpSYQ@45.89.52.66:9011#%20%F0%9F%87%B9%F0%9F%87%B7%20SHERVIN%20Hyper%20shdw
-ss://YWVzLTI1Ni1jZmI6SFNadXlKUWNXZThkeE5kRg@45.89.52.66:9043#%20%F0%9F%87%B9%F0%9F%87%B7%20SHERVIN%20Hyper%20shdw
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpZaDJKeE9WdEkwd2xDZ3hZcnZ2Q3ZV@62.133.63.244:7920#TR%F0%9F%87%B9%F0%9F%87%B7+%7C+62.133.63.244-7920+%7C+135.17ms
-ss://YWVzLTI1Ni1jZmI6cDl6NUJWQURIMllGczNNTg@45.89.52.66:9040#%20%F0%9F%87%B9%F0%9F%87%B7%20SHERVIN%20Hyper%20shdw
-trojan://tunnel-astrovpn_official-29@193.124.46.134:8441?security=tls&sni=zula.ir.AstroVPN-official.AstroVPN-official.workers.dev.AstroVPN_Official.org.AstroVPN.com.AstroVPN_Official.xyz.AstroVPN_Official.AstroVPN_Official.AstroVPN_Official.AstroVPN_Official.AstroVPN_Official.AstroVPN_Official.AstroVPN_Official.AstroVPN_Official.monster.AstroVPN_OfficialJoinTelegram-------------AstroVPN_Official----------Join.ir&alpn=http/1.1&allowInsecure=1&type=tcp&headerType=none&host=193.124.46.134#AstroVPN_Official 🇹🇷
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpxc2NhdkY1VXZpSUwtOFYtRTRyYUJB@83.217.9.128:2222#TR%F0%9F%87%B9%F0%9F%87%B7+%7C+83.217.9.128-2222+%7C+131.95ms
+ss://YWVzLTI1Ni1jZmI6UGVIU0htNVNxRWpCdUVYRQ==@45.89.52.66:9065#TR%F0%9F%87%B9%F0%9F%87%B7+%7C+45.89.52.66-9065+%7C+131.92ms
+ss://YWVzLTI1Ni1jZmI6QndjQVVaazhoVUZBa0RHTg@45.89.52.66:9031#%20%F0%9F%87%B9%F0%9F%87%B7%20SHERVIN%20Hyper%20shdw
 trojan://tunnel-astrovpn_official-tr@tr-1.stunnel.cc:8441?security=tls&sni=zula.ir.AstroVPN-official.AstroVPN-official.workers.dev.AstroVPN_Official.org.AstroVPN.com.AstroVPN_Official.xyz.AstroVPN_Official.monster.JoinTelegram-------------AstroVPN_Official----------Join.ir&alpn=http/1.1&allowInsecure=1&type=tcp&headerType=none&host=tr-1.stunnel.cc#AstroVPN_Official 🇹🇷
-vmess://eyJhZGQiOiJ6aWI0dHUuaW5mb3NwZWVkdGVzdC5jb20iLCJhaWQiOiIwIiwiYWxwbiI6IiIsImZwIjoiIiwiaG9zdCI6InRyZWxsby5jb20iLCJpZCI6IjFkNzNhNDMyLWQxYjEtNGRjNi1iOGJjLTk0Yjk3Y2QwMTdjNSIsIm5ldCI6InRjcCIsInBhdGgiOiIvIiwicG9ydCI6IjExNTc3IiwicHMiOiLwn4e58J+HtyBUUiB8IPCflJMgVk1FU1MgfCBAdm1lc3Nwcm90b2NvbCBbNF0iLCJzY3kiOiJhdXRvIiwic25pIjoiIiwidGxzIjoiIiwidHlwZSI6Imh0dHAiLCJ2IjoiMiJ9
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpxc2NhdkY1VXZpSUwtOFYtRTRyYUJB@83.217.9.128:2222#TR%F0%9F%87%B9%F0%9F%87%B7+%7C+83.217.9.128-2222+%7C+131.95ms
+ss://YWVzLTI1Ni1jZmI6cDl6NUJWQURIMllGczNNTg==@45.89.52.66:9040#%F0%9F%87%B9%F0%9F%87%B7TR-45.89.52.66-8083
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpZaDJKeE9WdEkwd2xDZ3hZcnZ2Q3ZV@62.133.63.244:7920#TR%F0%9F%87%B9%F0%9F%87%B7+%7C+62.133.63.244-7920+%7C+183.61ms
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprVndOTXQxT2UxbmlXS1B6NUdXN29W@62.60.233.219:55922#TR%F0%9F%87%B9%F0%9F%87%B7+%7C+62.60.233.219-55922+%7C+134.13ms
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpjNDA2NDFjMWY4OWU3YWNi@tr.vpnsparta.pro:57456#https:%2F%2Ft.me%2FForceRunVPN-%F0%9F%87%B9%F0%9F%87%B7-Istanbul-2279ms-Global%20Connectivity%20Solutions%20LLP
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3OQ==@tur.fastsoonlink.com:40019#TR%F0%9F%87%B9%F0%9F%87%B7+%7C+tur.fastsoonlink.com-40019+%7C+478.07ms
