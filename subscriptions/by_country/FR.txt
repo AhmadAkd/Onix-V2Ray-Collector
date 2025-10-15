@@ -1,17 +1,17 @@
-vmess://eyJhZGQiOiIxODUuMTYuMTEwLjIxMiIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiVEcuV2FuZ0NhaTIuczQuZGItbGluazAyLnRvcCIsImlkIjoiYjIwOWRmYmYtNmJiMC0zMGIyLWE3N2EtMjg2ZTIzMDQ2NmI1IiwibmV0Ijoid3MiLCJwYXRoIjoiL2RhYmFpIiwicG9ydCI6Ijg4ODAiLCJwcyI6IvCfh6vwn4e3RlItMTg1LjE2LjExMC4yMTItMDczMyIsInNjeSI6ImF1dG8iLCJzbmkiOiIiLCJ0bHMiOiIiLCJ0eXBlIjoiIiwidiI6IjIifQ
-vless://2404f667-5969-4883-a71a-ea2e0db2d25b@104.19.222.79:2096?allowInsecure=1&sni=wwwspeedtestnetwhiteberinsistomd6625996s08.gorgeserver1.ir&type=ws&host=wwwspeedtestnetwhiteberinsistomd6625996s08.gorgeserver1.ir&path=/security=tls#2%7C%F0%9F%87%AB%F0%9F%87%B76%20%7C%20%201.5MB/s%7C36%25%7COpenai
 vless://d60fc3c5-9f07-4cdb-b81f-70af27936bdc@141.11.203.247:8880?security=none&type=ws&path=%2FTelegram&host=ex.sue.x10.mx&sni=ex.sue.x10.mx#%F0%9F%87%AB%F0%9F%87%B7%20%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%3Adafei.de%20%E6%B3%95%E5%9B%BD%2004
+vmess://ewogICAgImFkZCI6ICIxODUuMTYuMTEwLjIxMiIsCiAgICAiYWlkIjogMCwKICAgICJob3N0IjogIlRHLldhbmdDYWkyLnM0LmRiLWxpbmswMi50b3AiLAogICAgImlkIjogImIyMDlkZmJmLTZiYjAtMzBiMi1hNzdhLTI4NmUyMzA0NjZiNSIsCiAgICAibmV0IjogIndzIiwKICAgICJwYXRoIjogIi9kYWJhaSIsCiAgICAicG9ydCI6IDg4ODAsCiAgICAicHMiOiAi8J+Hq/Cfh7dGUi0xODUuMTYuMTEwLjIxMi0wOTc1IiwKICAgICJ0bHMiOiAiIiwKICAgICJ0eXBlIjogImF1dG8iLAogICAgInNlY3VyaXR5IjogImF1dG8iLAogICAgInNraXAtY2VydC12ZXJpZnkiOiB0cnVlLAogICAgInNuaSI6ICIiCn0=
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp2bnR4cUhoUElOWHU1QWc2ODc2ZlhP@51.195.220.179:1080 # 🔒 [By EbraSha]
-trojan://zsu4Mq3A9J@51.195.254.75:8443?security=tls&sni=uk-02.allhubb.info&type=tcp#FR🇫🇷 | uk-02.allhubb.info-8443 | 113.31ms
-trojan://telegram-id-directvpn@51.44.51.53:22223?security=tls&alpn=http/1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#OurChannel : @DirectVPN
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@45.158.171.70:8080#FR%F0%9F%87%AB%F0%9F%87%B7+%7C+45.158.171.70-8080+%7C+96.24ms
-trojan://telegram-id-privatevpns@51.44.51.53:22222?security=tls&alpn=http/1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#(S104)🇨🇵t.me/PrivateVPNs
-ss://YWVzLTI1Ni1nY206WTZSOXBBdHZ4eHptR0M=@149.202.82.172:3306#%F0%9F%87%AB%F0%9F%87%B7FR-149.202.82.172-5407
+trojan://zsu4Mq3A9J@51.195.254.75:8443?security=tls&sni=uk-02.allhubb.info&type=tcp#FR🇫🇷
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@45.158.171.70:8080#FR%F0%9F%87%AB%F0%9F%87%B7+%7C+45.158.171.70-8080+%7C+147.74ms
+trojan://telegram-id-v2rayvpnchannel@51.44.51.53:22223?security=tls&alpn=http%2F1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#%F0%9F%87%AB%F0%9F%87%B7%20FR%20%7C%20%F0%9F%94%92%20TROJAN%20%7C%20%40v2rayvpnchannel%20%5B14%5D
+trojan://telegram-id-privatevpns@51.45.9.76:22222?security=tls&alpn=http%2F1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#%F0%9F%87%AB%F0%9F%87%B7%20FR%20%7C%20%F0%9F%94%92%20TROJAN%20%7C%20%40privatevpns%20%5B15%5D
+trojan://telegram-id-privatevpns@51.44.51.53:22222?security=tls&alpn=http%2F1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#%F0%9F%87%AB%F0%9F%87%B7%20FR%20%7C%20%F0%9F%94%92%20TROJAN%20%7C%20%40privatevpns%20%5B13%5D
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@45.158.171.66:8080#%F0%9F%87%AB%F0%9F%87%B7%20France%20-%20NA%20%F0%9F%8C%8D%20SS-TCP-NA%204%E2%83%A3
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpxWHZPN3pZVTdLZWFCME1kN0RRTG93@51.195.119.47:1080#FR%F0%9F%87%AB%F0%9F%87%B7+%7C+51.195.119.47-1080+%7C+109.93ms
 vmess://eyJhZGQiOiIxMjkuMTUxLjIyNS4yMjgiLCJhaWQiOiIwIiwiYWxwbiI6IiIsImZwIjoiIiwiaG9zdCI6ImUxMzA5MTdjLTFiNTgtNDEzNi1iMmQ5LTc2ZGM5MjBlMGFkZC5hZGQ5N2VlOC0wZjE0LTQ4YTMtYjJjZC05NzljNTY3NDJlNjQubG9zZXlvdXJpcC5jb20iLCJpZCI6IjA1NjQxY2Y1LTU4ZDItNGJhNC1hOWYxLWIzY2RhMGIxZmIxZCIsIm5ldCI6IndzIiwicGF0aCI6Ii8iLCJwb3J0IjoiODQ0MyIsInBzIjoi8J+Hq/Cfh7dGUi0xMjkuMTUxLjIyNS4yMjgtNzM5NSIsInNjeSI6ImF1dG8iLCJzbmkiOiJlMTMwOTE3Yy0xYjU4LTQxMzYtYjJkOS03NmRjOTIwZTBhZGQuYWRkOTdlZTgtMGYxNC00OGEzLWIyY2QtOTc5YzU2NzQyZTY0Lmxvc2V5b3VyaXAuY29tIiwidGxzIjoidGxzIiwidHlwZSI6IiIsInYiOiIyIn0
-trojan://telegram-id-privatevpns@51.45.9.76:22222?security=tls&alpn=http%2F1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#%F0%9F%87%AB%F0%9F%87%B7%20FR%20%7C%20%F0%9F%94%92%20TROJAN%20%7C%20%40privatevpns%20%5B12%5D
-trojan://telegram-id-directvpn@51.45.9.76:22223?security=tls&alpn=http/1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#OurChannel : @DirectVPN
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpxWHZPN3pZVTdLZWFCME1kN0RRTG93@51.195.119.47:1080#@Vip_Security join us - 468
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphNThmYTYyYjQ5NDRkZGJm@81.19.137.222:57456#%F0%9F%87%AB%F0%9F%87%B7FR-81.19.137.222-0266
+vmess://eyJ2IjogbnVsbCwgInBzIjogIvCfh6vwn4e3IFNoYXRha1ZQTiAxOTYyNzkiLCAiYWRkIjogIjUuMTk2LjI5LjEyMyIsICJwb3J0IjogMjA4MiwgImlkIjogIjExMmFjMzZmLTNmNTMtNGUyNi04MzcxLWQyNWMwMjhlMWI5YSIsICJhaWQiOiAiMCIsICJzY3kiOiAiYXV0byIsICJuZXQiOiAid3MiLCAidHlwZSI6IG51bGwsICJob3N0IjogImdvb2dsZS5jb20iLCAiYWxwbiI6IG51bGwsICJwYXRoIjogIi8iLCAidGxzIjogIm5vbmUiLCAic25pIjogbnVsbCwgImZwIjogbnVsbH0=#%F0%9F%87%AB%F0%9F%87%B7%20ShatakVPN%20196279
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphNThmYTYyYjQ5NDRkZGJm@81.19.137.222:57456#%F0%9F%87%AB%F0%9F%87%B7%20France%20-%20Paris%20%F0%9F%8C%8D%20SS-TCP-NA%204%E2%83%A3
 ss://YWVzLTI1Ni1nY206NWJkYTI3MzYtODFlNy00M2I0LTg2ZmMtMjg2ZjhmOGU2NTc4@51.195.103.227:8443 # 🔒 [By EbraSha]
 ss://YWVzLTI1Ni1nY206S2l4THZLendqZWtHMDBybQ==@51.77.53.200:8080#[🏁]t.me/Configs
-trojan://1ce1df7962f71c6f@uk-03.allhubb.info:8443?security=tls&alpn=h2%2Chttp%2F1.1&headerType=none&fp=chrome&type=tcp&sni=uk-03.allhubb.info#FR🇫🇷
+trojan://telegram-id-v2rayvpnchannel@51.45.9.76:22223?security=tls&alpn=http%2F1.1&headerType=none&type=tcp&sni=trojan.burgerip.co.uk#%F0%9F%87%AB%F0%9F%87%B7%20FR%20%7C%20%F0%9F%94%92%20TROJAN%20%7C%20%40v2rayvpnchannel%20%5B13%5D
+trojan://1ce1df7962f71c6f@uk-03.allhubb.info:8443?security=tls&alpn=h2%2Chttp%2F1.1&headerType=none&fp=chrome&type=tcp&sni=uk-03.allhubb.info#FR🇫🇷 | uk-03.allhubb.info-8443 | 290.55ms
