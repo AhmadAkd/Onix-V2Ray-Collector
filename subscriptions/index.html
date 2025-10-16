@@ -551,7 +551,44 @@
                 <span>دسته‌بندی بر اساس پروتکل</span>
             </div>
             <div class="protocol-grid" id="protocolGrid">
-                <!-- Protocols will be loaded dynamically -->
+                <!-- PROTOCOL_BUTTONS_START -->
+
+            <div class="protocol-btn" data-protocol="vless" style="--protocol-color: #2196F3;">
+                <i class="fas fa-bolt"></i>
+                <span>VLESS</span>
+                <div class="protocol-count" id="vless-count">0</div>
+            </div>
+
+            <div class="protocol-btn" data-protocol="vmess" style="--protocol-color: #4CAF50;">
+                <i class="fas fa-shield-alt"></i>
+                <span>VMess</span>
+                <div class="protocol-count" id="vmess-count">0</div>
+            </div>
+
+            <div class="protocol-btn" data-protocol="ss" style="--protocol-color: #9C27B0;">
+                <i class="fas fa-eye-slash"></i>
+                <span>Shadowsocks</span>
+                <div class="protocol-count" id="ss-count">0</div>
+            </div>
+
+            <div class="protocol-btn" data-protocol="trojan" style="--protocol-color: #FF9800;">
+                <i class="fas fa-lock"></i>
+                <span>Trojan</span>
+                <div class="protocol-count" id="trojan-count">0</div>
+            </div>
+
+            <div class="protocol-btn" data-protocol="ssr" style="--protocol-color: #6c5ce7;">
+                <i class="fas fa-ghost"></i>
+                <span>ShadowsocksR</span>
+                <div class="protocol-count" id="ssr-count">0</div>
+            </div>
+
+            <div class="protocol-btn" data-protocol="hysteria" style="--protocol-color: #e17055;">
+                <i class="fas fa-rocket"></i>
+                <span>Hysteria</span>
+                <div class="protocol-count" id="hysteria-count">0</div>
+            </div>
+<!-- PROTOCOL_BUTTONS_END -->
             </div>
         </div>
 
@@ -562,7 +599,182 @@
                 <span>دسته‌بندی بر اساس کشور</span>
             </div>
             <div class="country-grid" id="countryGrid">
-                <!-- Countries will be loaded dynamically -->
+                <!-- COUNTRY_BUTTONS_START -->
+
+            <div class="country-btn" data-country="FR">
+                <span class="country-flag">🇫🇷</span>
+                <span class="country-name">فرانسه</span>
+                <div class="country-count" id="FR-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="US">
+                <span class="country-flag">🇺🇸</span>
+                <span class="country-name">آمریکا</span>
+                <div class="country-count" id="US-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="FI">
+                <span class="country-flag">🇫🇮</span>
+                <span class="country-name">فنلاند</span>
+                <div class="country-count" id="FI-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="IR">
+                <span class="country-flag">🇮🇷</span>
+                <span class="country-name">ایران</span>
+                <div class="country-count" id="IR-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="CF">
+                <span class="country-flag">☁️</span>
+                <span class="country-name">Cloudflare</span>
+                <div class="country-count" id="CF-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="HK">
+                <span class="country-flag">🇭🇰</span>
+                <span class="country-name">هنگ‌کنگ</span>
+                <div class="country-count" id="HK-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="TR">
+                <span class="country-flag">🇹🇷</span>
+                <span class="country-name">ترکیه</span>
+                <div class="country-count" id="TR-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="NL">
+                <span class="country-flag">🇳🇱</span>
+                <span class="country-name">هلند</span>
+                <div class="country-count" id="NL-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="DE">
+                <span class="country-flag">🇩🇪</span>
+                <span class="country-name">آلمان</span>
+                <div class="country-count" id="DE-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="EU">
+                <span class="country-flag">🇪🇺</span>
+                <span class="country-name">اروپا</span>
+                <div class="country-count" id="EU-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="GB">
+                <span class="country-flag">🇬🇧</span>
+                <span class="country-name">انگلستان</span>
+                <div class="country-count" id="GB-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="IN">
+                <span class="country-flag">🇮🇳</span>
+                <span class="country-name">هند</span>
+                <div class="country-count" id="IN-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="PL">
+                <span class="country-flag">🇵🇱</span>
+                <span class="country-name">لهستان</span>
+                <div class="country-count" id="PL-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="LT">
+                <span class="country-flag">🇱🇹</span>
+                <span class="country-name">لیتوانی</span>
+                <div class="country-count" id="LT-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="ES">
+                <span class="country-flag">🇪🇸</span>
+                <span class="country-name">اسپانیا</span>
+                <div class="country-count" id="ES-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="RU">
+                <span class="country-flag">🇷🇺</span>
+                <span class="country-name">روسیه</span>
+                <div class="country-count" id="RU-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="JP">
+                <span class="country-flag">🇯🇵</span>
+                <span class="country-name">ژاپن</span>
+                <div class="country-count" id="JP-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="SG">
+                <span class="country-flag">🇸🇬</span>
+                <span class="country-name">سنگاپور</span>
+                <div class="country-count" id="SG-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="CN">
+                <span class="country-flag">🇨🇳</span>
+                <span class="country-name">چین</span>
+                <div class="country-count" id="CN-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="CH">
+                <span class="country-flag">🇨🇭</span>
+                <span class="country-name">سوئیس</span>
+                <div class="country-count" id="CH-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="TW">
+                <span class="country-flag">🇹🇼</span>
+                <span class="country-name">تایوان</span>
+                <div class="country-count" id="TW-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="SE">
+                <span class="country-flag">🇸🇪</span>
+                <span class="country-name">سوئد</span>
+                <div class="country-count" id="SE-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="BR">
+                <span class="country-flag">🇧🇷</span>
+                <span class="country-name">برزیل</span>
+                <div class="country-count" id="BR-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="KR">
+                <span class="country-flag">🇰🇷</span>
+                <span class="country-name">کره جنوبی</span>
+                <div class="country-count" id="KR-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="CA">
+                <span class="country-flag">🇨🇦</span>
+                <span class="country-name">کانادا</span>
+                <div class="country-count" id="CA-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="UA">
+                <span class="country-flag">🇺🇦</span>
+                <span class="country-name">اوکراین</span>
+                <div class="country-count" id="UA-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="IT">
+                <span class="country-flag">🇮🇹</span>
+                <span class="country-name">ایتالیا</span>
+                <div class="country-count" id="IT-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="AU">
+                <span class="country-flag">🇦🇺</span>
+                <span class="country-name">استرالیا</span>
+                <div class="country-count" id="AU-count">0</div>
+            </div>
+
+            <div class="country-btn" data-country="unknown">
+                <span class="country-flag">🌍</span>
+                <span class="country-name">unknown</span>
+                <div class="country-count" id="unknown-count">0</div>
+            </div>
+<!-- COUNTRY_BUTTONS_END -->
             </div>
         </div>
 
@@ -652,6 +864,190 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Protocol info mapping
+        const protocolInfo = {
+  "vmess": {
+    "name": "VMess",
+    "color": "#4CAF50",
+    "icon": "fas fa-shield-alt"
+  },
+  "vless": {
+    "name": "VLESS",
+    "color": "#2196F3",
+    "icon": "fas fa-bolt"
+  },
+  "trojan": {
+    "name": "Trojan",
+    "color": "#FF9800",
+    "icon": "fas fa-lock"
+  },
+  "ss": {
+    "name": "Shadowsocks",
+    "color": "#9C27B0",
+    "icon": "fas fa-eye-slash"
+  },
+  "ssr": {
+    "name": "ShadowsocksR",
+    "color": "#6c5ce7",
+    "icon": "fas fa-ghost"
+  },
+  "hysteria": {
+    "name": "Hysteria",
+    "color": "#e17055",
+    "icon": "fas fa-rocket"
+  },
+  "tuic": {
+    "name": "TUIC",
+    "color": "#00BCD4",
+    "icon": "fas fa-plane"
+  },
+  "wireguard": {
+    "name": "WireGuard",
+    "color": "#795548",
+    "icon": "fas fa-network-wired"
+  },
+  "naive": {
+    "name": "Naive",
+    "color": "#607D8B",
+    "icon": "fas fa-user-secret"
+  },
+  "reality": {
+    "name": "Reality",
+    "color": "#E91E63",
+    "icon": "fas fa-magic"
+  },
+  "hysteria2": {
+    "name": "Hysteria2",
+    "color": "#FF5722",
+    "icon": "fas fa-rocket"
+  },
+  "hysteria3": {
+    "name": "Hysteria3",
+    "color": "#3F51B5",
+    "icon": "fas fa-rocket"
+  }
+};
+
+        // Country info mapping
+        const countryInfo = {
+  "US": {
+    "name": "آمریکا",
+    "flag": "🇺🇸"
+  },
+  "DE": {
+    "name": "آلمان",
+    "flag": "🇩🇪"
+  },
+  "IR": {
+    "name": "ایران",
+    "flag": "🇮🇷"
+  },
+  "CA": {
+    "name": "کانادا",
+    "flag": "🇨🇦"
+  },
+  "NL": {
+    "name": "هلند",
+    "flag": "🇳🇱"
+  },
+  "TR": {
+    "name": "ترکیه",
+    "flag": "🇹🇷"
+  },
+  "GB": {
+    "name": "انگلستان",
+    "flag": "🇬🇧"
+  },
+  "FR": {
+    "name": "فرانسه",
+    "flag": "🇫🇷"
+  },
+  "JP": {
+    "name": "ژاپن",
+    "flag": "🇯🇵"
+  },
+  "SG": {
+    "name": "سنگاپور",
+    "flag": "🇸🇬"
+  },
+  "HK": {
+    "name": "هنگ‌کنگ",
+    "flag": "🇭🇰"
+  },
+  "AU": {
+    "name": "استرالیا",
+    "flag": "🇦🇺"
+  },
+  "RU": {
+    "name": "روسیه",
+    "flag": "🇷🇺"
+  },
+  "CN": {
+    "name": "چین",
+    "flag": "🇨🇳"
+  },
+  "IN": {
+    "name": "هند",
+    "flag": "🇮🇳"
+  },
+  "BR": {
+    "name": "برزیل",
+    "flag": "🇧🇷"
+  },
+  "IT": {
+    "name": "ایتالیا",
+    "flag": "🇮🇹"
+  },
+  "ES": {
+    "name": "اسپانیا",
+    "flag": "🇪🇸"
+  },
+  "PL": {
+    "name": "لهستان",
+    "flag": "🇵🇱"
+  },
+  "SE": {
+    "name": "سوئد",
+    "flag": "🇸🇪"
+  },
+  "FI": {
+    "name": "فنلاند",
+    "flag": "🇫🇮"
+  },
+  "LT": {
+    "name": "لیتوانی",
+    "flag": "🇱🇹"
+  },
+  "CH": {
+    "name": "سوئیس",
+    "flag": "🇨🇭"
+  },
+  "TW": {
+    "name": "تایوان",
+    "flag": "🇹🇼"
+  },
+  "KR": {
+    "name": "کره جنوبی",
+    "flag": "🇰🇷"
+  },
+  "UA": {
+    "name": "اوکراین",
+    "flag": "🇺🇦"
+  },
+  "EU": {
+    "name": "اروپا",
+    "flag": "🇪🇺"
+  },
+  "CF": {
+    "name": "Cloudflare",
+    "flag": "☁️"
+  },
+  "unknown": {
+    "name": "unknown",
+    "flag": "🌍"
+  }
+};
+
         // Protocol configurations
         const protocols = [
             {
@@ -700,35 +1096,123 @@
 
         // Country configurations
         const countryInfo = {
-            'US': { name: 'آمریکا', flag: '🇺🇸' },
-            'DE': { name: 'آلمان', flag: '🇩🇪' },
-            'IR': { name: 'ایران', flag: '🇮🇷' },
-            'CA': { name: 'کانادا', flag: '🇨🇦' },
-            'NL': { name: 'هلند', flag: '🇳🇱' },
-            'TR': { name: 'ترکیه', flag: '🇹🇷' },
-            'FR': { name: 'فرانسه', flag: '🇫🇷' },
-            'GB': { name: 'انگلیس', flag: '🇬🇧' },
-            'JP': { name: 'ژاپن', flag: '🇯🇵' },
-            'SG': { name: 'سنگاپور', flag: '🇸🇬' },
-            'HK': { name: 'هنگ‌کنگ', flag: '🇭🇰' },
-            'CN': { name: 'چین', flag: '🇨🇳' },
-            'RU': { name: 'روسیه', flag: '🇷🇺' },
-            'SE': { name: 'سوئد', flag: '🇸🇪' },
-            'FI': { name: 'فنلاند', flag: '🇫🇮' },
-            'LT': { name: 'لیتوانی', flag: '🇱🇹' },
-            'CH': { name: 'سوئیس', flag: '🇨🇭' },
-            'AU': { name: 'استرالیا', flag: '🇦🇺' },
-            'BR': { name: 'برزیل', flag: '🇧🇷' },
-            'IN': { name: 'هند', flag: '🇮🇳' },
-            'KR': { name: 'کره جنوبی', flag: '🇰🇷' },
-            'TW': { name: 'تایوان', flag: '🇹🇼' },
-            'PL': { name: 'لهستان', flag: '🇵🇱' },
-            'ES': { name: 'اسپانیا', flag: '🇪🇸' },
-            'IT': { name: 'ایتالیا', flag: '🇮🇹' },
-            'EU': { name: 'اتحادیه اروپا', flag: '🇪🇺' },
-            'CF': { name: 'Cloudflare', flag: '☁️' },
-            'UA': { name: 'اوکراین', flag: '🇺🇦' }
-        };
+  "US": {
+    "name": "آمریکا",
+    "flag": "🇺🇸"
+  },
+  "DE": {
+    "name": "آلمان",
+    "flag": "🇩🇪"
+  },
+  "IR": {
+    "name": "ایران",
+    "flag": "🇮🇷"
+  },
+  "CA": {
+    "name": "کانادا",
+    "flag": "🇨🇦"
+  },
+  "NL": {
+    "name": "هلند",
+    "flag": "🇳🇱"
+  },
+  "TR": {
+    "name": "ترکیه",
+    "flag": "🇹🇷"
+  },
+  "GB": {
+    "name": "انگلستان",
+    "flag": "🇬🇧"
+  },
+  "FR": {
+    "name": "فرانسه",
+    "flag": "🇫🇷"
+  },
+  "JP": {
+    "name": "ژاپن",
+    "flag": "🇯🇵"
+  },
+  "SG": {
+    "name": "سنگاپور",
+    "flag": "🇸🇬"
+  },
+  "HK": {
+    "name": "هنگ‌کنگ",
+    "flag": "🇭🇰"
+  },
+  "AU": {
+    "name": "استرالیا",
+    "flag": "🇦🇺"
+  },
+  "RU": {
+    "name": "روسیه",
+    "flag": "🇷🇺"
+  },
+  "CN": {
+    "name": "چین",
+    "flag": "🇨🇳"
+  },
+  "IN": {
+    "name": "هند",
+    "flag": "🇮🇳"
+  },
+  "BR": {
+    "name": "برزیل",
+    "flag": "🇧🇷"
+  },
+  "IT": {
+    "name": "ایتالیا",
+    "flag": "🇮🇹"
+  },
+  "ES": {
+    "name": "اسپانیا",
+    "flag": "🇪🇸"
+  },
+  "PL": {
+    "name": "لهستان",
+    "flag": "🇵🇱"
+  },
+  "SE": {
+    "name": "سوئد",
+    "flag": "🇸🇪"
+  },
+  "FI": {
+    "name": "فنلاند",
+    "flag": "🇫🇮"
+  },
+  "LT": {
+    "name": "لیتوانی",
+    "flag": "🇱🇹"
+  },
+  "CH": {
+    "name": "سوئیس",
+    "flag": "🇨🇭"
+  },
+  "TW": {
+    "name": "تایوان",
+    "flag": "🇹🇼"
+  },
+  "KR": {
+    "name": "کره جنوبی",
+    "flag": "🇰🇷"
+  },
+  "UA": {
+    "name": "اوکراین",
+    "flag": "🇺🇦"
+  },
+  "EU": {
+    "name": "اروپا",
+    "flag": "🇪🇺"
+  },
+  "CF": {
+    "name": "Cloudflare",
+    "flag": "☁️"
+  },
+  "unknown": {
+    "name": "unknown",
+    "flag": "🌍"
+  }
+};
 
         // Load data from latest_report.json
         async function loadData() {

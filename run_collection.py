@@ -80,6 +80,15 @@ async def run_full_cycle():
         print(
             f"\n⏰ زمان پایان: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
+        # Auto-update UI with new protocols and countries
+        print("\n🔄 بروزرسانی خودکار UI...")
+        try:
+            from auto_update_ui import UIAutoUpdater
+            ui_updater = UIAutoUpdater()
+            ui_updater.run_auto_update()
+        except Exception as e:
+            print(f"⚠️ خطا در بروزرسانی UI: {e}")
+
         return True
 
     except Exception as e:
