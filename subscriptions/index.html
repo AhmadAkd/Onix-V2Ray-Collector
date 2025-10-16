@@ -647,6 +647,7 @@
                     .sort((a, b) => (b[1].count || 0) - (a[1].count || 0));
 
                 console.log('Available countries:', Object.keys(countries));
+                console.log('Country info mapping:', countryInfo);
 
                 sortedCountries.forEach(([code, countryData]) => {
                     const upperCode = code.toUpperCase();
@@ -654,10 +655,12 @@
                     const count = countryData.count || 0;
                     const latency = countryData.avg_latency || 'N/A';
 
+                    console.log(`Processing country: ${code} -> ${upperCode} -> ${info.name} -> ${info.flag}`);
+
                     const card = document.createElement('div');
                     card.className = 'country-card fade-in';
                     card.innerHTML = `
-                        <div class="country-flag">${info.flag}</div>
+                        <div class="country-flag" style="font-size: 3rem; margin-bottom: 15px;">${info.flag}</div>
                         <div class="country-name">${info.name}</div>
                         <div class="country-stats">
                             <div>${count.toLocaleString('fa-IR')} کانفیگ</div>
