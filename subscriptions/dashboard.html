@@ -1041,11 +1041,11 @@
 
                 // AI Quality Distribution Chart
                 if (aiQuality.quality_categories) {
-                    const aiQualityLabels = Object.keys(aiQuality.quality_categories).map(cat => 
+                    const aiQualityLabels = Object.keys(aiQuality.quality_categories).map(cat =>
                         aiQualityInfo[cat]?.name || cat
                     );
                     const aiQualityData = Object.values(aiQuality.quality_categories);
-                    const aiQualityColors = Object.keys(aiQuality.quality_categories).map(cat => 
+                    const aiQualityColors = Object.keys(aiQuality.quality_categories).map(cat =>
                         aiQualityInfo[cat]?.color || '#999'
                     );
 
@@ -1261,7 +1261,7 @@
         // Auto-refresh can be enabled by uncommenting the line below:
         // setInterval(loadDashboardData, 5 * 60 * 1000);
     </script>
-    
+
     <!-- Theme Switcher -->
     <script src="theme-switcher.js"></script>
 </body>

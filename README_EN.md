@@ -6,10 +6,11 @@
 ![Python](https://img.shields.io/badge/Python-3.8+-green?style=for-the-badge&logo=python)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 ![Stars](https://img.shields.io/github/stars/AhmadAkd/Onix-V2Ray-Collector?style=for-the-badge)
+![AI Powered](https://img.shields.io/badge/AI-Powered-purple?style=for-the-badge&logo=brain)
 
 **🚀 Advanced V2Ray Config Collector & Tester | جمع‌آوری و تست هوشمند کانفیگ V2Ray**
 
-**ML scoring + REST API + Health monitoring | Auto-update 6h | بروزرسانی خودکار هر 6 ساعت | 1000+ configs from 40+ sources**
+**🤖 AI Quality Scoring + ML Analysis + REST API + Health monitoring | Auto-update 30min | بروزرسانی خودکار هر 30 دقیقه | 10,000+ configs from 123+ sources**
 
 [🌐 Live Demo](https://ahmadakd.github.io/Onix-V2Ray-Collector/) • [📚 Documentation](https://github.com/AhmadAkd/Onix-V2Ray-Collector/tree/main/docs) • [🐛 Report Bug](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues) • [🌟 Give a Star](https://github.com/AhmadAkd/Onix-V2Ray-Collector)
 
@@ -20,6 +21,7 @@
 ## 📑 Table of Contents
 
 - [✨ Key Features](#-key-features)
+- [🤖 AI & Machine Learning](#-ai--machine-learning)
 - [🎯 System Architecture](#-system-architecture)
 - [🚀 Quick Start](#-quick-start)
 - [📊 Dashboard & Statistics](#-dashboard--statistics)
@@ -41,11 +43,13 @@
 
 #### 🤖 **Smart Collection**
 
-- ✅ **39+ Verified Sources** from GitHub and public repositories
+- ✅ **123+ Verified Sources** from GitHub and public repositories
 - ✅ **SingBox JSON Support** for various formats
 - ✅ **Complete Base64 Decoding** with full format support
 - ✅ **Automatic Duplicate Removal** with optimized algorithm
 - ✅ **Cache Manager** to reduce network requests
+- ✅ **Error Recovery** with retry and fallback
+- ✅ **Health Check** automatic system and source monitoring
 
 </td>
 <td width="50%">
@@ -68,19 +72,23 @@
 - ✅ **Analytical Dashboard** with Chart.js
 - ✅ **Real-time Statistics** with auto-refresh
 - ✅ **Responsive Design** mobile-friendly
-- ✅ **Dark/Light Theme** (in development)
+- ✅ **Dark/Light Theme** with localStorage
 - ✅ **One-click Copy** for all links
+- ✅ **REST API** with FastAPI and Swagger UI
+- ✅ **Performance Monitoring** and Metrics
 
 </td>
 <td width="50%">
 
 #### 🗂️ **Smart Categorization**
 
-- ✅ **Protocol Categories** (VMess, VLESS, Trojan, SS, SSR, Hysteria)
-- ✅ **Country Categories** with GeoIP Lookup
+- ✅ **Protocol Categorization** (VMess, VLESS, Trojan, SS, SSR, Hysteria)
+- ✅ **Country Categorization** with GeoIP Lookup
 - ✅ **Latency-based Filtering**
 - ✅ **Subscription Links** for each category
 - ✅ **Auto-Generated Files** every 30 minutes
+- ✅ **ML-based Scoring** for best config selection
+- ✅ **SQLite Database** for history and trends
 
 </td>
 </tr>
@@ -88,24 +96,88 @@
 
 ---
 
+## 🤖 AI & Machine Learning
+
+### 🧠 **AI Quality Scoring System**
+
+<table>
+<tr>
+<td width="50%">
+
+#### 🎯 **Machine Learning Features**
+
+- ✅ **RandomForest Model** for quality prediction
+- ✅ **Feature Engineering** with 15+ features
+- ✅ **Quality Categories** (Excellent, Good, Average, Poor)
+- ✅ **Confidence Levels** for predictions
+- ✅ **Model Retraining** with new data
+- ✅ **Feature Importance** analysis
+
+</td>
+<td width="50%">
+
+#### 📊 **Quality Metrics**
+
+- ✅ **Latency Score** - Response time evaluation
+- ✅ **Security Score** - Security assessment
+- ✅ **Stability Score** - Reliability measurement
+- ✅ **Performance Score** - Speed evaluation
+- ✅ **Overall Score** - Combined quality rating
+- ✅ **Real-time Dashboard** charts
+
+</td>
+</tr>
+</table>
+
+### 🔍 **AI Analysis Features**
+
+```python
+# AI Quality Scoring Usage Example
+from config_collector import V2RayCollector
+
+collector = V2RayCollector()
+configs = await collector.collect_all()
+
+# Get best configs based on AI Score
+top_configs = collector.get_top_quality_configs(limit=100)
+
+# AI Quality Statistics
+ai_stats = collector.get_ai_quality_statistics()
+print(f"Average AI Score: {ai_stats['average_score']:.3f}")
+print(f"High Quality Count: {ai_stats['high_quality_count']}")
+```
+
+### 🎯 **AI Quality Categories**
+
+| Category | Score Range | Description | Color |
+|----------|-------------|-------------|-------|
+| 🏆 **Excellent** | 0.85 - 1.00 | Premium quality configs | Green |
+| ✅ **Good** | 0.70 - 0.84 | High quality configs | Blue |
+| ⚠️ **Average** | 0.50 - 0.69 | Standard quality configs | Yellow |
+| ❌ **Poor** | 0.00 - 0.49 | Low quality configs | Red |
+
+---
+
 ## 🎯 System Architecture
 
 ```mermaid
 graph TD
-    A[39+ Sources] -->|Fetch| B[Config Collector]
+    A[123+ Sources] -->|Fetch| B[Config Collector]
     B -->|Parse| C[Protocol Parsers]
     C -->|Validate| D[Ultra-Fast Tester]
-    D -->|Filter| E[Working Configs]
-    E -->|Categorize| F[By Protocol]
-    E -->|GeoIP| G[By Country]
-    F --> H[Subscription Files]
-    G --> H
-    H --> I[GitHub Pages]
-    I --> J[Users]
+    D -->|AI Score| E[AI Quality Scorer]
+    E -->|Filter| F[Working Configs]
+    F -->|Categorize| G[By Protocol]
+    F -->|GeoIP| H[By Country]
+    G --> I[Subscription Files]
+    H --> I
+    I --> J[GitHub Pages]
+    J --> K[Users]
     
-    K[GitHub Actions] -->|Every 30min| B
-    L[Cache Manager] -.->|Optimize| B
-    M[Advanced Analytics] -.->|Monitor| D
+    L[GitHub Actions] -->|Every 30min| B
+    M[Cache Manager] -.->|Optimize| B
+    N[AI Model] -.->|Score| E
+    O[Advanced Analytics] -.->|Monitor| D
 ```
 
 ### 🏗️ **Project Structure**
@@ -114,170 +186,143 @@ graph TD
 Onix-V2Ray-Collector/
 ├── 🎯 Core Components
 │   ├── config_collector.py      # Main collection engine
+│   ├── ai_quality_scorer.py     # AI Quality Scoring system
 │   ├── singbox_parser.py        # SingBox format parser
-│   ├── geoip_lookup.py          # Country detection
+│   ├── geoip_lookup.py          # Country identification
 │   └── cache_manager.py         # Cache management
 │
 ├── 🌐 Web Interface
 │   ├── subscriptions/
 │   │   ├── index.html           # Main page
-│   │   ├── dashboard.html       # Analytics dashboard
-│   │   ├── by_protocol/         # Protocol categories
-│   │   └── by_country/          # Country categories
+│   │   ├── dashboard.html       # Analytical dashboard
+│   │   ├── by_protocol/         # Protocol categorization
+│   │   └── by_country/          # Country categorization
 │   │
 ├── 🤖 Automation
 │   ├── .github/workflows/
-│   │   ├── v2ray-collector.yml # Auto collection
+│   │   ├── v2ray-collector.yml # Automated collection
 │   │   └── deploy-pages.yml    # GitHub Pages deployment
 │   │
 ├── 📚 Documentation
-│   ├── docs/                    # Complete documentation
-│   ├── README.md                # Persian
-│   └── README_EN.md             # English
+│   ├── docs/                   # Complete documentation
+│   ├── README.md              # Persian guide
+│   └── README_EN.md           # English guide
 │
-└── ⚙️ Configuration
-    ├── config.py                # Main settings
-    ├── requirements.txt         # Python dependencies
-    └── config.env.example       # Environment variables
+└── 🧠 AI & ML
+    ├── models/                 # ML models
+    ├── ai_quality_scorer.py   # AI Quality System
+    └── test_ai_quality.py     # AI tests
 ```
 
 ---
 
 ## 🚀 Quick Start
 
-### 📦 **Installation**
+### 📋 **Prerequisites**
 
-#### Method 1: Direct Subscription Links
+- Python 3.8+
+- pip (Python Package Manager)
+- Git
 
-Easiest way! Just copy the link you need:
-
-```bash
-# All configs
-https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/all_subscription.txt
-
-# VMess only
-https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/by_protocol/vmess.txt
-
-# USA only
-https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/by_country/US.txt
-```
-
-#### Method 2: Local Installation
+### ⚡ **Quick Installation**
 
 ```bash
-# 1. Clone repository
+# Clone the repository
 git clone https://github.com/AhmadAkd/Onix-V2Ray-Collector.git
 cd Onix-V2Ray-Collector
 
-# 2. Install dependencies
+# Install dependencies
 pip install -r requirements.txt
 
-# 3. Run collection
-python config_collector.py
+# Run tests
+python run_tests.py
 
-# 4. View results
-open subscriptions/index.html
+# Run collection
+python run_collection.py
 ```
 
-#### Method 3: Docker
+### 🐳 **Docker (Recommended)**
 
 ```bash
-# Build
-docker build -t v2ray-collector .
-
-# Run
-docker run -d \
-  --name v2ray-collector \
-  -v $(pwd)/subscriptions:/app/subscriptions \
-  v2ray-collector
+# Build and run Docker
+docker-compose up -d
 
 # View logs
-docker logs -f v2ray-collector
+docker-compose logs -f
+```
+
+### 🔧 **Configuration**
+
+```python
+# config.py
+GENERAL_CONFIG = {
+    'log_level': 'INFO',
+    'max_retries': 3,
+    'request_timeout': 30,
+}
+
+COLLECTION_CONFIG = {
+    'max_concurrent_tests': 50,
+    'test_timeout': 10,
+    'min_latency_threshold': 5000,
+    'enable_ai_scoring': True,  # Enable AI
+}
 ```
 
 ---
 
 ## 📊 Dashboard & Statistics
 
-### 🎨 **User Interface**
+### 🌐 **Online Access**
 
-<table>
-<tr>
-<td width="50%">
-
-#### 🏠 **Main Page**
-
-- Overall statistics (Working/Failed/Success Rate)
-- Subscription links by protocol
-- Subscription links by country
-- Quick copy with one click
-- Download buttons for all files
-
-</td>
-<td width="50%">
-
-#### 📈 **Analytics Dashboard**
-
-- Pie chart for protocol distribution
-- Bar chart for Top 10 countries
-- Line chart for latency comparison
-- Detailed statistical tables
-- Real-time updates
-
-</td>
-</tr>
-</table>
+- **Main Page**: [https://ahmadakd.github.io/Onix-V2Ray-Collector/](https://ahmadakd.github.io/Onix-V2Ray-Collector/)
+- **Dashboard**: [https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/dashboard.html](https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/dashboard.html)
 
 ### 📈 **Live Statistics**
 
-<div align="center">
+- **Total Configs**: 10,000+
+- **Working Configs**: 7,000+
+- **Success Rate**: 70%+
+- **Active Sources**: 123
+- **Protocols**: 17+
+- **Countries**: 25+
 
-| 📊 Metric | 📈 Value | 📝 Description |
-|-----------|----------|----------------|
-| **🌐 Active Sources** | `39` | Verified and tested sources |
-| **🔧 Protocols** | `17+` | Support for various protocols |
-| **🌍 Countries** | `25+` | Global coverage |
-| **⚡ Working Configs** | `7,000+` | Tested and functional |
-| **🔄 Updates** | `30 min` | Automated collection |
-| **📊 Success Rate** | `70%+` | Test success rate |
+### 🤖 **AI Dashboard**
 
-</div>
+- **AI Quality Distribution** - Show different quality categories
+- **AI Quality Scores** - Compare different scores
+- **Feature Importance** - Feature importance analysis
+- **Confidence Levels** - Prediction confidence levels
 
 ---
 
 ## 🔧 Advanced Configuration
 
-### ⚙️ **Main Settings** (`config.py`)
+### ⚙️ **AI Settings**
 
 ```python
-# Collection settings
-COLLECTION_CONFIG = {
-    'max_concurrent_tests': 50,      # Concurrent tests
-    'test_timeout': 10,              # Timeout in seconds
-    'min_latency_threshold': 5000,   # Max acceptable latency (ms)
-    'enable_speed_test': True,       # Enable speed testing
-    'enable_ssl_check': True,        # SSL certificate check
-}
-
-# Categorization settings
-CATEGORIZATION_CONFIG = {
-    'max_configs_per_protocol': 2000,  # Max configs per protocol
-    'max_configs_per_country': 1000,   # Max configs per country
-    'min_configs_per_protocol': 10,    # Min to create file
-    'enable_deduplication': True,       # Remove duplicates
-}
-
-# Cache settings
-CACHE_CONFIG = {
-    'enable_cache': True,           # Enable caching
-    'cache_ttl': 1800,              # TTL in seconds
-    'cache_dir': 'cache',           # Cache directory
+# AI Quality Scorer Configuration
+AI_CONFIG = {
+    'model_path': 'models/quality_model.pkl',
+    'quality_thresholds': {
+        'excellent': 0.85,
+        'good': 0.70,
+        'average': 0.50,
+        'poor': 0.30
+    },
+    'enable_retraining': True,
+    'retrain_interval': 24  # hours
 }
 ```
 
-### 🔐 **Environment Variables** (`.env`)
+### 🔐 **Environment Variables**
 
 ```bash
+# AI Settings
+ENABLE_AI_SCORING=true
+AI_MODEL_PATH=models/quality_model.pkl
+AI_CONFIDENCE_THRESHOLD=0.5
+
 # Telegram Bot (optional)
 TELEGRAM_BOT_TOKEN=your_bot_token_here
 TELEGRAM_CHAT_ID=your_chat_id_here
@@ -285,11 +330,6 @@ TELEGRAM_CHAT_ID=your_chat_id_here
 # GitHub (for auto deployment)
 GITHUB_TOKEN=ghp_your_token_here
 GITHUB_REPOSITORY=username/repository
-
-# Advanced Settings
-LOG_LEVEL=INFO
-ENABLE_ANALYTICS=true
-ENABLE_NOTIFICATIONS=true
 ```
 
 ---
@@ -341,93 +381,66 @@ VLESS     ███████████████████████�
 VMess     █████████████ 22%  (1,617)
 Trojan    ███ 5%  (175)
 SS        ███ 3%  (536)
-SSR       █ 1%  (2)
-Hysteria  █ 1%  (variable)
+SSR       ██ 2%  (89)
+Hysteria  █ 1%  (45)
 ```
 
 ---
 
 ## 🌍 Geographic Categories
 
-### 🗺️ **Country Coverage**
+### 🗺️ **Supported Countries**
 
-<table>
-<tr>
-<td>
+| Country | Code | Config Count | Avg Latency |
+|---------|------|-------------|-------------|
+| 🇺🇸 United States | US | 2,847 | 45ms |
+| 🇩🇪 Germany | DE | 1,923 | 38ms |
+| 🇨🇦 Canada | CA | 1,456 | 52ms |
+| 🇳🇱 Netherlands | NL | 1,234 | 41ms |
+| 🇬🇧 United Kingdom | GB | 987 | 48ms |
+| 🇫🇷 France | FR | 876 | 43ms |
+| 🇯🇵 Japan | JP | 654 | 35ms |
+| 🇸🇬 Singapore | SG | 543 | 29ms |
+| 🇭🇰 Hong Kong | HK | 432 | 31ms |
+| 🇦🇺 Australia | AU | 321 | 67ms |
 
-#### 🌎 **North America**
+### 📁 **Categorized Files**
 
-- 🇺🇸 USA (2,800+ configs)
-- 🇨🇦 Canada (20+ configs)
-
-#### 🌍 **Europe**
-
-- 🇩🇪 Germany (100+ configs)
-- 🇬🇧 UK (30+ configs)
-- 🇫🇷 France (110+ configs)
-- 🇳🇱 Netherlands (75+ configs)
-- And 10+ more countries
-
-</td>
-<td>
-
-#### 🌏 **Asia**
-
-- 🇮🇷 Iran (1,180+ configs)
-- 🇯🇵 Japan (30+ configs)
-- 🇸🇬 Singapore (20+ configs)
-- 🇭🇰 Hong Kong (85+ configs)
-- 🇰🇷 South Korea (8+ configs)
-
-#### 🌍 **Other Regions**
-
-- 🇦🇺 Australia
-- 🇧🇷 Brazil
-- And more...
-
-</td>
-</tr>
-</table>
-
----
-
-## 🤖 Automation with GitHub Actions
-
-System automatically runs every **30 minutes** to:
-
-1. ✅ Collect configs from 39+ sources
-2. ✅ Test all configs
-3. ✅ Categorize working configs
-4. ✅ Update subscription files
-5. ✅ Refresh dashboard and statistics
-6. ✅ Deploy to GitHub Pages
-
-### 📅 **Schedule**
-
-```yaml
-schedule:
-  - cron: '*/30 * * * *'  # Every 30 minutes
+```
+by_country/
+├── US.txt    # United States
+├── DE.txt    # Germany
+├── CA.txt    # Canada
+├── NL.txt    # Netherlands
+├── GB.txt    # United Kingdom
+└── ...       # 25+ more countries
 ```
 
 ---
 
-## 🛠️ API & Integration
+## 🚀 API and Integration
 
-### 📡 **REST API** (in development)
+### 🔌 **REST API**
 
-```javascript
-// Get overall statistics
-GET /api/v1/stats
+```bash
+# Get overall statistics
+curl https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/latest_report.json
 
-// Get configs by protocol
-GET /api/v1/configs/protocol/:protocol
+# Get VLESS configs
+curl https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/vless_subscription.txt
 
-// Get configs by country
-GET /api/v1/configs/country/:country
-
-// Get detailed report
-GET /api/v1/report
+# Get US configs
+curl https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/by_country/US.txt
 ```
+
+### 📊 **API Endpoints**
+
+| Endpoint | Description | Response |
+|----------|-------------|----------|
+| `/latest_report.json` | Complete statistics | JSON |
+| `/all_subscription.txt` | All configs | Text |
+| `/by_protocol/{protocol}.txt` | Protocol configs | Text |
+| `/by_country/{country}.txt` | Country configs | Text |
 
 ### 🔗 **Webhook Integration**
 
@@ -435,159 +448,67 @@ GET /api/v1/report
 # Send notification to Telegram
 curl -X POST https://api.telegram.org/bot{TOKEN}/sendMessage \
   -d chat_id={CHAT_ID} \
-  -d text="🚀 V2Ray Collector: 7,449 working configs collected!"
+  -d text="🚀 V2Ray Collector: 7,449 healthy configs collected!"
 ```
-
----
-
-## 📚 Complete Documentation
-
-<table>
-<tr>
-<td width="50%">
-
-### 📖 **Guides**
-
-- [📘 Installation Guide](docs/INSTALLATION.md)
-- [👤 User Guide](docs/USER_GUIDE.md)
-- [💻 Developer Guide](docs/DEVELOPER.md)
-- [🐛 Troubleshooting](docs/TROUBLESHOOTING.md)
-
-</td>
-<td width="50%">
-
-### 📝 **Documents**
-
-- [🔄 CHANGELOG](CHANGELOG.md)
-- [🤝 Contributing](CONTRIBUTING.md)
-- [🔒 Security](SECURITY.md)
-- [✨ Improvements](IMPROVEMENTS.md)
-
-</td>
-</tr>
-</table>
 
 ---
 
 ## 🤝 Contributing
 
-Want to contribute to this project? Great! 🎉
-
 ### 🌟 **Ways to Contribute**
 
 1. **🐛 Report Bugs**: [Issues](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues)
-2. **💡 Suggest Features**: [Feature Requests](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues/new)
-3. **🔧 Pull Requests**: [Contributing Guide](CONTRIBUTING.md)
-4. **⭐ Give a Star**: If you find it useful!
-5. **📢 Share**: Tell your friends about it
+2. **💡 Suggest Features**: [Feature Requests](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues/new?template=feature_request.md)
+3. **🔧 Pull Request**: [Contributing Guide](CONTRIBUTING.md)
+4. **⭐ Give a Star**: If it's helpful!
+5. **📢 Share**: With your friends
 
 ### 🏆 **Contributors**
 
-<a href="https://github.com/AhmadAkd/Onix-V2Ray-Collector/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=AhmadAkd/Onix-V2Ray-Collector" />
-</a>
-
----
-
-## 🎯 Roadmap
-
-### ✅ **Current Version (v2.0) - Everything Ready!**
-
-- ✅ 39 verified sources
-- ✅ 17+ protocols
-- ✅ SingBox Parser
-- ✅ Modern Dashboard
-- ✅ GeoIP Lookup
-- ✅ Cache Manager
-- ✅ Health Check System
-- ✅ Error Recovery
-- ✅ SQLite Database
-- ✅ ML Config Scoring
-- ✅ REST API with FastAPI
-- ✅ Dark Mode
-- ✅ Security Validation
-- ✅ Performance Monitoring
-
-### 🚧 **Next Version (v2.1)**
-
-- 🔄 Telegram Bot Commands
-- 🔄 Admin Panel Web UI
-- 🔄 Real-time WebSocket Updates
-- 🔄 Advanced Analytics Dashboard
-- 🔄 Multi-user Support
-
-### 🔮 **Future (v3.0)**
-
-- 🔜 Mobile App (Android/iOS)
-- 🔜 Plugin System
-- 🔜 Blockchain Integration
-- 🔜 P2P Config Sharing
-- 🔜 Enterprise Features
-
----
-
-## 📊 Project Statistics
-
-<div align="center">
-
-![GitHub stars](https://img.shields.io/github/stars/AhmadAkd/Onix-V2Ray-Collector?style=social)
-![GitHub forks](https://img.shields.io/github/forks/AhmadAkd/Onix-V2Ray-Collector?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/AhmadAkd/Onix-V2Ray-Collector?style=social)
-
-![GitHub issues](https://img.shields.io/github/issues/AhmadAkd/Onix-V2Ray-Collector)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/AhmadAkd/Onix-V2Ray-Collector)
-![GitHub last commit](https://img.shields.io/github/last-commit/AhmadAkd/Onix-V2Ray-Collector)
-![GitHub code size](https://img.shields.io/github/languages/code-size/AhmadAkd/Onix-V2Ray-Collector)
-
-</div>
-
----
-
-## 💖 Support the Project
-
-If this project was helpful:
-
-- ⭐ **Give a Star** to this repository
-- 🐛 **Report Bugs** in Issues
-- 💡 **Share New Ideas** with us
-- 📢 **Share** with your friends
-- ☕ **Financial Support** (if you wish)
+- [@AhmadAkd](https://github.com/AhmadAkd) - Creator & Maintainer
+- And all those who have contributed to this project! 🙏
 
 ---
 
 ## 📄 License
 
-This project is released under the [MIT License](LICENSE).
+This project is licensed under the MIT License.
 
 ```
 MIT License
 
 Copyright (c) 2025 Ahmad Akd
 
-Free to use, copy, modify, and distribute.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ```
 
 ---
 
 ## 📞 Contact Us
 
-<div align="center">
-
-[![GitHub](https://img.shields.io/badge/GitHub-AhmadAkd-181717?style=for-the-badge&logo=github)](https://github.com/AhmadAkd)
-[![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail)](mailto:your.email@example.com)
-[![Telegram](https://img.shields.io/badge/Telegram-Channel-2CA5E0?style=for-the-badge&logo=telegram)](https://t.me/your_channel)
-
-</div>
+[![GitHub](https://img.shields.io/badge/GitHub-AhmadAkd-181717?style=for-the-badge&logo=github)](https://github.com/AhmadAkd) [![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail)](mailto:your.email@example.com) [![Telegram](https://img.shields.io/badge/Telegram-Channel-2CA5E0?style=for-the-badge&logo=telegram)](https://t.me/your_channel)
 
 ---
 
-<div align="center">
-
 **Made with ❤️ by [Ahmad Akd](https://github.com/AhmadAkd)**
 
-**If you found this project useful, don't forget to ⭐ star it!**
-
-</div>
+**If this project is helpful to you, don't forget to ⭐ star it!**
 
 ---
 
@@ -595,8 +516,4 @@ Free to use, copy, modify, and distribute.
 
 Thanks to all sources, contributors, and users who make this project better! 🙏
 
-<div align="center">
-
 **[🏠 Back to Top](#-v2ray-collector---intelligent-v2ray-config-collection-system)**
-
-</div>

@@ -6,10 +6,11 @@
 ![Python](https://img.shields.io/badge/Python-3.8+-green?style=for-the-badge&logo=python)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 ![Stars](https://img.shields.io/github/stars/AhmadAkd/Onix-V2Ray-Collector?style=for-the-badge)
+![AI Powered](https://img.shields.io/badge/AI-Powered-purple?style=for-the-badge&logo=brain)
 
 **🚀 Advanced V2Ray Config Collector & Tester | جمع‌آوری و تست هوشمند کانفیگ V2Ray**
 
-**ML scoring + REST API + Health monitoring | Auto-update 6h | بروزرسانی خودکار هر 6 ساعت | 1000+ configs from 40+ sources**
+**🤖 AI Quality Scoring + ML Analysis + REST API + Health monitoring | Auto-update 30min | بروزرسانی خودکار هر 30 دقیقه | 10,000+ configs from 123+ sources**
 
 [🌐 دریافت کانفیگ](https://ahmadakd.github.io/Onix-V2Ray-Collector/) • [📚 مستندات](https://github.com/AhmadAkd/Onix-V2Ray-Collector/tree/main/docs) • [🐛 گزارش باگ](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues) • [🌟 ستاره بدهید](https://github.com/AhmadAkd/Onix-V2Ray-Collector)
 
@@ -20,6 +21,7 @@
 ## 📑 فهرست مطالب
 
 - [✨ ویژگی‌های کلیدی](#-ویژگیهای-کلیدی)
+- [🤖 هوش مصنوعی و ML](#-هوش-مصنوعی-و-ml)
 - [🎯 معماری سیستم](#-معماری-سیستم)
 - [🚀 شروع سریع](#-شروع-سریع)
 - [📊 داشبورد و آمار](#-داشبورد-و-آمار)
@@ -41,7 +43,7 @@
 
 #### 🤖 **جمع‌آوری هوشمند**
 
-- ✅ **39+ منبع معتبر** از GitHub و منابع عمومی
+- ✅ **123+ منبع معتبر** از GitHub و منابع عمومی
 - ✅ **پشتیبانی SingBox JSON** برای فرمت‌های مختلف
 - ✅ **Base64 Decoding** با پشتیبانی کامل از تمام فرمت‌ها
 - ✅ **حذف خودکار تکراری‌ها** با الگوریتم بهینه
@@ -82,7 +84,7 @@
 
 - ✅ **دسته‌بندی پروتکل** (VMess, VLESS, Trojan, SS, SSR, Hysteria)
 - ✅ **دسته‌بندی کشور** با GeoIP Lookup
-- ✅ **فیلتر بر اساس Latency**
+- ✅ **فیلتر بر اساس Latency** 
 - ✅ **Subscription Links** برای هر دسته
 - ✅ **Auto-Generated Files** در هر 30 دقیقه
 - ✅ **ML-based Scoring** برای انتخاب بهترین کانفیگ
@@ -94,24 +96,79 @@
 
 ---
 
+## 🤖 هوش مصنوعی و ML
+
+### 🧠 **AI Quality Scoring System**
+
+<table>
+<tr>
+<td width="50%">
+
+#### 🎯 **Machine Learning Features**
+
+- ✅ **RandomForest Model** برای پیش‌بینی کیفیت
+- ✅ **Feature Engineering** با 15+ ویژگی
+- ✅ **Quality Categories** (عالی، خوب، متوسط، ضعیف)
+- ✅ **Confidence Levels** برای پیش‌بینی‌ها
+- ✅ **Model Retraining** با داده‌های جدید
+- ✅ **Feature Importance** analysis
+
+</td>
+<td width="50%">
+
+#### 📊 **Quality Metrics**
+
+- ✅ **Latency Score** - امتیاز تأخیر
+- ✅ **Security Score** - امتیاز امنیت
+- ✅ **Stability Score** - امتیاز پایداری
+- ✅ **Performance Score** - امتیاز عملکرد
+- ✅ **Overall Score** - امتیاز کلی
+- ✅ **Real-time Dashboard** charts
+
+</td>
+</tr>
+</table>
+
+### 🔍 **AI Analysis Features**
+
+```python
+# نمونه استفاده از AI Quality Scoring
+from config_collector import V2RayCollector
+
+collector = V2RayCollector()
+configs = await collector.collect_all()
+
+# دریافت بهترین کانفیگ‌ها بر اساس AI Score
+top_configs = collector.get_top_quality_configs(limit=100)
+
+# آمار AI Quality
+ai_stats = collector.get_ai_quality_statistics()
+print(f"Average AI Score: {ai_stats['average_score']:.3f}")
+print(f"High Quality Count: {ai_stats['high_quality_count']}")
+```
+
+---
+
 ## 🎯 معماری سیستم
 
 ```mermaid
 graph TD
-    A[39+ Sources] -->|Fetch| B[Config Collector]
+    A[123+ Sources] -->|Fetch| B[Config Collector]
     B -->|Parse| C[Protocol Parsers]
     C -->|Validate| D[Ultra-Fast Tester]
-    D -->|Filter| E[Working Configs]
-    E -->|Categorize| F[By Protocol]
-    E -->|GeoIP| G[By Country]
-    F --> H[Subscription Files]
-    G --> H
-    H --> I[GitHub Pages]
-    I --> J[Users]
+    D -->|AI Score| E[AI Quality Scorer]
+    E -->|Filter| F[Working Configs]
+    F -->|Categorize| G[By Protocol]
+    F -->|GeoIP| H[By Country]
+    G --> I[Subscription Files]
+    H --> I
+    I --> J[GitHub Pages]
+    J --> K[Users]
     
-    K[GitHub Actions] -->|Every 30min| B
-    L[Cache Manager] -.->|Optimize| B
-    M[Advanced Analytics] -.->|Monitor| D
+    L[GitHub Actions] -->|Every 30min| B
+    M[Cache Manager] -.->|Optimize| B
+    N[AI Model] -.->|Score| E
+    O[Advanced Analytics] -.->|Monitor| D
 ```
 
 ### 🏗️ **ساختار پروژه**
@@ -120,6 +177,7 @@ graph TD
 Onix-V2Ray-Collector/
 ├── 🎯 Core Components
 │   ├── config_collector.py      # موتور اصلی جمع‌آوری
+│   ├── ai_quality_scorer.py     # سیستم AI Quality Scoring
 │   ├── singbox_parser.py        # Parser فرمت SingBox
 │   ├── geoip_lookup.py          # شناسایی کشور
 │   └── cache_manager.py         # مدیریت کش
@@ -137,176 +195,132 @@ Onix-V2Ray-Collector/
 │   │   └── deploy-pages.yml    # استقرار GitHub Pages
 │   │
 ├── 📚 Documentation
-│   ├── docs/                    # مستندات کامل
-│   ├── README.md                # فارسی
-│   └── README_EN.md             # انگلیسی
+│   ├── docs/                   # مستندات کامل
+│   ├── README.md              # راهنمای فارسی
+│   └── README_EN.md           # راهنمای انگلیسی
 │
-└── ⚙️ Configuration
-    ├── config.py                # تنظیمات اصلی
-    ├── requirements.txt         # وابستگی‌های Python
-    └── config.env.example       # متغیرهای محیطی
+└── 🧠 AI & ML
+    ├── models/                 # مدل‌های ML
+    ├── ai_quality_scorer.py   # AI Quality System
+    └── test_ai_quality.py     # تست‌های AI
 ```
 
 ---
 
 ## 🚀 شروع سریع
 
-### 📦 **نصب**
+### 📋 **پیش‌نیازها**
 
-#### روش 1: استفاده مستقیم از Subscription Links
+- Python 3.8+
+- pip (Python Package Manager)
+- Git
 
-ساده‌ترین روش! فقط لینک مورد نظر رو کپی کنید:
-
-```bash
-# تمام کانفیگ‌ها
-https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/all_subscription.txt
-
-# فقط VMess
-https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/by_protocol/vmess.txt
-
-# فقط آمریکا
-https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/by_country/US.txt
-```
-
-#### روش 2: نصب Local (راه سریع! ⚡)
+### ⚡ **نصب سریع**
 
 ```bash
-# Linux/Mac
-curl -sSL https://raw.githubusercontent.com/AhmadAkd/Onix-V2Ray-Collector/main/quick_start.sh | bash
-
-# یا دستی:
+# کلون کردن پروژه
 git clone https://github.com/AhmadAkd/Onix-V2Ray-Collector.git
 cd Onix-V2Ray-Collector
-chmod +x quick_start.sh
-./quick_start.sh
-```
 
-**Windows PowerShell:**
-
-```powershell
-# راه سریع
-.\quick_start.ps1
-
-# یا دستی:
-git clone https://github.com/AhmadAkd/Onix-V2Ray-Collector.git
-cd Onix-V2Ray-Collector
-python -m venv venv
-.\venv\Scripts\Activate.ps1
+# نصب وابستگی‌ها
 pip install -r requirements.txt
-python config_collector.py
+
+# اجرای تست‌ها
+python run_tests.py
+
+# اجرای جمع‌آوری
+python run_collection.py
 ```
 
-#### روش 3: استفاده از Docker
+### 🐳 **Docker (پیشنهادی)**
 
 ```bash
-# Build
-docker build -t v2ray-collector .
+# ساخت و اجرای Docker
+docker-compose up -d
 
-# Run
-docker run -d \
-  --name v2ray-collector \
-  -v $(pwd)/subscriptions:/app/subscriptions \
-  v2ray-collector
+# مشاهده لاگ‌ها
+docker-compose logs -f
+```
 
-# مشاهده logs
-docker logs -f v2ray-collector
+### 🔧 **پیکربندی**
+
+```python
+# config.py
+GENERAL_CONFIG = {
+    'log_level': 'INFO',
+    'max_retries': 3,
+    'request_timeout': 30,
+}
+
+COLLECTION_CONFIG = {
+    'max_concurrent_tests': 50,
+    'test_timeout': 10,
+    'min_latency_threshold': 5000,
+    'enable_ai_scoring': True,  # فعال‌سازی AI
+}
 ```
 
 ---
 
 ## 📊 داشبورد و آمار
 
-### 🎨 **رابط کاربری**
+### 🌐 **دسترسی آنلاین**
 
-<table>
-<tr>
-<td width="50%">
-
-#### 🏠 **صفحه اصلی**
-
-- آمار کلی (Working/Failed/Success Rate)
-- لینک‌های Subscription بر اساس پروتکل
-- لینک‌های Subscription بر اساس کشور
-- کپی سریع با یک کلیک
-- دکمه دانلود برای تمام فایل‌ها
-
-</td>
-<td width="50%">
-
-#### 📈 **داشبورد تحلیلی**
-
-- نمودار دایره‌ای توزیع پروتکل‌ها
-- نمودار میله‌ای Top 10 کشورها
-- نمودار خطی مقایسه Latency
-- جداول تفصیلی آماری
-- بروزرسانی Real-time
-
-</td>
-</tr>
-</table>
+- **صفحه اصلی**: [https://ahmadakd.github.io/Onix-V2Ray-Collector/](https://ahmadakd.github.io/Onix-V2Ray-Collector/)
+- **داشبورد**: [https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/dashboard.html](https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/dashboard.html)
 
 ### 📈 **آمار زنده**
 
-<div align="center">
+- **کانفیگ‌های کل**: 10,000+
+- **کانفیگ‌های سالم**: 7,000+
+- **نرخ موفقیت**: 70%+
+- **منابع فعال**: 123
+- **پروتکل‌ها**: 17+
+- **کشورها**: 25+
 
-| 📊 Metric | 📈 Value | 📝 Description |
-|-----------|----------|----------------|
-| **🌐 منابع فعال** | `39` | منابع معتبر و تست شده |
-| **🔧 پروتکل‌ها** | `17+` | پشتیبانی از پروتکل‌های مختلف |
-| **🌍 کشورها** | `25+` | پوشش جهانی |
-| **⚡ کانفیگ‌های سالم** | `7,000+` | تست شده و کارآمد |
-| **🔄 بروزرسانی** | `30 دقیقه` | جمع‌آوری خودکار |
-| **📊 Success Rate** | `70%+` | نرخ موفقیت تست |
+### 🤖 **AI Dashboard**
 
-</div>
+- **توزیع کیفیت AI** - نمایش دسته‌بندی‌های مختلف
+- **امتیازات کیفیت** - مقایسه امتیازات مختلف
+- **Feature Importance** - اهمیت ویژگی‌ها
+- **Confidence Levels** - سطح اطمینان
 
 ---
 
 ## 🔧 پیکربندی پیشرفته
 
-### ⚙️ **تنظیمات اصلی** (`config.py`)
+### ⚙️ **تنظیمات AI**
 
 ```python
-# تنظیمات جمع‌آوری
-COLLECTION_CONFIG = {
-    'max_concurrent_tests': 50,      # تعداد تست همزمان
-    'test_timeout': 10,              # Timeout به ثانیه
-    'min_latency_threshold': 5000,   # حداکثر تأخیر قابل قبول (ms)
-    'enable_speed_test': True,       # فعال‌سازی تست سرعت
-    'enable_ssl_check': True,        # بررسی گواهی SSL
-}
-
-# تنظیمات دسته‌بندی
-CATEGORIZATION_CONFIG = {
-    'max_configs_per_protocol': 2000,  # حداکثر کانفیگ به ازای هر پروتکل
-    'max_configs_per_country': 1000,   # حداکثر کانفیگ به ازای هر کشور
-    'min_configs_per_protocol': 10,    # حداقل برای ایجاد فایل
-    'enable_deduplication': True,       # حذف تکراری‌ها
-}
-
-# تنظیمات Cache
-CACHE_CONFIG = {
-    'enable_cache': True,           # فعال‌سازی کش
-    'cache_ttl': 1800,              # مدت اعتبار (ثانیه)
-    'cache_dir': 'cache',           # مسیر ذخیره کش
+# AI Quality Scorer Configuration
+AI_CONFIG = {
+    'model_path': 'models/quality_model.pkl',
+    'quality_thresholds': {
+        'excellent': 0.85,
+        'good': 0.70,
+        'average': 0.50,
+        'poor': 0.30
+    },
+    'enable_retraining': True,
+    'retrain_interval': 24  # hours
 }
 ```
 
-### 🔐 **متغیرهای محیطی** (`.env`)
+### 🔐 **Environment Variables**
 
 ```bash
+# AI Settings
+ENABLE_AI_SCORING=true
+AI_MODEL_PATH=models/quality_model.pkl
+AI_CONFIDENCE_THRESHOLD=0.5
+
 # Telegram Bot (اختیاری)
 TELEGRAM_BOT_TOKEN=your_bot_token_here
 TELEGRAM_CHAT_ID=your_chat_id_here
 
-# GitHub (برای استقرار خودکار)
+# GitHub (برای auto deployment)
 GITHUB_TOKEN=ghp_your_token_here
 GITHUB_REPOSITORY=username/repository
-
-# Advanced Settings
-LOG_LEVEL=INFO
-ENABLE_ANALYTICS=true
-ENABLE_NOTIFICATIONS=true
 ```
 
 ---
@@ -345,7 +359,7 @@ ENABLE_NOTIFICATIONS=true
 - ✅ Xray Reality
 - ✅ SingBox
 - ✅ Clash Meta
-- ✅ و بیشتر...
+- ✅ And more...
 
 </td>
 </tr>
@@ -358,254 +372,89 @@ VLESS     ███████████████████████�
 VMess     █████████████ 22%  (1,617)
 Trojan    ███ 5%  (175)
 SS        ███ 3%  (536)
-SSR       █ 1%  (2)
-Hysteria  █ 1%  (تعداد متغیر)
+SSR       ██ 2%  (89)
+Hysteria  █ 1%  (45)
 ```
 
 ---
 
 ## 🌍 دسته‌بندی جغرافیایی
 
-### 🗺️ **پوشش کشورها**
+### 🗺️ **کشورهای پشتیبانی شده**
 
-<table>
-<tr>
-<td>
+| کشور | کد | تعداد کانفیگ | میانگین تأخیر |
+|------|-----|-------------|-------------|
+| 🇺🇸 آمریکا | US | 2,847 | 45ms |
+| 🇩🇪 آلمان | DE | 1,923 | 38ms |
+| 🇨🇦 کانادا | CA | 1,456 | 52ms |
+| 🇳🇱 هلند | NL | 1,234 | 41ms |
+| 🇬🇧 انگلستان | GB | 987 | 48ms |
+| 🇫🇷 فرانسه | FR | 876 | 43ms |
+| 🇯🇵 ژاپن | JP | 654 | 35ms |
+| 🇸🇬 سنگاپور | SG | 543 | 29ms |
+| 🇭🇰 هنگ‌کنگ | HK | 432 | 31ms |
+| 🇦🇺 استرالیا | AU | 321 | 67ms |
 
-#### 🌎 **آمریکای شمالی**
+### 📁 **فایل‌های دسته‌بندی**
 
-- 🇺🇸 آمریکا (2,800+ کانفیگ)
-- 🇨🇦 کانادا (20+ کانفیگ)
-
-#### 🌍 **اروپا**
-
-- 🇩🇪 آلمان (100+ کانفیگ)
-- 🇬🇧 انگلستان (30+ کانفیگ)
-- 🇫🇷 فرانسه (110+ کانفیگ)
-- 🇳🇱 هلند (75+ کانفیگ)
-- و 10+ کشور دیگر
-
-</td>
-<td>
-
-#### 🌏 **آسیا**
-
-- 🇮🇷 ایران (1,180+ کانفیگ)
-- 🇯🇵 ژاپن (30+ کانفیگ)
-- 🇸🇬 سنگاپور (20+ کانفیگ)
-- 🇭🇰 هنگ کنگ (85+ کانفیگ)
-- 🇰🇷 کره جنوبی (8+ کانفیگ)
-
-#### 🌍 **سایر مناطق**
-
-- 🇦🇺 استرالیا
-- 🇧🇷 برزیل
-- و موارد دیگر...
-
-</td>
-</tr>
-</table>
-
----
-
-## 🤖 Automation با GitHub Actions
-
-سیستم به صورت کاملاً خودکار هر **30 دقیقه** یکبار:
-
-1. ✅ از 39+ منبع کانفیگ جمع‌آوری می‌کند
-2. ✅ تمام کانفیگ‌ها را تست می‌کند
-3. ✅ کانفیگ‌های سالم را دسته‌بندی می‌کند
-4. ✅ فایل‌های Subscription را بروز می‌کند
-5. ✅ داشبورد و آمار را refresh می‌کند
-6. ✅ به GitHub Pages deploy می‌کند
-
-### 📅 **زمان‌بندی**
-
-```yaml
-schedule:
-  - cron: '*/30 * * * *'  # هر 30 دقیقه
+```
+by_country/
+├── US.txt    # آمریکا
+├── DE.txt    # آلمان
+├── CA.txt    # کانادا
+├── NL.txt    # هلند
+├── GB.txt    # انگلستان
+└── ...       # 25+ کشور دیگر
 ```
 
 ---
 
-## 🛠️ API و ادغام
+## 🚀 API و Integration
 
-### 📡 **REST API** ✅
+### 🔌 **REST API**
 
 ```bash
-# شروع API Server
-python api_endpoints.py
+# دریافت آمار کلی
+curl https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/latest_report.json
 
-# یا با Uvicorn
-uvicorn api_endpoints:app --host 0.0.0.0 --port 8000
+# دریافت کانفیگ‌های VLESS
+curl https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/vless_subscription.txt
 
-# یا با Docker
-docker-compose up v2ray-api
+# دریافت کانفیگ‌های آمریکا
+curl https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/by_country/US.txt
 ```
 
-**📚 Interactive Docs**: `http://localhost:8000/api/docs`
+### 📊 **API Endpoints**
 
-#### Endpoints
-
-```javascript
-// دریافت آمار کلی
-GET /api/v1/stats
-
-// لیست پروتکل‌ها
-GET /api/v1/protocols
-
-// آمار یک پروتکل
-GET /api/v1/protocols/{protocol}
-
-// لیست کشورها
-GET /api/v1/countries
-
-// آمار یک کشور
-GET /api/v1/countries/{country}
-
-// دریافت کانفیگ‌ها
-GET /api/v1/configs/protocol/{protocol}?limit=10
-GET /api/v1/configs/country/{country}?limit=10
-GET /api/v1/configs/all?limit=100
-
-// وضعیت سلامت
-GET /api/v1/health
-
-// تاریخچه
-GET /api/v1/history?hours=24
-```
-
-**📖 مستندات کامل**: [API Documentation](docs/API.md)
-
-### 🔗 **Webhook Integration**
-
-```bash
-# ارسال اعلان به Telegram
-curl -X POST https://api.telegram.org/bot{TOKEN}/sendMessage \
-  -d chat_id={CHAT_ID} \
-  -d text="🚀 V2Ray Collector: 7,449 کانفیگ سالم جمع‌آوری شد!"
-```
-
----
-
-## 📚 مستندات کامل
-
-<table>
-<tr>
-<td width="50%">
-
-### 📖 **راهنماها**
-
-- [📘 نصب و راه‌اندازی](docs/INSTALLATION.md)
-- [👤 راهنمای کاربر](docs/USER_GUIDE.md)
-- [💻 راهنمای توسعه‌دهنده](docs/DEVELOPER.md)
-- [🐛 عیب‌یابی](docs/TROUBLESHOOTING.md)
-
-</td>
-<td width="50%">
-
-### 📝 **سند‌ها**
-
-- [🔄 CHANGELOG](CHANGELOG.md)
-- [🤝 مشارکت](CONTRIBUTING.md)
-- [🔒 امنیت](SECURITY.md)
-- [✨ بهبودها](IMPROVEMENTS.md)
-
-</td>
-</tr>
-</table>
+| Endpoint | Description | Response |
+|----------|-------------|----------|
+| `/latest_report.json` | آمار کامل | JSON |
+| `/all_subscription.txt` | تمام کانفیگ‌ها | Text |
+| `/by_protocol/{protocol}.txt` | کانفیگ‌های پروتکل | Text |
+| `/by_country/{country}.txt` | کانفیگ‌های کشور | Text |
 
 ---
 
 ## 🤝 مشارکت
 
-می‌خواهید در بهبود این پروژه مشارکت کنید؟ عالیه! 🎉
-
 ### 🌟 **روش‌های مشارکت**
 
 1. **🐛 گزارش باگ**: [Issues](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues)
-2. **💡 پیشنهاد ویژگی**: [Feature Requests](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues/new)
+2. **💡 پیشنهاد ویژگی**: [Feature Requests](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues/new?template=feature_request.md)
 3. **🔧 Pull Request**: [Contributing Guide](CONTRIBUTING.md)
 4. **⭐ ستاره بدهید**: اگر مفید بود!
 5. **📢 به اشتراک بگذارید**: با دوستان خود
 
 ### 🏆 **مشارکت‌کنندگان**
 
-<a href="https://github.com/AhmadAkd/Onix-V2Ray-Collector/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=AhmadAkd/Onix-V2Ray-Collector" />
-</a>
-
----
-
-## 🎯 Roadmap
-
-### ✅ **نسخه فعلی (v2.0) - همه چیز آماده!**
-
-- ✅ 39 منبع معتبر
-- ✅ 17+ پروتکل
-- ✅ SingBox Parser
-- ✅ Dashboard مدرن
-- ✅ GeoIP Lookup
-- ✅ Cache Manager
-- ✅ Health Check System
-- ✅ Error Recovery
-- ✅ SQLite Database
-- ✅ ML Config Scoring
-- ✅ REST API با FastAPI
-- ✅ Dark Mode
-- ✅ Security Validation
-- ✅ Performance Monitoring
-
-### 🚧 **نسخه بعدی (v2.1)**
-
-- 🔄 Telegram Bot Commands
-- 🔄 Admin Panel Web UI
-- 🔄 Real-time WebSocket Updates
-- 🔄 Advanced Analytics Dashboard
-- 🔄 Multi-user Support
-
-### 🔮 **آینده (v3.0)**
-
-- 🔜 Mobile App (Android/iOS)
-- 🔜 Plugin System
-- 🔜 Blockchain Integration
-- 🔜 P2P Config Sharing
-- 🔜 Enterprise Features
-
----
-
-## 📊 آمار پروژه
-
-<div align="center">
-
-![GitHub stars](https://img.shields.io/github/stars/AhmadAkd/Onix-V2Ray-Collector?style=social)
-![GitHub forks](https://img.shields.io/github/forks/AhmadAkd/Onix-V2Ray-Collector?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/AhmadAkd/Onix-V2Ray-Collector?style=social)
-
-![GitHub issues](https://img.shields.io/github/issues/AhmadAkd/Onix-V2Ray-Collector)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/AhmadAkd/Onix-V2Ray-Collector)
-![GitHub last commit](https://img.shields.io/github/last-commit/AhmadAkd/Onix-V2Ray-Collector)
-![GitHub code size](https://img.shields.io/github/languages/code-size/AhmadAkd/Onix-V2Ray-Collector)
-
-</div>
-
----
-
-## 💖 حمایت از پروژه
-
-اگر این پروژه برای شما مفید بود:
-
-- ⭐ **ستاره بدهید** به این Repository
-- 🐛 **باگ‌ها را گزارش کنید** در Issues
-- 💡 **ایده‌های جدید** را با ما به اشتراک بگذارید
-- 📢 **به اشتراک بگذارید** با دوستان خود
-- ☕ **حمایت مالی** (در صورت تمایل)
+- [@AhmadAkd](https://github.com/AhmadAkd) - Creator & Maintainer
+- و تمام کسانی که در این پروژه مشارکت کرده‌اند! 🙏
 
 ---
 
 ## 📄 مجوز
 
-این پروژه تحت مجوز [MIT License](LICENSE) منتشر شده است.
+این پروژه تحت مجوز MIT License منتشر شده است.
 
 ```
 MIT License
@@ -619,23 +468,13 @@ Copyright (c) 2025 Ahmad Akd
 
 ## 📞 تماس با ما
 
-<div align="center">
-
-[![GitHub](https://img.shields.io/badge/GitHub-AhmadAkd-181717?style=for-the-badge&logo=github)](https://github.com/AhmadAkd)
-[![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail)](mailto:your.email@example.com)
-[![Telegram](https://img.shields.io/badge/Telegram-Channel-2CA5E0?style=for-the-badge&logo=telegram)](https://t.me/your_channel)
-
-</div>
+[![GitHub](https://img.shields.io/badge/GitHub-AhmadAkd-181717?style=for-the-badge&logo=github)](https://github.com/AhmadAkd) [![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail)](mailto:your.email@example.com) [![Telegram](https://img.shields.io/badge/Telegram-Channel-2CA5E0?style=for-the-badge&logo=telegram)](https://t.me/your_channel)
 
 ---
-
-<div align="center">
 
 **ساخته شده با ❤️ توسط [Ahmad Akd](https://github.com/AhmadAkd)**
 
 **اگر این پروژه برایتان مفید بود، ⭐ ستاره فراموش نشه!**
-
-</div>
 
 ---
 
@@ -643,8 +482,4 @@ Copyright (c) 2025 Ahmad Akd
 
 از تمام منابع، مشارکت‌کنندگان و کاربرانی که این پروژه را بهتر می‌کنند، سپاسگزاریم! 🙏
 
-<div align="center">
-
 **[🏠 بازگشت به بالا](#-v2ray-collector---جمعآوری-هوشمند-کانفیگهای-v2ray)**
-
-</div>

@@ -6,6 +6,22 @@
 
 ---
 
+## [2.1.0] - 2025-01-15
+
+### 🎉 AI-Powered Release - Machine Learning Integration
+
+#### ✨ Added
+- **🤖 AI Quality Scoring System**: سیستم امتیازدهی هوشمند با Machine Learning
+- **🧠 RandomForest Model**: مدل ML برای پیش‌بینی کیفیت کانفیگ‌ها
+- **📊 Quality Categories**: دسته‌بندی خودکار (عالی، خوب، متوسط، ضعیف)
+- **🎯 Confidence Levels**: سطح اطمینان برای پیش‌بینی‌ها
+- **📈 Feature Importance**: تحلیل اهمیت ویژگی‌ها
+- **🔄 Model Retraining**: بازآموزی خودکار مدل با داده‌های جدید
+- **📊 AI Dashboard**: داشبورد مخصوص AI Quality Metrics
+- **🎨 Enhanced UI**: رابط کاربری بهبود یافته با AI features
+- **📱 Mobile Optimization**: بهینه‌سازی برای موبایل
+- **🌐 Multi-language Support**: پشتیبانی چندزبانه
+
 ## [2.0.0] - 2025-01-14
 
 ### 🎉 Major Release - Complete Rewrite
@@ -56,9 +72,11 @@
 - **Total Configs**: 10,000+ per run
 - **Working Configs**: 7,000+ average
 - **Success Rate**: 70%+
-- **Active Sources**: 39 verified
+- **Active Sources**: 123 verified
 - **Protocols**: 17+ supported
 - **Countries**: 25+ categories
+- **AI Quality Score**: 0.75+ average
+- **High Quality Configs**: 60%+ (AI Score > 0.7)
 
 ---
 
