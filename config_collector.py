@@ -19,6 +19,13 @@ from typing import List, Dict, Optional, Tuple, Set, Any
 from dataclasses import dataclass
 from urllib.parse import urlparse
 
+# Import Telegram Collector
+try:
+    from telegram_collector import TelegramCollector, TELEGRAM_SOURCES
+    TELEGRAM_AVAILABLE = True
+except ImportError:
+    TELEGRAM_AVAILABLE = False
+
 # تنظیم لاگ
 logging.basicConfig(
     level=logging.INFO,
@@ -257,6 +264,20 @@ class V2RayCollector:
                 "AI Quality Scorer not available, running without AI scoring")
             self.ai_scorer = None
 
+        # اضافه کردن Telegram Collector
+        if TELEGRAM_AVAILABLE:
+            try:
+                self.telegram_collector = TelegramCollector()
+                # اضافه کردن منابع تلگرام
+                for source in TELEGRAM_SOURCES:
+                    self.telegram_collector.add_source(source)
+                logger.info(f"Telegram Collector initialized with {len(TELEGRAM_SOURCES)} sources")
+            except Exception as e:
+                logger.error(f"Failed to initialize Telegram Collector: {e}")
+                self.telegram_collector = None
+        else:
+            self.telegram_collector = None
+
         # بارگذاری منابع از config.py
         try:
             from config import CONFIG_SOURCES
@@ -398,6 +419,7 @@ class V2RayCollector:
         """جمع‌آوری کانفیگ‌ها از تمام منابع"""
         all_configs = []
 
+        # جمع‌آوری از منابع معمولی
         tasks = [self.fetch_configs_from_source(
             source) for source in self.config_sources]
         results = await asyncio.gather(*tasks, return_exceptions=True)
@@ -407,6 +429,16 @@ class V2RayCollector:
                 all_configs.extend(result)
             elif isinstance(result, Exception):
                 logger.error(f"خطا در جمع‌آوری: {result}")
+
+        # جمع‌آوری از تلگرام (اگر در دسترس باشد)
+        if self.telegram_collector:
+            try:
+                logger.info("📱 شروع جمع‌آوری از تلگرام...")
+                telegram_configs = await self.telegram_collector.collect_all_sources()
+                all_configs.extend(telegram_configs)
+                logger.info(f"📱 {len(telegram_configs)} کانفیگ از تلگرام جمع‌آوری شد")
+            except Exception as e:
+                logger.error(f"خطا در جمع‌آوری از تلگرام: {e}")
 
         # حذف کانفیگ‌های تکراری
         unique_configs = list(set(all_configs))
