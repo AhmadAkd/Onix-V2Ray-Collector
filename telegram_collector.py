@@ -52,11 +52,13 @@ class TelegramCollector:
         self.bot_token = bot_token or os.getenv('TELEGRAM_BOT_TOKEN')
         
         if not self.bot_token:
-            logger.warning("⚠️ Telegram Bot Token not provided")
+            logger.warning("⚠️ Telegram Bot Token not provided - using static sources only")
+            logger.info("💡 To enable real-time collection, set TELEGRAM_BOT_TOKEN environment variable")
             self.api_url = None
         else:
             self.api_url = f"https://api.telegram.org/bot{self.bot_token}"
-            logger.info("✅ Telegram Collector initialized")
+            logger.info("✅ Telegram Collector initialized with Bot Token")
+            logger.info(f"🔗 API URL: {self.api_url}")
         
         self.sources = []
         self.collected_configs = []
