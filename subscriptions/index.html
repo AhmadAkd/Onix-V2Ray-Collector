@@ -1427,21 +1427,34 @@
 
         // Update statistics
         function updateStatistics(data) {
-            document.getElementById('workingConfigs').textContent = 
-                (data.working_configs || 0).toLocaleString('fa-IR');
+            console.log('Updating statistics with data:', data);
             
-            const protocolCount = Object.keys(data.protocols || {}).length;
-            document.getElementById('totalProtocols').textContent = protocolCount;
-            
-            const countryCount = Object.keys(data.countries || {}).length;
-            document.getElementById('totalCountries').textContent = countryCount;
-            
-            document.getElementById('successRate').textContent = data.success_rate || '0%';
-            
-            const lastUpdate = new Date(data.timestamp);
-            const relativeTime = getRelativeTime(lastUpdate);
-            document.getElementById('lastUpdateBadge').innerHTML = 
-                `<i class="fas fa-clock"></i> ${relativeTime}`;
+            try {
+                document.getElementById('workingConfigs').textContent = 
+                    (data.working_configs || 0).toLocaleString('fa-IR');
+                
+                const protocolCount = Object.keys(data.protocols || {}).length;
+                document.getElementById('totalProtocols').textContent = protocolCount;
+                
+                const countryCount = Object.keys(data.countries || {}).length;
+                document.getElementById('totalCountries').textContent = countryCount;
+                
+                document.getElementById('successRate').textContent = data.success_rate || '0%';
+                
+                if (data.timestamp) {
+                    const lastUpdate = new Date(data.timestamp);
+                    const relativeTime = getRelativeTime(lastUpdate);
+                    const lastUpdateElement = document.getElementById('lastUpdateBadge');
+                    if (lastUpdateElement) {
+                        lastUpdateElement.innerHTML = 
+                            `<i class="fas fa-clock"></i> ${relativeTime}`;
+                    }
+                }
+                
+                console.log('Statistics updated successfully');
+            } catch (error) {
+                console.error('Error updating statistics:', error);
+            }
         }
 
         // Load protocols
@@ -1449,7 +1462,9 @@
             const protocolGrid = document.getElementById('protocolGrid');
             protocolGrid.innerHTML = '';
 
-            const availableProtocols = data.available_files?.protocols || [];
+            // Get available protocols from the data
+            const availableProtocols = Object.keys(data.protocols || {});
+            console.log('Available protocols:', availableProtocols);
             
             protocols.forEach(protocol => {
                 if (availableProtocols.includes(protocol.id)) {
@@ -1490,7 +1505,7 @@
             countryGrid.innerHTML = '';
 
             const countries = data.countries || {};
-            const availableCountries = data.available_files?.countries || [];
+            console.log('Available countries:', Object.keys(countries));
 
             // Sort countries by count
             const sortedCountries = Object.entries(countries)
@@ -1498,10 +1513,6 @@
 
             sortedCountries.forEach(([code, countryData]) => {
                 const upperCode = code.toUpperCase();
-                if (!availableCountries.includes(code) && !availableCountries.includes(upperCode)) {
-                    return;
-                }
-
                 const info = countryInfo[upperCode] || { name: upperCode, flag: '🏳️' };
                 const count = countryData.count || 0;
                 const latency = countryData.avg_latency || 'N/A';
@@ -1510,10 +1521,15 @@
                 card.className = 'country-card fade-in';
                 card.onclick = () => copyCountryUrl(code, card);
                 card.innerHTML = `
-                    <div class="country-flag">${info.flag}</div>
-                    <div class="country-name">${info.name}</div>
-                    <div class="country-count">${count.toLocaleString('fa-IR')} کانفیگ</div>
-                    <small class="text-muted" style="font-size: 0.75rem;">${latency}</small>
+                    <div class="country-flag" style="font-size: 2rem; margin-bottom: 10px;">${info.flag}</div>
+                    <h4>${info.name}</h4>
+                    <div class="country-count" style="font-size: 1.2rem; font-weight: bold; color: #667eea; margin: 10px 0;">${count.toLocaleString('fa-IR')} کانفیگ</div>
+                    <small class="text-muted" style="font-size: 0.75rem;">تأخیر: ${latency}</small>
+                    <div class="url-box" id="url${code}" style="margin-top: 10px; font-size: 0.8rem;">https://raw.githubusercontent.com/AhmadAkd/Onix-V2Ray-Collector/main/subscriptions/by_country/${code}.txt</div>
+                    <button class="btn-copy" onclick="copyUrl('url${code}', this)" style="margin-top: 10px; padding: 8px 16px; font-size: 0.9rem;">
+                        <i class="fas fa-copy"></i>
+                        <span>کپی لینک اشتراک</span>
+                    </button>
                 `;
                 countryGrid.appendChild(card);
             });
