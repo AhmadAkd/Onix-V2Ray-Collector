@@ -1,0 +1,208 @@
+name: Manual V2Ray Collection Run
+
+on:
+  workflow_dispatch:
+    inputs:
+      collection_type:
+        description: 'نوع جمع‌آوری'
+        required: true
+        default: 'full'
+        type: choice
+        options:
+        - full
+        - telegram_only
+        - test_only
+      max_sources:
+        description: 'حداکثر تعداد منابع (0 = همه)'
+        required: false
+        default: '0'
+        type: string
+      timeout_minutes:
+        description: 'زمان انتظار (دقیقه)'
+        required: false
+        default: '60'
+        type: string
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  issues: write
+
+concurrency:
+  group: manual-v2ray-collection
+  cancel-in-progress: false
+
+jobs:
+  manual-collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: ${{ fromJson(github.event.inputs.timeout_minutes) || 60 }}
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+    
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+    
+    - name: 📦 Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: 🔧 Configure collection
+      run: |
+        echo "Collection Type: ${{ github.event.inputs.collection_type }}"
+        echo "Max Sources: ${{ github.event.inputs.max_sources }}"
+        echo "Timeout: ${{ github.event.inputs.timeout_minutes }} minutes"
+        
+        # تنظیم متغیرهای محیطی
+        echo "COLLECTION_TYPE=${{ github.event.inputs.collection_type }}" >> $GITHUB_ENV
+        echo "MAX_SOURCES=${{ github.event.inputs.max_sources }}" >> $GITHUB_ENV
+    
+    - name: 🧪 Run tests (if test_only)
+      if: github.event.inputs.collection_type == 'test_only'
+      run: |
+        echo "🧪 اجرای تست‌ها..."
+        python run_tests.py
+    
+    - name: 📱 Run Telegram collection (if telegram_only)
+      if: github.event.inputs.collection_type == 'telegram_only'
+      run: |
+        echo "📱 اجرای جمع‌آوری از تلگرام..."
+        python -c "
+        import asyncio
+        from telegram_collector import TelegramCollector, TELEGRAM_SOURCES
+        
+        async def main():
+            collector = TelegramCollector()
+            
+            # اضافه کردن منابع
+            for source in TELEGRAM_SOURCES:
+                collector.add_source(source)
+            
+            print(f'📊 {len(collector.sources)} منبع تلگرام اضافه شد')
+            
+            # جمع‌آوری (بدون bot token)
+            if collector.bot_token:
+                configs = await collector.collect_all_sources()
+                print(f'✅ {len(configs)} کانفیگ از تلگرام جمع‌آوری شد')
+            else:
+                print('⚠️ Bot Token تنظیم نشده - تست بدون جمع‌آوری واقعی')
+        
+        asyncio.run(main())
+        "
+    
+    - name: 🚀 Run full collection cycle
+      if: github.event.inputs.collection_type == 'full'
+      run: |
+        echo "🚀 اجرای Collection Cycle کامل..."
+        python run_collection.py
+    
+    - name: 📊 Generate summary
+      if: always()
+      run: |
+        echo "## 📊 Manual Collection Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Collection Type:** ${{ github.event.inputs.collection_type }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Max Sources:** ${{ github.event.inputs.max_sources }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Timeout:** ${{ github.event.inputs.timeout_minutes }} minutes" >> $GITHUB_STEP_SUMMARY
+        echo "**Run Time:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        if [ -f "subscriptions/latest_report.json" ]; then
+          echo "### 📈 Collection Results:" >> $GITHUB_STEP_SUMMARY
+          
+          TOTAL=$(jq -r '.total_configs_tested // 0' subscriptions/latest_report.json)
+          WORKING=$(jq -r '.working_configs // 0' subscriptions/latest_report.json)
+          FAILED=$(jq -r '.failed_configs // 0' subscriptions/latest_report.json)
+          SUCCESS_RATE=$(jq -r '.success_rate // "0%"' subscriptions/latest_report.json)
+          
+          echo "- 📊 Total configs tested: **$TOTAL**" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Working configs: **$WORKING**" >> $GITHUB_STEP_SUMMARY
+          echo "- ❌ Failed configs: **$FAILED**" >> $GITHUB_STEP_SUMMARY
+          echo "- 📈 Success rate: **$SUCCESS_RATE**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # آمار AI Quality
+          AI_SCORE=$(jq -r '.ai_quality.average_score // 0' subscriptions/latest_report.json)
+          if [ "$AI_SCORE" != "0" ]; then
+            echo "### 🤖 AI Quality Metrics:" >> $GITHUB_STEP_SUMMARY
+            echo "- 📊 Average AI Score: **$AI_SCORE**" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          # آمار پروتکل‌ها
+          echo "### 🔌 Configs by Protocol:" >> $GITHUB_STEP_SUMMARY
+          jq -r '.protocols | to_entries[] | "- **\(.key)**: \(.value.count) configs (\(.value.avg_latency))"' subscriptions/latest_report.json >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # آمار کشورها
+          echo "### 🌍 Top Countries:" >> $GITHUB_STEP_SUMMARY
+          jq -r '.countries | to_entries | sort_by(.value.count) | reverse | .[:10] | .[] | "- **\(.key)**: \(.value.count) configs (\(.value.avg_latency))"' subscriptions/latest_report.json >> $GITHUB_STEP_SUMMARY
+        else
+          echo "⚠️ No report generated" >> $GITHUB_STEP_SUMMARY
+        fi
+    
+    - name: 📁 Upload artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: manual-collection-${{ github.run_number }}
+        path: |
+          subscriptions/*.txt
+          subscriptions/*.json
+          subscriptions/*.html
+        retention-days: 30
+    
+    - name: 🔄 Commit and push changes
+      if: github.event.inputs.collection_type == 'full'
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        
+        git add subscriptions/
+        
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+          exit 0
+        fi
+        
+        TOTAL_CONFIGS=$(cat subscriptions/all_subscription.txt 2>/dev/null | wc -l || echo "0")
+        
+        git commit -m "🤖 Manual collection: ${{ github.event.inputs.collection_type }} - $(date '+%Y-%m-%d %H:%M')
+
+        📊 Total configs: $TOTAL_CONFIGS
+        🎯 Collection type: ${{ github.event.inputs.collection_type }}
+        ⏰ Time: $(date -u '+%Y-%m-%d %H:%M:%S UTC')
+        🔄 Run: #${{ github.run_number }}"
+        
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+        
+        for i in {1..3}; do
+          if git push origin main; then
+            echo "✅ Push successful"
+            exit 0
+          else
+            echo "⚠️ Push failed, attempt $i/3"
+            git fetch origin main
+            git rebase origin/main || git rebase --abort
+            sleep 5
+          fi
+        done
+        
+        echo "❌ Push failed after 3 attempts"
+        exit 1
+    
+    - name: 🎉 Success notification
+      if: success()
+      run: |
+        echo "✅ Manual collection completed successfully!"
+        echo "📊 Check the summary above for details."
+        echo "🔗 View results at: https://ahmadakd.github.io/Onix-V2Ray-Collector/"
