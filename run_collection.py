@@ -43,6 +43,22 @@ async def run_full_cycle():
         print(f"   ❌ کانفیگ‌های ناسالم: {report.get('failed_configs', 0):,}")
         print(f"   📈 نرخ موفقیت: {report.get('success_rate', '0%')}")
 
+        # آمار AI Quality
+        ai_quality = report.get('ai_quality', {})
+        if ai_quality:
+            print(f"\n🤖 آمار AI Quality:")
+            print(f"   📊 میانگین امتیاز: {ai_quality.get('average_score', 0):.3f}")
+            print(f"   🏆 کیفیت بالا: {ai_quality.get('high_quality_count', 0)}")
+            print(f"   ⚠️ کیفیت متوسط: {ai_quality.get('medium_quality_count', 0)}")
+            print(f"   ❌ کیفیت پایین: {ai_quality.get('low_quality_count', 0)}")
+            
+            # نمایش دسته‌بندی‌های کیفیت
+            categories = ai_quality.get('quality_categories', {})
+            if categories:
+                print(f"   📋 دسته‌بندی‌ها:")
+                for category, count in categories.items():
+                    print(f"      {category}: {count}")
+
         # آمار پروتکل‌ها
         protocols = report.get('protocols', {})
         print(f"\n🔌 آمار پروتکل‌ها:")
