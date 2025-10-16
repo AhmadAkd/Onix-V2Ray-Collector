@@ -15,7 +15,7 @@ import logging
 import hashlib
 import socket
 import concurrent.futures
-from typing import List, Dict, Optional, Tuple, Set
+from typing import List, Dict, Optional, Tuple, Set, Any
 from dataclasses import dataclass
 from urllib.parse import urlparse
 
@@ -45,6 +45,14 @@ class V2RayConfig:
     latency: float = 0.0
     is_working: bool = False
     country: str = "unknown"
+    # AI Quality Metrics
+    ai_quality_score: float = 0.0
+    ai_quality_category: str = "unknown"
+    ai_confidence_level: float = 0.0
+    ai_latency_score: float = 0.0
+    ai_security_score: float = 0.0
+    ai_stability_score: float = 0.0
+    ai_performance_score: float = 0.0
 
 
 class UltraFastConnectionPool:
@@ -78,7 +86,7 @@ class UltraFastConnectionPool:
 
         except Exception:
             return False, 0.0
-    
+
     def test_connection_advanced(self, address: str, port: int, protocol: str = 'tcp', timeout: float = 2.0) -> Tuple[bool, float, Dict]:
         """تست پیشرفته اتصال با جزئیات بیشتر"""
         try:
@@ -90,7 +98,7 @@ class UltraFastConnectionPool:
             sock.settimeout(timeout)
 
             result = sock.connect_ex((address, port))
-            
+
             if result == 0:
                 # تست ارسال و دریافت داده
                 try:
@@ -100,7 +108,7 @@ class UltraFastConnectionPool:
                     details['response_size'] = len(response)
                 except:
                     details['response_received'] = False
-            
+
             sock.close()
 
             latency = (time.time() - start_time) * 1000
@@ -230,7 +238,7 @@ class V2RayCollector:
             from geoip_lookup import GeoIPLookup
             self.geoip = GeoIPLookup()
             logger.info("GeoIP Lookup initialized successfully")
-            
+
             # Initialize SingBox parser
             from singbox_parser import SingBoxParser
             self.singbox_parser = SingBoxParser()
@@ -238,6 +246,16 @@ class V2RayCollector:
         except ImportError:
             logger.warning("GeoIP Lookup not available, running without GeoIP")
             self.geoip = None
+
+        # اضافه کردن AI Quality Scorer
+        try:
+            from ai_quality_scorer import AIQualityScorer
+            self.ai_scorer = AIQualityScorer()
+            logger.info("AI Quality Scorer initialized successfully")
+        except ImportError:
+            logger.warning(
+                "AI Quality Scorer not available, running without AI scoring")
+            self.ai_scorer = None
 
         # بارگذاری منابع از config.py
         try:
@@ -291,15 +309,18 @@ class V2RayCollector:
                             try:
                                 # استفاده از SingBox parser جدید
                                 if hasattr(self, 'singbox_parser') and self.singbox_parser:
-                                    configs = self.singbox_parser.parse_singbox_json(content)
+                                    configs = self.singbox_parser.parse_singbox_json(
+                                        content)
                                     logger.info(
                                         f"✅ دریافت {len(configs)} کانفیگ از SingBox JSON: {source_url}")
                                 else:
                                     # Fallback to old parser
                                     import json
                                     json_data = json.loads(content)
-                                    singbox_configs = self.parse_singbox_config(json_data)
-                                    configs = [config.raw_config for config in singbox_configs]
+                                    singbox_configs = self.parse_singbox_config(
+                                        json_data)
+                                    configs = [
+                                        config.raw_config for config in singbox_configs]
                                     logger.info(
                                         f"دریافت {len(configs)} کانفیگ از SingBox JSON: {source_url}")
 
@@ -336,7 +357,7 @@ class V2RayCollector:
                             line = line.strip()
                             if not line or line.startswith('#'):
                                 continue
-                            
+
                             # اگر خط شامل پروتکل است، مستقیم اضافه کن
                             if any(proto in line for proto in ['vmess://', 'vless://', 'trojan://', 'ss://', 'ssr://', 'hysteria://', 'hysteria2://', 'hy2://', 'tuic://', 'wireguard://']):
                                 configs.append(line)
@@ -344,7 +365,8 @@ class V2RayCollector:
                             elif len(line) > 50 and not ' ' in line:
                                 try:
                                     # ممکن است Base64 encoded configs باشد
-                                    decoded = base64.b64decode(line).decode('utf-8')
+                                    decoded = base64.b64decode(
+                                        line).decode('utf-8')
                                     # اگر داخل decoded چند کانفیگ بود، همشون رو اضافه کن
                                     if '\n' in decoded:
                                         for subline in decoded.split('\n'):
@@ -492,37 +514,37 @@ class V2RayCollector:
         try:
             if not config_str.startswith('ss://'):
                 return None
-            
+
             # حذف ss:// از ابتدا
             config_part = config_str[5:]
-            
+
             # استخراج remark اگر وجود دارد
             import urllib.parse
             remark = ''
             if '#' in config_part:
                 config_part, remark = config_part.split('#', 1)
                 remark = urllib.parse.unquote(remark)
-            
+
             # فرمت جدید: ss://BASE64(method:password)@host:port
             if '@' in config_part:
                 encoded_part, server_part = config_part.split('@', 1)
-                
+
                 # Decode بخش Base64
                 try:
                     # اضافه کردن padding
                     padding = 4 - (len(encoded_part) % 4)
                     if padding != 4:
                         encoded_part += '=' * padding
-                    
+
                     decoded = base64.b64decode(encoded_part).decode('utf-8')
-                    
+
                     # Parse method:password
                     if ':' in decoded:
                         method, password = decoded.split(':', 1)
                     else:
                         logger.debug(f"Invalid decoded SS format: {decoded}")
                         return None
-                    
+
                     # Parse server:port
                     if ':' in server_part:
                         address, port = server_part.rsplit(':', 1)
@@ -530,10 +552,10 @@ class V2RayCollector:
                     else:
                         logger.debug(f"Invalid server part: {server_part}")
                         return None
-                    
+
                     # استخراج کشور
                     country = self.detect_country(address, remark)
-                    
+
                     return V2RayConfig(
                         protocol="ss",
                         address=address,
@@ -552,19 +574,19 @@ class V2RayCollector:
                     padding = 4 - (len(config_part) % 4)
                     if padding != 4:
                         config_part += '=' * padding
-                    
+
                     decoded = base64.b64decode(config_part).decode('utf-8')
-                    
+
                     if '@' in decoded:
                         method_password, address_port = decoded.split('@', 1)
                         if ':' in method_password and ':' in address_port:
                             method, password = method_password.split(':', 1)
                             address, port = address_port.rsplit(':', 1)
                             port = int(port)
-                            
+
                             # استخراج کشور
                             country = self.detect_country(address, remark)
-                            
+
                             return V2RayConfig(
                                 protocol="ss",
                                 address=address,
@@ -576,7 +598,7 @@ class V2RayCollector:
                 except Exception as e:
                     logger.debug(f"خطا در decode فرمت قدیمی SS: {e}")
                     return None
-                    
+
         except Exception as e:
             logger.debug(f"خطا در تجزیه SS: {e}")
         return None
@@ -1454,10 +1476,13 @@ class V2RayCollector:
                 config.is_working = is_working
                 config.latency = latency
 
+                # اعمال AI Quality Scoring
+                config = self.apply_ai_quality_scoring(config)
+
                 if is_working:
                     self.working_configs.append(config)
                     logger.debug(
-                        f"✅ {config.protocol.upper()} {config.address}:{config.port} - {latency:.0f}ms")
+                        f"✅ {config.protocol.upper()} {config.address}:{config.port} - {latency:.0f}ms - AI Score: {config.ai_quality_score:.3f}")
                 else:
                     self.failed_configs.append(config)
 
@@ -1496,6 +1521,100 @@ class V2RayCollector:
     async def test_all_configs(self, configs: List[str], max_concurrent: int = 50):
         """Wrapper برای تست فوق سریع"""
         await self.test_all_configs_ultra_fast(configs, max_concurrent)
+
+    def apply_ai_quality_scoring(self, config: V2RayConfig) -> V2RayConfig:
+        """اعمال AI Quality Scoring به کانفیگ"""
+        if not self.ai_scorer:
+            return config
+
+        try:
+            # تبدیل V2RayConfig به dict برای AI scorer
+            config_data = {
+                'protocol': config.protocol,
+                'server': config.address,
+                'port': config.port,
+                'network': config.network,
+                'tls': config.tls,
+                'latency': config.latency,
+                'uptime': 95.0 if config.is_working else 50.0,  # تخمین uptime
+                'success_rate': 1.0 if config.is_working else 0.0,
+                'country': config.country
+            }
+
+            # پیش‌بینی کیفیت با AI
+            quality_metrics = self.ai_scorer.predict_quality(config_data)
+
+            # اعمال نتایج به کانفیگ
+            config.ai_quality_score = quality_metrics.overall_score
+            config.ai_quality_category = self.ai_scorer.get_quality_category(
+                quality_metrics.overall_score)
+            config.ai_confidence_level = quality_metrics.confidence_level
+            config.ai_latency_score = quality_metrics.latency_score
+            config.ai_security_score = quality_metrics.security_score
+            config.ai_stability_score = quality_metrics.stability_score
+            config.ai_performance_score = quality_metrics.performance_score
+
+            logger.debug(
+                f"AI Quality Score for {config.protocol}://{config.address}:{config.port} = {config.ai_quality_score:.3f}")
+
+        except Exception as e:
+            logger.error(f"❌ خطا در AI Quality Scoring: {e}")
+            # تنظیم مقادیر پیش‌فرض در صورت خطا
+            config.ai_quality_score = 0.5
+            config.ai_quality_category = "unknown"
+            config.ai_confidence_level = 0.0
+
+        return config
+
+    def sort_configs_by_ai_quality(self, configs: List[V2RayConfig]) -> List[V2RayConfig]:
+        """مرتب‌سازی کانفیگ‌ها بر اساس AI Quality Score"""
+        return sorted(configs, key=lambda x: x.ai_quality_score, reverse=True)
+
+    def get_top_quality_configs(self, limit: int = 100) -> List[V2RayConfig]:
+        """دریافت بهترین کانفیگ‌ها بر اساس AI Score"""
+        if not self.working_configs:
+            return []
+
+        # مرتب‌سازی بر اساس AI score
+        sorted_configs = self.sort_configs_by_ai_quality(self.working_configs)
+
+        # فیلتر کردن کانفیگ‌های با کیفیت بالا
+        high_quality_configs = [
+            config for config in sorted_configs
+            if config.ai_quality_score >= 0.7 and config.ai_confidence_level >= 0.5
+        ]
+
+        return high_quality_configs[:limit]
+
+    def get_ai_quality_statistics(self) -> Dict[str, Any]:
+        """دریافت آمار AI Quality"""
+        if not self.working_configs:
+            return {}
+
+        scores = [
+            config.ai_quality_score for config in self.working_configs if config.ai_quality_score > 0]
+
+        if not scores:
+            return {}
+
+        categories = {}
+        for config in self.working_configs:
+            if config.ai_quality_category in categories:
+                categories[config.ai_quality_category] += 1
+            else:
+                categories[config.ai_quality_category] = 1
+
+        return {
+            'total_configs': len(self.working_configs),
+            'scored_configs': len(scores),
+            'average_score': sum(scores) / len(scores),
+            'max_score': max(scores),
+            'min_score': min(scores),
+            'quality_categories': categories,
+            'high_quality_count': len([s for s in scores if s >= 0.8]),
+            'medium_quality_count': len([s for s in scores if 0.5 <= s < 0.8]),
+            'low_quality_count': len([s for s in scores if s < 0.5])
+        }
 
     def apply_geo_filter(self, configs: List[str]) -> List[str]:
         """اعمال فیلتر جغرافیایی"""
@@ -1791,6 +1910,7 @@ class V2RayCollector:
             'success_rate': f"{success_rate:.1f}%",
             'protocols': {},
             'countries': {},
+            'ai_quality': self.get_ai_quality_statistics(),
             'available_files': {
                 'protocols': [],
                 'countries': []

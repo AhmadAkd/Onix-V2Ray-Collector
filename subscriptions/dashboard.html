@@ -554,6 +554,39 @@
             </div>
         </div>
 
+        <!-- AI Quality Metrics Row -->
+        <div class="row g-4 mb-4">
+            <!-- AI Quality Distribution -->
+            <div class="col-lg-6">
+                <div class="chart-card fade-in">
+                    <div class="chart-header">
+                        <div class="chart-title">
+                            <i class="fas fa-brain" style="color: #9b59b6;"></i>
+                            توزیع کیفیت AI
+                        </div>
+                    </div>
+                    <div style="position: relative; height: 300px; max-height: 400px;">
+                        <canvas id="aiQualityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Quality Scores -->
+            <div class="col-lg-6">
+                <div class="chart-card fade-in">
+                    <div class="chart-header">
+                        <div class="chart-title">
+                            <i class="fas fa-star" style="color: #f39c12;"></i>
+                            امتیازات کیفیت AI
+                        </div>
+                    </div>
+                    <div style="position: relative; height: 300px; max-height: 400px;">
+                        <canvas id="aiScoresChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Latency Chart -->
         <div class="chart-card fade-in">
             <div class="chart-header">
@@ -646,7 +679,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script>
-        let protocolChart, countryChart, latencyChart;
+        let protocolChart, countryChart, latencyChart, aiQualityChart, aiScoresChart;
 
         // Protocol info
         const protocolInfo = {
@@ -656,6 +689,14 @@
             'ss': { name: 'Shadowsocks', color: '#0984e3', icon: 'fas fa-eye-slash' },
             'ssr': { name: 'ShadowsocksR', color: '#6c5ce7', icon: 'fas fa-ghost' },
             'hysteria': { name: 'Hysteria', color: '#e17055', icon: 'fas fa-rocket' }
+        };
+
+        // AI Quality info
+        const aiQualityInfo = {
+            'excellent': { name: 'عالی', color: '#00b894', threshold: 0.85 },
+            'good': { name: 'خوب', color: '#74b9ff', threshold: 0.70 },
+            'average': { name: 'متوسط', color: '#fdcb6e', threshold: 0.50 },
+            'poor': { name: 'ضعیف', color: '#ff6b6b', threshold: 0.30 }
         };
 
         // Country info
@@ -801,10 +842,12 @@
             try {
                 const protocols = data.protocols || {};
                 const countries = data.countries || {};
+                const aiQuality = data.ai_quality || {};
 
                 console.log('📊 Updating charts with data:', {
                     protocols: Object.keys(protocols).length,
-                    countries: Object.keys(countries).length
+                    countries: Object.keys(countries).length,
+                    aiQuality: Object.keys(aiQuality).length
                 });
 
                 // Protocol Chart
@@ -993,6 +1036,125 @@
                         console.log('✅ Latency chart created successfully');
                     } catch (e) {
                         console.error('❌ Error creating latency chart:', e);
+                    }
+                }
+
+                // AI Quality Distribution Chart
+                if (aiQuality.quality_categories) {
+                    const aiQualityLabels = Object.keys(aiQuality.quality_categories).map(cat => 
+                        aiQualityInfo[cat]?.name || cat
+                    );
+                    const aiQualityData = Object.values(aiQuality.quality_categories);
+                    const aiQualityColors = Object.keys(aiQuality.quality_categories).map(cat => 
+                        aiQualityInfo[cat]?.color || '#999'
+                    );
+
+                    if (aiQualityChart) {
+                        try {
+                            aiQualityChart.destroy();
+                        } catch (e) {
+                            console.error('Error destroying AI quality chart:', e);
+                        }
+                        aiQualityChart = null;
+                    }
+
+                    const aiQualityCtx = document.getElementById('aiQualityChart');
+                    if (aiQualityCtx && aiQualityLabels.length > 0) {
+                        try {
+                            aiQualityChart = new Chart(aiQualityCtx, {
+                                type: 'doughnut',
+                                data: {
+                                    labels: aiQualityLabels,
+                                    datasets: [{
+                                        data: aiQualityData,
+                                        backgroundColor: aiQualityColors,
+                                        borderWidth: 0
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    aspectRatio: 1,
+                                    plugins: {
+                                        legend: {
+                                            position: 'bottom',
+                                            labels: {
+                                                font: { size: 12 },
+                                                padding: 10,
+                                                boxWidth: 15
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                            console.log('✅ AI Quality chart created successfully');
+                        } catch (e) {
+                            console.error('❌ Error creating AI Quality chart:', e);
+                        }
+                    }
+                }
+
+                // AI Quality Scores Chart
+                if (aiQuality.average_score !== undefined) {
+                    const aiScoresData = [
+                        { label: 'امتیاز کلی', value: aiQuality.average_score || 0 },
+                        { label: 'کیفیت بالا', value: aiQuality.high_quality_count || 0 },
+                        { label: 'کیفیت متوسط', value: aiQuality.medium_quality_count || 0 },
+                        { label: 'کیفیت پایین', value: aiQuality.low_quality_count || 0 }
+                    ];
+
+                    if (aiScoresChart) {
+                        try {
+                            aiScoresChart.destroy();
+                        } catch (e) {
+                            console.error('Error destroying AI scores chart:', e);
+                        }
+                        aiScoresChart = null;
+                    }
+
+                    const aiScoresCtx = document.getElementById('aiScoresChart');
+                    if (aiScoresCtx) {
+                        try {
+                            aiScoresChart = new Chart(aiScoresCtx, {
+                                type: 'bar',
+                                data: {
+                                    labels: aiScoresData.map(item => item.label),
+                                    datasets: [{
+                                        label: 'مقدار',
+                                        data: aiScoresData.map(item => item.value),
+                                        backgroundColor: [
+                                            '#9b59b6',
+                                            '#00b894',
+                                            '#fdcb6e',
+                                            '#ff6b6b'
+                                        ],
+                                        borderWidth: 0
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    aspectRatio: 1.5,
+                                    plugins: {
+                                        legend: {
+                                            display: false
+                                        }
+                                    },
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true,
+                                            ticks: { font: { size: 11 } }
+                                        },
+                                        x: {
+                                            ticks: { font: { size: 10 } }
+                                        }
+                                    }
+                                }
+                            });
+                            console.log('✅ AI Scores chart created successfully');
+                        } catch (e) {
+                            console.error('❌ Error creating AI Scores chart:', e);
+                        }
                     }
                 }
 
