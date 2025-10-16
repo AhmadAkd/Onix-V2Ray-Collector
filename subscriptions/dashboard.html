@@ -858,7 +858,7 @@
                 // Validate data
                 if (protocolLabels.length === 0 || protocolData.length === 0) {
                     console.warn('⚠️ No protocol data available');
-                    return;
+                    // Don't return, continue with other charts
                 }
 
                 // Destroy existing chart only if it exists
@@ -872,7 +872,7 @@
                 }
 
                 const protocolCtx = document.getElementById('protocolChart');
-                if (protocolCtx) {
+                if (protocolCtx && protocolLabels.length > 0) {
                     try {
                         protocolChart = new Chart(protocolCtx, {
                             type: 'doughnut',
@@ -920,7 +920,7 @@
                 // Validate data
                 if (countryLabels.length === 0 || countryData.length === 0) {
                     console.warn('⚠️ No country data available');
-                    return;
+                    // Don't return, continue with other charts
                 }
 
                 if (countryChart) {
@@ -933,7 +933,7 @@
                 }
 
                 const countryCtx = document.getElementById('countryChart');
-                if (countryCtx) {
+                if (countryCtx && countryLabels.length > 0) {
                     try {
                         countryChart = new Chart(countryCtx, {
                             type: 'bar',
