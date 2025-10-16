@@ -1,2 +1,6 @@
+vless://e999db7a-1b17-4da6-bc37-c9fa24af2e93@104.19.144.33:8443?path=/&security=tls&encryption=none&host=9Jj23Cd71F.kAgHaZ.oRg&type=ws#⚜️Telegram: @IP_CF 🇨🇦
+vless://7e948e09-fa6f-4b8e-8c5d-181fa15fbec5@104.17.41.52:8080?path=/ijiDwDw8BcM9ieHc?ed&security=&encryption=none&host=v2ngsupply2.ip-ddns.com&type=ws#🇨🇦𝐣𝐨𝐢𝐍-@𝐅𝐑𝐄𝐄𝐕𝟐𝐑𝐍𝐆
+vless://a0ca6189-a0e8-4daa-9ad1-6b055e8b5b38@cdnfast.dl8movis.ir:8880?path=/?ed=2056&security=&encryption=none&host=trk.ixstore.ir&type=httpupgrade#👉🆔@v2ray_configs_pool📡🇨🇦®️Canada©️Toronto🅿️ping:28.15ms
+vless://70465717-66ae-4756-b28a-ec5899e08b17@104.26.6.89:2095?path=/?ed=2095&security=none&encryption=none&host=ns.teHRantOlIdI.Ir&type=httpupgrade#[🇨🇦] @Hddify
+trojan://d4ff43e1-3131-4c32-e41b-716303c8ee49@104.17.147.22:8880?security=none&type=ws&path=/melo/&host=ch.我的名字伊斯梅洛.site.#👉🆔@v2ray_configs_pool📡🇨🇦®️Canada©️Toronto🅿️ping:27.52ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpUSlo0NHNic0JUbG5TVEVLejJ5UkQx@103.98.215.192:8443#%F0%9F%87%A8%F0%9F%87%A6CA%28AzadNet.t.me%29
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNToyYTZjMDM2NS1lM2VkLTRhZWYtODFjYS1iMWI2YjQ2MDg4ZGE=@132.145.102.60:21001#CA%F0%9F%87%A8%F0%9F%87%A6+%7C+132.145.102.60-21001+%7C+19.92ms
