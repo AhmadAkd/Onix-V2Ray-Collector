@@ -1,6 +1,6 @@
 trojan://96983eb4-c8f1-316e-ab00-500014ed3d8b@203.210.16.78:8443?security=tls&sni=official.seoulcitygovernment.com.ua&allowInsecure=1&fp=chrome&type=tcp#%F0%9F%87%B0%F0%9F%87%B7%20Korea,%20Republic%20of%20-%20NA%20%F0%9F%8C%8F%20TR-TCP-TLS%204%E2%83%A3
-ss://WVdWekxUSTFOaTFqWm1JNmNYZGxjbEpGVjFGQVFBOg==@218.237.185.230:4652#🆔soskeynet%20🔒%20SS-TCP-TLS%20🇰🇷%20KR%20151ms
 vmess://ewogICAgImFkZCI6ICIyMjAuOTIuMTQ2LjE2MSIsCiAgICAiYWlkIjogMCwKICAgICJob3N0IjogImFhLm5iZWUucHAudWEiLAogICAgImlkIjogImZmZGUzODFiLTRhMzAtNDFkNC05MGViLTE1MWYyMjhiMDZlYSIsCiAgICAibmV0IjogIndzIiwKICAgICJwYXRoIjogIi9xcSIsCiAgICAicG9ydCI6IDUwMDAxLAogICAgInBzIjogIvCfh7Dwn4e3S1ItMjIwLjkyLjE0Ni4xNjEtMDk5MyIsCiAgICAidGxzIjogInRscyIsCiAgICAidHlwZSI6ICJhdXRvIiwKICAgICJzZWN1cml0eSI6ICJhdXRvIiwKICAgICJza2lwLWNlcnQtdmVyaWZ5IjogdHJ1ZSwKICAgICJzbmkiOiAiIgp9
-trojan://96983eb4-c8f1-316e-ab00-500014ed3d8b@official.seoulcityhall.com.ua:8443?security=tls#%F0%9F%87%B0%F0%9F%87%B7KR-203.210.16.78-3068
+vmess://eyJhZGQiOiI0OS4xMjguMjE4LjEwMiIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiIiwiaWQiOiIyODNjMGFmOC1lYjBmLTQ1NTYtYTc4Yi0wZjEyOWRlNGI2MjAiLCJuZXQiOiJ3cyIsInBhdGgiOiIvdGVsZWdyYW1fQHNzd2lhIiwicG9ydCI6IjIwNTIyIiwicHMiOiLwn4ew8J+Ht0tSLTQ5LjEyOC4yMTguMTAyLTU1NjUiLCJzY3kiOiJhdXRvIiwic25pIjoiIiwidGxzIjoiIiwidHlwZSI6IiIsInYiOiIyIn0
 trojan://96983eb4-c8f1-316e-ab00-500014ed3d8b@official.seoulcitygovernment.com.ua:8443?security=tls#%F0%9F%87%B0%F0%9F%87%B7KR-203.210.16.78-2857
 trojan://96983eb4-c8f1-316e-ab00-500014ed3d8b@official.seoulcityhall.com.ua:2053?security=tls#%F0%9F%87%B0%F0%9F%87%B7KR-203.210.16.78-3197
+trojan://96983eb4-c8f1-316e-ab00-500014ed3d8b@official.seoulcityhall.com.ua:8443?security=tls#%F0%9F%87%B0%F0%9F%87%B7KR-203.210.16.78-3068
