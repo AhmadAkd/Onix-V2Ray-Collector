@@ -1,1 +1,3 @@
+vless://12345678-1234-1234-1234-123456789123@103.169.142.62:2096?path=%2Fsnippets%26Telegram%F0%9F%87%A8%F0%9F%87%B3+%40WangCai2+%2F%3Fed%3D2560&security=tls&encryption=none&host=ss.nzvrn.com&type=ws&sni=ss.nzvrn.com#🆔configfa%20🔒%20VL-WS-N/A%20🇦🇺%20AU%2019ms
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTppemlsMEdGa0hOeWVYbWNVaEI5cTVw@103.6.170.220:8443#%F0%9F%87%A6%F0%9F%87%BA%20ShatakVPN%20117980
 trojan://installshield@176.97.68.153:8443?security=tls&sni=176.97.68.153#%F0%9F%87%A6%F0%9F%87%BAAU-176.97.68.153-5512
