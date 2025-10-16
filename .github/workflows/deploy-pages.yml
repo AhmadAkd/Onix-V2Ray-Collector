@@ -50,6 +50,25 @@ jobs:
             mkdir -p subscriptions
           fi
           
+      - name: Prepare deployment files
+        run: |
+          echo "🔧 Preparing files for deployment..."
+          
+          # کپی فایل‌های subscriptions به root برای دسترسی بهتر
+          if [ -d "subscriptions" ]; then
+            echo "📋 Copying subscription files to root..."
+            cp -r subscriptions/* . 2>/dev/null || echo "No files to copy"
+            
+            # اطمینان از وجود index.html
+            if [ ! -f "index.html" ]; then
+              echo "⚠️ Creating fallback index.html"
+              echo '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>V2Ray Collector</title></head><body><h1>V2Ray Collector</h1><p>Loading...</p><script>window.location.href="subscriptions/index.html";</script></body></html>' > index.html
+            fi
+          fi
+          
+          echo "📊 Final structure:"
+          ls -la *.html 2>/dev/null || echo "No HTML files in root"
+          
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
