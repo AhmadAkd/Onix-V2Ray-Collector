@@ -112,41 +112,56 @@ class UIAutoUpdater:
                 print(f"➕ کشور جدید اضافه شد: {country}")
 
     def generate_protocol_buttons(self, protocols: List[str]) -> str:
-        """Generate protocol buttons HTML"""
-        buttons = []
+        """Generate protocol cards HTML with copyable links"""
+        cards = []
         for protocol in protocols:
             info = self.protocol_info.get(protocol, {})
             name = info.get('name', protocol.upper())
             color = info.get('color', '#999999')
             icon = info.get('icon', 'fas fa-circle')
             
-            button = f'''
-            <div class="protocol-btn" data-protocol="{protocol}" style="--protocol-color: {color};">
-                <i class="{icon}"></i>
-                <span>{name}</span>
-                <div class="protocol-count" id="{protocol}-count">0</div>
-            </div>'''
-            buttons.append(button)
+            card = f'''
+                <div class="protocol-card">
+                    <div class="protocol-header">
+                        <div class="protocol-icon" style="background: {color};">
+                            <i class="{icon}" style="color: white;"></i>
+                        </div>
+                        <div class="protocol-info">
+                            <h3>{name}</h3>
+                            <p>کانفیگ‌های {name}</p>
+                        </div>
+                    </div>
+                    <div class="url-box" id="url{protocol}">https://raw.githubusercontent.com/AhmadAkd/Onix-V2Ray-Collector/main/subscriptions/by_protocol/{protocol}.txt</div>
+                    <button class="btn-copy" onclick="copyUrl('url{protocol}', this)">
+                        <i class="fas fa-copy"></i>
+                        <span>کپی لینک اشتراک</span>
+                    </button>
+                </div>'''
+            cards.append(card)
         
-        return '\n'.join(buttons)
+        return '\n'.join(cards)
 
     def generate_country_buttons(self, countries: List[str]) -> str:
-        """Generate country buttons HTML"""
-        buttons = []
+        """Generate country cards HTML with copyable links and flags"""
+        cards = []
         for country in countries:
             info = self.country_info.get(country, {})
             name = info.get('name', country)
             flag = info.get('flag', '🌍')
             
-            button = f'''
-            <div class="country-btn" data-country="{country}">
-                <span class="country-flag">{flag}</span>
-                <span class="country-name">{name}</span>
-                <div class="country-count" id="{country}-count">0</div>
-            </div>'''
-            buttons.append(button)
+            card = f'''
+                <div class="country-card" data-country="{country}">
+                    <div class="country-flag" style="font-size: 2rem; margin-bottom: 10px;">{flag}</div>
+                    <h4>{name}</h4>
+                    <div class="url-box" id="url{country}">https://raw.githubusercontent.com/AhmadAkd/Onix-V2Ray-Collector/main/subscriptions/by_country/{country}.txt</div>
+                    <button class="btn-copy" onclick="copyUrl('url{country}', this)">
+                        <i class="fas fa-copy"></i>
+                        <span>کپی لینک اشتراک</span>
+                    </button>
+                </div>'''
+            cards.append(card)
         
-        return '\n'.join(buttons)
+        return '\n'.join(cards)
 
     def update_index_html(self, protocols: List[str], countries: List[str]) -> None:
         """Update index.html with new protocols and countries"""
