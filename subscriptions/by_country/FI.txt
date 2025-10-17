@@ -1,6 +1,3 @@
-vless://4c2fd69b-f8ea-453c-bd98-7c4fa2c46182@Www.speedtest.net:8880?path=/wss9500?ed=2560@V2RAYNG_IP---@V2RAYNG_IP---@V2RAYNG_IP---@V2RAYNG_IP---@V2RAYNG_IP---@V2RAYNG_IP---@V2RAYNG_IP---@V2RAYNG_IP---@V2RAYNG_IP-G_IP---@V2RAYNG_IP---@V2RAYNG_IP---@V2RAYNG_IP&security=none&encryption=none&host=Sbh.vipmehspd.ir.&type=httpupgrade#🇫🇮 Telegram @ata_connect
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo5Wmg4RW91aElMWjRKWkNRZGFYczBj@195.96.156.9:14847#FI%F0%9F%87%AB%F0%9F%87%AE+%7C+195.96.156.9-14847+%7C+102.56ms
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNToxWXczSnNHM2dtdXJoN1pCanpWaWFE@94.237.15.214:8443#FI%F0%9F%87%AB%F0%9F%87%AE+%7C+94.237.15.214-8443+%7C+106.08ms
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNToxWXczSnNHM2dtdXJoN1pCanpWaWFE@94.237.15.214:8443#Channel%20id%3A%20%40@proxy_kafee%20%F0%9F%87%AB%F0%9F%87%AE
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTozNjBlMjFkMjE5NzdkYzEx@185.193.102.7:57456#🇫🇮[openproxylist.com] ss-FI
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp1R1hWWmdYcUI3Um5Ea0J4ZDFSeUl1@91.204.74.95:27335#🇫🇮@vpnserverrrکانال تلگرامی
-vmess://ewogICJ2IjogIjIiLAogICJwcyI6ICJAYXJtYW5zdG9yZTIg8J+Hq/Cfh67wn4er8J+Hri3aqdin2YbYp9mEINiq2YTar9ix2KfZhSIsCiAgImFkZCI6ICJhcm1hbjEuZnJlZS5uZXh0c2Vlc2lvbi5pciIsCiAgInBvcnQiOiAxMDQyNiwKICAiaWQiOiAiM2I3ZDQwNmYtZTBlNC00OTMyLTlmZmQtZjIwNzU0YjU2M2EyIiwKICAic2N5IjogImF1dG8iLAogICJuZXQiOiAiZ3JwYyIsCiAgInRscyI6ICJ0bHMiLAogICJwYXRoIjogIiIsCiAgImF1dGhvcml0eSI6ICIiLAogICJzbmkiOiAiYXJtYW4xLmZyZWUubmV4dHNlZXNpb24uaXIiLAogICJmcCI6ICJyYW5kb20iLAogICJhbHBuIjogImgyLGh0dHAvMS4xLGgzIgp9
