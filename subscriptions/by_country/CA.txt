@@ -1,5 +1,4 @@
-vless://9ea5a2f5-3a56-4282-919c-4dfee486372e@104.19.150.163:8443?path=%2F&security=tls&encryption=none&host=vless.keepfuck.me&fp=chrome&type=ws&sni=vless.keepfuck.me#Channel%20id%3A%20%40proxy_kafee%F0%9F%87%A8%F0%9F%87%A6
-vless://0d0782a3-2c62-4936-b893-5790188778ea@104.19.144.33:8443?path=/&security=tls&alpn=h3,h2&encryption=none&host=03Pz2UaTr4.GiGa1.OrG&fp=chrome&type=ws#🇨🇦𝐣𝐨𝐢𝐍-@𝐅𝐑𝐄𝐄𝐕𝟐𝐑𝐍𝐆
+vless://e9979910-79d1-4621-a93c-b2a579c44ba7@104.25.131.154:8880?path=%2FC5itOz6YmbLanD7F%3Fed%3D2560&security=none&alpn=http%2F1.1&encryption=none&host=vngsupply.ip-ddns.com&fp=randomized&type=ws&sni=vngsUPPly.IP-DDnS.CoM#%F0%9F%87%A8%F0%9F%87%A6%40vpn_ioss%20%E2%99%BB%EF%B8%8F%20%D8%B9%D8%B6%D9%88%20%D8%B4%D9%88
 trojan://aa81d044-0e0a-5b01-a6d7-3981ed218497@104.17.147.22:2095?security=none&type=ws&path=/&host=at1.vless.Sitespeedtest.net.#👉🆔@freenettir📡🇨🇦®️Canada©️Toronto🅿️ping:27.88ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpUSlo0NHNic0JUbG5TVEVLejJ5UkQx@103.98.215.192:8443#%F0%9F%87%A8%F0%9F%87%A6CA%28AzadNet.t.me%29
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNToyYTZjMDM2NS1lM2VkLTRhZWYtODFjYS1iMWI2YjQ2MDg4ZGE=@132.145.102.60:21001#CA%F0%9F%87%A8%F0%9F%87%A6+%7C+132.145.102.60-21001+%7C+19.92ms
