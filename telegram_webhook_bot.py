@@ -8,6 +8,7 @@ Telegram Webhook Bot for GitHub Pages
 import asyncio
 import json
 import logging
+import os
 from typing import Dict, Any
 from telegram_bot_enhanced import EnhancedTelegramBot
 
