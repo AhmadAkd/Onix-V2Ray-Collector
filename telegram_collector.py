@@ -90,7 +90,10 @@ class TelegramCollector:
             # URL کانال در t.me
             url = f"https://t.me/s/{channel_username}"
             
-            async with aiohttp.ClientSession() as session:
+            # ایجاد connector بدون SSL verification
+            connector = aiohttp.TCPConnector(ssl=False)
+            
+            async with aiohttp.ClientSession(connector=connector) as session:
                 async with session.get(url) as response:
                     if response.status == 200:
                         html = await response.text()
@@ -653,7 +656,7 @@ class TelegramCollector:
             
             with open("subscriptions/telegram_report.json", 'w', encoding='utf-8') as f:
                 json.dump(report, f, indent=2, ensure_ascii=False)
-                
+
         except Exception as e:
             logger.error(f"خطا در ذخیره گزارش تلگرام: {e}")
 
