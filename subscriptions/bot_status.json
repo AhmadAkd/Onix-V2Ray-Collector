@@ -4,7 +4,7 @@
   "bot_id": "8474552244",
   "admin_users": [6563143907],
   "status": "polling_active",
-  "last_run": "2025-10-17T14:39:03Z",
+  "last_run": "2025-10-17T14:49:42Z",
   "github_repo": "https://github.com/AhmadAkd/Onix-V2Ray-Collector",
   "polling_interval": "2_seconds",
   "collection_interval": "30_minutes",
