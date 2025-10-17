@@ -44,22 +44,24 @@ class TelegramCollector:
     def __init__(self, bot_token: Optional[str] = None):
         """
         Initialize Telegram Collector
-        
+
         Args:
             bot_token: Telegram Bot Token (از env یا parameter)
         """
         import os
         self.bot_token = bot_token or os.getenv('TELEGRAM_BOT_TOKEN')
-        
+
         if not self.bot_token:
-            logger.warning("⚠️ Telegram Bot Token not provided - using static sources only")
-            logger.info("💡 To enable real-time collection, set TELEGRAM_BOT_TOKEN environment variable")
+            logger.warning(
+                "⚠️ Telegram Bot Token not provided - using static sources only")
+            logger.info(
+                "💡 To enable real-time collection, set TELEGRAM_BOT_TOKEN environment variable")
             self.api_url = None
         else:
             self.api_url = f"https://api.telegram.org/bot{self.bot_token}"
             logger.info("✅ Telegram Collector initialized with Bot Token")
             logger.info(f"🔗 API URL: {self.api_url}")
-        
+
         self.sources = []
         self.collected_configs = []
 
@@ -378,7 +380,7 @@ TELEGRAM_SOURCES = [
 
 async def main():
     # تنظیم Bot Token (باید از BotFather دریافت شود)
-    BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
+    BOT_TOKEN = "6942899950:AAEDV4iX8jh2zD8be2dPqcADnB7V4xWy7aE"
 
     collector = TelegramCollector(BOT_TOKEN)
 
