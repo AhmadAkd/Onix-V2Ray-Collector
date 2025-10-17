@@ -282,15 +282,256 @@ class TelegramCollector:
             logger.error(f"خطا در دسته‌بندی کانفیگ‌ها: {e}")
     
     async def _save_by_country(self, configs: List[str]):
-        """ذخیره کانفیگ‌ها بر اساس کشور (ساده‌سازی شده)"""
+        """ذخیره کانفیگ‌ها بر اساس کشور"""
         try:
-            # برای سادگی، همه کانفیگ‌ها را در فایل عمومی ذخیره می‌کنیم
-            # در آینده می‌توان با GeoIP این کار را دقیق‌تر کرد
+            # دسته‌بندی بر اساس کشور
+            country_configs = await self._categorize_by_country(configs)
+            
+            # ذخیره در فایل‌های کشور
+            for country, country_configs_list in country_configs.items():
+                if country_configs_list:
+                    filename = f"subscriptions/by_country/{country}.txt"
+                    await self._append_to_file(filename, country_configs_list)
+                    logger.info(f"🌍 {len(country_configs_list)} کانفیگ {country} ذخیره شد")
+            
+            # ذخیره در فایل عمومی تلگرام
             filename = "subscriptions/telegram_collected.txt"
             await self._append_to_file(filename, configs)
             
         except Exception as e:
             logger.error(f"خطا در ذخیره بر اساس کشور: {e}")
+    
+    async def _categorize_by_country(self, configs: List[str]) -> Dict[str, List[str]]:
+        """دسته‌بندی کانفیگ‌ها بر اساس کشور"""
+        try:
+            country_configs = {}
+            
+            for config in configs:
+                country = await self._detect_country_from_config(config)
+                
+                if country not in country_configs:
+                    country_configs[country] = []
+                
+                country_configs[country].append(config)
+            
+            return country_configs
+            
+        except Exception as e:
+            logger.error(f"خطا در دسته‌بندی بر اساس کشور: {e}")
+            return {"UNKNOWN": configs}
+    
+    async def _detect_country_from_config(self, config: str) -> str:
+        """تشخیص کشور از کانفیگ"""
+        try:
+            # استخراج آدرس سرور از کانفیگ
+            server_address = self._extract_server_address(config)
+            
+            if not server_address:
+                return "UNKNOWN"
+            
+            # تشخیص کشور بر اساس آدرس IP یا دامنه
+            country = await self._get_country_from_address(server_address)
+            
+            return country
+            
+        except Exception as e:
+            logger.debug(f"خطا در تشخیص کشور: {e}")
+            return "UNKNOWN"
+    
+    def _extract_server_address(self, config: str) -> str:
+        """استخراج آدرس سرور از کانفیگ"""
+        try:
+            config_lower = config.lower()
+            
+            if 'vmess://' in config_lower:
+                return self._extract_vmess_address(config)
+            elif 'vless://' in config_lower:
+                return self._extract_vless_address(config)
+            elif 'trojan://' in config_lower:
+                return self._extract_trojan_address(config)
+            elif 'ss://' in config_lower:
+                return self._extract_ss_address(config)
+            elif 'ssr://' in config_lower:
+                return self._extract_ssr_address(config)
+            elif 'hysteria://' in config_lower or 'hy2://' in config_lower:
+                return self._extract_hysteria_address(config)
+            elif 'tuic://' in config_lower:
+                return self._extract_tuic_address(config)
+            
+            return ""
+            
+        except Exception as e:
+            logger.debug(f"خطا در استخراج آدرس: {e}")
+            return ""
+    
+    def _extract_vmess_address(self, config: str) -> str:
+        """استخراج آدرس از VMess"""
+        try:
+            import base64
+            import json
+            
+            # حذف پیشوند vmess://
+            encoded_part = config[8:]
+            
+            # اضافه کردن padding
+            missing_padding = len(encoded_part) % 4
+            if missing_padding:
+                encoded_part += '=' * (4 - missing_padding)
+            
+            # decode base64
+            decoded = base64.b64decode(encoded_part).decode('utf-8')
+            data = json.loads(decoded)
+            
+            return data.get('add', '')
+            
+        except Exception:
+            return ""
+    
+    def _extract_vless_address(self, config: str) -> str:
+        """استخراج آدرس از VLESS"""
+        try:
+            # فرمت: vless://uuid@server:port?params
+            if '@' in config:
+                server_part = config.split('@')[1]
+                if ':' in server_part:
+                    return server_part.split(':')[0]
+            return ""
+        except Exception:
+            return ""
+    
+    def _extract_trojan_address(self, config: str) -> str:
+        """استخراج آدرس از Trojan"""
+        try:
+            # فرمت: trojan://password@server:port?params
+            if '@' in config:
+                server_part = config.split('@')[1]
+                if ':' in server_part:
+                    return server_part.split(':')[0]
+            return ""
+        except Exception:
+            return ""
+    
+    def _extract_ss_address(self, config: str) -> str:
+        """استخراج آدرس از Shadowsocks"""
+        try:
+            import base64
+            
+            # فرمت: ss://method:password@server:port
+            if '@' in config:
+                server_part = config.split('@')[1]
+                if ':' in server_part:
+                    return server_part.split(':')[0]
+            return ""
+        except Exception:
+            return ""
+    
+    def _extract_ssr_address(self, config: str) -> str:
+        """استخراج آدرس از ShadowsocksR"""
+        try:
+            import base64
+            
+            # حذف پیشوند ssr://
+            encoded_part = config[6:]
+            
+            # اضافه کردن padding
+            missing_padding = len(encoded_part) % 4
+            if missing_padding:
+                encoded_part += '=' * (4 - missing_padding)
+            
+            # decode base64
+            decoded = base64.b64decode(encoded_part).decode('utf-8')
+            
+            # فرمت: server:port:protocol:method:obfs:password
+            parts = decoded.split(':')
+            if len(parts) >= 1:
+                return parts[0]
+            
+            return ""
+        except Exception:
+            return ""
+    
+    def _extract_hysteria_address(self, config: str) -> str:
+        """استخراج آدرس از Hysteria"""
+        try:
+            # فرمت: hysteria://server:port?params
+            if '://' in config:
+                server_part = config.split('://')[1]
+                if ':' in server_part:
+                    return server_part.split(':')[0]
+            return ""
+        except Exception:
+            return ""
+    
+    def _extract_tuic_address(self, config: str) -> str:
+        """استخراج آدرس از TUIC"""
+        try:
+            # فرمت: tuic://uuid:password@server:port?params
+            if '@' in config:
+                server_part = config.split('@')[1]
+                if ':' in server_part:
+                    return server_part.split(':')[0]
+            return ""
+        except Exception:
+            return ""
+    
+    async def _get_country_from_address(self, address: str) -> str:
+        """تشخیص کشور از آدرس IP یا دامنه"""
+        try:
+            # لیست کشورهای رایج بر اساس دامنه
+            domain_countries = {
+                '.us': 'US', '.com': 'US', '.org': 'US', '.net': 'US',
+                '.de': 'DE', '.uk': 'GB', '.fr': 'FR', '.ca': 'CA',
+                '.nl': 'NL', '.jp': 'JP', '.kr': 'KR', '.sg': 'SG',
+                '.hk': 'HK', '.tw': 'TW', '.au': 'AU', '.ch': 'CH',
+                '.se': 'SE', '.no': 'NO', '.dk': 'DK', '.fi': 'FI',
+                '.it': 'IT', '.es': 'ES', '.pl': 'PL', '.ru': 'RU',
+                '.cn': 'CN', '.in': 'IN', '.br': 'BR', '.mx': 'MX',
+                '.tr': 'TR', '.ir': 'IR', '.ae': 'AE', '.sa': 'SA'
+            }
+            
+            # بررسی دامنه
+            for domain, country in domain_countries.items():
+                if domain in address.lower():
+                    return country
+            
+            # اگر آدرس IP بود، از GeoIP استفاده کن
+            if self._is_ip_address(address):
+                return await self._get_country_from_ip(address)
+            
+            # پیش‌فرض
+            return "UNKNOWN"
+            
+        except Exception as e:
+            logger.debug(f"خطا در تشخیص کشور از آدرس: {e}")
+            return "UNKNOWN"
+    
+    def _is_ip_address(self, address: str) -> bool:
+        """بررسی اینکه آیا آدرس یک IP است"""
+        try:
+            import socket
+            socket.inet_aton(address)
+            return True
+        except socket.error:
+            return False
+    
+    async def _get_country_from_ip(self, ip: str) -> str:
+        """تشخیص کشور از IP (ساده‌سازی شده)"""
+        try:
+            # برای سادگی، از یک سرویس عمومی استفاده می‌کنیم
+            # در تولید واقعی، از یک کتابخانه GeoIP استفاده کنید
+            import aiohttp
+            
+            async with aiohttp.ClientSession() as session:
+                async with session.get(f"http://ip-api.com/json/{ip}") as response:
+                    if response.status == 200:
+                        data = await response.json()
+                        return data.get('countryCode', 'UNKNOWN')
+            
+            return "UNKNOWN"
+            
+        except Exception as e:
+            logger.debug(f"خطا در تشخیص کشور از IP: {e}")
+            return "UNKNOWN"
     
     async def _save_telegram_report(self, configs: List[str]):
         """ذخیره گزارش جمع‌آوری تلگرام"""
