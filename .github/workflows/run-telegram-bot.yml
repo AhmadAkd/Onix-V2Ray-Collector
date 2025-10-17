@@ -46,18 +46,7 @@ jobs:
     - name: 🤖 Test Bot Connection
       run: |
         echo "🤖 Testing bot connection..."
-        python -c "
-        import asyncio
-        from telegram_bot_enhanced import EnhancedTelegramBot
-        
-        async def test():
-            bot = EnhancedTelegramBot('${{ secrets.TELEGRAM_BOT_TOKEN }}')
-            info = await bot.get_bot_info()
-            print(f'✅ Bot: {info.get(\"first_name\")} (@{info.get(\"username\")})')
-            print(f'✅ Admin users: {list(bot.admin_users)}')
-        
-        asyncio.run(test())
-        "
+        python test_telegram_bot_simple.py
     
     - name: 📱 Run Telegram Bot (Polling)
       run: |
