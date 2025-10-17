@@ -267,7 +267,9 @@ class V2RayCollector:
         # اضافه کردن Telegram Collector
         if TELEGRAM_AVAILABLE:
             try:
-                self.telegram_collector = TelegramCollector()
+                import os
+                bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
+                self.telegram_collector = TelegramCollector(bot_token)
                 # اضافه کردن منابع تلگرام
                 for source in TELEGRAM_SOURCES:
                     self.telegram_collector.add_source(source)
