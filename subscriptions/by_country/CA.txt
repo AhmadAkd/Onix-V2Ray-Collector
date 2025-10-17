@@ -1,3 +1,2 @@
-trojan://89b3cbba-e6ac-485a-9481-976a0415eab9@104.18.39.232:2083?security=tls&type=ws&sni=ArGodev11222.PaGes.Dev&path=/Telegram@Linkvws?ed=2560&host=argodev11222.pages.dev#👉🆔@v2ray_configs_pool📡🇨🇦®️Canada©️Toronto🅿️ping:28.26ms
-vless://59860b15-b2d9-47f9-9b92-81bd1639fcc5@104.18.41.190:8443?path=%2F%3Fed%3D2560&security=tls&encryption=none&host=5-55sfjslf.ifenxiang.cfd&fp=random&type=ws&sni=5-55sfjslf.ifenxiang.cfd#👉🆔@v2ray_configs_pool📡🇨🇦®️Canada©️Toronto🅿️ping:8.21ms`
+trojan://aa81d044-0e0a-5b01-a6d7-3981ed218497@104.17.147.22:2095?security=none&type=ws&path=/&host=at1.vless.Sitespeedtest.net.#👉🆔@freenettir📡🇨🇦®️Canada©️Toronto🅿️ping:27.88ms
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNToyYTZjMDM2NS1lM2VkLTRhZWYtODFjYS1iMWI2YjQ2MDg4ZGE=@132.145.102.60:21001#CA%F0%9F%87%A8%F0%9F%87%A6+%7C+132.145.102.60-21001+%7C+19.92ms
