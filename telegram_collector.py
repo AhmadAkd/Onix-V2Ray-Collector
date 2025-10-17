@@ -125,8 +125,8 @@ class TelegramCollector:
         """استخراج کانفیگ‌ها از HTML"""
         configs = []
 
-        # الگوهای کانفیگ
-        patterns = [
+        # الگوهای اصلی کانفیگ
+        main_patterns = [
             r'vmess://[A-Za-z0-9+/=]+',
             r'vless://[^\\s]+',
             r'trojan://[^\\s]+',
@@ -134,10 +134,39 @@ class TelegramCollector:
             r'ssr://[A-Za-z0-9+/=]+',
             r'hysteria://[^\\s]+',
             r'hy2://[^\\s]+',
-            r'tuic://[^\\s]+'
+            r'tuic://[^\\s]+',
+            r'reality://[^\\s]+',
+            r'singbox://[^\\s]+',
+            r'xray://[^\\s]+'
         ]
 
-        for pattern in patterns:
+        # الگوهای Base64 (کانفیگ‌های encoded)
+        base64_patterns = [
+            r'[A-Za-z0-9+/=]{100,}',  # Base64 strings طولانی
+        ]
+
+        # الگوهای JSON
+        json_patterns = [
+            r'\\{[^}]*"server"[^}]*\\}',  # JSON configs
+            r'\\{[^}]*"address"[^}]*\\}',  # JSON configs
+        ]
+
+        # استخراج با الگوهای اصلی
+        for pattern in main_patterns:
+            matches = re.findall(pattern, html, re.IGNORECASE)
+            configs.extend(matches)
+
+        # استخراج Base64 strings (فقط اگر کانفیگ اصلی نداشتیم)
+        if len(configs) == 0:
+            for pattern in base64_patterns:
+                matches = re.findall(pattern, html, re.IGNORECASE)
+                # فیلتر کردن Base64 strings که احتمالاً کانفیگ هستند
+                filtered_matches = [
+                    m for m in matches if len(m) > 50 and len(m) < 2000]
+                configs.extend(filtered_matches)
+
+        # استخراج JSON configs
+        for pattern in json_patterns:
             matches = re.findall(pattern, html, re.IGNORECASE)
             configs.extend(matches)
 
