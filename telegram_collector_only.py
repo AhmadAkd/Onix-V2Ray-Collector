@@ -68,7 +68,7 @@ class TelegramCollectorOnly:
         except Exception as e:
             logger.error(f"❌ Collection error: {e}")
     
-    async def run(self, mode: str = "periodic"):
+    async def run(self, mode: str = "once"):
         """اجرای جمع‌آورنده"""
         try:
             if mode == "once":
@@ -93,11 +93,11 @@ async def main():
     collector = TelegramCollectorOnly(BOT_TOKEN)
     
     print("📱 Config collector is now running...")
-    print("🔄 Collection every 30 minutes")
+    print("🔄 Running one-time collection...")
     print("⏹️ Press Ctrl+C to stop")
     
     # اجرای جمع‌آورنده
-    await collector.run("periodic")
+    await collector.run("once")
 
 if __name__ == "__main__":
     asyncio.run(main())

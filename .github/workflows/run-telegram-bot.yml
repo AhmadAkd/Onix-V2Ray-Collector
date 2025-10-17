@@ -48,10 +48,10 @@ jobs:
         echo "🤖 Testing bot connection..."
         python test_telegram_bot_simple.py
     
-    - name: 📱 Run Telegram Bot (Polling)
+    - name: 📱 Run Telegram Config Collector
       run: |
-        echo "📱 Starting Telegram Bot with polling..."
-        timeout 50m python telegram_polling_bot.py || true
+        echo "📱 Starting Telegram Config Collector..."
+        python telegram_collector_only.py
     
     - name: 📊 Generate Status Report
       run: |
