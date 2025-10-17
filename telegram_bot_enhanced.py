@@ -680,17 +680,19 @@ class EnhancedTelegramBot:
             return False
 
     async def start_polling(self, interval: int = 1):
-        """شروع polling"""
+        """شروع polling بهینه شده"""
         logger.info("🔄 Starting Telegram bot polling...")
 
         offset = 0
+        consecutive_errors = 0
+        max_errors = 5
 
         while True:
             try:
                 url = f"{self.api_url}/getUpdates"
                 params = {
                     'offset': offset,
-                    'timeout': 30,
+                    'timeout': 10,  # کاهش timeout از 30 به 10
                     'limit': 100
                 }
 
@@ -701,6 +703,7 @@ class EnhancedTelegramBot:
 
                             if data.get('ok'):
                                 updates = data.get('result', [])
+                                consecutive_errors = 0  # reset error counter
 
                                 for update in updates:
                                     await self.process_webhook_update(update)
@@ -710,16 +713,29 @@ class EnhancedTelegramBot:
                                 if updates:
                                     logger.info(
                                         f"📨 Processed {len(updates)} updates")
+                                else:
+                                    # اگر پیامی نبود، کمتر log کن
+                                    if offset % 10 == 0:  # هر 10 بار یک بار log کن
+                                        logger.debug("⏳ No new messages, waiting...")
                             else:
                                 logger.error(f"❌ API Error: {data}")
+                                consecutive_errors += 1
                         else:
                             logger.error(f"❌ HTTP Error: {response.status}")
+                            consecutive_errors += 1
 
-                await asyncio.sleep(interval)
+                # اگر خطاهای متوالی زیاد شد، بیشتر صبر کن
+                if consecutive_errors >= max_errors:
+                    logger.warning(f"⚠️ Too many errors ({consecutive_errors}), waiting longer...")
+                    await asyncio.sleep(30)
+                    consecutive_errors = 0
+                else:
+                    await asyncio.sleep(interval)
 
             except Exception as e:
                 logger.error(f"❌ Polling error: {e}")
-                await asyncio.sleep(5)
+                consecutive_errors += 1
+                await asyncio.sleep(min(5 * consecutive_errors, 60))  # exponential backoff
 
 # مثال استفاده
 

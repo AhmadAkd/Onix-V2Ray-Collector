@@ -46,9 +46,10 @@ class PollingTelegramBot:
                 configs = await self.telegram_collector.collect_all_sources()
                 logger.info(f"✅ Collected {len(configs)} configs from Telegram")
                 
-                # ارسال اطلاعیه به ادمین
-                admin_id = 6563143907
-                message = f"""
+                # فقط اگر کانفیگ جدیدی یافت شد، اطلاعیه ارسال کن
+                if len(configs) > 0:
+                    admin_id = 6563143907
+                    message = f"""
 📊 **گزارش جمع‌آوری دوره‌ای**
 
 ✅ کانفیگ‌های جمع‌آوری شده: {len(configs)}
@@ -59,14 +60,17 @@ class PollingTelegramBot:
 • کل کانفیگ‌ها: {len(configs)}
 • منابع فعال: {len(self.telegram_collector.sources)}
 • آخرین بروزرسانی: {datetime.now().strftime('%H:%M')}
-                """
-                
-                await self.bot.send_message(admin_id, message)
+                    """
+                    
+                    await self.bot.send_message(admin_id, message)
+                else:
+                    logger.info("ℹ️ No new configs found, skipping notification")
                 
             except Exception as e:
                 logger.error(f"❌ Collection error: {e}")
                 
             # انتظار برای دور بعد
+            logger.info(f"⏰ Waiting {interval_minutes} minutes for next collection...")
             await asyncio.sleep(interval_minutes * 60)
     
     async def run(self):
