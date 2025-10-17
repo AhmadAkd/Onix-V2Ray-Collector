@@ -44,13 +44,13 @@ class TelegramCollector:
     def __init__(self, bot_token: Optional[str] = None):
         """
         Initialize Telegram Collector
-        
+
         Args:
             bot_token: Telegram Bot Token (از env یا parameter)
         """
         import os
         self.bot_token = bot_token or os.getenv('TELEGRAM_BOT_TOKEN')
-        
+
         if not self.bot_token:
             logger.warning(
                 "⚠️ Telegram Bot Token not provided - using static sources only")
@@ -61,7 +61,7 @@ class TelegramCollector:
             self.api_url = f"https://api.telegram.org/bot{self.bot_token}"
             logger.info("✅ Telegram Collector initialized with Bot Token")
             logger.info(f"🔗 API URL: {self.api_url}")
-        
+
         self.sources = []
         self.collected_configs = []
 
@@ -80,27 +80,28 @@ class TelegramCollector:
             logger.error(f"خطا در دریافت پیام‌های تلگرام: {e}")
 
         return []
-    
+
     async def _scrape_channel_web(self, channel_id: str, limit: int = 100) -> List[Dict]:
         """Web scraping از کانال تلگرام"""
         try:
             # حذف @ از channel_id
-            channel_username = channel_id[1:] if channel_id.startswith('@') else channel_id
-            
+            channel_username = channel_id[1:] if channel_id.startswith(
+                '@') else channel_id
+
             # URL کانال در t.me
             url = f"https://t.me/s/{channel_username}"
-            
+
             # ایجاد connector بدون SSL verification
             connector = aiohttp.TCPConnector(ssl=False)
-            
+
             async with aiohttp.ClientSession(connector=connector) as session:
                 async with session.get(url) as response:
                     if response.status == 200:
                         html = await response.text()
-                        
+
                         # استخراج کانفیگ‌ها از HTML
                         configs = self._extract_configs_from_html(html)
-                        
+
                         # تبدیل به فرمت پیام
                         messages = []
                         for i, config in enumerate(configs[:limit]):
@@ -109,20 +110,21 @@ class TelegramCollector:
                                 'text': config,
                                 'date': int(time.time())
                             })
-                        
+
                         return messages
                     else:
-                        logger.warning(f"HTTP {response.status} for {channel_id}")
+                        logger.warning(
+                            f"HTTP {response.status} for {channel_id}")
                         return []
-                        
+
         except Exception as e:
             logger.debug(f"خطا در scraping {channel_id}: {e}")
             return []
-    
+
     def _extract_configs_from_html(self, html: str) -> List[str]:
         """استخراج کانفیگ‌ها از HTML"""
         configs = []
-        
+
         # الگوهای کانفیگ
         patterns = [
             r'vmess://[A-Za-z0-9+/=]+',
@@ -134,11 +136,11 @@ class TelegramCollector:
             r'hy2://[^\\s]+',
             r'tuic://[^\\s]+'
         ]
-        
+
         for pattern in patterns:
             matches = re.findall(pattern, html, re.IGNORECASE)
             configs.extend(matches)
-        
+
         return configs
 
     async def get_channel_history(self, channel_id: str, limit: int = 100) -> List[Dict]:
@@ -189,7 +191,17 @@ class TelegramCollector:
             messages = await self.get_channel_messages(source.channel_id, 50)
 
             for message in messages:
-                if 'message' in message:
+                # بررسی فرمت جدید پیام‌ها (از web scraping)
+                if 'text' in message:
+                    text = message['text']
+
+                    # استخراج کانفیگ‌ها
+                    found_configs = self.extract_configs_from_text(
+                        text, source.config_patterns)
+                    configs.extend(found_configs)
+
+                # بررسی فرمت قدیمی پیام‌ها (از Bot API)
+                elif 'message' in message:
                     msg = message['message']
                     text = msg.get('text', '')
 
@@ -257,75 +269,78 @@ class TelegramCollector:
             if not configs:
                 logger.info("هیچ کانفیگی برای ذخیره وجود ندارد")
                 return
-            
+
             # تست کانفیگ‌ها قبل از ذخیره
             logger.info(f"🧪 شروع تست {len(configs)} کانفیگ از تلگرام...")
             working_configs = await self._test_configs(configs)
-            
+
             if not working_configs:
                 logger.warning("❌ هیچ کانفیگ سالمی از تلگرام یافت نشد")
                 return
-                
-            logger.info(f"✅ {len(working_configs)} کانفیگ سالم از {len(configs)} کانفیگ تست شده")
-            
+
+            logger.info(
+                f"✅ {len(working_configs)} کانفیگ سالم از {len(configs)} کانفیگ تست شده")
+
             # ذخیره در فایل اصلی all_subscription.txt
             await self._append_to_file("subscriptions/all_subscription.txt", working_configs)
-            
+
             # ذخیره در فایل‌های پروتکل
             await self._categorize_and_save_configs(working_configs)
-            
+
             # ذخیره در فایل‌های کشور
             await self._save_by_country(working_configs)
-            
+
             # ذخیره گزارش
             await self._save_telegram_report(working_configs, len(configs))
-            
-            logger.info(f"✅ {len(working_configs)} کانفیگ سالم از تلگرام ذخیره شد")
+
+            logger.info(
+                f"✅ {len(working_configs)} کانفیگ سالم از تلگرام ذخیره شد")
 
         except Exception as e:
             logger.error(f"خطا در ذخیره کانفیگ‌ها: {e}")
-    
+
     async def _test_configs(self, configs: List[str]) -> List[str]:
         """تست کانفیگ‌ها و برگرداندن سالم‌ها"""
         try:
             # Import V2RayCollector برای تست
             from config_collector import V2RayCollector
-            
+
             # ایجاد instance از V2RayCollector
             collector = V2RayCollector()
-            
+
             # تست کانفیگ‌ها
             logger.info("🔍 شروع تست کانفیگ‌های تلگرام...")
             await collector.test_all_configs_ultra_fast(configs, max_concurrent=20)
-            
+
             # دریافت کانفیگ‌های سالم
             working_configs = []
             for config in collector.working_configs:
                 if config.is_working:
                     working_configs.append(config.raw_config)
-            
-            logger.info(f"🧪 تست کامل: {len(working_configs)} کانفیگ سالم از {len(configs)} کانفیگ")
-            
+
+            logger.info(
+                f"🧪 تست کامل: {len(working_configs)} کانفیگ سالم از {len(configs)} کانفیگ")
+
             return working_configs
-            
+
         except Exception as e:
             logger.error(f"خطا در تست کانفیگ‌ها: {e}")
             # در صورت خطا، کانفیگ‌ها را بدون تست ذخیره کن
             return configs
-    
+
     async def _append_to_file(self, filename: str, configs: List[str]):
         """اضافه کردن کانفیگ‌ها به فایل"""
         try:
             import os
             os.makedirs(os.path.dirname(filename), exist_ok=True)
-            
+
             with open(filename, 'a', encoding='utf-8') as f:
                 for config in configs:
                     f.write(f"{config}\\n")
 
         except Exception as e:
             logger.error(f"خطا در اضافه کردن به {filename}: {e}")
-    
+
     async def _categorize_and_save_configs(self, configs: List[str]):
         """دسته‌بندی و ذخیره کانفیگ‌ها بر اساس پروتکل"""
         try:
@@ -339,7 +354,7 @@ class TelegramCollector:
                 'hy2': [],
                 'tuic': []
             }
-            
+
             for config in configs:
                 config_lower = config.lower()
                 if 'vmess://' in config_lower:
@@ -358,79 +373,81 @@ class TelegramCollector:
                     protocols['hy2'].append(config)
                 elif 'tuic://' in config_lower:
                     protocols['tuic'].append(config)
-            
+
             # ذخیره در فایل‌های پروتکل
             for protocol, protocol_configs in protocols.items():
                 if protocol_configs:
                     filename = f"subscriptions/by_protocol/{protocol}.txt"
                     await self._append_to_file(filename, protocol_configs)
-                    logger.info(f"📁 {len(protocol_configs)} کانفیگ {protocol} ذخیره شد")
-                    
+                    logger.info(
+                        f"📁 {len(protocol_configs)} کانفیگ {protocol} ذخیره شد")
+
         except Exception as e:
             logger.error(f"خطا در دسته‌بندی کانفیگ‌ها: {e}")
-    
+
     async def _save_by_country(self, configs: List[str]):
         """ذخیره کانفیگ‌ها بر اساس کشور"""
         try:
             # دسته‌بندی بر اساس کشور
             country_configs = await self._categorize_by_country(configs)
-            
+
             # ذخیره در فایل‌های کشور
             for country, country_configs_list in country_configs.items():
                 if country_configs_list:
                     filename = f"subscriptions/by_country/{country}.txt"
                     await self._append_to_file(filename, country_configs_list)
-                    logger.info(f"🌍 {len(country_configs_list)} کانفیگ {country} ذخیره شد")
-            
+                    logger.info(
+                        f"🌍 {len(country_configs_list)} کانفیگ {country} ذخیره شد")
+
             # ذخیره در فایل عمومی تلگرام
             filename = "subscriptions/telegram_collected.txt"
             await self._append_to_file(filename, configs)
-            
+
         except Exception as e:
             logger.error(f"خطا در ذخیره بر اساس کشور: {e}")
-    
+
     async def _categorize_by_country(self, configs: List[str]) -> Dict[str, List[str]]:
         """دسته‌بندی کانفیگ‌ها بر اساس کشور"""
         try:
             country_configs = {}
-            
+
             for config in configs:
                 country = await self._detect_country_from_config(config)
-                
+
                 if country not in country_configs:
                     country_configs[country] = []
-                
+
                 country_configs[country].append(config)
-            
+
             return country_configs
-            
+
         except Exception as e:
             logger.error(f"خطا در دسته‌بندی بر اساس کشور: {e}")
             return {"UNKNOWN": configs}
-    
+
     async def _detect_country_from_config(self, config: str) -> str:
         """تشخیص کشور از کانفیگ"""
         try:
             # استخراج آدرس سرور از کانفیگ
             server_address = self._extract_server_address(config)
-            
+
             if not server_address:
                 return "UNKNOWN"
-            
+
             # تشخیص کشور بر اساس آدرس IP یا دامنه
             country = await self._get_country_from_address(server_address)
-            
+
             return country
-            
+
         except Exception as e:
             logger.debug(f"خطا در تشخیص کشور: {e}")
             return "UNKNOWN"
-    
+
     def _extract_server_address(self, config: str) -> str:
         """استخراج آدرس سرور از کانفیگ"""
         try:
             config_lower = config.lower()
-            
+
             if 'vmess://' in config_lower:
                 return self._extract_vmess_address(config)
             elif 'vless://' in config_lower:
@@ -445,36 +462,36 @@ class TelegramCollector:
                 return self._extract_hysteria_address(config)
             elif 'tuic://' in config_lower:
                 return self._extract_tuic_address(config)
-            
+
             return ""
-            
+
         except Exception as e:
             logger.debug(f"خطا در استخراج آدرس: {e}")
             return ""
-    
+
     def _extract_vmess_address(self, config: str) -> str:
         """استخراج آدرس از VMess"""
         try:
             import base64
             import json
-            
+
             # حذف پیشوند vmess://
             encoded_part = config[8:]
-            
+
             # اضافه کردن padding
             missing_padding = len(encoded_part) % 4
             if missing_padding:
                 encoded_part += '=' * (4 - missing_padding)
-            
+
             # decode base64
             decoded = base64.b64decode(encoded_part).decode('utf-8')
             data = json.loads(decoded)
-            
+
             return data.get('add', '')
-            
+
         except Exception:
             return ""
-    
+
     def _extract_vless_address(self, config: str) -> str:
         """استخراج آدرس از VLESS"""
         try:
@@ -486,7 +503,7 @@ class TelegramCollector:
             return ""
         except Exception:
             return ""
-    
+
     def _extract_trojan_address(self, config: str) -> str:
         """استخراج آدرس از Trojan"""
         try:
@@ -498,12 +515,12 @@ class TelegramCollector:
             return ""
         except Exception:
             return ""
-    
+
     def _extract_ss_address(self, config: str) -> str:
         """استخراج آدرس از Shadowsocks"""
         try:
             import base64
-            
+
             # فرمت: ss://method:password@server:port
             if '@' in config:
                 server_part = config.split('@')[1]
@@ -512,32 +529,32 @@ class TelegramCollector:
             return ""
         except Exception:
             return ""
-    
+
     def _extract_ssr_address(self, config: str) -> str:
         """استخراج آدرس از ShadowsocksR"""
         try:
             import base64
-            
+
             # حذف پیشوند ssr://
             encoded_part = config[6:]
-            
+
             # اضافه کردن padding
             missing_padding = len(encoded_part) % 4
             if missing_padding:
                 encoded_part += '=' * (4 - missing_padding)
-            
+
             # decode base64
             decoded = base64.b64decode(encoded_part).decode('utf-8')
-            
+
             # فرمت: server:port:protocol:method:obfs:password
             parts = decoded.split(':')
             if len(parts) >= 1:
                 return parts[0]
-            
+
             return ""
         except Exception:
             return ""
-    
+
     def _extract_hysteria_address(self, config: str) -> str:
         """استخراج آدرس از Hysteria"""
         try:
@@ -549,7 +566,7 @@ class TelegramCollector:
             return ""
         except Exception:
             return ""
-    
+
     def _extract_tuic_address(self, config: str) -> str:
         """استخراج آدرس از TUIC"""
         try:
@@ -561,7 +578,7 @@ class TelegramCollector:
             return ""
         except Exception:
             return ""
-    
+
     async def _get_country_from_address(self, address: str) -> str:
         """تشخیص کشور از آدرس IP یا دامنه"""
         try:
@@ -576,23 +593,23 @@ class TelegramCollector:
                 '.cn': 'CN', '.in': 'IN', '.br': 'BR', '.mx': 'MX',
                 '.tr': 'TR', '.ir': 'IR', '.ae': 'AE', '.sa': 'SA'
             }
-            
+
             # بررسی دامنه
             for domain, country in domain_countries.items():
                 if domain in address.lower():
                     return country
-            
+
             # اگر آدرس IP بود، از GeoIP استفاده کن
             if self._is_ip_address(address):
                 return await self._get_country_from_ip(address)
-            
+
             # پیش‌فرض
             return "UNKNOWN"
-            
+
         except Exception as e:
             logger.debug(f"خطا در تشخیص کشور از آدرس: {e}")
             return "UNKNOWN"
-    
+
     def _is_ip_address(self, address: str) -> bool:
         """بررسی اینکه آیا آدرس یک IP است"""
         try:
@@ -601,36 +618,37 @@ class TelegramCollector:
             return True
         except socket.error:
             return False
-    
+
     async def _get_country_from_ip(self, ip: str) -> str:
         """تشخیص کشور از IP (ساده‌سازی شده)"""
         try:
             # برای سادگی، از یک سرویس عمومی استفاده می‌کنیم
             # در تولید واقعی، از یک کتابخانه GeoIP استفاده کنید
             import aiohttp
-            
+
             async with aiohttp.ClientSession() as session:
                 async with session.get(f"http://ip-api.com/json/{ip}") as response:
                     if response.status == 200:
                         data = await response.json()
                         return data.get('countryCode', 'UNKNOWN')
-            
+
             return "UNKNOWN"
-            
+
         except Exception as e:
             logger.debug(f"خطا در تشخیص کشور از IP: {e}")
             return "UNKNOWN"
-    
+
     async def _save_telegram_report(self, configs: List[str], total_tested: int = None):
         """ذخیره گزارش جمع‌آوری تلگرام"""
         try:
             import json
             from datetime import datetime
-            
+
             # محاسبه آمار تست
             tested_count = total_tested or len(configs)
-            success_rate = (len(configs) / tested_count * 100) if tested_count > 0 else 0
-            
+            success_rate = (len(configs) / tested_count *
+                            100) if tested_count > 0 else 0
+
             report = {
                 "source": "telegram",
                 "timestamp": datetime.now().isoformat(),
@@ -653,7 +671,7 @@ class TelegramCollector:
                 "sources_count": len(self.sources),
                 "status": "success" if len(configs) > 0 else "no_working_configs"
             }
-            
+
             with open("subscriptions/telegram_report.json", 'w', encoding='utf-8') as f:
                 json.dump(report, f, indent=2, ensure_ascii=False)
 
