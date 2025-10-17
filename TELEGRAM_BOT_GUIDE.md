@@ -53,7 +53,7 @@ pip install aiohttp python-telegram-bot
 
 ```python
 # در فایل config.py یا .env
-TELEGRAM_BOT_TOKEN = "6942899950:AAEDV4iX8jh2zD8be2dPqcADnB7V4xWy7aE"
+TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
 ```
 
 ### 4️⃣ **راه‌اندازی ربات**
@@ -74,7 +74,7 @@ nohup python telegram_bot_enhanced.py &
 
 ```bash
 # فایل .env
-TELEGRAM_BOT_TOKEN=6942899950:AAEDV4iX8jh2zD8be2dPqcADnB7V4xWy7aE
+TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN_HERE
 TELEGRAM_ADMIN_USERS=123456789,987654321
 TELEGRAM_WEBHOOK_URL=https://yourdomain.com/webhook
 TELEGRAM_POLLING_INTERVAL=1

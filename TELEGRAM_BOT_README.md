@@ -41,14 +41,14 @@ python start_telegram_bot.py
 ### متغیرهای محیطی
 
 ```bash
-TELEGRAM_BOT_TOKEN=6942899950:AAEDV4iX8jh2zD8be2dPqcADnB7V4xWy7aE
+TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN_HERE
 ```
 
 ### فایل .env
 
 ```bash
 # ایجاد فایل .env
-echo "TELEGRAM_BOT_TOKEN=6942899950:AAEDV4iX8jh2zD8be2dPqcADnB7V4xWy7aE" > .env
+echo "TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN_HERE" > .env
 ```
 
 ## 📁 فایل‌ها

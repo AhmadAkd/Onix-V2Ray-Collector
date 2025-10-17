@@ -26,7 +26,7 @@ services:
     environment:
       - TZ=Asia/Tehran
       - PYTHONUNBUFFERED=1
-      - TELEGRAM_BOT_TOKEN=6942899950:AAEDV4iX8jh2zD8be2dPqcADnB7V4xWy7aE
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
     volumes:
       - ./subscriptions:/app/subscriptions
       - ./cache:/app/cache

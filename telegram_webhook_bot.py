@@ -84,8 +84,8 @@ async def main():
     """تابع اصلی"""
     print("🤖 Setting up Telegram Webhook Bot...")
     
-    # Bot Token
-    BOT_TOKEN = "8474552244:AAERRNE4n7_aFIeqxRlwEmutYn9jUvd9yUQ"
+    # Bot Token from environment
+    BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN', '8474552244:AAERRNE4n7_aFIeqxRlwEmutYn9jUvd9yUQ')
     
     # ایجاد ربات
     webhook_bot = WebhookTelegramBot(BOT_TOKEN)

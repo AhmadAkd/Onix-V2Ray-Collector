@@ -88,8 +88,8 @@ async def main():
     """تابع اصلی"""
     print("🤖 Starting V2Ray Collector Telegram Bot with Polling...")
     
-    # Bot Token
-    BOT_TOKEN = "8474552244:AAERRNE4n7_aFIeqxRlwEmutYn9jUvd9yUQ"
+    # Bot Token from environment
+    BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN', '8474552244:AAERRNE4n7_aFIeqxRlwEmutYn9jUvd9yUQ')
     
     # ایجاد ربات
     bot = PollingTelegramBot(BOT_TOKEN)

@@ -77,8 +77,8 @@ async def main():
     print("🔍 Telegram User ID Getter")
     print("=" * 50)
 
-    # Bot Token
-    BOT_TOKEN = "8474552244:AAERRNE4n7_aFIeqxRlwEmutYn9jUvd9yUQ"
+    # Bot Token from environment
+    BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN', '8474552244:AAERRNE4n7_aFIeqxRlwEmutYn9jUvd9yUQ')
 
     # ایجاد کلاس
     user_getter = TelegramUserIDGetter(BOT_TOKEN)

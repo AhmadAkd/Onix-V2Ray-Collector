@@ -380,7 +380,7 @@ TELEGRAM_SOURCES = [
 
 async def main():
     # تنظیم Bot Token (باید از BotFather دریافت شود)
-    BOT_TOKEN = "6942899950:AAEDV4iX8jh2zD8be2dPqcADnB7V4xWy7aE"
+    BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN', '')
 
     collector = TelegramCollector(BOT_TOKEN)
 
