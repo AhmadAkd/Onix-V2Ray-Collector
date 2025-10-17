@@ -44,13 +44,13 @@ class TelegramCollector:
     def __init__(self, bot_token: Optional[str] = None):
         """
         Initialize Telegram Collector
-
+        
         Args:
             bot_token: Telegram Bot Token (از env یا parameter)
         """
         import os
         self.bot_token = bot_token or os.getenv('TELEGRAM_BOT_TOKEN')
-
+        
         if not self.bot_token:
             logger.warning(
                 "⚠️ Telegram Bot Token not provided - using static sources only")
@@ -61,7 +61,7 @@ class TelegramCollector:
             self.api_url = f"https://api.telegram.org/bot{self.bot_token}"
             logger.info("✅ Telegram Collector initialized with Bot Token")
             logger.info(f"🔗 API URL: {self.api_url}")
-
+        
         self.sources = []
         self.collected_configs = []
 
@@ -202,28 +202,66 @@ class TelegramCollector:
             await asyncio.sleep(interval)
 
     async def save_configs(self, configs: List[str]):
-        """ذخیره کانفیگ‌ها در فایل‌های اصلی"""
+        """ذخیره کانفیگ‌ها در فایل‌های اصلی (فقط سالم‌ها)"""
         try:
             if not configs:
                 logger.info("هیچ کانفیگی برای ذخیره وجود ندارد")
                 return
+            
+            # تست کانفیگ‌ها قبل از ذخیره
+            logger.info(f"🧪 شروع تست {len(configs)} کانفیگ از تلگرام...")
+            working_configs = await self._test_configs(configs)
+            
+            if not working_configs:
+                logger.warning("❌ هیچ کانفیگ سالمی از تلگرام یافت نشد")
+                return
                 
+            logger.info(f"✅ {len(working_configs)} کانفیگ سالم از {len(configs)} کانفیگ تست شده")
+            
             # ذخیره در فایل اصلی all_subscription.txt
-            await self._append_to_file("subscriptions/all_subscription.txt", configs)
+            await self._append_to_file("subscriptions/all_subscription.txt", working_configs)
             
             # ذخیره در فایل‌های پروتکل
-            await self._categorize_and_save_configs(configs)
+            await self._categorize_and_save_configs(working_configs)
             
             # ذخیره در فایل‌های کشور
-            await self._save_by_country(configs)
+            await self._save_by_country(working_configs)
             
             # ذخیره گزارش
-            await self._save_telegram_report(configs)
+            await self._save_telegram_report(working_configs, len(configs))
             
-            logger.info(f"✅ {len(configs)} کانفیگ از تلگرام در فایل‌های اصلی ذخیره شد")
+            logger.info(f"✅ {len(working_configs)} کانفیگ سالم از تلگرام ذخیره شد")
 
         except Exception as e:
             logger.error(f"خطا در ذخیره کانفیگ‌ها: {e}")
+    
+    async def _test_configs(self, configs: List[str]) -> List[str]:
+        """تست کانفیگ‌ها و برگرداندن سالم‌ها"""
+        try:
+            # Import V2RayCollector برای تست
+            from config_collector import V2RayCollector
+            
+            # ایجاد instance از V2RayCollector
+            collector = V2RayCollector()
+            
+            # تست کانفیگ‌ها
+            logger.info("🔍 شروع تست کانفیگ‌های تلگرام...")
+            await collector.test_all_configs_ultra_fast(configs, max_concurrent=20)
+            
+            # دریافت کانفیگ‌های سالم
+            working_configs = []
+            for config in collector.working_configs:
+                if config.is_working:
+                    working_configs.append(config.raw_config)
+            
+            logger.info(f"🧪 تست کامل: {len(working_configs)} کانفیگ سالم از {len(configs)} کانفیگ")
+            
+            return working_configs
+            
+        except Exception as e:
+            logger.error(f"خطا در تست کانفیگ‌ها: {e}")
+            # در صورت خطا، کانفیگ‌ها را بدون تست ذخیره کن
+            return configs
     
     async def _append_to_file(self, filename: str, configs: List[str]):
         """اضافه کردن کانفیگ‌ها به فایل"""
@@ -234,7 +272,7 @@ class TelegramCollector:
             with open(filename, 'a', encoding='utf-8') as f:
                 for config in configs:
                     f.write(f"{config}\\n")
-                    
+
         except Exception as e:
             logger.error(f"خطا در اضافه کردن به {filename}: {e}")
     
@@ -533,16 +571,25 @@ class TelegramCollector:
             logger.debug(f"خطا در تشخیص کشور از IP: {e}")
             return "UNKNOWN"
     
-    async def _save_telegram_report(self, configs: List[str]):
+    async def _save_telegram_report(self, configs: List[str], total_tested: int = None):
         """ذخیره گزارش جمع‌آوری تلگرام"""
         try:
             import json
             from datetime import datetime
             
+            # محاسبه آمار تست
+            tested_count = total_tested or len(configs)
+            success_rate = (len(configs) / tested_count * 100) if tested_count > 0 else 0
+            
             report = {
                 "source": "telegram",
                 "timestamp": datetime.now().isoformat(),
-                "total_configs": len(configs),
+                "testing_stats": {
+                    "total_tested": tested_count,
+                    "working_configs": len(configs),
+                    "failed_configs": tested_count - len(configs),
+                    "success_rate": round(success_rate, 2)
+                },
                 "protocols": {
                     "vmess": len([c for c in configs if 'vmess://' in c.lower()]),
                     "vless": len([c for c in configs if 'vless://' in c.lower()]),
@@ -554,7 +601,7 @@ class TelegramCollector:
                     "tuic": len([c for c in configs if 'tuic://' in c.lower()])
                 },
                 "sources_count": len(self.sources),
-                "status": "success"
+                "status": "success" if len(configs) > 0 else "no_working_configs"
             }
             
             with open("subscriptions/telegram_report.json", 'w', encoding='utf-8') as f:
