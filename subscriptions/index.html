@@ -477,45 +477,187 @@
     <script>
         // Protocol info mapping
         const protocolInfo = {
-            'vmess': { name: 'VMess', color: '#667eea', icon: 'fas fa-bolt' },
-            'vless': { name: 'VLESS', color: '#00b894', icon: 'fas fa-shield-alt' },
-            'trojan': { name: 'Trojan', color: '#fdcb6e', icon: 'fas fa-lock' },
-            'ss': { name: 'Shadowsocks', color: '#e17055', icon: 'fas fa-eye-slash' },
-            'ssr': { name: 'ShadowsocksR', color: '#6c5ce7', icon: 'fas fa-ghost' },
-            'hysteria': { name: 'Hysteria', color: '#e17055', icon: 'fas fa-rocket' }
-        };
+  "vmess": {
+    "name": "VMess",
+    "color": "#4CAF50",
+    "icon": "fas fa-shield-alt"
+  },
+  "vless": {
+    "name": "VLESS",
+    "color": "#2196F3",
+    "icon": "fas fa-bolt"
+  },
+  "trojan": {
+    "name": "Trojan",
+    "color": "#FF9800",
+    "icon": "fas fa-lock"
+  },
+  "ss": {
+    "name": "Shadowsocks",
+    "color": "#9C27B0",
+    "icon": "fas fa-eye-slash"
+  },
+  "ssr": {
+    "name": "ShadowsocksR",
+    "color": "#6c5ce7",
+    "icon": "fas fa-ghost"
+  },
+  "hysteria": {
+    "name": "Hysteria",
+    "color": "#e17055",
+    "icon": "fas fa-rocket"
+  },
+  "tuic": {
+    "name": "TUIC",
+    "color": "#00BCD4",
+    "icon": "fas fa-plane"
+  },
+  "wireguard": {
+    "name": "WireGuard",
+    "color": "#795548",
+    "icon": "fas fa-network-wired"
+  },
+  "naive": {
+    "name": "Naive",
+    "color": "#607D8B",
+    "icon": "fas fa-user-secret"
+  },
+  "reality": {
+    "name": "Reality",
+    "color": "#E91E63",
+    "icon": "fas fa-magic"
+  },
+  "hysteria2": {
+    "name": "Hysteria2",
+    "color": "#FF5722",
+    "icon": "fas fa-rocket"
+  },
+  "hysteria3": {
+    "name": "Hysteria3",
+    "color": "#3F51B5",
+    "icon": "fas fa-rocket"
+  }
+};
 
         // Country info mapping with flags
         const countryInfo = {
-            'US': { name: 'آمریکا', flag: '🇺🇸' },
-            'DE': { name: 'آلمان', flag: '🇩🇪' },
-            'IR': { name: 'ایران', flag: '🇮🇷' },
-            'CA': { name: 'کانادا', flag: '🇨🇦' },
-            'NL': { name: 'هلند', flag: '🇳🇱' },
-            'TR': { name: 'ترکیه', flag: '🇹🇷' },
-            'GB': { name: 'انگلستان', flag: '🇬🇧' },
-            'FR': { name: 'فرانسه', flag: '🇫🇷' },
-            'JP': { name: 'ژاپن', flag: '🇯🇵' },
-            'SG': { name: 'سنگاپور', flag: '🇸🇬' },
-            'HK': { name: 'هنگ‌کنگ', flag: '🇭🇰' },
-            'AU': { name: 'استرالیا', flag: '🇦🇺' },
-            'RU': { name: 'روسیه', flag: '🇷🇺' },
-            'CN': { name: 'چین', flag: '🇨🇳' },
-            'IN': { name: 'هند', flag: '🇮🇳' },
-            'BR': { name: 'برزیل', flag: '🇧🇷' },
-            'IT': { name: 'ایتالیا', flag: '🇮🇹' },
-            'ES': { name: 'اسپانیا', flag: '🇪🇸' },
-            'PL': { name: 'لهستان', flag: '🇵🇱' },
-            'SE': { name: 'سوئد', flag: '🇸🇪' },
-            'FI': { name: 'فنلاند', flag: '🇫🇮' },
-            'LT': { name: 'لیتوانی', flag: '🇱🇹' },
-            'CH': { name: 'سوئیس', flag: '🇨🇭' },
-            'TW': { name: 'تایوان', flag: '🇹🇼' },
-            'KR': { name: 'کره جنوبی', flag: '🇰🇷' },
-            'UA': { name: 'اوکراین', flag: '🇺🇦' },
-            'EU': { name: 'اروپا', flag: '🇪🇺' },
-            'CF': { name: 'Cloudflare', flag: '☁️' }
-        };
+  "US": {
+    "name": "آمریکا",
+    "flag": "🇺🇸"
+  },
+  "DE": {
+    "name": "آلمان",
+    "flag": "🇩🇪"
+  },
+  "IR": {
+    "name": "ایران",
+    "flag": "🇮🇷"
+  },
+  "CA": {
+    "name": "کانادا",
+    "flag": "🇨🇦"
+  },
+  "NL": {
+    "name": "هلند",
+    "flag": "🇳🇱"
+  },
+  "TR": {
+    "name": "ترکیه",
+    "flag": "🇹🇷"
+  },
+  "GB": {
+    "name": "انگلستان",
+    "flag": "🇬🇧"
+  },
+  "FR": {
+    "name": "فرانسه",
+    "flag": "🇫🇷"
+  },
+  "JP": {
+    "name": "ژاپن",
+    "flag": "🇯🇵"
+  },
+  "SG": {
+    "name": "سنگاپور",
+    "flag": "🇸🇬"
+  },
+  "HK": {
+    "name": "هنگ‌کنگ",
+    "flag": "🇭🇰"
+  },
+  "AU": {
+    "name": "استرالیا",
+    "flag": "🇦🇺"
+  },
+  "RU": {
+    "name": "روسیه",
+    "flag": "🇷🇺"
+  },
+  "CN": {
+    "name": "چین",
+    "flag": "🇨🇳"
+  },
+  "IN": {
+    "name": "هند",
+    "flag": "🇮🇳"
+  },
+  "BR": {
+    "name": "برزیل",
+    "flag": "🇧🇷"
+  },
+  "IT": {
+    "name": "ایتالیا",
+    "flag": "🇮🇹"
+  },
+  "ES": {
+    "name": "اسپانیا",
+    "flag": "🇪🇸"
+  },
+  "PL": {
+    "name": "لهستان",
+    "flag": "🇵🇱"
+  },
+  "SE": {
+    "name": "سوئد",
+    "flag": "🇸🇪"
+  },
+  "FI": {
+    "name": "فنلاند",
+    "flag": "🇫🇮"
+  },
+  "LT": {
+    "name": "لیتوانی",
+    "flag": "🇱🇹"
+  },
+  "CH": {
+    "name": "سوئیس",
+    "flag": "🇨🇭"
+  },
+  "TW": {
+    "name": "تایوان",
+    "flag": "🇹🇼"
+  },
+  "KR": {
+    "name": "کره جنوبی",
+    "flag": "🇰🇷"
+  },
+  "UA": {
+    "name": "اوکراین",
+    "flag": "🇺🇦"
+  },
+  "EU": {
+    "name": "اروپا",
+    "flag": "🇪🇺"
+  },
+  "CF": {
+    "name": "Cloudflare",
+    "flag": "☁️"
+  },
+  "unknown": {
+    "name": "unknown",
+    "flag": "🌍"
+  }
+};
 
         // Load data on page load
         document.addEventListener('DOMContentLoaded', loadData);
