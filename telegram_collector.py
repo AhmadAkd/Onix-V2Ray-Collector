@@ -710,100 +710,146 @@ class TelegramCollector:
 
 # تنظیمات منابع تلگرام - کانال‌های معروف V2Ray
 TELEGRAM_SOURCES = [
-    # کانال‌های اصلی V2Ray
+    # کانال‌های اصلی V2Ray (کارکرد)
     TelegramSource(
         channel_id="@v2rayngvpn",
         channel_name="V2RayNG VPN",
     ),
     TelegramSource(
-        channel_id="@freev2ray",
-        channel_name="Free V2Ray",
+        channel_id="@iranconfigs",
+        channel_name="Iran Configs",
+    ),
+
+    # کانال‌های جدید و معتبر
+    TelegramSource(
+        channel_id="@tehranvpnv2rayng",
+        channel_name="Tehran VPN V2RayNG",
     ),
     TelegramSource(
-        channel_id="@vpnconfigs",
-        channel_name="VPN Configs",
+        channel_id="@v2rayng218",
+        channel_name="V2RayNG 218",
     ),
     TelegramSource(
-        channel_id="@proxynetwork",
-        channel_name="Proxy Network",
+        channel_id="@v2makers",
+        channel_name="V2Ray Makers",
     ),
     TelegramSource(
-        channel_id="@v2raycollect",
-        channel_name="V2Ray Collector",
-    ),
-    # کانال‌های تخصصی VLess
-    TelegramSource(
-        channel_id="@vlessvpn",
-        channel_name="VLess VPN",
+        channel_id="@WBNet",
+        channel_name="VPN CLUB",
     ),
     TelegramSource(
-        channel_id="@vlessconfigs",
-        channel_name="VLess Configs",
+        channel_id="@iran_config",
+        channel_name="Iran Config",
     ),
+    TelegramSource(
+        channel_id="@zibanabz",
+        channel_name="Zibanabz Config",
+    ),
+    TelegramSource(
+        channel_id="@ConfingV2RaayNG",
+        channel_name="Config V2RayNG",
+    ),
+    TelegramSource(
+        channel_id="@v2rayngfreir",
+        channel_name="V2RayNG Free Iran",
+    ),
+
+    # کانال‌های عمومی V2Ray
+    TelegramSource(
+        channel_id="@v2rayfree",
+        channel_name="V2Ray Free",
+    ),
+    TelegramSource(
+        channel_id="@v2rayconfig",
+        channel_name="V2Ray Config",
+    ),
+    TelegramSource(
+        channel_id="@v2rayvpn",
+        channel_name="V2Ray VPN",
+    ),
+    TelegramSource(
+        channel_id="@v2rayng",
+        channel_name="V2RayNG",
+    ),
+    TelegramSource(
+        channel_id="@v2rayngconfig",
+        channel_name="V2RayNG Config",
+    ),
+
+    # کانال‌های VLess
     TelegramSource(
         channel_id="@vlessfree",
         channel_name="VLess Free",
     ),
-    # کانال‌های تخصصی VMess
     TelegramSource(
-        channel_id="@vmessvpn",
-        channel_name="VMess VPN",
+        channel_id="@vlessconfig",
+        channel_name="VLess Config",
     ),
     TelegramSource(
-        channel_id="@vmessconfigs",
-        channel_name="VMess Configs",
+        channel_id="@vlessvpn",
+        channel_name="VLess VPN",
     ),
+
+    # کانال‌های VMess
     TelegramSource(
         channel_id="@vmessfree",
         channel_name="VMess Free",
     ),
-    # کانال‌های تخصصی Shadowsocks
     TelegramSource(
-        channel_id="@ssvpn",
-        channel_name="Shadowsocks VPN",
+        channel_id="@vmessconfig",
+        channel_name="VMess Config",
     ),
     TelegramSource(
-        channel_id="@ssconfigs",
-        channel_name="Shadowsocks Configs",
+        channel_id="@vmessvpn",
+        channel_name="VMess VPN",
     ),
+
+    # کانال‌های Shadowsocks
     TelegramSource(
         channel_id="@ssfree",
         channel_name="Shadowsocks Free",
     ),
-    # کانال‌های تخصصی Trojan
     TelegramSource(
-        channel_id="@trojanvpn",
-        channel_name="Trojan VPN",
+        channel_id="@ssconfig",
+        channel_name="Shadowsocks Config",
     ),
     TelegramSource(
-        channel_id="@trojanconfigs",
-        channel_name="Trojan Configs",
+        channel_id="@ssvpn",
+        channel_name="Shadowsocks VPN",
     ),
+
+    # کانال‌های Trojan
     TelegramSource(
         channel_id="@trojanfree",
         channel_name="Trojan Free",
     ),
-    # کانال‌های تخصصی Hysteria
     TelegramSource(
-        channel_id="@hysteriavpn",
-        channel_name="Hysteria VPN",
+        channel_id="@trojanconfig",
+        channel_name="Trojan Config",
     ),
     TelegramSource(
-        channel_id="@hysteriaconfigs",
-        channel_name="Hysteria Configs",
+        channel_id="@trojanvpn",
+        channel_name="Trojan VPN",
     ),
+
+    # کانال‌های Hysteria
     TelegramSource(
         channel_id="@hysteriafree",
         channel_name="Hysteria Free",
     ),
+    TelegramSource(
+        channel_id="@hysteriaconfig",
+        channel_name="Hysteria Config",
+    ),
+    TelegramSource(
+        channel_id="@hysteriavpn",
+        channel_name="Hysteria VPN",
+    ),
+
     # کانال‌های ایرانی
     TelegramSource(
         channel_id="@iranvpn",
         channel_name="Iran VPN",
-    ),
-    TelegramSource(
-        channel_id="@iranconfigs",
-        channel_name="Iran Configs",
     ),
     TelegramSource(
         channel_id="@iranfree",
@@ -822,6 +868,7 @@ TELEGRAM_SOURCES = [
         channel_id="@globalfree",
         channel_name="Global Free",
     ),
+
     # کانال‌های پرمخاطب
     TelegramSource(
         channel_id="@vpnclub",
@@ -843,6 +890,7 @@ TELEGRAM_SOURCES = [
         channel_id="@vpnpro",
         channel_name="VPN Pro",
     ),
+
     # کانال‌های تخصصی پروتکل‌های جدید
     TelegramSource(
         channel_id="@tuicvpn",
