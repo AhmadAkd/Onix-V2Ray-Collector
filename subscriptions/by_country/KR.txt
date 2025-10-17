@@ -1,7 +1,6 @@
+ss://YWVzLTI1Ni1jZmI6cXdlclJFV1FAQA@218.237.185.230:4652#%F0%9F%87%B0%F0%9F%87%B7KR-218.237.185.230-4888
+trojan://96983eb4-c8f1-316e-ab00-500014ed3d8b@official.seoulcityhall.com.ua:8443?security=tls#%F0%9F%87%B0%F0%9F%87%B7KR-203.210.16.78-3112
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNToxMjI0Mg@115.161.136.145:10099#%F0%9F%87%B0%F0%9F%87%B7%20Gwangjin-gu%2C%2011%2C%20South%20Korea%20%281%29
 vmess://ewogICAgImFkZCI6ICIyMjAuOTIuMTQ2LjE2MSIsCiAgICAiYWlkIjogMCwKICAgICJob3N0IjogImFhLm5iZWUucHAudWEiLAogICAgImlkIjogImZmZGUzODFiLTRhMzAtNDFkNC05MGViLTE1MWYyMjhiMDZlYSIsCiAgICAibmV0IjogIndzIiwKICAgICJwYXRoIjogIi9xcSIsCiAgICAicG9ydCI6IDUwMDAxLAogICAgInBzIjogIvCfh7Dwn4e3S1ItMjIwLjkyLjE0Ni4xNjEtMTAwNSIsCiAgICAidGxzIjogInRscyIsCiAgICAidHlwZSI6ICJhdXRvIiwKICAgICJzZWN1cml0eSI6ICJhdXRvIiwKICAgICJza2lwLWNlcnQtdmVyaWZ5IjogdHJ1ZSwKICAgICJzbmkiOiAiIgp9
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNToxMjI0Mg@glance.asuscomm.com:10099#%F0%9F%87%B0%F0%9F%87%B7%20Gwangjin-gu%2C%2011%2C%20South%20Korea
-trojan://96983eb4-c8f1-316e-ab00-500014ed3d8b@official.seoulcityhall.com.ua:8443?security=tls#%F0%9F%87%B0%F0%9F%87%B7KR-203.210.16.78-3112
-trojan://96983eb4-c8f1-316e-ab00-500014ed3d8b@official.seoulcityhall.com.ua:2053?security=tls#%F0%9F%87%B0%F0%9F%87%B7KR-203.210.16.78-3241
 trojan://96983eb4-c8f1-316e-ab00-500014ed3d8b@official.seoulcitygovernment.com.ua:8443?security=tls#%F0%9F%87%B0%F0%9F%87%B7KR-203.210.16.78-2901
-ss://YWVzLTI1Ni1jZmI6cXdlclJFV1FAQA==@p141.panda001.net:4652#%F0%9F%87%B0%F0%9F%87%B7KR-218.237.185.230-4909
+trojan://96983eb4-c8f1-316e-ab00-500014ed3d8b@official.seoulcityhall.com.ua:2053?security=tls#%F0%9F%87%B0%F0%9F%87%B7KR-203.210.16.78-3241
