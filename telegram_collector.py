@@ -71,25 +71,72 @@ class TelegramCollector:
         logger.info(f"منبع تلگرام اضافه شد: {source.channel_name}")
 
     async def get_channel_messages(self, channel_id: str, limit: int = 100) -> List[Dict]:
-        """دریافت پیام‌های کانال"""
+        """دریافت پیام‌های کانال از طریق web scraping"""
         try:
-            url = f"{self.api_url}/getUpdates"
-            params = {
-                'offset': -limit,
-                'limit': limit,
-                'timeout': 30
-            }
-
-            async with aiohttp.ClientSession() as session:
-                async with session.get(url, params=params) as response:
-                    if response.status == 200:
-                        data = await response.json()
-                        return data.get('result', [])
+            # استفاده از web scraping به جای Bot API
+            return await self._scrape_channel_web(channel_id, limit)
 
         except Exception as e:
             logger.error(f"خطا در دریافت پیام‌های تلگرام: {e}")
 
         return []
+    
+    async def _scrape_channel_web(self, channel_id: str, limit: int = 100) -> List[Dict]:
+        """Web scraping از کانال تلگرام"""
+        try:
+            # حذف @ از channel_id
+            channel_username = channel_id[1:] if channel_id.startswith('@') else channel_id
+            
+            # URL کانال در t.me
+            url = f"https://t.me/s/{channel_username}"
+            
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url) as response:
+                    if response.status == 200:
+                        html = await response.text()
+                        
+                        # استخراج کانفیگ‌ها از HTML
+                        configs = self._extract_configs_from_html(html)
+                        
+                        # تبدیل به فرمت پیام
+                        messages = []
+                        for i, config in enumerate(configs[:limit]):
+                            messages.append({
+                                'message_id': i + 1,
+                                'text': config,
+                                'date': int(time.time())
+                            })
+                        
+                        return messages
+                    else:
+                        logger.warning(f"HTTP {response.status} for {channel_id}")
+                        return []
+                        
+        except Exception as e:
+            logger.debug(f"خطا در scraping {channel_id}: {e}")
+            return []
+    
+    def _extract_configs_from_html(self, html: str) -> List[str]:
+        """استخراج کانفیگ‌ها از HTML"""
+        configs = []
+        
+        # الگوهای کانفیگ
+        patterns = [
+            r'vmess://[A-Za-z0-9+/=]+',
+            r'vless://[^\\s]+',
+            r'trojan://[^\\s]+',
+            r'ss://[A-Za-z0-9+/=]+',
+            r'ssr://[A-Za-z0-9+/=]+',
+            r'hysteria://[^\\s]+',
+            r'hy2://[^\\s]+',
+            r'tuic://[^\\s]+'
+        ]
+        
+        for pattern in patterns:
+            matches = re.findall(pattern, html, re.IGNORECASE)
+            configs.extend(matches)
+        
+        return configs
 
     async def get_channel_history(self, channel_id: str, limit: int = 100) -> List[Dict]:
         """دریافت تاریخچه کانال (نیاز به Bot API v6.0+)"""
