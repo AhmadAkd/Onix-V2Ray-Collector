@@ -202,19 +202,125 @@ class TelegramCollector:
             await asyncio.sleep(interval)
 
     async def save_configs(self, configs: List[str]):
-        """ذخیره کانفیگ‌ها در فایل"""
+        """ذخیره کانفیگ‌ها در فایل‌های اصلی"""
         try:
-            timestamp = int(time.time())
-            filename = f"telegram_configs_{timestamp}.txt"
-
-            with open(filename, 'w', encoding='utf-8') as f:
-                for config in configs:
-                    f.write(f"{config}\\n")
-
-            logger.info(f"کانفیگ‌ها در {filename} ذخیره شدند")
+            if not configs:
+                logger.info("هیچ کانفیگی برای ذخیره وجود ندارد")
+                return
+                
+            # ذخیره در فایل اصلی all_subscription.txt
+            await self._append_to_file("subscriptions/all_subscription.txt", configs)
+            
+            # ذخیره در فایل‌های پروتکل
+            await self._categorize_and_save_configs(configs)
+            
+            # ذخیره در فایل‌های کشور
+            await self._save_by_country(configs)
+            
+            # ذخیره گزارش
+            await self._save_telegram_report(configs)
+            
+            logger.info(f"✅ {len(configs)} کانفیگ از تلگرام در فایل‌های اصلی ذخیره شد")
 
         except Exception as e:
             logger.error(f"خطا در ذخیره کانفیگ‌ها: {e}")
+    
+    async def _append_to_file(self, filename: str, configs: List[str]):
+        """اضافه کردن کانفیگ‌ها به فایل"""
+        try:
+            import os
+            os.makedirs(os.path.dirname(filename), exist_ok=True)
+            
+            with open(filename, 'a', encoding='utf-8') as f:
+                for config in configs:
+                    f.write(f"{config}\\n")
+                    
+        except Exception as e:
+            logger.error(f"خطا در اضافه کردن به {filename}: {e}")
+    
+    async def _categorize_and_save_configs(self, configs: List[str]):
+        """دسته‌بندی و ذخیره کانفیگ‌ها بر اساس پروتکل"""
+        try:
+            protocols = {
+                'vmess': [],
+                'vless': [],
+                'trojan': [],
+                'ss': [],
+                'ssr': [],
+                'hysteria': [],
+                'hy2': [],
+                'tuic': []
+            }
+            
+            for config in configs:
+                config_lower = config.lower()
+                if 'vmess://' in config_lower:
+                    protocols['vmess'].append(config)
+                elif 'vless://' in config_lower:
+                    protocols['vless'].append(config)
+                elif 'trojan://' in config_lower:
+                    protocols['trojan'].append(config)
+                elif 'ss://' in config_lower and 'ssr://' not in config_lower:
+                    protocols['ss'].append(config)
+                elif 'ssr://' in config_lower:
+                    protocols['ssr'].append(config)
+                elif 'hysteria://' in config_lower:
+                    protocols['hysteria'].append(config)
+                elif 'hy2://' in config_lower:
+                    protocols['hy2'].append(config)
+                elif 'tuic://' in config_lower:
+                    protocols['tuic'].append(config)
+            
+            # ذخیره در فایل‌های پروتکل
+            for protocol, protocol_configs in protocols.items():
+                if protocol_configs:
+                    filename = f"subscriptions/by_protocol/{protocol}.txt"
+                    await self._append_to_file(filename, protocol_configs)
+                    logger.info(f"📁 {len(protocol_configs)} کانفیگ {protocol} ذخیره شد")
+                    
+        except Exception as e:
+            logger.error(f"خطا در دسته‌بندی کانفیگ‌ها: {e}")
+    
+    async def _save_by_country(self, configs: List[str]):
+        """ذخیره کانفیگ‌ها بر اساس کشور (ساده‌سازی شده)"""
+        try:
+            # برای سادگی، همه کانفیگ‌ها را در فایل عمومی ذخیره می‌کنیم
+            # در آینده می‌توان با GeoIP این کار را دقیق‌تر کرد
+            filename = "subscriptions/telegram_collected.txt"
+            await self._append_to_file(filename, configs)
+            
+        except Exception as e:
+            logger.error(f"خطا در ذخیره بر اساس کشور: {e}")
+    
+    async def _save_telegram_report(self, configs: List[str]):
+        """ذخیره گزارش جمع‌آوری تلگرام"""
+        try:
+            import json
+            from datetime import datetime
+            
+            report = {
+                "source": "telegram",
+                "timestamp": datetime.now().isoformat(),
+                "total_configs": len(configs),
+                "protocols": {
+                    "vmess": len([c for c in configs if 'vmess://' in c.lower()]),
+                    "vless": len([c for c in configs if 'vless://' in c.lower()]),
+                    "trojan": len([c for c in configs if 'trojan://' in c.lower()]),
+                    "ss": len([c for c in configs if 'ss://' in c.lower() and 'ssr://' not in c.lower()]),
+                    "ssr": len([c for c in configs if 'ssr://' in c.lower()]),
+                    "hysteria": len([c for c in configs if 'hysteria://' in c.lower()]),
+                    "hy2": len([c for c in configs if 'hy2://' in c.lower()]),
+                    "tuic": len([c for c in configs if 'tuic://' in c.lower()])
+                },
+                "sources_count": len(self.sources),
+                "status": "success"
+            }
+            
+            with open("subscriptions/telegram_report.json", 'w', encoding='utf-8') as f:
+                json.dump(report, f, indent=2, ensure_ascii=False)
+                
+        except Exception as e:
+            logger.error(f"خطا در ذخیره گزارش تلگرام: {e}")
 
 
 # تنظیمات منابع تلگرام - کانال‌های معروف V2Ray
