@@ -1,6 +1,6 @@
 <div align="center">
 
-#  onyx Onyx V2Ray Collector 
+#  Onix V2Ray Collector 
 
 **جمع‌آوری و تست هوشمند کانفیگ‌های V2Ray با قدرت هوش مصنوعی**
 
