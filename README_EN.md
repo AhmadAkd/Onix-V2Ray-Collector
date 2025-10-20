@@ -23,9 +23,9 @@
 
 ---
 
-## 🎯 **What is Onyx Collector?**
+## 🎯 **What is Onix Collector?**
 
-**Onyx V2Ray Collector** is an intelligent, automated, and powerful system designed to collect, test, and score V2Ray configurations from across the web. Powered by **Artificial Intelligence**, this project finds the best and fastest configs for you, categorizes them (by protocol and country), and provides them through subscription links.
+**Onix V2Ray Collector** is an intelligent, automated, and powerful system designed to collect, test, and score V2Ray configurations from across the web. Powered by **Artificial Intelligence**, this project finds the best and fastest configs for you, categorizes them (by protocol and country), and provides them through subscription links.
 
 The system automatically updates every **30 minutes**, scanning over **10,000 configs** from **120+ trusted sources**.
 
