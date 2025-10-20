@@ -1,6 +1,6 @@
 <div align="center">
 
-#  onyx Onyx V2Ray Collector 
+#  Onix V2Ray Collector 
 
 **An intelligent, AI-powered V2Ray config collector and tester.**
 
