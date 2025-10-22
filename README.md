@@ -5,20 +5,20 @@
 **جمع‌آوری و تست هوشمند کانفیگ‌های V2Ray با قدرت هوش مصنوعی**
 
 <p>
-<a href="https://github.com/AhmadAkd/Onix-V2Ray-Collector/blob/main/README_EN.md">English</a> •
-<a href="https://github.com/AhmadAkd/Onix-V2Ray-Collector/blob/main/README.md">فارسی</a>
+<a href="https://github.com/rpg-dev420/Onix-V2Ray-Collector/blob/main/README_EN.md">English</a> •
+<a href="https://github.com/rpg-dev420/Onix-V2Ray-Collector/blob/main/README.md">فارسی</a>
 </p>
 
-![GitHub stars](https://img.shields.io/github/stars/AhmadAkd/Onix-V2Ray-Collector?style=social)
-![GitHub forks](https://img.shields.io/github/forks/AhmadAkd/Onix-V2Ray-Collector?style=social)
-![GitHub issues](https://img.shields.io/github/issues/AhmadAkd/Onix-V2Ray-Collector?style=flat-square)
-![GitHub license](https://img.shields.io/github/license/AhmadAkd/Onix-V2Ray-Collector?style=flat-square)
+![GitHub stars](https://img.shields.io/github/stars/rpg-dev420/Onix-V2Ray-Collector?style=social)
+![GitHub forks](https://img.shields.io/github/forks/rpg-dev420/Onix-V2Ray-Collector?style=social)
+![GitHub issues](https://img.shields.io/github/issues/rpg-dev420/Onix-V2Ray-Collector?style=flat-square)
+![GitHub license](https://img.shields.io/github/license/rpg-dev420/Onix-V2Ray-Collector?style=flat-square)
 ![Python version](https://img.shields.io/badge/python-3.8+-blue.svg?style=flat-square)
 
 </div>
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/AhmadAkd/Onix-V2Ray-Collector/main/docs/assets/dashboard_preview.png" alt="Dashboard Preview" width="75%">
+  <img src="https://raw.githubusercontent.com/rpg-dev420/Onix-V2Ray-Collector/main/docs/assets/dashboard_preview.png" alt="Dashboard Preview" width="75%">
 </div>
 
 ---
@@ -40,7 +40,7 @@
 | **🗂 دسته‌بندی هوشمند**      | تفکیک خودکار کانفیگ‌ها بر اساس **پروتکل** (VLESS, VMess, Trojan, ...) و **کشور** (با GeoIP) و ارائه لینک‌های اشتراک مجزا.                                                                                                         |
 | **🔌 پشتیبانی از API**        | **REST API** قدرتمند (ساخته شده با FastAPI) با مستندات **Swagger UI** برای دسترسی برنامه‌نویسان به داده‌ها و آمار.                                                                                                                 |
 | **🛡 امنیت و پایداری**    | مجهز به سیستم‌های **Cache Manager** برای کاهش بار شبکه، **Error Recovery** برای مقابله با خطاها و **Health Monitoring** برای نظارت بر سلامت سیستم.                                                                                   |
-| **🤖 ربات تلگرام**        | یک ربات تلگرام پیشرفته برای دریافت آمار، کانفیگ‌ها و مدیریت سیستم با دستورات ادمین. ([راهنمای کامل ربات](https://github.com/AhmadAkd/Onix-V2Ray-Collector/blob/main/TELEGRAM_BOT_GUIDE.md)) |
+| **🤖 ربات تلگرام**        | یک ربات تلگرام پیشرفته برای دریافت آمار، کانفیگ‌ها و مدیریت سیستم با دستورات ادمین. ([راهنمای کامل ربات](https://github.com/rpg-dev420/Onix-V2Ray-Collector/blob/main/TELEGRAM_BOT_GUIDE.md)) |
 
 ---
 
@@ -53,7 +53,7 @@
 
 ```bash
 # 1. پروژه را کلون کنید
-git clone https://github.com/AhmadAkd/Onix-V2Ray-Collector.git
+git clone https://github.com/rpg-dev420/Onix-V2Ray-Collector.git
 cd Onix-V2Ray-Collector
 
 # 2. کانتینرها را بسازید و اجرا کنید
@@ -70,7 +70,7 @@ docker-compose logs -f
 
 ```bash
 # 1. پروژه را کلون کنید
-git clone https://github.com/AhmadAkd/Onix-V2Ray-Collector.git
+git clone https://github.com/rpg-dev420/Onix-V2Ray-Collector.git
 cd Onix-V2Ray-Collector
 
 # 2. وابستگی‌ها را نصب کنید
@@ -89,20 +89,20 @@ python run_collection.py
 ## 🌐 **لینک‌های اشتراک و داشبورد**
 
 - **صفحه اصلی (شامل تمام لینک‌ها):**
-  - [https://ahmadakd.github.io/Onix-V2Ray-Collector/](https://ahmadakd.github.io/Onix-V2Ray-Collector/)
+  - [https://rpg-dev420.github.io/Onix-V2Ray-Collector/](https://rpg-dev420.github.io/Onix-V2Ray-Collector/)
 
 - **داشبورد تحلیلی:**
-  - [https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/dashboard.html](https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/dashboard.html)
+  - [https://rpg-dev420.github.io/Onix-V2Ray-Collector/subscriptions/dashboard.html](https://rpg-dev420.github.io/Onix-V2Ray-Collector/subscriptions/dashboard.html)
 
 - **مهم‌ترین لینک‌های اشتراک:**
   - **همه کانفیگ‌ها (یکی شده):**
-    - `https://raw.githubusercontent.com/AhmadAkd/Onix-V2Ray-Collector/main/subscriptions/all_subscription.txt`
+    - `https://raw.githubusercontent.com/rpg-dev420/Onix-V2Ray-Collector/main/subscriptions/all_subscription.txt`
   - **همه کانفیگ‌ها (Base64):**
-    - `https://raw.githubusercontent.com/AhmadAkd/Onix-V2Ray-Collector/main/subscriptions/all_subscription_base64.txt`
+    - `https://raw.githubusercontent.com/rpg-dev420/Onix-V2Ray-Collector/main/subscriptions/all_subscription_base64.txt`
   - **کانفیگ‌های VLESS:**
-    - `https://raw.githubusercontent.com/AhmadAkd/Onix-V2Ray-Collector/main/subscriptions/vless_subscription.txt`
+    - `https://raw.githubusercontent.com/rpg-dev420/Onix-V2Ray-Collector/main/subscriptions/vless_subscription.txt`
   - **کانفیگ‌های VMess:**
-    - `https://raw.githubusercontent.com/AhmadAkd/Onix-V2Ray-Collector/main/subscriptions/vmess_subscription.txt`
+    - `https://raw.githubusercontent.com/rpg-dev420/Onix-V2Ray-Collector/main/subscriptions/vmess_subscription.txt`
 
 ---
 
@@ -148,20 +148,20 @@ graph TD
 
 از هرگونه مشارکت در این پروژه استقبال می‌کنیم! شما می‌توانید از طریق موارد زیر به ما کمک کنید:
 
-- **ثبت Issue:** اگر با باگ یا مشکلی مواجه شدید، یک [Issue جدید](https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues) ثبت کنید.
-- **ارسال Pull Request:** اگر کد جدیدی نوشته‌اید یا بهبودهایی اعمال کرده‌اید، برای ما [Pull Request](https://github.com/AhmadAkd/Onix-V2Ray-Collector/pulls) ارسال کنید.
+- **ثبت Issue:** اگر با باگ یا مشکلی مواجه شدید، یک [Issue جدید](https://github.com/rpg-dev420/Onix-V2Ray-Collector/issues) ثبت کنید.
+- **ارسال Pull Request:** اگر کد جدیدی نوشته‌اید یا بهبودهایی اعمال کرده‌اید، برای ما [Pull Request](https://github.com/rpg-dev420/Onix-V2Ray-Collector/pulls) ارسال کنید.
 - **دادن ستاره:** اگر این پروژه برای شما مفید بوده، با ⭐ دادن به آن از ما حمایت کنید.
 
-لطفاً قبل از مشارکت، راهنمای [CONTRIBUTING.md](https://github.com/AhmadAkd/Onix-V2Ray-Collector/blob/main/CONTRIBUTING.md) را مطالعه کنید.
+لطفاً قبل از مشارکت، راهنمای [CONTRIBUTING.md](https://github.com/rpg-dev420/Onix-V2Ray-Collector/blob/main/CONTRIBUTING.md) را مطالعه کنید.
 
 ## 📄 **مجوز (License)**
 
-این پروژه تحت مجوز **MIT** منتشر شده است. برای اطلاعات بیشتر فایل [LICENSE](https://github.com/AhmadAkd/Onix-V2Ray-Collector/blob/main/LICENSE) را مشاهده کنید.
+این پروژه تحت مجوز **MIT** منتشر شده است. برای اطلاعات بیشتر فایل [LICENSE](https://github.com/rpg-dev420/Onix-V2Ray-Collector/blob/main/LICENSE) را مشاهده کنید.
 
 ---
 
 <div align="center">
-  با ❤️ ساخته شده توسط <a href="https://github.com/AhmadAkd">AhmadAkd</a>
+  با ❤️ ساخته شده توسط <a href="https://github.com/rpg-dev420">rpg-dev420</a>
 </div>
 
 
