@@ -94,11 +94,11 @@
 
 ## 🔗 Links | لینک‌ها
 
-- 🌐 **Live Demo**: <https://ahmadakd.github.io/Onix-V2Ray-Collector/>
-- 📚 **Documentation**: <https://github.com/AhmadAkd/Onix-V2Ray-Collector/tree/main/docs>
-- 📡 **API Docs**: <https://github.com/AhmadAkd/Onix-V2Ray-Collector/blob/main/docs/API.md>
-- 🐛 **Issues**: <https://github.com/AhmadAkd/Onix-V2Ray-Collector/issues>
-- 💬 **Discussions**: <https://github.com/AhmadAkd/Onix-V2Ray-Collector/discussions>
+- 🌐 **Live Demo**: <https://rpg-dev420.github.io/Onix-V2Ray-Collector/>
+- 📚 **Documentation**: <https://github.com/rpg-dev420/Onix-V2Ray-Collector/tree/main/docs>
+- 📡 **API Docs**: <https://github.com/rpg-dev420/Onix-V2Ray-Collector/blob/main/docs/API.md>
+- 🐛 **Issues**: <https://github.com/rpg-dev420/Onix-V2Ray-Collector/issues>
+- 💬 **Discussions**: <https://github.com/rpg-dev420/Onix-V2Ray-Collector/discussions>
 
 ---
 
@@ -115,7 +115,7 @@
 
 - 📧 Email: [Your Email]
 - 💬 Telegram: [Your Telegram]
-- 🐙 GitHub: [@AhmadAkd](https://github.com/AhmadAkd)
+- 🐙 GitHub: [@rpg-dev420](https://github.com/rpg-dev420)
 
 ---
 
@@ -125,6 +125,6 @@
 
 **اگر این پروژه را دوست دارید، لطفا ستاره بدهید!**
 
-[![GitHub stars](https://img.shields.io/github/stars/AhmadAkd/Onix-V2Ray-Collector?style=social)](https://github.com/AhmadAkd/Onix-V2Ray-Collector)
+[![GitHub stars](https://img.shields.io/github/stars/rpg-dev420/Onix-V2Ray-Collector?style=social)](https://github.com/rpg-dev420/Onix-V2Ray-Collector)
 
 </div>
