@@ -44,12 +44,12 @@
 کپی کردن لینک و وارد کردن در کلاینت V2Ray:
 
 ```
-https://raw.githubusercontent.com/AhmadAkd/Onix-V2Ray-Collector/main/subscriptions/all_subscription.txt
+https://raw.githubusercontent.com/rpg-dev420/Onix-V2Ray-Collector/main/subscriptions/all_subscription.txt
 ```
 
 ### 2️⃣ استفاده از صفحات وب
 
-- مراجعه به [index.html](https://ahmadakd.github.io/Onix-V2Ray-Collector/)
+- مراجعه به [index.html](https://rpg-dev420.github.io/Onix-V2Ray-Collector/)
 - انتخاب پروتکل یا کشور مورد نظر
 - کپی لینک با یک کلیک
 
@@ -57,13 +57,13 @@ https://raw.githubusercontent.com/AhmadAkd/Onix-V2Ray-Collector/main/subscriptio
 
 ```bash
 # دریافت آمار کامل
-curl https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/latest_report.json
+curl https://rpg-dev420.github.io/Onix-V2Ray-Collector/subscriptions/latest_report.json
 
 # دریافت کانفیگ‌های VLESS
-curl https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/vless_subscription.txt
+curl https://rpg-dev420.github.io/Onix-V2Ray-Collector/subscriptions/vless_subscription.txt
 
 # دریافت کانفیگ‌های آمریکا
-curl https://ahmadakd.github.io/Onix-V2Ray-Collector/subscriptions/by_country/US.txt
+curl https://rpg-dev420.github.io/Onix-V2Ray-Collector/subscriptions/by_country/US.txt
 ```
 
 ## 🤖 ویژگی‌های AI
